@@ -1,0 +1,194 @@
+/* Swiper For Gallery */
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  position: static !important;
+  background-color: white;
+
+  top: var(--swiper-navigation-top-offset, 45%) !important;
+}
+
+.swiper-button-next::after {
+  content: "" !important;
+}
+
+.swiper-button-prev::after {
+  content: "" !important;
+}
+
+.swiper-scrollbar-drag {
+  background-color: #3a1e13 !important;
+}
+
+.swiper-button-disabled {
+  opacity: 0.5 !important;
+  pointer-events: none;
+  background: var(--text-white-text, #fff) !important;
+}
+.swiper-button-disabled svg {
+  transition: all 0.3s ease-in-out;
+  stroke: var(--primary-mild, #e7dad6) !important;
+  color: var(--primary-mild, #e7dad6) !important;
+}
+
+/* Gallery Pop Up Hover Image */
+
+.tiles .tile {
+  display: inline-block;
+  text-align: left;
+  opacity: 0.99;
+  overflow: hidden;
+  position: relative;
+  border-radius: 3px;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.05);
+}
+
+.tiles .tile:before {
+  content: "";
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  width: 100%;
+  height: 80%;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 2;
+  transition: top 0.3s, opacity 0.3s; /* Combine transition properties */
+}
+
+.tiles .tile .details {
+  padding: 20px;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+}
+
+.tiles .tile .details span {
+  display: block;
+  opacity: 0;
+  position: relative;
+  top: 100px;
+  transition: top 0.3s, opacity 0.3s; /* Combine transition properties */
+  transition-delay: 0s; /* Remove unnecessary delay */
+}
+
+.tiles .tile .details .title {
+  line-height: 1;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.tiles .tile .details .info {
+  line-height: 1.2;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.tiles .tile:focus:before,
+.tiles .tile:focus span,
+.tiles .tile:hover:before,
+.tiles .tile:hover span {
+  opacity: 1;
+}
+
+.tiles .tile:focus:before,
+.tiles .tile:hover:before {
+  top: 50%;
+}
+
+.tiles .tile:focus span,
+.tiles .tile:hover span {
+  top: 0;
+}
+
+.tiles .tile:focus .title,
+.tiles .tile:hover .title {
+  transition-delay: 0.15s;
+}
+
+.tiles .tile:focus .info,
+.tiles .tile:hover .info {
+  transition-delay: 0.25s;
+}
+
+/* Slider Pop Up Section  */
+
+.menu-slide-right {
+  opacity: 0;
+  transform: translateX(200px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.new-layout-enter {
+  opacity: 0;
+  transform: translateY(200px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.new-layout-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.new-layout-exit {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Bar And Restaurant */
+
+.menu-slide-right {
+  opacity: 0;
+  transform: translateX(200px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.new-layout-enter {
+  opacity: 0;
+  transform: translateY(200px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.new-layout-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+.new-layout-exit {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* 
+
+
+*/
