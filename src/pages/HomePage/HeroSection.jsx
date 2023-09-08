@@ -29,7 +29,7 @@ export const HeroSection = () => {
           width="250"
           className="brightness-200 xl:hidden"
         />
-        <div className="text-white z-20 typo-display mb-10 capitalize">
+        <div className="text-white z-20 typo-display mb-10 mx-4 capitalize text-center">
           Serving you our best forever
         </div>
       </div>

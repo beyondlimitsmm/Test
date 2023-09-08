@@ -114,7 +114,7 @@ export const Footer = () => {
             </Link>
             <Link
               onClick={handleLinkClick}
-              to="/room-type"
+              to="/rooms"
               className="my-1 nav-link-footer-typography"
             >
               <FlipText

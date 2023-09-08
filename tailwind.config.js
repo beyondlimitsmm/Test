@@ -12,6 +12,13 @@ export default {
         hoverTest: "#3A1E13",
         hoverPale: "#b18e7d",
       },
+      backgroundImage: {
+        "room-door": "url('/src/assets/images/rooms-door.svg')",
+        room: "url('/src/assets/images/rooms.png')",
+        articles: "url('/src/assets/images/articles.png')",
+        "bar-details": "url('/src/assets/images/bar-details.png')",
+        foodAndDrink: "url('/src/assets/images/FoodAndDrink.png')",
+      },
       transitionTimingFunction: {
         "flip-hover": "cubic-bezier(0.76, 0, 0.24, 1)",
       },

@@ -129,7 +129,7 @@ html {
 
 .typo-display {
   font-family: Walbaum;
-  font-size: 24px;
+  font-size: 42px;
   font-style: normal;
   font-weight: 500;
   line-height: 150%; /* 36px */
@@ -411,4 +411,20 @@ html {
   transform-origin: left;
   -webkit-transition: all 450ms ease;
   transition: all 450ms ease;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.pagination a.active {
+  border: 1px solid var(--text-primary-text, #333);
+}
+
+.pagination a:hover:not(.active) {
+  background-color: var(--primary-hover);
 }
