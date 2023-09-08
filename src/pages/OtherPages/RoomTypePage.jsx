@@ -6,31 +6,34 @@ import { handleScrollDownClick } from "../../utils";
 
 const RoomsData = [
   {
+    id: 1,
     imageSrc: Rooms,
     title: "Lorem ipsum dolor sit amet",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, iusto. Quas nisi perspiciatis molestias totam?",
-    viewDetailsLink: "./room-details",
+    viewDetailsLink: `./rooms`,
     reserveRoomLink: "#",
   },
 
   {
+    id: 2,
     imageSrc: Rooms,
     title: "Lorem ipsum dolor 2",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, iusto. Quas nisi perspiciatis molestias totam?",
-    viewDetailsLink: "./room-details",
+    viewDetailsLink: "./rooms",
     reserveRoomLink: "#",
   },
 ];
 
 const SuitesData = [
   {
+    id: 1,
     imageSrc: Rooms,
     title: "Lorem ipsum dolor sit amet",
     description:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, iusto. Quas nisi perspiciatis molestias totam?",
-    viewDetailsLink: "./room-details",
+    viewDetailsLink: "./rooms",
     reserveRoomLink: "#",
   },
 ];
@@ -111,6 +114,7 @@ export const RoomTypePage = () => {
               ? RoomsData.map((roomCard, index) => {
                   return (
                     <RoomCard
+                      id={roomCard.id}
                       key={index}
                       imageSrc={roomCard.imageSrc}
                       title={roomCard.title}
@@ -123,6 +127,7 @@ export const RoomTypePage = () => {
               : SuitesData.map((roomCard, index) => {
                   return (
                     <RoomCard
+                      id={roomCard.id}
                       key={index}
                       imageSrc={roomCard.imageSrc}
                       title={roomCard.title}
@@ -158,6 +163,7 @@ export const RoomTypePage = () => {
 };
 
 export const RoomCard = ({
+  id,
   imageSrc,
   title,
   description,
@@ -177,7 +183,7 @@ export const RoomCard = ({
         <h6 className="typo-menu-2">{title}</h6>
         <p className="typo-body-2 mt-2 mb-8">{description}</p>
         <div className="flex justify-between items-center gap-10">
-          <a href={viewDetailsLink} className="flex items-center gap-1">
+          <Link to={`${id}`} className="flex items-center gap-1">
             <div className="mb-1">View Details</div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -193,7 +199,7 @@ export const RoomCard = ({
             >
               <path d="m9 18 6-6-6-6" />
             </svg>
-          </a>
+          </Link>
           <div
             onClick={() => {
               console.log(reserveRoomLink);
