@@ -1,8 +1,15 @@
+import { useQuery } from "react-query";
+
 import ArticleIcon from "../../assets/images/articles-icon.svg";
 import ArticleBg from "../../assets/images/articles.png";
 import { OutlineButton } from "../../components/OutlineButton";
+import { article } from "../../api/home";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 
 export const Articles = () => {
+  const { data } = useQuery("homeArticle", article);
+  const cmsData = parseCmsData(data);
+
   return (
     <section
       id="articles-for-you"
@@ -12,7 +19,7 @@ export const Articles = () => {
         <div
           className="w-full h-full bg-no-repeat bg-cover bg-fixed"
           style={{
-            backgroundImage: `url('${ArticleBg}')`,
+            backgroundImage: `url('${createAssetsUrl(cmsData?.image)}')`,
             filter: "brightness(0.5)",
           }}
         ></div>
@@ -32,18 +39,16 @@ export const Articles = () => {
                 height="60"
                 className="w-[60px] h-[60px]"
               />
-              <h4 className="typo-title capitalize">Articles for You</h4>
+              <h4 className="typo-title capitalize">{cmsData?.title}</h4>
               <p className="typo-body-2 text-center max-w-[450px]">
-                Lorem ipsum dolor sit amet consectetur. Congue felis nunc dictum
-                urna non suscipit convallis. A vulputate nunc commodo urna nibh
-                aenean facilisi sapien. Non quis semper amet.
+                {cmsData?.description}
               </p>
             </div>
             <div className="mt-8 flex justify-center items-center">
               <OutlineButton
                 styles="border-white !text-white hover:border-hoverPale transition-[border]"
-                routeTo="./articles"
-                text="Let's Explore"
+                routeTo={cmsData?.button?.link}
+                text={cmsData?.button?.name}
               ></OutlineButton>
             </div>
           </div>

@@ -1,6 +1,24 @@
+import { useQuery } from "react-query";
 import { OutlineButton } from "../../components/OutlineButton";
+import { getInTouch } from "../../api/home";
+import { parseCmsData } from "../../libs/functions";
+import { useState } from "react";
 
 export const ContactUs = () => {
+  const { data } = useQuery("getInTouch", getInTouch);
+  const { formData, setFormData } = useState({
+    name: "",
+    email: "",
+    phone: "",
+    comment: "",
+  });
+
+  const cmsData = parseCmsData(data);
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+  };
+
   return (
     <section id="contactUs" className="bg-[#F8F9FA] xl:py-12 xl:px-0 px-4 py-6">
       <div className="container mx-auto relative overflow-hidden">
@@ -16,30 +34,31 @@ export const ContactUs = () => {
               <div className="flex xl:justify-start flex-row">
                 <p className="min-w-[75px] typo-body-2">Address :</p>
                 <a
-                  href="https://goo.gl/maps/LFB6PZeqcQDDuBnS8"
+                  href={cmsData?.contactInfo?.location?.link}
                   target="_blank"
                   rel="noreferrer"
                 >
                   <p className="typo-body-2 font-medium hover:text-hoverPale">
-                    No 129, Inya Road,
+                    {/* No 129, Inya Road,
                     <br className="hidden xl:block" />
-                    Kamayut Township Yangon, Myanmar
+                    Kamayut Township Yangon, Myanmar */}
+                    {cmsData?.contactInfo?.location?.name}
                   </p>
                 </a>
               </div>
               <div className="flex xl:justify-start flex-row">
                 <p className="min-w-[75px] typo-body-2">Email :</p>
-                <a href="mailto:theboundaryresidence@gmail.com">
+                <a href={`mailto:${cmsData?.contactInfo?.email}`}>
                   <p className="flip-text typo-body-2 font-medium">
-                    theboundaryresidence@gmail.com
+                    {cmsData?.contactInfo?.email}
                   </p>
                 </a>
               </div>
               <div className="flex xl:justify-start flex-row">
                 <p className="min-w-[75px] typo-body-2">Phone :</p>
-                <a href="tel:01526289">
+                <a href={`tel:${cmsData?.contactInfo?.phone}`}>
                   <p className="flip-text typo-body-2 font-medium">
-                    01 526 289
+                    {cmsData?.contactInfo?.phone}
                   </p>
                 </a>
               </div>
@@ -50,15 +69,19 @@ export const ContactUs = () => {
                 </p>
 
                 <div className="flex justify-start">
-                  <p className="w-[150px] typo-body-2">Winter Season :</p>
+                  <p className="w-[150px] typo-body-2">
+                    {cmsData?.openClose?.open?.split(":")[0]} :
+                  </p>
                   <p className="typo-body-2 font-medium">
-                    03.11.2023 - 21.04.2024
+                    {cmsData?.openClose?.open?.split(":")[1]}
                   </p>
                 </div>
                 <div className="flex justify-start">
-                  <p className="w-[150px] typo-body-2">Summer Season :</p>
+                  <p className="w-[150px] typo-body-2">
+                    {cmsData?.openClose?.close?.split(":")[0]} :
+                  </p>
                   <p className="typo-body-2 font-medium">
-                    03.11.2023 - 21.04.2024
+                    {cmsData?.openClose?.close?.split(":")[1]}
                   </p>
                 </div>
               </div>

@@ -1,12 +1,18 @@
 /* eslint-disable no-undef */
 
+import { useQuery } from "react-query";
 import { useEffect, useRef } from "react";
+
 import RoomsDoor from "../../assets/images/rooms-door.svg";
 import RoomsBg from "../../assets/images/rooms.png";
 import { OutlineButton } from "../../components/OutlineButton";
+import { room } from "../../api/home";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 
 export const RoomSection = () => {
   const roomSectionRef = useRef();
+  const { data } = useQuery("room", room);
+  const cmsData = parseCmsData(data);
 
   useEffect(() => {
     if (window.matchMedia("(min-width: 1024px)").matches) {
@@ -45,7 +51,7 @@ export const RoomSection = () => {
             id="home-rooms-image"
             className="w-full h-full bg-no-repeat bg-cover bg-fixed"
             style={{
-              backgroundImage: `url(${RoomsBg})`,
+              backgroundImage: `url(${createAssetsUrl(cmsData?.image)})`,
             }}
           >
             <div className="p-10 bg-white/90 w-[300px] xl:w-[500px] h-max absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
@@ -58,18 +64,16 @@ export const RoomSection = () => {
                   className="w-[60px] h-[60px]"
                 />
                 <h4 className="typo-title capitalize typo-text-black font-modesfa">
-                  Rooms
+                  {cmsData?.title}
                 </h4>
                 <p className="typo-body-2 text-center max-w-[450px] typo-text-black">
-                  Lorem ipsum dolor sit amet consectetur. Congue felis nunc
-                  dictum urna non suscipit convallis. A vulputate nunc commodo
-                  urna nibh aenean facilisi
+                  {cmsData?.description}
                 </p>
               </div>
               <div className="mt-8 flex justify-center items-center">
                 <OutlineButton
                   routeTo="./room-type"
-                  text="Let’s Explore"
+                  text={cmsData?.button?.name}
                 ></OutlineButton>
               </div>
             </div>
