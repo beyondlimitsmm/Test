@@ -3,8 +3,9 @@ import HotelLogo from "../assets/Logo.png";
 import { NavBarContext } from "../hooks/NavBarContext";
 import useScrollAtTop from "../hooks/useScrollAtTop";
 import { NavSlideDown } from "./NavSlideDown";
+import { Link } from "react-router-dom";
 
-export const HomePageNavBar = () => {
+const Nav = () => {
   const { isSidebarOpen, toggleNavbar } = useContext(NavBarContext);
   const atTop = useScrollAtTop();
 
@@ -47,14 +48,16 @@ export const HomePageNavBar = () => {
                 ></span>
               </div>
             </button>
-            <h1
-              className={`typo-menu absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase typo-text-black tracking-wider font-madera font-medium invisible xl:visible ${
-                atTop && !isSidebarOpen && "hidden"
-              } ${isSidebarOpen && "block"}`}
-              style={{ fontSize: "25px" }}
-            >
-              The Boundary Residence
-            </h1>
+            <Link to="/">
+              <h1
+                className={`typo-menu absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase typo-text-black tracking-wider font-madera font-medium invisible xl:visible ${
+                  atTop && !isSidebarOpen && "hidden"
+                } ${isSidebarOpen && "block"}`}
+                style={{ fontSize: "25px" }}
+              >
+                The Boundary Residence
+              </h1>
+            </Link>
             <button
               className={`border-button ${
                 atTop &&
@@ -68,18 +71,8 @@ export const HomePageNavBar = () => {
         </div>
         <NavSlideDown></NavSlideDown>
       </div>
-
-      <div
-        className="absolute top-2 left-1/2 -translate-x-1/2 z-20 hidden sm:block"
-        //   x-bind:class="{'hidden sm:block': atTop, 'hidden': open}"
-      >
-        <img
-          className="transition duration-300"
-          src={HotelLogo}
-          alt="logo"
-          width="150"
-        />
-      </div>
     </>
   );
 };
+
+export default Nav;
