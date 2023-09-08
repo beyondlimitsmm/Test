@@ -80,6 +80,7 @@ export const PoolPage = () => {
           </div>
         </section>
         {/* Section 2 */}
+
         <section className="py-20 bg-whiteGray">
           <div className="container mx-auto flex justify-center flex-col gap-10 xl:gap-0 xl:flex-row">
             <div className="p-8 xl:p-0 flex-1 xl:max-w-2xl flex flex-col gap-8">
