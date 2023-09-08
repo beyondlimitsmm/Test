@@ -55,7 +55,8 @@ export const NavBarBuilder = () => {
   } else if (
     location.pathname === "/bar-details" ||
     location.pathname === "/restaurant" ||
-    location.pathname === "/meeting-room"
+    location.pathname === "/meeting-room" ||
+    location.pathname === "/pool"
   ) {
     return <Nav />;
   } else if (
