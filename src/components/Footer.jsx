@@ -11,7 +11,6 @@ import Youtube from "../assets/images/Youtube.svg";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import HotelLogo from "../assets/Logo.png";
-import { handleScrollDownClick } from "../utils";
 import { FlipText } from "./FlipText";
 
 export const Footer = () => {
@@ -27,10 +26,6 @@ export const Footer = () => {
         behavior: "smooth",
       });
     }, 1);
-  }
-
-  function handleLinkClick() {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }
 
   return (
@@ -101,22 +96,14 @@ export const Footer = () => {
 
         <div className="col-span-1 grid grid-cols-1 xl:grid-cols-3 xl:grid-rows-3">
           <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6">
-            <Link
-              onClick={handleLinkClick}
-              to="/"
-              className="my-1 nav-link-footer-typography"
-            >
+            <Link to="/" className="my-1 nav-link-footer-typography">
               <FlipText
                 textStyles={"text-white/75"}
                 secondTextStyles={"!text-white"}
                 text={"Home"}
               ></FlipText>
             </Link>
-            <Link
-              onClick={handleLinkClick}
-              to="/rooms"
-              className="my-1 nav-link-footer-typography"
-            >
+            <Link to="/rooms" className="my-1 nav-link-footer-typography">
               <FlipText
                 textStyles={"text-white/75"}
                 secondTextStyles={"!text-white"}
@@ -124,7 +111,7 @@ export const Footer = () => {
               ></FlipText>
             </Link>
             <div
-              onClick={() => handleScrollDownClick("features")}
+              onClick={() => handleClick("features")}
               className="my-1 nav-link-footer-typography"
             >
               <FlipText
@@ -152,33 +139,21 @@ export const Footer = () => {
             </Link>
           </div>
           <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6">
-            <Link
-              onClick={handleLinkClick}
-              to="/restaurant"
-              className="my-1 nav-link-footer-typography"
-            >
+            <Link to="/restaurant" className="my-1 nav-link-footer-typography">
               <FlipText
                 textStyles={"text-white/75"}
                 secondTextStyles={"!text-white"}
                 text={"Restaurant"}
               ></FlipText>
             </Link>
-            <Link
-              onClick={handleLinkClick}
-              to="/bar-details"
-              className="my-1 nav-link-footer-typography"
-            >
+            <Link to="/bar-details" className="my-1 nav-link-footer-typography">
               <FlipText
                 textStyles={"text-white/75"}
                 secondTextStyles={"!text-white"}
                 text={"Voyage Bar"}
               ></FlipText>
             </Link>
-            <Link
-              onClick={handleLinkClick}
-              to="/pool"
-              className="my-1 nav-link-footer-typography"
-            >
+            <Link to="/pool" className="my-1 nav-link-footer-typography">
               <FlipText
                 textStyles={"text-white/75"}
                 secondTextStyles={"!text-white"}
@@ -186,7 +161,6 @@ export const Footer = () => {
               ></FlipText>
             </Link>
             <Link
-              onClick={handleLinkClick}
               to="/meeting-room"
               className="my-1 nav-link-footer-typography"
             >
@@ -196,11 +170,7 @@ export const Footer = () => {
                 text={"Meeting and Events"}
               ></FlipText>
             </Link>
-            <Link
-              onClick={handleLinkClick}
-              to="/gallery"
-              className="my-1 nav-link-footer-typography"
-            >
+            <Link to="/gallery" className="my-1 nav-link-footer-typography">
               <FlipText
                 textStyles={"text-white/75"}
                 secondTextStyles={"!text-white"}
@@ -239,11 +209,7 @@ export const Footer = () => {
                 text={"View On Map"}
               ></FlipText>
             </div>
-            <Link
-              onClick={handleLinkClick}
-              to="/articles"
-              className="my-1 nav-link-footer-typography"
-            >
+            <Link to="/articles" className="my-1 nav-link-footer-typography">
               <FlipText
                 textStyles={"text-white/75"}
                 secondTextStyles={"!text-white"}
@@ -287,7 +253,7 @@ export const Footer = () => {
       <div className="mx-auto container">
         <div className="w-full divider h-[0.5px] bg-white/30 mb-10"></div>
 
-        <div className="w-full flex flex-col gap-6 xl:gap-0 xl:flex-row justify-between items-center pb-10 typo-label-2 text-sm text-white/75">
+        <div className="w-full flex flex-col gap-6 xl:gap-0 xl:flex-row justify-between items-center pb-10 typo-body-2 text-white/75">
           <p>The Boundary Residence © 2023</p>
 
           <p className="text-center">

@@ -46,8 +46,6 @@ export const RoomTypePage = () => {
     setSelectedMenu(selectedItem);
   }
 
-  console.log(selectedMenu);
-
   return (
     <div>
       <div>

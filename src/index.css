@@ -197,12 +197,19 @@ html {
 .flip-text:hover .text-block {
   transform: translateY(-100%);
 }
+
 .flip-text .text-block:last-child {
   /* color: #d3a13b; */
   color: #b18e7d;
+  opacity: 0;
 }
+
+.flip-text:hover .text-block:last-child {
+  opacity: 1;
+}
+
 .flip-text .text-block {
-  transition: transform 0.35s ease-out;
+  transition: transform 0.35s ease-out, opacity 0.5s ease;
 }
 
 /* Features Section */

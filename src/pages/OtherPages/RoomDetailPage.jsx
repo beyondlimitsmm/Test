@@ -157,7 +157,7 @@ const RoomDetailPage = () => {
           </div>
           <h4 className="font-modesfa z-20 typo-display capitalize text-3xl xl:text-5xl">
             Rooms
-            <span className="typo-display capitalize text-3xl xl:text-5xl">
+            <span className="typo-display capitalize text-3xl xl:text-5xl px-4">
               &
             </span>
             Suites

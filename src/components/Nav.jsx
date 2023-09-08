@@ -1,9 +1,9 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import HotelLogo from "../assets/Logo.png";
 import { NavBarContext } from "../hooks/NavBarContext";
 import useScrollAtTop from "../hooks/useScrollAtTop";
 import { NavSlideDown } from "./NavSlideDown";
-import { Link } from "react-router-dom";
 
 const Nav = () => {
   const { isSidebarOpen, toggleNavbar } = useContext(NavBarContext);

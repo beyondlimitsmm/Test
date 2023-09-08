@@ -23,9 +23,7 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-  position: static !important;
   background-color: white;
-
   top: var(--swiper-navigation-top-offset, 45%) !important;
 }
 
@@ -38,18 +36,18 @@
 }
 
 .swiper-scrollbar-drag {
-  background-color: #3a1e13 !important;
+  background-color: #3a1e13;
 }
 
 .swiper-button-disabled {
-  opacity: 0.5 !important;
+  opacity: 0.5;
   pointer-events: none;
-  background: var(--text-white-text, #fff) !important;
+  background: var(--text-white-text, #fff);
 }
 .swiper-button-disabled svg {
   transition: all 0.3s ease-in-out;
-  stroke: var(--primary-mild, #e7dad6) !important;
-  color: var(--primary-mild, #e7dad6) !important;
+  stroke: var(--primary-mild, #e7dad6);
+  color: var(--primary-mild, #e7dad6);
 }
 
 /* Gallery Pop Up Hover Image */

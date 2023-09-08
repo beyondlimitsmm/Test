@@ -36,6 +36,7 @@ export const RoomSection = () => {
 
   return (
     <section id="roomSection" ref={roomSectionRef}>
+      {/* Desktop */}
       <div className="hidden xl:flex w-screen mb-20 overflow-hidden z-0 relative justify-center items-center">
         <div
           className="w-screen h-[calc(100vh-120px)] overflow-hidden relative hidden xl:block"
@@ -46,6 +47,7 @@ export const RoomSection = () => {
             className="w-full h-full bg-no-repeat bg-cover bg-fixed"
             style={{
               backgroundImage: `url(${RoomsBg})`,
+              backgroundPosition: "50% 125px",
             }}
           >
             <div className="p-10 bg-white/90 w-[300px] xl:w-[500px] h-max absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
@@ -68,7 +70,7 @@ export const RoomSection = () => {
               </div>
               <div className="mt-8 flex justify-center items-center">
                 <OutlineButton
-                  routeTo="./room-type"
+                  routeTo="./rooms"
                   text="Let’s Explore"
                 ></OutlineButton>
               </div>
@@ -76,11 +78,14 @@ export const RoomSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Mobile Section */}
       <div className="flex xl:hidden w-screen h-[70vh] mb-10 overflow-hidden z-0 relative justify-center items-center">
         <div
           className="w-full h-full bg-no-repeat bg-cover bg-fixed"
           style={{
             backgroundImage: `url('${RoomsBg}')`,
+            backgroundPosition: "50% -125px",
           }}
         >
           <div className="px-6 py-10 xl:p-10 bg-white/90 w-[350px] xl:w-[500px] h-max absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
@@ -102,10 +107,10 @@ export const RoomSection = () => {
               </p>
             </div>
             <div className="mt-8 flex justify-center items-center">
-              <outline-button
-                routeTo="./room-type.html"
+              <OutlineButton
+                routeTo="./rooms"
                 text="Let’s Explore"
-              ></outline-button>
+              ></OutlineButton>
             </div>
           </div>
         </div>

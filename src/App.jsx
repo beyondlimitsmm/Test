@@ -5,21 +5,31 @@ import { HomePageNavBar } from "./components/HomePageNavBar";
 // import { NavBar } from "./components/NavBar";
 import Nav from "./components/Nav";
 // import { Articles } from "./pages/HomePage/Articles";
+import { useEffect, useState } from "react";
+import { NavBar } from "./components/NavBar";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { NotFound } from "./pages/NotFound";
-import { GalleryPage } from "./pages/OtherPages/GalleryPage";
-import { PoolPage } from "./pages/OtherPages/PoolPage";
-import { RoomTypePage } from "./pages/OtherPages/RoomTypePage";
-import { RestaurantPage } from "./pages/OtherPages/RestaurantPage";
-import BarPage from "./pages/OtherPages/BarDetailPage";
-import MeetingRoom from "./pages/OtherPages/MeetingRoom";
-import { NavBar } from "./components/NavBar";
-import RoomDetailPage from "./pages/OtherPages/RoomDetailPage";
-import Articles from "./pages/OtherPages/ArticlesPage";
 import ArticleDetailPage from "./pages/OtherPages/ArticleDetailPage";
+import Articles from "./pages/OtherPages/ArticlesPage";
+import BarPage from "./pages/OtherPages/BarDetailPage";
+import { GalleryPage } from "./pages/OtherPages/GalleryPage";
+import MeetingRoom from "./pages/OtherPages/MeetingRoom";
+import { PoolPage } from "./pages/OtherPages/PoolPage";
+import { RestaurantPage } from "./pages/OtherPages/RestaurantPage";
+import RoomDetailPage from "./pages/OtherPages/RoomDetailPage";
+import { RoomTypePage } from "./pages/OtherPages/RoomTypePage";
 
 function App() {
   const location = useLocation();
+  const [prevUrl, setPrevUrl] = useState();
+
+  useEffect(() => {
+    if (prevUrl !== location.pathname) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+      setPrevUrl(location.pathname);
+    }
+  }, [location.pathname, prevUrl]);
+
   return (
     <div className="App">
       <NavBarBuilder></NavBarBuilder>

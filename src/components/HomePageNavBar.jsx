@@ -69,10 +69,7 @@ export const HomePageNavBar = () => {
         <NavSlideDown></NavSlideDown>
       </div>
 
-      <div
-        className="absolute top-2 left-1/2 -translate-x-1/2 z-20 hidden sm:block"
-        //   x-bind:class="{'hidden sm:block': atTop, 'hidden': open}"
-      >
+      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 hidden xl:block">
         <img
           className="transition duration-300"
           src={HotelLogo}
