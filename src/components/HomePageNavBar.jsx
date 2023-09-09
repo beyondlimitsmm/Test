@@ -48,7 +48,7 @@ export const HomePageNavBar = () => {
               </div>
             </button>
             <h1
-              className={`typo-menu absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase typo-text-black tracking-wider font-madera font-medium invisible xl:visible ${
+              className={`typo-menu absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase typo-text-black tracking-wider font-madera !font-medium invisible xl:visible ${
                 atTop && !isSidebarOpen && "hidden"
               } ${isSidebarOpen && "block"}`}
               style={{ fontSize: "25px" }}

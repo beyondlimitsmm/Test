@@ -1,5 +1,3 @@
-/* Swiper */
-
 .swiper {
   width: 100%;
   height: 100%;
@@ -32,11 +30,11 @@
 }
 
 .swiper-button-next {
-  right: -27px !important;
+  right: -27px;
 }
 
 .swiper-button-prev {
-  left: -27px !important;
+  left: -27px;
 }
 
 .swiper-button-next::after {
@@ -49,11 +47,11 @@
 
 .swiper-button-disabled {
   opacity: 1 !important;
-  border: 1px solid var(--primary-mild, #e7dad6) !important;
-  background: var(--text-white-text, #fff) !important;
+  border: 1px solid var(--primary-mild, #e7dad6);
+  background: var(--text-white-text, #fff);
 }
 .swiper-button-disabled svg {
   transition: all 0.3s ease-in-out;
-  stroke: var(--primary-mild, #e7dad6) !important;
-  color: var(--primary-mild, #e7dad6) !important;
+  stroke: var(--primary-mild, #e7dad6);
+  color: var(--primary-mild, #e7dad6);
 }

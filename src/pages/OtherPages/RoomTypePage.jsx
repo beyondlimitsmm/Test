@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Rooms from "../../assets/images/rooms.png";
+import { LinkToContactUs } from "../../components/LinkToContactUs";
 import { handleScrollDownClick } from "../../utils";
 
 const RoomsData = [
@@ -137,24 +137,8 @@ export const RoomTypePage = () => {
                 })}
           </div>
         </section>
-        {/*  Contact US  */}
-        <section className="bg-[#3A1E13] w-screen h-[50vh] my-12">
-          <div className="container mx-auto text-white flex justify-center items-center h-full">
-            <div className="max-w-xs flex flex-col justify-center gap-10">
-              <h4 className="text-4xl">
-                If you have any questions feel free to contact us!
-              </h4>
-              <Link className="w-max" to="">
-                <button
-                  className="border-button !text-white w-max"
-                  id="contact-us-btn"
-                >
-                  Contact Us
-                </button>
-              </Link>
-            </div>
-          </div>
-        </section>
+
+        <LinkToContactUs></LinkToContactUs>
       </div>
     </div>
   );

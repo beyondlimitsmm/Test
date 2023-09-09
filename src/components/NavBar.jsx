@@ -1,7 +1,7 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { NavBarContext } from "../hooks/NavBarContext";
 import { NavSlideDown } from "./NavSlideDown";
-import { Link } from "react-router-dom";
 
 export const NavBar = () => {
   const { isSidebarOpen, toggleNavbar } = useContext(NavBarContext);
@@ -34,7 +34,7 @@ export const NavBar = () => {
           </button>
           <Link to="/">
             <h1
-              className="typo-menu absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase typo-text-black tracking-wider font-madera font-medium invisible xl:visible"
+              className="typo-menu absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase typo-text-black tracking-wider font-madera !font-medium invisible xl:visible"
               style={{ fontSize: "25px" }}
             >
               The Boundary Residence

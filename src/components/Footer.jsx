@@ -95,7 +95,7 @@ export const Footer = () => {
         </div>
 
         <div className="col-span-1 grid grid-cols-1 xl:grid-cols-3 xl:grid-rows-3">
-          <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6">
+          <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-3 items-center justify-start xl:items-start mb-6">
             <Link to="/" className="my-1 nav-link-footer-typography">
               <FlipText
                 textStyles={"text-white/75"}
@@ -138,7 +138,7 @@ export const Footer = () => {
               ></FlipText>
             </Link>
           </div>
-          <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6">
+          <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-3 items-center justify-start xl:items-start mb-6">
             <Link to="/restaurant" className="my-1 nav-link-footer-typography">
               <FlipText
                 textStyles={"text-white/75"}
@@ -178,7 +178,7 @@ export const Footer = () => {
               ></FlipText>
             </Link>
           </div>
-          <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6">
+          <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-3 items-center justify-start xl:items-start mb-6">
             <div
               onClick={() => handleClick("contactUs")}
               className="my-1 nav-link-footer-typography"

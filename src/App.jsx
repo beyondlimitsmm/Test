@@ -1,11 +1,8 @@
+import { useEffect, useState } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "swiper/css";
 import { Footer } from "./components/Footer";
 import { HomePageNavBar } from "./components/HomePageNavBar";
-// import { NavBar } from "./components/NavBar";
-import Nav from "./components/Nav";
-// import { Articles } from "./pages/HomePage/Articles";
-import { useEffect, useState } from "react";
 import { NavBar } from "./components/NavBar";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { NotFound } from "./pages/NotFound";
@@ -59,25 +56,15 @@ export default App;
 export const NavBarBuilder = () => {
   const location = useLocation();
 
-  // Specify which pages has white navbar or transparent navbar
-  if (location.pathname === "/") {
-    return <HomePageNavBar />;
-  } else if (
-    location.pathname === "/bar-details" ||
-    location.pathname === "/restaurant" ||
-    location.pathname === "/meeting-room" ||
-    location.pathname === "/pool"
-  ) {
-    return <Nav />;
-  } else if (
+  if (
     location.pathname === "/gallery" ||
     location.pathname === "/articles" ||
-    location.pathname === "/articles/*"
+    location.pathname.startsWith("/articles/")
   ) {
     return <NavBar />;
   } else if (location.pathname === "/404") {
     return;
   } else {
-    return <NavBar></NavBar>;
+    return <HomePageNavBar />;
   }
 };

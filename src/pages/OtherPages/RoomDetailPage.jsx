@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import rooms from "../../assets/images/more-rooms.png";
+import { GallerySliderSection } from "../../components/GallerySliderSection";
 
 const RoomDetailPage = () => {
   const navigate = useNavigate();
@@ -132,7 +133,9 @@ const RoomDetailPage = () => {
           </div>
         </div>
       </section>
-      <section className="container mx-auto">{/* <ImageCarousel /> */}</section>
+
+      <GallerySliderSection></GallerySliderSection>
+
       <section className="mx-auto container flex justify-center items-center mb-10 xl:mb-40">
         <div
           className="flex items-center gap-6 cursor-pointer"
