@@ -85,7 +85,6 @@ export const RoomSection = () => {
           className="w-full h-full bg-no-repeat bg-cover bg-fixed"
           style={{
             backgroundImage: `url('${RoomsBg}')`,
-            backgroundPosition: "50% -125px",
           }}
         >
           <div className="px-6 py-10 xl:p-10 bg-white/90 w-[350px] xl:w-[500px] h-max absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">

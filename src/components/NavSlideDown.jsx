@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Facebook from "../assets/images/Facebook.svg";
 import Instagram from "../assets/images/Instagram.svg";
 import LinkedIn from "../assets/images/LinkedIn.svg";
@@ -87,11 +87,36 @@ export const NavSlideDown = () => {
               <div className="mb-8 2xl:mb-[60px]">
                 <h6 className="nav-link-typography 2xl:mb-4">Our HighLights</h6>
                 <div className="flex flex-col gap-1">
-                  <p className="typo-body-2">Luxuary Rooms</p>
-                  <p className="typo-body-2">Restarurant</p>
-                  <p className="typo-body-2">Refresh Pool</p>
-                  <p className="typo-body-2">Voyage Bar</p>
-                  <p className="typo-body-2">Luxuary Rooms</p>
+                  <Link onClick={() => toggleNavbar()} to={"/rooms"}>
+                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
+                      Deluxe Rooms
+                    </p>
+                  </Link>
+                  <Link onClick={() => toggleNavbar()} to={"/rooms"}>
+                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
+                      Suites
+                    </p>
+                  </Link>
+                  <Link onClick={() => toggleNavbar()} to={"/restaurant"}>
+                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
+                      Restaurant
+                    </p>
+                  </Link>
+                  <Link onClick={() => toggleNavbar()} to={"/bar-details"}>
+                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
+                      Voyage Bar
+                    </p>
+                  </Link>
+                  <Link onClick={() => toggleNavbar()} to={"/pool"}>
+                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
+                      Amazing Pool
+                    </p>
+                  </Link>
+                  <Link onClick={() => toggleNavbar()} to={"/meeting-room"}>
+                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
+                      Meetings & Events
+                    </p>
+                  </Link>
                 </div>
               </div>
 

@@ -85,7 +85,7 @@ export const RoomTypePage = () => {
                     }`}
                     onClick={() => selectRoomType("rooms")}
                   >
-                    <h6 className="typo-display text-3xl">Rooms</h6>
+                    <h6 className="typo-display">Rooms</h6>
                   </button>
                 </li>
                 <li className="relative inline-block text-center mx-4 md:mx-7 xl:mx-9 first:ml-4 last:mr-4">
@@ -97,7 +97,7 @@ export const RoomTypePage = () => {
                     }`}
                     onClick={() => selectRoomType("suites")}
                   >
-                    <h6 className="typo-display text-3xl">Suites</h6>
+                    <h6 className="typo-display">Suites</h6>
                   </button>
                 </li>
               </ul>

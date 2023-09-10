@@ -17,9 +17,9 @@ const RoomDetailPage = () => {
         </div>
 
         <div className="min-h-screen xl:min-h-[600px] xl:py-48 flex flex-col justify-center gap-8 items-center">
-          <h4 className="text-white font-modesfa z-20 typo-display capitalize text-3xl xl:text-5xl">
+          <h4 className="text-white font-modesfa z-20 typo-display capitalize !text-3xl xl:!text-5xl">
             Rooms
-            <span className="typo-display capitalize text-3xl xl:text-5xl">
+            <span className="typo-display capitalize !text-3xl xl:!text-5xl px-4">
               &
             </span>
             Suites
@@ -158,9 +158,9 @@ const RoomDetailPage = () => {
               <path d="M19 12H5" />
             </svg>
           </div>
-          <h4 className="font-modesfa z-20 typo-display capitalize text-3xl xl:text-5xl">
+          <h4 className="font-modesfa z-20 typo-display capitalize !text-3xl xl:!text-5xl">
             Rooms
-            <span className="typo-display capitalize text-3xl xl:text-5xl px-4">
+            <span className="typo-display capitalize !text-3xl xl:!text-5xl px-4">
               &
             </span>
             Suites
