@@ -16,7 +16,7 @@ const SlideMenuData = [
     dressCode: "Smart Casual",
     openingHours: "6:00pm – 11:00pm",
     menuLink: "#",
-    exploreLink: "#",
+    exploreLink: "/restaurant",
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const SlideMenuData = [
     dressCode: "Casual",
     openingHours: "5:00pm – 2:00am",
     menuLink: "#",
-    exploreLink: "#",
+    exploreLink: "/bar-details",
   },
 ];
 

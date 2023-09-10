@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import "swiper/css/effect-creative";
+import { EffectCreative, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 export const GallerySliderSection = () => {
   const [thumbSwiper, setThumbsSwiper] = useState(null);
 
@@ -52,7 +52,18 @@ export const GallerySliderSection = () => {
             nextEl: ".swiper-button-next",
             prevEl: ".swiper-button-prev",
           }}
-          modules={[FreeMode, Navigation, Thumbs]}
+          creativeEffect={{
+            prev: {
+              shadow: true,
+              translate: [0, 0, -400],
+            },
+            next: {
+              translate: ["100%", 0, 0],
+            },
+          }}
+          grabCursor={true}
+          effect={"creative"}
+          modules={[FreeMode, Navigation, Thumbs, EffectCreative]}
           thumbs={{ swiper: thumbSwiper }}
           className="swiper roomDetailsSwiper h-[400px] xl:h-[600px]"
         >

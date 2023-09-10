@@ -58,7 +58,6 @@ export const NavBarBuilder = () => {
 
   if (
     location.pathname === "/gallery" ||
-    location.pathname === "/articles" ||
     location.pathname.startsWith("/articles/")
   ) {
     return <NavBar />;

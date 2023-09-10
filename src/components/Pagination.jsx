@@ -4,25 +4,25 @@ const Pagination = () => {
       <a className="flex justify-center items-center gap-2" href="#">
         <span>&laquo;</span>Prev
       </a>
-      <a className="active" href="#">
+      <a className="active" href="">
         1
       </a>
-      <a className="" href="#">
+      <a className="" href="">
         2
       </a>
-      <a className="" href="#">
+      <a className="" href="">
         3
       </a>
-      <a className="" href="#">
+      <a className="" href="">
         4
       </a>
-      <a className="hidden xl:block" href="#">
+      <a className="hidden xl:block" href="">
         5
       </a>
-      <a className="hidden xl:block" href="#">
+      <a className="hidden xl:block" href="">
         6
       </a>
-      <a className="flex justify-center items-center gap-2" href="#">
+      <a className="flex justify-center items-center gap-2" href="">
         Next<span>&raquo;</span>
       </a>
     </div>
