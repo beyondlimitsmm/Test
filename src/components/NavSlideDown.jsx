@@ -41,7 +41,6 @@ export const NavSlideDown = () => {
             <button
               onClick={() => handleClick("home")}
               className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
-              //   x-on:click="handleScrollDownClick('#home');open = !open"
             >
               Home
             </button>
@@ -49,34 +48,29 @@ export const NavSlideDown = () => {
             <button
               onClick={() => handleClick("roomSection")}
               className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
-              //   x-on:click="handleScrollDownClick('#roomSection');open = !open"
             >
               Our Rooms
             </button>
             <button
               onClick={() => handleClick("features")}
-              //   x-on:click="handleScrollDownClick('#features');open = !open"
               className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
             >
               Our Features
             </button>
             <button
               onClick={() => handleClick("gallery")}
-              //   x-on:click="handleScrollDownClick('#gallery');open = !open"
               className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
             >
               Gallery
             </button>
             <button
               onClick={() => handleClick("articles-for-you")}
-              //   x-on:click="handleScrollDownClick('#articles-for-you');open = !open"
               className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
             >
               Articles For You
             </button>
             <button
               onClick={() => handleClick("br-map")}
-              //   x-on:click="handleScrollDownClick('#br-map');open = !open"
               className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
             >
               View on Map
@@ -125,8 +119,8 @@ export const NavSlideDown = () => {
                   Check-In/Check Out
                 </h6>
                 <div className="flex flex-col gap-1">
-                  <p className="typo-body-2">Check in from: 15:00</p>
-                  <p className="typo-body-2">Check in from: 15:00</p>
+                  <p className="typo-body-2">Check in from: 14:00</p>
+                  <p className="typo-body-2">Check out before: 12:00</p>
                 </div>
               </div>
             </div>
@@ -135,12 +129,15 @@ export const NavSlideDown = () => {
                 <div className="mb-8 2xl:mb-[60px]">
                   <h6 className="nav-link-typography">Contact Us</h6>
                   <div className="flex flex-col gap-1">
-                    <a href="tel:01526289" className="typo-body-2">
-                      01 526 289
+                    <a
+                      href="tel:01526289"
+                      className="typo-body-2 hover:text-hoverPale"
+                    >
+                      01-526-289
                     </a>
                     <a
                       href="mailto:theboundaryresidence@gmail.com"
-                      className="typo-body-2"
+                      className="typo-body-2 hover:text-hoverPale"
                     >
                       theboundaryresidence@gmail.com
                     </a>
@@ -151,7 +148,7 @@ export const NavSlideDown = () => {
                   <a
                     href="https://goo.gl/maps/LFB6PZeqcQDDuBnS8"
                     target="_blank"
-                    className="typo-body-2"
+                    className="typo-body-2 hover:text-hoverPale"
                     rel="noreferrer"
                   >
                     Coner of Dhammazedi Road x Inya Road, No.129, Kamayut
@@ -166,27 +163,29 @@ export const NavSlideDown = () => {
             <img
               src={Instagram}
               alt=""
-              className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
             />
             <img
               src={Twitter}
               alt=""
-              className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
             />
-            <img
-              src={Facebook}
-              alt=""
-              className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
-            />
+            <a href="https://www.facebook.com/TheBoundaryResidence" target="_">
+              <img
+                src={Facebook}
+                alt=""
+                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
+              />
+            </a>
             <img
               src={Youtube}
               alt=""
-              className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
             />
             <img
               src={LinkedIn}
               alt=""
-              className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
             />
           </div>
         </div>

@@ -5,9 +5,9 @@ import MPU from "../assets/images/payment_images/MPU.jpg";
 import Union from "../assets/images/payment_images/Union.jpg";
 import VISA from "../assets/images/payment_images/VISA.jpg";
 
-import Facebook from "../assets/images/Facebook.svg";
-import Instagram from "../assets/images/Instagram.svg";
-import Youtube from "../assets/images/Youtube.svg";
+import Facebook from "../assets/images/Facebook-footer.svg";
+import Instagram from "../assets/images/Instagram-footer.svg";
+import Youtube from "../assets/images/Youtube-footer.svg";
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import HotelLogo from "../assets/Logo.png";
@@ -75,11 +75,13 @@ export const Footer = () => {
           </div>
 
           <div className="socials flex gap-8 xl:mb-10 mb-6 justify-center xl:justify-start">
-            <img
-              src={Facebook}
-              alt=""
-              className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
-            />
+            <a href="https://www.facebook.com/TheBoundaryResidence" target="_">
+              <img
+                src={Facebook}
+                alt=""
+                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              />
+            </a>
             <img
               src={Instagram}
               alt=""
