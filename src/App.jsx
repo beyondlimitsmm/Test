@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "swiper/css";
 import { Footer } from "./components/Footer";
@@ -18,14 +18,10 @@ import { RoomTypePage } from "./pages/OtherPages/RoomTypePage";
 
 function App() {
   const location = useLocation();
-  const [prevUrl, setPrevUrl] = useState();
 
   useEffect(() => {
-    if (prevUrl !== location.pathname) {
-      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-      setPrevUrl(location.pathname);
-    }
-  }, [location.pathname, prevUrl]);
+    window.scrollTo({ top: 0, left: 0 });
+  }, [location.pathname]);
 
   return (
     <div className="App">

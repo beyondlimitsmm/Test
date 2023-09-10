@@ -42,7 +42,7 @@ export const FeaturesSection = () => {
             Lorem ipsum dolor sit amet consectetur. Congue felis nunc dictum
             urna non suscipit convallis. A vulputate nunc commodo urna
           </p>
-          <OutlineButton routeTo="./pool" text="Let's Explore"></OutlineButton>
+          <OutlineButton routeTo="/pool" text="Let's Explore"></OutlineButton>
         </div>
       </div>
 
@@ -80,7 +80,7 @@ export const FeaturesSection = () => {
             urna non suscipit convallis. A vulputate nunc commodo urna
           </p>
           <OutlineButton
-            routeTo="./meeting-room"
+            routeTo="/meeting-room"
             text="Let's Explore"
           ></OutlineButton>
         </div>

@@ -10,7 +10,7 @@ export const GallerySection = () => {
   return (
     <section
       id="gallery"
-      className="flex justify-center h-[900px] items-center relative py-10 xl:py-0 xl:scroll-m-32"
+      className="flex justify-center h-[900px] items-center relative py-10 xl:py-0"
     >
       <div className="container mx-auto flex flex-col lg:flex-row lg:justify-between lg:items-center w-full h-full gap-32 lg:gap-20 relative">
         <div className="lg:max-w-md lg:mb-32 flex flex-col relative mx-12">
