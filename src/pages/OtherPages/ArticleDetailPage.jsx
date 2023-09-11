@@ -5,7 +5,7 @@ import sharedSvg from "../../assets/images/share.svg";
 const ArticleDetailPage = () => {
   const { id } = useParams();
   return (
-    <div className="container mx-auto mb-[120px]">
+    <div className="container mx-auto mb-[120px] mt-20">
       <h2 className="mt-4 mb-6 text-center">
         Home &gt; Articles for you &gt; Detail
       </h2>

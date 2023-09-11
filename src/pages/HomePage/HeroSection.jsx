@@ -1,9 +1,14 @@
+import { Cloudinary } from "@cloudinary/url-gen";
 import HotelLogo from "../../assets/Logo.png";
 import HomePagePoster from "../../assets/images/Rectangle13.png";
 import HomePageVideo from "../../assets/videos/hero-video.mp4";
 import { handleScrollDownClick } from "../../utils";
 
 export const HeroSection = () => {
+  const cld = new Cloudinary({ cloud: { cloudName: "drioyq6vt" } });
+  const HomePoster = cld.image("Rectangle13_ig2kb3");
+  console.log(cld, HomePoster);
+
   return (
     <section
       id="home"
@@ -14,7 +19,7 @@ export const HeroSection = () => {
           loop
           autoPlay
           muted
-          preload="none"
+          // preload="none"
           type="video/mp4"
           playsInline
           src={HomePageVideo}
