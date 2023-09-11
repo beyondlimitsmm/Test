@@ -15,7 +15,7 @@ export const FeaturesSection = () => {
           <img
             src={Rectangle10}
             alt=""
-            className="h-[300px] w-full xl:h-[650px] xl:w-auto object-cover"
+            className="h-[300px] xl:max-w-xl w-full xl:h-[650px] xl:w-auto object-cover"
           />
 
           <div
@@ -56,7 +56,7 @@ export const FeaturesSection = () => {
           <img
             src={Rectangle10}
             alt=""
-            className="h-[300px] w-full xl:h-[650px] xl:w-auto object-cover"
+            className="h-[300px] xl:max-w-xl w-full xl:h-[650px] xl:w-auto object-cover"
           />
 
           <img

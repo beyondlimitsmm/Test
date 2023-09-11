@@ -11,7 +11,7 @@ export const HomePageNavBar = () => {
 
   return (
     <>
-      <div className="HomeNav h-20 sticky top-0 left-0 right-0 z-50 ">
+      <div className="HomeNav h-20 sticky top-0 left-0 right-0 z-50">
         <div
           className={`h-20 bg-white ${
             atTop && !isSidebarOpen && "!bg-transparent"

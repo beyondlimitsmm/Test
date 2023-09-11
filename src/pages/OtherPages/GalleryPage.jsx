@@ -23,7 +23,7 @@ export const GalleryPage = () => {
 
   return (
     <>
-      <section className="my-20">
+      <section className="my-12">
         <nav className="flex justify-between md:px-20 w-full relative border-b border-stellarLightGrey mb-18">
           <div className="flex justify-start items-center"></div>
           <ul className="navSlider inline-block py-4 md:py-7 xl:py-9 whitespace-nowrap overflow-x-auto font-walbaum">

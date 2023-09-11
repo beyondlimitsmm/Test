@@ -82,17 +82,21 @@ export const Footer = () => {
                 className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
               />
             </a>
-            <img
-              src={Instagram}
-              alt=""
-              className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
-            />
+            <a href="" target="_">
+              <img
+                src={Instagram}
+                alt=""
+                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              />
+            </a>
 
-            <img
-              src={Youtube}
-              alt=""
-              className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
-            />
+            <a href="" target="_">
+              <img
+                src={Youtube}
+                alt=""
+                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              />
+            </a>
           </div>
         </div>
 
