@@ -420,18 +420,19 @@ html {
   transition: all 450ms ease;
 }
 
-.pagination a {
+.pagination li {
   color: black;
+  list-style: none;
   float: left;
   padding: 8px 16px;
   text-decoration: none;
   border: 1px solid transparent;
 }
 
-.pagination a.active {
+.pagination li.active {
   border: 1px solid var(--text-primary-text, #333);
 }
 
-.pagination a:hover:not(.active) {
+.pagination li:hover:not(.active) {
   background-color: var(--primary-hover);
 }
