@@ -12,7 +12,7 @@ export const ServiceSection = () => {
           Service and Features
         </h4>
 
-        <div className="w-full xl:w-max grid grid-cols-1 xs:grid-cols-2 xl:grid-cols-4 xl:gap-8 gap-0">
+        <div className="w-full xl:w-max grid grid-cols-1 xs:grid-cols-2 xl:grid-cols-4 xl:gap-4 2xl:gap-8 gap-0">
           <div className="col-span-1">
             <div className="typo-body flex items-center gap-3 mb-2 xl:mb-0">
               <BsClock />
