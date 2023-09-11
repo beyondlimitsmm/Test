@@ -1,20 +1,20 @@
 import config from "../config";
 
 export const hero = () =>
-  fetch(
-    config.BASE_API_URL + "/home-heroes/1?fields=title&populate[video]=*"
-  ).then((res) => res.json());
+  fetch(config.BASE_API_URL + "/home-hero?fields=title&populate=*").then(
+    (res) => res.json()
+  );
 
 export const about = () =>
   fetch(
     config.BASE_API_URL +
-      "/home-abouts/1?fields=*&populate[logo]=*&populate[contactInfo][populate][location]=*&populate[button]=*"
+      "/home-about?fields=*&populate[logo]=*&populate[contactInfo][populate][location]=*&populate[button]=*"
   ).then((res) => res.json());
 
 export const room = () =>
   fetch(
     config.BASE_API_URL +
-      "/home-rooms/1?fields=*&populate[0]=button&populate[1]=image"
+      "/home-room?fields=*&populate[0]=button&populate[1]=image"
   ).then((res) => res.json());
 
 export const barAndRestaurants = () =>
@@ -28,7 +28,7 @@ export const ourFeatures = () =>
   );
 
 export const ourGalleryHead = () =>
-  fetch(config.BASE_API_URL + "/home-gallery-heads/1?fields=*&populate=*").then(
+  fetch(config.BASE_API_URL + "/home-gallery-head?fields=*&populate=*").then(
     (res) => res.json()
   );
 
@@ -38,20 +38,23 @@ export const ourGalleries = () =>
   ).then((res) => res.json());
 
 export const article = () =>
-  fetch(config.BASE_API_URL + "/home-articles/1?fields=*&populate=*").then(
-    (res) => res.json()
+  fetch(config.BASE_API_URL + "/home-article?fields=*&populate=*").then((res) =>
+    res.json()
   );
 
 export const getInTouch = () =>
   fetch(
     config.BASE_API_URL +
-      "/home-getintouches/1?populate[openClose]=*&populate[contactInfo][populate][location]=*"
+      "/home-getintouch?populate[openClose]=*&populate[contactInfo][populate][location]=*"
   ).then((res) => res.json());
 
-export const sendMessage = (obj) =>
-  fetch(config.BASE_API_URL + "/messages", {
-    method: "POST",
-    "content-type": "application/json",
-    accept: "application/json",
-    body: JSON.parse(obj),
-  });
+export const footerSocials = () =>
+  fetch(
+    config.BASE_API_URL +
+      "/footer-social?populate[socials]=*&populate[contactInfo][populate][location]=*"
+  ).then((res) => res.json());
+
+export const payments = () =>
+  fetch(config.BASE_API_URL + "/payments/?populate=*&fields[0]=title").then(
+    (res) => res.json()
+  );

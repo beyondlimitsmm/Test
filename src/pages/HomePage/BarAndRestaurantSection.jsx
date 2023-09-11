@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import Rectangle10 from "../../assets/images/Rectangle10.png";
 import Rectangle13 from "../../assets/images/Rectangle13.png";
@@ -48,7 +48,10 @@ export const BarAndRestaurantSection = () => {
   const [menuSlideRight, setMenuSlideRight] = useState(false);
   const [slideMenu, setSlideMenu] = useState([]);
 
-  const { data } = useQuery("barAndRestaurants", barAndRestaurants);
+  const { data } = useQuery({
+    queryKey: ["barAndRestaurants"],
+    queryFn: barAndRestaurants,
+  });
 
   const createSlideMenu = useCallback(() => {
     if (!data) return;

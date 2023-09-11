@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect, useState } from "react";
 
 import Rectangle10 from "../../assets/images/Rectangle10.png";
@@ -8,7 +8,10 @@ import { ourFeatures } from "../../api/home";
 import { createAssetsUrl } from "../../libs/functions";
 
 export const FeaturesSection = () => {
-  const { data } = useQuery("ourFeatures", ourFeatures);
+  const { data } = useQuery({
+    queryKey: ["ourFeatures"],
+    queryFn: ourFeatures,
+  });
   const [ourFeatureData, setOurFeatureData] = useState([]);
 
   const createOurFeatureData = useCallback(() => {

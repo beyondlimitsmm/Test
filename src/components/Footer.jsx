@@ -1,3 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import JCB from "../assets/images/payment_images/JCB.jpg";
 import Kpay from "../assets/images/payment_images/Kpay.jpg";
 import MasterCard from "../assets/images/payment_images/MasterCard.jpg";
@@ -9,14 +12,47 @@ import Facebook from "../assets/images/Facebook.svg";
 import Instagram from "../assets/images/Instagram.svg";
 import Youtube from "../assets/images/Youtube.svg";
 
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import HotelLogo from "../assets/Logo.png";
 import { handleScrollDownClick } from "../utils";
 import { FlipText } from "./FlipText";
+import { footerSocials, payments } from "../api/home";
+import { createAssetsUrl, parseCmsData } from "../libs/functions";
+import { useCallback, useEffect, useState } from "react";
 
 export const Footer = () => {
+  const { data } = useQuery({
+    queryKey: ["footerSocials"],
+    queryFn: footerSocials,
+  });
+  const { data: payment } = useQuery({
+    queryKey: ["payments"],
+    queryFn: payments,
+  });
+  const [paymentData, setPaymentData] = useState([]);
+
+  const cmsFooterSocialData = parseCmsData(data);
+
   const navigate = useNavigate();
   const location = useLocation();
+
+  const createPaymentData = useCallback(() => {
+    if (!payment) return;
+
+    const _payment = payment?.data?.map((data) => {
+      const attr = data.attributes;
+
+      return {
+        id: data.id,
+        image: createAssetsUrl(attr?.image),
+      };
+    });
+
+    setPaymentData(_payment);
+  }, [payment]);
+
+  useEffect(() => {
+    createPaymentData();
+  }, [createPaymentData]);
 
   function handleClick(sectionId) {
     if (location.pathname !== "/") {
@@ -48,20 +84,19 @@ export const Footer = () => {
               <p className="min-w-[75px] typo-body-2">Address:</p>
 
               <a
-                href="https://goo.gl/maps/LFB6PZeqcQDDuBnS8"
+                href={cmsFooterSocialData?.contactInfo?.location?.link}
                 target="_blank"
                 className="typo-body-2 font-medium max-w-[400px] xl:text-start text-center hover:text-white transition"
                 rel="noreferrer"
               >
-                Coner of Dhammazedi Road x Inya Road, No.129, Kamayut Township
-                Yangon, Myanmar, 11041
+                {cmsFooterSocialData?.contactInfo?.location?.name}
               </a>
             </div>
             <div className="flex justify-center xl:justify-start">
               <p className="min-w-[75px] typo-body-2">Email :</p>
-              <a href="mailto:theboundaryresidence@gmail.com">
+              <a href={`mailto:${cmsFooterSocialData?.contactInfo?.email}`}>
                 <FlipText
-                  text={"theboundaryresidence@gmail.com"}
+                  text={cmsFooterSocialData?.contactInfo?.email}
                   textStyles={"text-white/75 typo-body-2 font-medium"}
                   secondTextStyles={"!text-white"}
                 ></FlipText>
@@ -69,9 +104,9 @@ export const Footer = () => {
             </div>
             <div className="flex justify-center xl:justify-start">
               <p className="min-w-[75px] typo-body-2">Phone :</p>
-              <a href="tel:01526289">
+              <a href={`tel:${cmsFooterSocialData?.contactInfo?.phone}`}>
                 <FlipText
-                  text={"01-526-289"}
+                  text={cmsFooterSocialData?.contactInfo?.phone}
                   secondTextStyles={"!text-white"}
                   textStyles={"text-white/75 typo-body-2 font-medium"}
                 ></FlipText>
@@ -80,22 +115,27 @@ export const Footer = () => {
           </div>
 
           <div className="socials flex gap-8 xl:mb-10 mb-6 justify-center xl:justify-start">
-            <img
-              src={Facebook}
-              alt=""
-              className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
-            />
-            <img
-              src={Instagram}
-              alt=""
-              className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
-            />
-
-            <img
-              src={Youtube}
-              alt=""
-              className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
-            />
+            <a target="_blank" href={cmsFooterSocialData?.socials?.facebook}>
+              <img
+                src={Facebook}
+                alt=""
+                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              />
+            </a>
+            <a target="_blank" href={cmsFooterSocialData?.socials?.instagram}>
+              <img
+                src={Instagram}
+                alt=""
+                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              />
+            </a>
+            <a target="_blank" href={cmsFooterSocialData?.socials?.youtube}>
+              <img
+                src={Youtube}
+                alt=""
+                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              />
+            </a>
           </div>
         </div>
 
@@ -261,10 +301,13 @@ export const Footer = () => {
             </p>
 
             <div className="grid grid-cols-3 xl:grid-cols-6 gap-3">
-              <div className="h-10 w-14">
-                <img className="" src={JCB} alt="" />
-              </div>
-              <div className="h-10 w-14">
+              {paymentData?.map((data) => (
+                <div key={data.id} className="h-10 w-14">
+                  <img className="" src={data.image} alt="" />
+                </div>
+              ))}
+
+              {/* <div className="h-10 w-14">
                 <img className="" src={Kpay} alt="" />
               </div>
               <div className="h-10 w-14">
@@ -278,7 +321,7 @@ export const Footer = () => {
               </div>
               <div className="h-10 w-14">
                 <img className="" src={VISA} alt="" />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

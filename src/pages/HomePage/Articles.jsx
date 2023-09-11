@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import ArticleIcon from "../../assets/images/articles-icon.svg";
 import ArticleBg from "../../assets/images/articles.png";
@@ -7,7 +7,7 @@ import { article } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 
 export const Articles = () => {
-  const { data } = useQuery("homeArticle", article);
+  const { data } = useQuery({ queryKey: ["article"], queryFn: article });
   const cmsData = parseCmsData(data);
 
   return (

@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import HotelLogo from "../../assets/Logo.png";
 import { handleScrollDownClick } from "../../utils";
@@ -6,7 +6,7 @@ import { hero } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 
 export const HeroSection = () => {
-  const { data } = useQuery("homeHero", hero);
+  const { data } = useQuery({ queryKey: ["hero"], queryFn: hero });
   const cmsData = parseCmsData(data);
 
   return (

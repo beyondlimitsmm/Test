@@ -1,12 +1,16 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { OutlineButton } from "../../components/OutlineButton";
 import { getInTouch } from "../../api/home";
 import { parseCmsData } from "../../libs/functions";
 import { useState } from "react";
+import config from "../../config";
 
 export const ContactUs = () => {
-  const { data } = useQuery("getInTouch", getInTouch);
-  const { formData, setFormData } = useState({
+  const { data } = useQuery({ queryKey: ["getInTouch"], queryFn: getInTouch });
+  const sendMessage = useMutation((form) =>
+    axios.post(config.BASE_API_URL + "/messages", form)
+  );
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
@@ -17,6 +21,25 @@ export const ContactUs = () => {
 
   const onChangeHandler = (e) => {
     const { name, value } = e.target;
+
+    setFormData((data) => {
+      data[name] = value;
+
+      return data;
+    });
+  };
+
+  const onSubmitHandler = async () => {
+    if (validateForm().length > 0) return console.log("Error");
+
+    console.log(formData);
+    // await sendMessage.mutate(formData);
+
+    // setFormData({ name: "", email: "", phone: "", comment: "" });
+  };
+
+  const validateForm = () => {
+    return Object.keys(formData).filter((key) => formData[key] == "");
   };
 
   return (
@@ -92,6 +115,8 @@ export const ContactUs = () => {
               <input
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-2 font-medium"
+                name="name"
+                onChange={onChangeHandler}
               />
 
               <span className="input_underline"></span>
@@ -105,6 +130,8 @@ export const ContactUs = () => {
               <input
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-2 font-medium"
+                name="phone"
+                onChange={onChangeHandler}
               />
 
               <span className="input_underline"></span>
@@ -118,6 +145,8 @@ export const ContactUs = () => {
               <input
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 font-medium mt-2"
+                name="email"
+                onChange={onChangeHandler}
               />
 
               <span className="input_underline"></span>
@@ -132,6 +161,8 @@ export const ContactUs = () => {
                 rows="4"
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-2 resize-none font-medium"
+                name="comment"
+                onChange={onChangeHandler}
               ></textarea>
 
               <span className="input_underline"></span>
@@ -141,11 +172,16 @@ export const ContactUs = () => {
               </label>
             </div>
 
-            <OutlineButton
+            {/* <OutlineButton
               linkStyle="self-end"
               routeTo="./articles"
               text="Send"
-            ></OutlineButton>
+            ></OutlineButton> */}
+            <div className="self-end">
+              <button className="border-button" onClick={onSubmitHandler}>
+                Send
+              </button>
+            </div>
           </div>
         </div>
 

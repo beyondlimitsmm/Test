@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 
 import RoomsDoor from "../../assets/images/rooms-door.svg";
@@ -11,7 +11,7 @@ import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 
 export const RoomSection = () => {
   const roomSectionRef = useRef();
-  const { data } = useQuery("room", room);
+  const { data } = useQuery({ queryKey: ["room"], queryFn: room });
   const cmsData = parseCmsData(data);
 
   useEffect(() => {

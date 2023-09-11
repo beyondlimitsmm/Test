@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 
 import HotelLogoBrown from "../../assets/logo-brown.png";
 import { FlipText } from "../../components/FlipText";
@@ -7,7 +7,8 @@ import { about } from "../../api/home";
 import { parseCmsData } from "../../libs/functions";
 
 export const AboutUsSection = () => {
-  const { data } = useQuery("about", about);
+  const { data } = useQuery({ queryKey: ["about"], queryFn: about });
+
   const cmsData = parseCmsData(data);
 
   return (

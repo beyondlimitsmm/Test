@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import "swiper/css";
 import "swiper/css/scrollbar";
 import { Navigation, Pagination, Scrollbar } from "swiper/modules";
@@ -13,8 +13,14 @@ import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 export const GallerySection = () => {
   const [galleryData, setGalleryData] = useState([]);
 
-  const { data: headData } = useQuery("ourGalleryHead", ourGalleryHead);
-  const { data } = useQuery("ourGalleries", ourGalleries);
+  const { data: headData } = useQuery({
+    queryKey: ["ourGalleryHead"],
+    queryFn: ourGalleryHead,
+  });
+  const { data } = useQuery({
+    queryKey: ["ourGalleries"],
+    queryFn: ourGalleries,
+  });
 
   const cmsHeadData = parseCmsData(headData);
 
