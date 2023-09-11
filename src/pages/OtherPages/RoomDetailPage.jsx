@@ -2,6 +2,47 @@ import { useNavigate, useParams } from "react-router-dom";
 import rooms from "../../assets/images/more-rooms.png";
 import { GallerySliderSection } from "../../components/GallerySliderSection";
 
+const ROOM_CONSTANTS = {
+  title: "Rooms & Suites",
+  price: "90,000/per night",
+  people: "3 max",
+  bed: "King Bed",
+  squareFeet: "32 m²",
+  type: "en suite",
+  amenities: [
+    {
+      image:
+        "https://www.kempinski.com/en/content/download/115/405?version=21&amp;inline=1",
+      description: "Bathtub and separate shower",
+    },
+    {
+      image:
+        "https://www.kempinski.com/en/content/download/105/385?version=21&amp;inline=1",
+      description: "Safe",
+    },
+    {
+      image:
+        "https://www.kempinski.com/en/content/download/83/341?version=21&amp;inline=1",
+      description: "Desk",
+    },
+    {
+      image:
+        "https://www.kempinski.com/en/content/download/80/335?version=21&amp;inline=1",
+      description: "Coffee and/or tea making facilities",
+    },
+    {
+      image:
+        "https://www.kempinski.com/en/content/download/77/329?version=23&amp;inline=1",
+      description: "Baby bed allowed",
+    },
+    {
+      image:
+        "https://www.kempinski.com/en/content/download/74/323?version=21&amp;inline=1",
+      description: "Air conditioning",
+    },
+  ],
+};
+
 const RoomDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
@@ -18,35 +59,35 @@ const RoomDetailPage = () => {
 
         <div className="min-h-screen xl:min-h-[600px] xl:py-48 flex flex-col justify-center gap-8 items-center">
           <h4 className="text-white font-modesfa z-20 typo-display capitalize !text-3xl xl:!text-5xl">
-            Rooms
+            {/* Rooms
             <span className="typo-display capitalize !text-3xl xl:!text-5xl px-4">
               &
             </span>
-            Suites
+            Suites */}
+
+            {ROOM_CONSTANTS.title}
           </h4>
 
           <div className="w-[80%] p-8 grid grid-cols-2 xl:grid-cols-5 justify-items-center xl:items-center items-start gap-4 xl:gap-2">
             <div className="text-white text-center col-span-2 md:col-span-1">
               <h4 className="typo-body">Price</h4>
-              <p className="typo-menu-2">90,000/per night</p>
+              <p className="typo-menu-2">{ROOM_CONSTANTS.price}</p>
             </div>
             <div className="text-white text-center">
               <h4 className="typo-body">People</h4>
-              <p className="typo-menu-2">3 max</p>
+              <p className="typo-menu-2">{ROOM_CONSTANTS.people}</p>
             </div>
             <div className="text-white text-center">
               <h4 className="typo-body">Bed</h4>
-              <p className="typo-menu-2">King Bed</p>
+              <p className="typo-menu-2">{ROOM_CONSTANTS.bed}</p>
             </div>
             <div className="text-white text-center">
               <h4 className="typo-body">Square Feet</h4>
-              <p className="typo-menu-2">
-                32 m<sup className="text-xs">2</sup>
-              </p>
+              <p className="typo-menu-2">{ROOM_CONSTANTS.squareFeet}</p>
             </div>
             <div className="text-white text-center">
               <h4 className="typo-body">Type</h4>
-              <p className="typo-menu-2">en suite</p>
+              <p className="typo-menu-2">{ROOM_CONSTANTS.type}</p>
             </div>
           </div>
         </div>
@@ -64,72 +105,22 @@ const RoomDetailPage = () => {
           <h3 className="typo-section-title">Amenities {id}</h3>
           <p className="typo-menu-2">Our Executive Rooms feature</p>
           <div className="flex flex-col mt-10">
-            <div className="flex items-center border-b py-4 gap-5">
-              <div className="h-7 w-7 md:w-8 md:h-8 flex shrink-0 items-center">
-                <img
-                  src="https://www.kempinski.com/en/content/download/115/405?version=21&amp;inline=1"
-                  className="h-full w-full object-cover object-center"
-                  alt="Bathtub and separate shower"
-                  loading="lazy"
-                />
+            {ROOM_CONSTANTS.amenities.map((amenity, index) => (
+              <div
+                key={index}
+                className="flex items-center border-b py-4 gap-5"
+              >
+                <div className="h-7 w-7 md:w-8 md:h-8 flex shrink-0 items-center">
+                  <img
+                    src={amenity.image}
+                    className="h-full w-full object-cover object-center"
+                    alt={amenity.description}
+                    loading="lazy"
+                  />
+                </div>
+                <p className="typo-body-2">{amenity.description}</p>
               </div>
-              <p className="typo-body-2">Bathtub and separate shower</p>
-            </div>
-            <div className="flex items-center border-b py-4 gap-5">
-              <div className="h-7 w-7 md:w-8 md:h-8 flex shrink-0 items-center">
-                <img
-                  src="https://www.kempinski.com/en/content/download/105/385?version=21&amp;inline=1"
-                  className="h-full w-full object-cover object-center"
-                  alt="Safe"
-                  loading="lazy"
-                />
-              </div>
-              <p className="typo-body-2">Safe</p>
-            </div>
-            <div className="flex items-center border-b py-4 gap-5">
-              <div className="h-7 w-7 md:w-8 md:h-8 flex shrink-0 items-center">
-                <img
-                  src="https://www.kempinski.com/en/content/download/83/341?version=21&amp;inline=1"
-                  className="h-full w-full object-cover object-center"
-                  alt="Desk"
-                  loading="lazy"
-                />
-              </div>
-              <p className="typo-body-2">Desk</p>
-            </div>
-            <div className="flex items-center border-b py-4 gap-5">
-              <div className="h-7 w-7 md:w-8 md:h-8 flex shrink-0 items-center">
-                <img
-                  src="https://www.kempinski.com/en/content/download/80/335?version=21&amp;inline=1"
-                  className="h-full w-full object-cover object-center"
-                  alt="Coffee and/or tea making facilities"
-                  loading="lazy"
-                />
-              </div>
-              <p className="typo-body-2">Coffee and/or tea making facilities</p>
-            </div>
-            <div className="flex items-center border-b py-4 gap-5">
-              <div className="h-7 w-7 md:w-8 md:h-8 flex shrink-0 items-center">
-                <img
-                  src="https://www.kempinski.com/en/content/download/77/329?version=23&amp;inline=1"
-                  className="h-full w-full object-cover object-center"
-                  alt="Baby bed allowed"
-                  loading="lazy"
-                />
-              </div>
-              <p className="typo-body-2">Baby bed allowed</p>
-            </div>
-            <div className="flex items-center border-b py-4 gap-5">
-              <div className="h-7 w-7 md:w-8 md:h-8 flex shrink-0 items-center">
-                <img
-                  src="https://www.kempinski.com/en/content/download/74/323?version=21&amp;inline=1"
-                  className="h-full w-full object-cover object-center"
-                  alt="Air conditioning"
-                  loading="lazy"
-                />
-              </div>
-              <p className="typo-body-2">Air conditioning</p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
