@@ -5,7 +5,7 @@ export const hero = async () =>
 
 export const about = async () =>
   await base(
-    "/home-abouts?fields=*&populate[logo]=*&populate[contactInfo][populate][location]=*&populate[button]=*"
+    "/home-about?fields=*&populate[logo]=*&populate[contactInfo][populate][location]=*&populate[button]=*"
   );
 
 export const room = async () =>
@@ -36,13 +36,7 @@ export const getInTouch = async () =>
     "/home-getintouch?populate[openClose]=*&populate[contactInfo][populate][location]=*"
   );
 
-export const footerSocials = () =>
-  fetch(
-    config.BASE_API_URL +
-      "/footer-social?populate[socials]=*&populate[contactInfo][populate][location]=*"
-  ).then((res) => res.json());
-
-export const payments = () =>
-  fetch(config.BASE_API_URL + "/payments/?populate=*&fields[0]=title").then(
-    (res) => res.json()
+export const footer = async () =>
+  await base(
+    "/footer?populate[logo]=*&populate[socials]=*&populate[footerLinks]=*&populate[payments][populate][0]=image&populate[contactInfo][populate][0]=location"
   );

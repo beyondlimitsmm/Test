@@ -27,7 +27,7 @@ function App() {
         <Route path="*" element={<Navigate to="/404" replace />}></Route>
         <Route path="/404" element={<NotFound />}></Route>
       </Routes>
-      {/* {location.pathname !== "/404" && <Footer></Footer>} */}
+      {location.pathname !== "/404" && <Footer></Footer>}
     </div>
   );
 }

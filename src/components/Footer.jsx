@@ -15,44 +15,17 @@ import Youtube from "../assets/images/Youtube.svg";
 import HotelLogo from "../assets/Logo.png";
 import { handleScrollDownClick } from "../utils";
 import { FlipText } from "./FlipText";
-import { footerSocials, payments } from "../api/home";
 import { createAssetsUrl, parseCmsData } from "../libs/functions";
 import { useCallback, useEffect, useState } from "react";
+import Error from "./Error";
+import { footer } from "../api/home";
 
 export const Footer = () => {
-  const { data } = useQuery({
-    queryKey: ["footerSocials"],
-    queryFn: footerSocials,
-  });
-  const { data: payment } = useQuery({
-    queryKey: ["payments"],
-    queryFn: payments,
-  });
-  const [paymentData, setPaymentData] = useState([]);
+  const { data, error } = useQuery(["footer"], footer);
 
-  const cmsFooterSocialData = parseCmsData(data);
+  if (error) return <Error />;
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const createPaymentData = useCallback(() => {
-    if (!payment) return;
-
-    const _payment = payment?.data?.map((data) => {
-      const attr = data.attributes;
-
-      return {
-        id: data.id,
-        image: createAssetsUrl(attr?.image),
-      };
-    });
-
-    setPaymentData(_payment);
-  }, [payment]);
-
-  useEffect(() => {
-    createPaymentData();
-  }, [createPaymentData]);
+  const cmsData = parseCmsData(data);
 
   function handleClick(sectionId) {
     if (location.pathname !== "/") {
@@ -84,19 +57,19 @@ export const Footer = () => {
               <p className="min-w-[75px] typo-body-2">Address:</p>
 
               <a
-                href={cmsFooterSocialData?.contactInfo?.location?.link}
+                href={cmsData?.contactInfo?.location?.link}
                 target="_blank"
                 className="typo-body-2 font-medium max-w-[400px] xl:text-start text-center hover:text-white transition"
                 rel="noreferrer"
               >
-                {cmsFooterSocialData?.contactInfo?.location?.name}
+                {cmsData?.contactInfo?.location?.name}
               </a>
             </div>
             <div className="flex justify-center xl:justify-start">
               <p className="min-w-[75px] typo-body-2">Email :</p>
-              <a href={`mailto:${cmsFooterSocialData?.contactInfo?.email}`}>
+              <a href={`mailto:${cmsData?.contactInfo?.email}`}>
                 <FlipText
-                  text={cmsFooterSocialData?.contactInfo?.email}
+                  text={cmsData?.contactInfo?.email}
                   textStyles={"text-white/75 typo-body-2 font-medium"}
                   secondTextStyles={"!text-white"}
                 ></FlipText>
@@ -104,9 +77,9 @@ export const Footer = () => {
             </div>
             <div className="flex justify-center xl:justify-start">
               <p className="min-w-[75px] typo-body-2">Phone :</p>
-              <a href={`tel:${cmsFooterSocialData?.contactInfo?.phone}`}>
+              <a href={`tel:${cmsData?.contactInfo?.phone}`}>
                 <FlipText
-                  text={cmsFooterSocialData?.contactInfo?.phone}
+                  text={cmsData?.contactInfo?.phone}
                   secondTextStyles={"!text-white"}
                   textStyles={"text-white/75 typo-body-2 font-medium"}
                 ></FlipText>
@@ -115,21 +88,21 @@ export const Footer = () => {
           </div>
 
           <div className="socials flex gap-8 xl:mb-10 mb-6 justify-center xl:justify-start">
-            <a target="_blank" href={cmsFooterSocialData?.socials?.facebook}>
+            <a target="_blank" href={cmsData?.socials?.facebook}>
               <img
                 src={Facebook}
                 alt=""
                 className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
               />
             </a>
-            <a target="_blank" href={cmsFooterSocialData?.socials?.instagram}>
+            <a target="_blank" href={cmsData?.socials?.instagram}>
               <img
                 src={Instagram}
                 alt=""
                 className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
               />
             </a>
-            <a target="_blank" href={cmsFooterSocialData?.socials?.youtube}>
+            <a target="_blank" href={cmsData?.socials?.youtube}>
               <img
                 src={Youtube}
                 alt=""
@@ -301,9 +274,9 @@ export const Footer = () => {
             </p>
 
             <div className="grid grid-cols-3 xl:grid-cols-6 gap-3">
-              {paymentData?.map((data) => (
+              {cmsData?.payments?.map((data) => (
                 <div key={data.id} className="h-10 w-14">
-                  <img className="" src={data.image} alt="" />
+                  <img className="" src={createAssetsUrl(data?.image)} alt="" />
                 </div>
               ))}
 
