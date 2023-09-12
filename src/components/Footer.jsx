@@ -105,7 +105,7 @@ export const Footer = () => {
                 text={"Home"}
               ></FlipText>
             </Link>
-            <Link to="/rooms" className="my-1 nav-link-footer-typography">
+            <Link to="/room-types" className="my-1 nav-link-footer-typography">
               <FlipText
                 textStyles={"text-white/75"}
                 secondTextStyles={"!text-white"}

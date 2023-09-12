@@ -56,7 +56,7 @@ const ROOM_CONSTANTS = {
   ],
 };
 
-const RoomDetailPage = () => {
+const SuiteDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   return (
@@ -177,4 +177,4 @@ const RoomDetailPage = () => {
     </>
   );
 };
-export default RoomDetailPage;
+export default SuiteDetailPage;

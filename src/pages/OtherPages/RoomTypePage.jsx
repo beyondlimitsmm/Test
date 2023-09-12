@@ -24,16 +24,71 @@ const RoomsData = [
     viewDetailsLink: "./rooms",
     reserveRoomLink: "#",
   },
+
+  {
+    id: 3,
+    imageSrc: Rooms,
+    title: "Deluxe Room",
+    description:
+      "Enjoy the spacious and elegantly designed Deluxe Room. Featuring a comfortable king-size bed, modern amenities, and a private balcony with city views.",
+    viewDetailsLink: `./rooms`,
+    reserveRoomLink: "#",
+  },
+  {
+    id: 5,
+    imageSrc: Rooms,
+    title: "Presidential Suite",
+    description:
+      "Indulge in luxury with our Presidential Suite. This opulent suite boasts a grand living area, a dining room, a king-size bedroom, and a private terrace.",
+    viewDetailsLink: "./rooms",
+    reserveRoomLink: "#",
+  },
 ];
 
 const SuitesData = [
   {
     id: 1,
     imageSrc: Rooms,
-    title: "Lorem ipsum dolor sit amet",
+    title: "Luxury Suite",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, iusto. Quas nisi perspiciatis molestias totam?",
-    viewDetailsLink: "./rooms",
+      "Experience true luxury in our exquisitely designed Luxury Suite. Enjoy spacious living areas, a king-size bed, and breathtaking views of the city skyline.",
+    viewDetailsLink: "./suites",
+    reserveRoomLink: "#",
+  },
+  {
+    id: 2,
+    imageSrc: Rooms,
+    title: "Grand Suite",
+    description:
+      "The Grand Suite is the epitome of elegance and comfort. It features a separate living room, a queen-size bed, and a private terrace overlooking lush gardens.",
+    viewDetailsLink: "./suites",
+    reserveRoomLink: "#",
+  },
+  {
+    id: 3,
+    imageSrc: Rooms,
+    title: "Honeymoon Suite",
+    description:
+      "Celebrate your special moments in our romantic Honeymoon Suite. Enjoy a cozy fireplace, a four-poster bed, and a private balcony with stunning sunset views.",
+    viewDetailsLink: "./suites",
+    reserveRoomLink: "#",
+  },
+  {
+    id: 4,
+    imageSrc: Rooms,
+    title: "Penthouse Suite",
+    description:
+      "Indulge in the ultimate luxury in our Penthouse Suite. This spacious suite includes a private elevator, a king-size bedroom, and a rooftop terrace with a private pool.",
+    viewDetailsLink: "./suites",
+    reserveRoomLink: "#",
+  },
+  {
+    id: 5,
+    imageSrc: Rooms,
+    title: "Family Suite",
+    description:
+      "Ideal for families, our Family Suite offers a blend of comfort and space. It includes a master bedroom, a twin-bedded room, and a cozy living area.",
+    viewDetailsLink: "./suites",
     reserveRoomLink: "#",
   },
 ];
@@ -165,7 +220,10 @@ export const RoomCard = ({
         <h6 className="typo-menu-2">{title}</h6>
         <p className="typo-body-2 mt-2 mb-8">{description}</p>
         <div className="flex justify-between items-center gap-10">
-          <Link to={`${id}`} className="flex items-center gap-1">
+          <Link
+            to={`${viewDetailsLink}/${id}`}
+            className="flex items-center gap-1"
+          >
             <div className="mb-1">View Details</div>
             <svg
               xmlns="http://www.w3.org/2000/svg"

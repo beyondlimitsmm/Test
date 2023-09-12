@@ -15,6 +15,7 @@ import { PoolPage } from "./pages/OtherPages/PoolPage";
 import { RestaurantPage } from "./pages/OtherPages/RestaurantPage";
 import RoomDetailPage from "./pages/OtherPages/RoomDetailPage";
 import { RoomTypePage } from "./pages/OtherPages/RoomTypePage";
+import SuiteDetailPage from "./pages/OtherPages/SuiteDetailPage";
 
 function App() {
   const location = useLocation();
@@ -33,8 +34,14 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/gallery" element={<GalleryPage />}></Route>
-        <Route path="/rooms" element={<RoomTypePage />}></Route>
-        <Route path="/rooms/:id" element={<RoomDetailPage />}></Route>
+        <Route path="/room-types" element={<RoomTypePage />}></Route>
+        <Route
+          path="/room-types/rooms/:id"
+          element={<RoomDetailPage />}
+        ></Route>
+
+        <Route path="/room-types/suites/:id" element={<SuiteDetailPage />} />
+
         <Route path="/pool" element={<PoolPage />}></Route>
         <Route path="/articles" element={<Articles />}></Route>
         <Route path="/articles/:id" element={<ArticleDetailPage />}></Route>

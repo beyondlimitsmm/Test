@@ -16,7 +16,7 @@ export const IMAGE_URLS = [
   "https://swiperjs.com/demos/images/nature-10.jpg",
 ];
 
-export const GallerySliderSection = () => {
+export const GallerySliderSection = ({ imageUrls }) => {
   const [thumbSwiper, setThumbsSwiper] = useState(null);
 
   return (
@@ -81,7 +81,7 @@ export const GallerySliderSection = () => {
           thumbs={{ swiper: thumbSwiper }}
           className="swiper roomDetailsSwiper h-[400px] xl:h-[600px]"
         >
-          {IMAGE_URLS.map((imageUrl, index) => (
+          {imageUrls.map((imageUrl, index) => (
             <SwiperSlide key={index}>
               <img src={imageUrl} alt={`Nature ${index + 1}`} />
             </SwiperSlide>
@@ -115,36 +115,11 @@ export const GallerySliderSection = () => {
           }}
           className="swiper thumbSwiper xl:h-[150px] h-[100px]"
         >
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-          </SwiperSlide>
+          {imageUrls.map((imageUrl, index) => (
+            <SwiperSlide key={index}>
+              <img src={imageUrl} alt={`Nature ${index + 1}`} />
+            </SwiperSlide>
+          ))}
         </Swiper>
       </div>
     </section>
