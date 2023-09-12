@@ -10,6 +10,6 @@ export default async (uri) => {
 
     if (res.ok) return await res.json();
   } catch (error) {
-    return new Error(error.message);
+    throw new Error(error.message);
   }
 };

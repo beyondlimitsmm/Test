@@ -11,6 +11,7 @@ import "../../styles/GalleryPage.css";
 import "../../styles/RoomDetails.css";
 import { galleryCategories } from "../../api/gallery";
 import { parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
 
 const MenuData = [
   "Exterior",
@@ -24,10 +25,12 @@ const MenuData = [
 export const GalleryPage = () => {
   const [selectedMenu, setSelectedMenu] = useState();
   const [menuData, setMenuData] = useState([]);
-  const { data, isLoading, isError } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ["galleryCategories"],
     queryFn: galleryCategories,
   });
+
+  if (error) return <Error />;
 
   const createMenuData = useCallback(() => {
     if (!data) return;

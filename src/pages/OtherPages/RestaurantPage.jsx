@@ -6,6 +6,7 @@ import "../../styles/ImageCarousel.css";
 import { useQuery } from "@tanstack/react-query";
 import { about, facility, gallery, header } from "../../api/restaurant";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
 
 // const CarouselListData = [
 //   {
@@ -54,10 +55,12 @@ import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 
 export const RestaurantPage = () => {
   const [activeImage, setActiveImage] = useState(0);
-  const { data: headData } = useQuery(["restaurantHeader"], header);
+  const { data: headData, error } = useQuery(["restaurantHeader"], header);
   const { data: aboutData } = useQuery(["restaurantAbout"], about);
   const { data: facilityData } = useQuery(["restaurantFacility"], facility);
   const { data: galleryData } = useQuery(["restaurantGallery"], gallery);
+
+  if (error) return <Error />;
 
   const cmsHeadData = parseCmsData(headData);
   const cmsAboutData = parseCmsData(aboutData);
