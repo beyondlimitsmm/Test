@@ -5,9 +5,11 @@ import ArticleBg from "../../assets/images/articles.png";
 import { OutlineButton } from "../../components/OutlineButton";
 import { article } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
 
 export const Articles = () => {
-  const { data } = useQuery({ queryKey: ["article"], queryFn: article });
+  const { data, error } = useQuery({ queryKey: ["article"], queryFn: article });
+  if (error) return <Error />;
   const cmsData = parseCmsData(data);
 
   return (

@@ -1,52 +1,40 @@
-import config from "../config";
+import base from "./base";
 
-export const hero = () =>
-  fetch(config.BASE_API_URL + "/home-hero?fields=title&populate=*").then(
-    (res) => res.json()
+export const hero = async () =>
+  await base("/home-hero?fields=title&populate=*");
+
+export const about = async () =>
+  await base(
+    "/home-abouts?fields=*&populate[logo]=*&populate[contactInfo][populate][location]=*&populate[button]=*"
   );
 
-export const about = () =>
-  fetch(
-    config.BASE_API_URL +
-      "/home-about?fields=*&populate[logo]=*&populate[contactInfo][populate][location]=*&populate[button]=*"
-  ).then((res) => res.json());
+export const room = async () =>
+  await base("/home-room?fields=*&populate[0]=button&populate[1]=image");
 
-export const room = () =>
-  fetch(
-    config.BASE_API_URL +
-      "/home-room?fields=*&populate[0]=button&populate[1]=image"
-  ).then((res) => res.json());
-
-export const barAndRestaurants = () =>
-  fetch(
-    config.BASE_API_URL + "/home-bar-restaurants/?populate=*&fields=*"
-  ).then((res) => res.json());
-
-export const ourFeatures = () =>
-  fetch(config.BASE_API_URL + "/home-our-features?fields=*&populate=*").then(
-    (res) => res.json()
+export const gallery = async () =>
+  await base(
+    "/home-gallery?fields=*&populate[galleryCards][populate][0]=image&populate[button]=*"
   );
 
-export const ourGalleryHead = () =>
-  fetch(config.BASE_API_URL + "/home-gallery-head?fields=*&populate=*").then(
-    (res) => res.json()
+export const service = async () => await base("/home-service?populate=*");
+
+export const feature = async () =>
+  await base(
+    "/home-feature?fields=*&populate[featureCards][populate][0]=mainImage&populate[featureCards][populate][1]=subImage&populate[featureCards][populate][2]=button"
   );
 
-export const ourGalleries = () =>
-  fetch(
-    config.BASE_API_URL + "/home-galleries?fields=*&populate[1]=image"
-  ).then((res) => res.json());
-
-export const article = () =>
-  fetch(config.BASE_API_URL + "/home-article?fields=*&populate=*").then((res) =>
-    res.json()
+export const bar = async () =>
+  await base(
+    "/home-restaurant/?populate[restaurantCards][populate][0]=image&fields=*"
   );
 
-export const getInTouch = () =>
-  fetch(
-    config.BASE_API_URL +
-      "/home-getintouch?populate[openClose]=*&populate[contactInfo][populate][location]=*"
-  ).then((res) => res.json());
+export const article = async () =>
+  await base("/home-article?fields=*&populate=*");
+
+export const getInTouch = async () =>
+  await base(
+    "/home-getintouch?populate[openClose]=*&populate[contactInfo][populate][location]=*"
+  );
 
 export const footerSocials = () =>
   fetch(

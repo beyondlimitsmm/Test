@@ -7,43 +7,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "../../styles/HomePage.css";
 import { OutlineButton } from "../../components/OutlineButton";
-import { ourGalleries, ourGalleryHead } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import { gallery } from "../../api/home";
+import Error from "../../components/Error";
 
 export const GallerySection = () => {
   const [galleryData, setGalleryData] = useState([]);
+  const { data, error } = useQuery(["homeGallery"], gallery);
+  if (error) return <Error />;
 
-  const { data: headData } = useQuery({
-    queryKey: ["ourGalleryHead"],
-    queryFn: ourGalleryHead,
-  });
-  const { data } = useQuery({
-    queryKey: ["ourGalleries"],
-    queryFn: ourGalleries,
-  });
-
-  const cmsHeadData = parseCmsData(headData);
-
-  const createGalleryData = useCallback(() => {
-    if (!data) return;
-
-    const _galleryData = data?.data?.map((dt) => {
-      const attr = dt?.attributes;
-
-      return {
-        id: dt?.id,
-        title: attr?.title,
-        description: attr?.description,
-        image: createAssetsUrl(attr?.image),
-      };
-    });
-
-    setGalleryData(_galleryData);
-  }, [data]);
-
-  useEffect(() => {
-    createGalleryData();
-  }, [createGalleryData]);
+  const cmsData = parseCmsData(data);
 
   return (
     <section
@@ -53,7 +26,7 @@ export const GallerySection = () => {
       <div className="container mx-auto flex flex-col lg:flex-row lg:justify-between lg:items-center w-full h-full gap-32 lg:gap-20 relative">
         <div className="lg:max-w-md lg:mb-32 flex flex-col relative mx-12">
           <h6 className="typo-title capitalize typo-text-black font-modesfa mb-4">
-            {cmsHeadData?.title}
+            {cmsData?.title}
           </h6>
           <p
             className="typo-body-2 typo-text-black text-left"
@@ -63,13 +36,13 @@ export const GallerySection = () => {
               fontSize: "1.0625rem",
             }}
           >
-            {cmsHeadData?.description}
+            {cmsData?.description}
           </p>
 
           <OutlineButton
             styles="my-6 w-max"
-            routeTo={cmsHeadData?.button?.link}
-            text={cmsHeadData?.button?.name}
+            routeTo={cmsData?.button?.link}
+            text={cmsData?.button?.name}
           ></OutlineButton>
 
           <div className="relative mt-6 flex items-center">
@@ -138,9 +111,13 @@ export const GallerySection = () => {
         }}
         className="absolute bottom-0 lg:bottom-auto right-0 w-[90%] lg:w-1/2  pb-10 h-[340px] md:h-[400px] lg:h-[550px] mb-14 tiles"
       >
-        {galleryData?.map((data) => (
+        {cmsData?.galleryCards?.map((data) => (
           <SwiperSlide key={data?.id} className="swiper-slide tile">
-            <img src={data?.image} alt="" className="h-[550px]" />
+            <img
+              src={createAssetsUrl(data?.image)}
+              alt=""
+              className="h-[550px]"
+            />
             <div className="details">
               <span className="title">{data?.title}</span>
               <span className="info">{data?.description}</span>

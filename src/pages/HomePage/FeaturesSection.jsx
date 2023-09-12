@@ -4,45 +4,18 @@ import { useCallback, useEffect, useState } from "react";
 import Rectangle10 from "../../assets/images/Rectangle10.png";
 import RestaurantColor from "../../assets/images/restaurant-color.svg";
 import { OutlineButton } from "../../components/OutlineButton";
-import { ourFeatures } from "../../api/home";
-import { createAssetsUrl } from "../../libs/functions";
+import { feature } from "../../api/home";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
 
 export const FeaturesSection = () => {
-  const { data } = useQuery({
-    queryKey: ["ourFeatures"],
-    queryFn: ourFeatures,
-  });
-  const [ourFeatureData, setOurFeatureData] = useState([]);
-
-  const createOurFeatureData = useCallback(() => {
-    if (!data) return;
-
-    const _ourFeatureData = data?.data?.map((dt) => {
-      const attr = dt?.attributes;
-
-      return {
-        id: dt?.id,
-        title: attr?.title,
-        description: attr?.description,
-        button: attr?.button,
-        position: attr?.position,
-        mainImage: createAssetsUrl(attr?.mainImage),
-        subImage: createAssetsUrl(attr?.subImage),
-      };
-    });
-
-    // console.log(_ourFeatureData);
-
-    setOurFeatureData(_ourFeatureData);
-  }, [data]);
-
-  useEffect(() => {
-    createOurFeatureData();
-  }, [createOurFeatureData]);
+  const { data, error } = useQuery(["homeFeature"], feature);
+  if (error) return <Error />;
+  const cmsData = parseCmsData(data);
 
   return (
     <section id="features" className="container mx-auto overflow-hidden">
-      {ourFeatureData?.map((data) => (
+      {cmsData?.featureCards?.map((data) => (
         <div
           key={data?.id}
           data-aos="fade-up"
@@ -58,7 +31,7 @@ export const FeaturesSection = () => {
             }`}
           >
             <img
-              src={data?.mainImage}
+              src={createAssetsUrl(data?.mainImage)}
               alt=""
               className="h-[300px] w-full xl:h-[650px] xl:w-auto object-cover"
             />
@@ -74,7 +47,7 @@ export const FeaturesSection = () => {
               }`}
             >
               <img
-                src={data?.subImage}
+                src={createAssetsUrl(data?.subImage)}
                 alt=""
                 className={`h-full w-full object-cover border-[12px] border-white shadow-lg ${
                   data?.position == "left" && "rotate-[-3deg]"

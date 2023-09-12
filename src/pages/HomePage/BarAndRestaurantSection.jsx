@@ -5,8 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 import Rectangle10 from "../../assets/images/Rectangle10.png";
 import Rectangle13 from "../../assets/images/Rectangle13.png";
 import "../../styles/HomePage.css";
-import { barAndRestaurants } from "../../api/home";
-import { createAssetsUrl } from "../../libs/functions";
+import { bar } from "../../api/home";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
 
 // const SlideMenuData = [
 //   {
@@ -18,7 +19,7 @@ import { createAssetsUrl } from "../../libs/functions";
 //     imageUrl: Rectangle10,
 //     cuisine: "French Cuisine, Local Specialties",
 //     dressCode: "Smart Casual",
-//     openingHours: "6:00pm – 11:00pm",
+//     openHours: "6:00pm – 11:00pm",
 //     menuLink: "#",
 //     exploreLink: "#",
 //   },
@@ -31,7 +32,7 @@ import { createAssetsUrl } from "../../libs/functions";
 //     imageUrl: Rectangle13,
 //     cuisine: "Cocktails, Wines, Craft Beers",
 //     dressCode: "Casual",
-//     openingHours: "5:00pm – 2:00am",
+//     openHours: "5:00pm – 2:00am",
 //     menuLink: "#",
 //     exploreLink: "#",
 //   },
@@ -48,33 +49,30 @@ export const BarAndRestaurantSection = () => {
   const [menuSlideRight, setMenuSlideRight] = useState(false);
   const [slideMenu, setSlideMenu] = useState([]);
 
-  const { data } = useQuery({
-    queryKey: ["barAndRestaurants"],
-    queryFn: barAndRestaurants,
-  });
+  const { data, error } = useQuery(["bar"], bar);
+  if (error) return <Error />;
+  const cmsData = parseCmsData(data);
 
   const createSlideMenu = useCallback(() => {
-    if (!data) return;
+    if (!cmsData) return;
 
-    const _slideMenu = data?.data?.map((dt) => {
-      const attr = dt?.attributes;
-
+    const _slideMenu = cmsData?.restaurantCards?.map((dt) => {
       return {
         id: dt?.id,
         imageRef: React.createRef(),
-        title: attr?.title,
-        description: attr?.description,
-        cuisine: attr?.cuisine,
-        dressCode: attr?.dressCode,
-        openingHours: attr?.openingHours,
-        imageUrl: createAssetsUrl(attr?.image),
-        menuLink: createAssetsUrl(attr?.menu),
-        exploreLink: attr?.explore,
+        title: dt?.title,
+        description: dt?.description,
+        cuisine: dt?.cuisine,
+        dressCode: dt?.dressCode,
+        openHours: dt?.openHours,
+        imageUrl: createAssetsUrl(dt?.image),
+        menuLink: createAssetsUrl(dt?.menu),
+        exploreLink: dt?.explore,
       };
     });
 
     setSlideMenu(_slideMenu);
-  }, [data]);
+  }, [cmsData]);
 
   useEffect(() => {
     createSlideMenu();
@@ -260,7 +258,7 @@ const LayoutDetails = ({
   description,
   cuisine,
   dressCode,
-  openingHours,
+  openHours,
   menuLink,
   exploreLink,
 }) => {
@@ -288,7 +286,7 @@ const LayoutDetails = ({
       </div>
       <div className="border-b py-4 flex justify-between">
         <p>Opening hours</p>
-        <p>{openingHours}</p>
+        <p>{openHours}</p>
       </div>
       <div className="flex gap-4 group transition opacity-75 hover:opacity-100 duration-300 w-max cursor-pointer">
         <div className="group-hover:translate-x-2 duration-700">

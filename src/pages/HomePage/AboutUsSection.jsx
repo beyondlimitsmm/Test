@@ -5,9 +5,11 @@ import { FlipText } from "../../components/FlipText";
 import { handleScrollDownClick } from "../../utils";
 import { about } from "../../api/home";
 import { parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
 
 export const AboutUsSection = () => {
-  const { data } = useQuery({ queryKey: ["about"], queryFn: about });
+  const { data,error } = useQuery({ queryKey: ["about"], queryFn: about });
+  if(error) return <Error />
 
   const cmsData = parseCmsData(data);
 

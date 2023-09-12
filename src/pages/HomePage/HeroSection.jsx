@@ -4,9 +4,12 @@ import HotelLogo from "../../assets/Logo.png";
 import { handleScrollDownClick } from "../../utils";
 import { hero } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
 
 export const HeroSection = () => {
-  const { data } = useQuery({ queryKey: ["hero"], queryFn: hero });
+  const { data, error } = useQuery({ queryKey: ["hero"], queryFn: hero });
+
+  if (error) return <Error />;
   const cmsData = parseCmsData(data);
 
   return (

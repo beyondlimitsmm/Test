@@ -8,10 +8,12 @@ import RoomsBg from "../../assets/images/rooms.png";
 import { OutlineButton } from "../../components/OutlineButton";
 import { room } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
 
 export const RoomSection = () => {
   const roomSectionRef = useRef();
-  const { data } = useQuery({ queryKey: ["room"], queryFn: room });
+  const { data, error } = useQuery({ queryKey: ["room"], queryFn: room });
+  if (error) return <Error />;
   const cmsData = parseCmsData(data);
 
   useEffect(() => {

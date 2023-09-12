@@ -4,9 +4,14 @@ import { getInTouch } from "../../api/home";
 import { parseCmsData } from "../../libs/functions";
 import { useState } from "react";
 import config from "../../config";
+import Error from "../../components/Error";
 
 export const ContactUs = () => {
-  const { data } = useQuery({ queryKey: ["getInTouch"], queryFn: getInTouch });
+  const { data, error } = useQuery({
+    queryKey: ["getInTouch"],
+    queryFn: getInTouch,
+  });
+  if (error) return <Error />;
   const sendMessage = useMutation((form) =>
     axios.post(config.BASE_API_URL + "/messages", form)
   );
