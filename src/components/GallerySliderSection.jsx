@@ -1,9 +1,40 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import "swiper/css/effect-creative";
 import { EffectCreative, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-export const GallerySliderSection = () => {
+import { galleries } from "../api/gallery";
+import { createAssetsUrl } from "../libs/functions";
+
+export const GallerySliderSection = ({ selectedMenu }) => {
   const [thumbSwiper, setThumbsSwiper] = useState(null);
+  const { data } = useQuery({
+    queryKey: [selectedMenu],
+    queryFn: () => galleries(selectedMenu),
+  });
+
+  const [galleryData, setGalleryData] = useState([]);
+
+  const createGalleryData = useCallback(() => {
+    if (!data) return;
+
+    const _galleryData = data?.data[0]?.attributes?.galleries?.data.map(
+      (data) => {
+        const attr = data?.attributes;
+
+        return {
+          id: data?.id,
+          image: createAssetsUrl(attr?.image),
+        };
+      }
+    );
+
+    setGalleryData(_galleryData);
+  }, [data]);
+
+  useEffect(() => {
+    createGalleryData();
+  }, [createGalleryData]);
 
   return (
     <section
@@ -67,10 +98,12 @@ export const GallerySliderSection = () => {
           thumbs={{ swiper: thumbSwiper }}
           className="swiper roomDetailsSwiper h-[400px] xl:h-[600px]"
         >
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
+          {galleryData?.map((data) => (
+            <SwiperSlide key={data.id}>
+              <img src={data.image} />
+            </SwiperSlide>
+          ))}
+          {/* <SwiperSlide>
             <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
           </SwiperSlide>
           <SwiperSlide>
@@ -96,7 +129,7 @@ export const GallerySliderSection = () => {
           </SwiperSlide>
           <SwiperSlide>
             <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
         <Swiper
           onSwiper={(swiper) => {
@@ -126,10 +159,13 @@ export const GallerySliderSection = () => {
           }}
           className="swiper thumbSwiper xl:h-[150px] h-[100px]"
         >
-          <SwiperSlide>
-            <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-          </SwiperSlide>
-          <SwiperSlide>
+          {galleryData?.map((data) => (
+            <SwiperSlide key={data.id}>
+              <img src={data.image} />
+            </SwiperSlide>
+          ))}
+
+          {/* <SwiperSlide>
             <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
           </SwiperSlide>
           <SwiperSlide>
@@ -155,7 +191,7 @@ export const GallerySliderSection = () => {
           </SwiperSlide>
           <SwiperSlide>
             <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-          </SwiperSlide>
+          </SwiperSlide> */}
         </Swiper>
       </div>
     </section>
