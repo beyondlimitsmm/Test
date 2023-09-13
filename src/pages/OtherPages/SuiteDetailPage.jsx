@@ -1,6 +1,8 @@
 import { useNavigate, useParams } from "react-router-dom";
 import rooms from "../../assets/images/more-rooms.png";
 import { GallerySliderSection } from "../../components/GallerySliderSection";
+import { useSuites } from "../../hooks/SuitesContext";
+import config from "../../config";
 
 const ROOM_CONSTANTS = {
   title: "Rooms & Suites",
@@ -57,14 +59,17 @@ const ROOM_CONSTANTS = {
 };
 
 const SuiteDetailPage = () => {
+  const suites = useSuites();
   const navigate = useNavigate();
   const { id } = useParams();
+  const suite = suites.find((suite) => suite.id == id);
+  console.log(suite);
   return (
     <>
       <section className="-mt-20 w-screen min-h-screen xl:min-h-0 relative">
         <div className="absolute inset-0 overflow-hidden -z-10">
           <img
-            src={rooms}
+            src={`${config.BASE_IMAGE_URL}${suite.imageUrl}`}
             alt=""
             className="w-full h-full object-cover brightness-50"
           />
@@ -78,29 +83,29 @@ const SuiteDetailPage = () => {
             </span>
             Suites */}
 
-            {ROOM_CONSTANTS.title}
+            {suite.title}
           </h4>
 
           <div className="w-[80%] p-8 grid grid-cols-2 xl:grid-cols-5 justify-items-center xl:items-center items-start gap-4 xl:gap-2">
             <div className="text-white text-center col-span-2 md:col-span-1">
               <h4 className="typo-body">Price</h4>
-              <p className="typo-menu-2">{ROOM_CONSTANTS.price}</p>
+              <p className="typo-menu-2">{suite.price}</p>
             </div>
             <div className="text-white text-center">
               <h4 className="typo-body">People</h4>
-              <p className="typo-menu-2">{ROOM_CONSTANTS.people}</p>
+              <p className="typo-menu-2">{suite.people}</p>
             </div>
             <div className="text-white text-center">
               <h4 className="typo-body">Bed</h4>
-              <p className="typo-menu-2">{ROOM_CONSTANTS.bed}</p>
+              <p className="typo-menu-2">{suite.bed}</p>
             </div>
             <div className="text-white text-center">
               <h4 className="typo-body">Square Feet</h4>
-              <p className="typo-menu-2">{ROOM_CONSTANTS.squareFeet}</p>
+              <p className="typo-menu-2">{suite.squareFeet}</p>
             </div>
             <div className="text-white text-center">
               <h4 className="typo-body">Type</h4>
-              <p className="typo-menu-2">{ROOM_CONSTANTS.type}</p>
+              <p className="typo-menu-2">{suite.type}</p>
             </div>
           </div>
         </div>
@@ -109,7 +114,7 @@ const SuiteDetailPage = () => {
       <section className="container mx-auto flex flex-col xl:flex-row justify-between items-center py-10 px-4 xl:px-0 xl:py-20 xl:my-20">
         <div className="flex-1 xl:px-20 self-stretch flex justify-center items-center">
           <img
-            src={ROOM_CONSTANTS.featuredImage}
+            src={suite.featuredImage}
             alt=""
             className="w-full xl:h-full h-[400px] object-cover max-w-[500px]"
           />
@@ -118,7 +123,7 @@ const SuiteDetailPage = () => {
           <h3 className="typo-section-title">Amenities {id}</h3>
           <p className="typo-menu-2">Our Executive Rooms feature</p>
           <div className="flex flex-col mt-10">
-            {ROOM_CONSTANTS.amenities.map((amenity, index) => (
+            {suite.amenities.map((amenity, index) => (
               <div
                 key={index}
                 className="flex items-center border-b py-4 gap-5"
@@ -139,13 +144,13 @@ const SuiteDetailPage = () => {
       </section>
 
       <GallerySliderSection
-        imageUrls={ROOM_CONSTANTS.galleryImages}
+        imageUrls={suite.galleryImages}
       ></GallerySliderSection>
 
       <section className="mx-auto container flex justify-center items-center mb-10 xl:mb-40">
         <div
           className="flex items-center gap-6 cursor-pointer"
-          onClick={() => navigate("/rooms")}
+          onClick={() => navigate("/room-types")}
         >
           <div className="mb-1">
             <svg
@@ -165,12 +170,11 @@ const SuiteDetailPage = () => {
             </svg>
           </div>
           <h4 className="font-modesfa z-20 typo-display capitalize !text-3xl xl:!text-5xl">
-            {/* Rooms
+            Rooms
             <span className="typo-display capitalize !text-3xl xl:!text-5xl px-4">
               &
             </span>
-            Suites */}
-            {ROOM_CONSTANTS.title}
+            Suites
           </h4>
         </div>
       </section>

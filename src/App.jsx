@@ -16,6 +16,8 @@ import { RestaurantPage } from "./pages/OtherPages/RestaurantPage";
 import RoomDetailPage from "./pages/OtherPages/RoomDetailPage";
 import { RoomTypePage } from "./pages/OtherPages/RoomTypePage";
 import SuiteDetailPage from "./pages/OtherPages/SuiteDetailPage";
+import { RoomsProvider } from "./hooks/RoomsContext";
+import { SuitesProvider } from "./hooks/SuitesContext";
 
 function App() {
   const location = useLocation();
@@ -34,13 +36,33 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/gallery" element={<GalleryPage />}></Route>
-        <Route path="/room-types" element={<RoomTypePage />}></Route>
+
+        <Route
+          path="/room-types"
+          element={
+            <RoomsProvider>
+              <SuitesProvider>
+                <RoomTypePage />
+              </SuitesProvider>
+            </RoomsProvider>
+          }
+        ></Route>
         <Route
           path="/room-types/rooms/:id"
-          element={<RoomDetailPage />}
+          element={
+            <RoomsProvider>
+              <RoomDetailPage />
+            </RoomsProvider>
+          }
         ></Route>
-
-        <Route path="/room-types/suites/:id" element={<SuiteDetailPage />} />
+        <Route
+          path="/room-types/suites/:id"
+          element={
+            <SuitesProvider>
+              <SuiteDetailPage />
+            </SuitesProvider>
+          }
+        />
 
         <Route path="/pool" element={<PoolPage />}></Route>
         <Route path="/articles" element={<Articles />}></Route>

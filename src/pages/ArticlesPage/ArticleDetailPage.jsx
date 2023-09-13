@@ -33,7 +33,7 @@ const ArticleDetailPage = () => {
     .slice(0, 3);
 
   return (
-    <div className="container mx-auto mb-[120px]">
+    <div className="container max-w-6xl mx-auto mb-[120px]">
       <h2 className="mt-4 mb-6 text-center">
         <Link to="/">Home</Link> &gt;{" "}
         <Link to="/articles"> Articles for you</Link> &gt; <Link> Detail</Link>
@@ -54,42 +54,46 @@ const ArticleDetailPage = () => {
             <div className="overlay absolute inset-0"></div>
           </div>
 
-          <h6 className="font-Lato text-xl font-medium leading-[150%] my-8 mx-4 prose lg:prose-2xl">
+          <h6 className="font-Jost text-xl font-medium leading-[150%] my-8 mx-4 prose lg:prose-2xl">
             {post[0].title}
           </h6>
 
-          <div className="flex flex-col gap-6 justify-between mx-4 prose lg:prose-2xl">
-            <ReactMarkdown className="line-break font-Lato text-lg font-normal leading-[150%]">
+          <div className="flex flex-col gap-6 justify-between mx-4 prose max-w-none">
+            <ReactMarkdown className="line-break font-Jost text-lg font-normal leading-[150%]">
               {post[0].content}
             </ReactMarkdown>
           </div>
+
+          <div className='underline mx-4 font-Jost'><Link to={'/articles'}> Back to articles </Link></div>
         </div>
 
-        <div className="container my-6 mx-auto max-w-[400px]">
-          <h4 className="font-Lato text-3xl font-normal leading-3 mb-6">
-            Interesting Articles
-          </h4>
-          <div className="flex flex-col gap-6">
-            {interestingArticles.map((article) => (
-              <div key={article.id}>
-                <Link to={`/articles/${article.id}`}>
-                  <div className="h-[120px] flex items-center">
-                    <img
-                      src={`${config.BASE_IMAGE_URL}${article.attributes.imageUrl.data.attributes.url}`}
-                      alt="PlaceHolder"
-                      className="w-[120px]"
-                    />
-                    <div className="p-4">
-                      <p className="font-Lato text-lg font-normal leading-[150%]">
-                        {article.attributes.title}
-                      </p>
-                    </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
+
+        {/*<div className="container my-6 mx-auto max-w-[400px]">*/}
+        {/*  <h4 className="font-Lato text-3xl font-normal leading-3 mb-6">*/}
+        {/*    Interesting Articles*/}
+        {/*  </h4>*/}
+        {/*  <div className="flex flex-col gap-6">*/}
+        {/*    {interestingArticles.map((article) => (*/}
+        {/*      <div key={article.id}>*/}
+        {/*        <Link to={`/articles/${article.id}`}>*/}
+        {/*          <div className="bg-cover h-48 flex items-center">*/}
+        {/*            <img*/}
+        {/*              src={`${config.BASE_IMAGE_URL}${article.attributes.imageUrl.data.attributes.url}`}*/}
+        {/*              alt="PlaceHolder"*/}
+        {/*              className="w-full h-full bg-no-repeat object-cover"*/}
+        {/*              style={{ width: '120px', height: '120px' }}*/}
+        {/*            />*/}
+        {/*            <div className="p-4">*/}
+        {/*              <p className="font-Lato text-lg font-normal leading-[150%]">*/}
+        {/*                {article.attributes.title}*/}
+        {/*              </p>*/}
+        {/*            </div>*/}
+        {/*          </div>*/}
+        {/*        </Link>*/}
+        {/*      </div>*/}
+        {/*    ))}*/}
+        {/*  </div>*/}
+        {/*</div>*/}
       </div>
     </div>
   );

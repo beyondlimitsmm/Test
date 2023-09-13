@@ -12,6 +12,9 @@ export default {
         hoverTest: "#3A1E13",
         hoverPale: "#b18e7d",
       },
+      fontFamily: {
+        Jost: ['Jost', 'Arial', 'sans-serif']
+      },
       backgroundImage: {
         "room-door": "url('/src/assets/images/rooms-door.svg')",
         room: "url('/src/assets/images/rooms.png')",

@@ -81,12 +81,12 @@ export const NavSlideDown = () => {
               <div className="mb-8 2xl:mb-[60px]">
                 <h6 className="nav-link-typography 2xl:mb-4">Our HighLights</h6>
                 <div className="flex flex-col gap-1">
-                  <Link onClick={() => toggleNavbar()} to={"/rooms"}>
+                  <Link onClick={() => toggleNavbar()} to={"/room-types"}>
                     <p className="typo-body-2 hover:text-hoverPale transition-colors">
                       Deluxe Rooms
                     </p>
                   </Link>
-                  <Link onClick={() => toggleNavbar()} to={"/rooms"}>
+                  <Link onClick={() => toggleNavbar()} to={"/room-types"}>
                     <p className="typo-body-2 hover:text-hoverPale transition-colors">
                       Suites
                     </p>

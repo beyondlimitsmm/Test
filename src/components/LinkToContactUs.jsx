@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export const LinkToContactUs = () => {
+export const LinkToContactUs = ({contactText}) => {
   const navigate = useNavigate();
 
   function handleContactUsClick(sectionId) {
@@ -19,7 +19,7 @@ export const LinkToContactUs = () => {
       <div className="container mx-auto text-white flex justify-center items-center h-full">
         <div className="max-w-xs flex flex-col justify-center gap-10">
           <h4 className="text-4xl">
-            If you have any questions feel free to contact us!
+            {contactText}
           </h4>
           <div className="w-max">
             <button

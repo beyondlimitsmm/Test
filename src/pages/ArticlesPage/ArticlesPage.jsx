@@ -83,7 +83,7 @@ export default function Articles() {
       <div className="bg-white container mx-auto px-4 xl:px-0">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl lg:max-w-4xl">
-            <div className="mt-16 space-y-20 lg:mt-20 lg:space-y-20">
+            <div className="my-16 space-y-20 lg:mt-20 lg:space-y-20">
               {currentPosts.map((post) => (
                 <ArticleCard post={post} key={post.id} />
               ))}

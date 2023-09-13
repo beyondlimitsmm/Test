@@ -148,7 +148,7 @@ const BarDetailPage = () => {
         </div>
       </section>
 
-      <LinkToContactUs></LinkToContactUs>
+      <LinkToContactUs contactText={"If you have any questions, feel free to Contact Us"}></LinkToContactUs>
     </>
   );
 };
