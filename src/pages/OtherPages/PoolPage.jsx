@@ -2,6 +2,11 @@ import { useState } from "react";
 import { TiWeatherDownpour } from "react-icons/ti";
 import PoolBg from "../../assets/images/pool.png";
 import "../../styles/ImageCarousel.css";
+import { useQuery } from "@tanstack/react-query";
+import { gallery, header } from "../../api/pool";
+
+import Error from "../../components/Error";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 
 const CarouselListData = [
   {
@@ -43,6 +48,12 @@ const CarouselListData = [
 
 export const PoolPage = () => {
   const [activeImage, setActiveImage] = useState(0);
+  const { data: headData, error } = useQuery(["poolHeader"], header);
+  const { data: galleryData } = useQuery(["poolGallery"], gallery);
+  if (error) return <Error />;
+
+  const cmsHeadData = parseCmsData(headData);
+  const cmsGalleryData = parseCmsData(galleryData);
 
   var optionElements = document.querySelectorAll(".option");
 
@@ -62,19 +73,17 @@ export const PoolPage = () => {
       <section className="-mt-20 w-screen min-h-screen xl:min-h-0 relative">
         <div className="absolute inset-0 overflow-hidden -z-10">
           <img
-            src={PoolBg}
+            src={createAssetsUrl(cmsHeadData?.image)}
             alt=""
             className="w-full h-full object-cover brightness-75"
           />
         </div>
         <div className="h-screen xl:h-[75vh] xl:py-48 flex flex-col justify-center items-center">
           <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0">
-            Pool
+            {cmsHeadData?.title}
           </h4>
           <p className="typo-body-2 text-white max-w-[560px] mx-4 xl:mx-0 mt-2 md:mt-6 text-center">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Consequuntur quaerat praesentium at cum eos? Dolore in sapiente
-            totam dolores nobis.
+            {cmsHeadData?.description}
           </p>
         </div>
       </section>
@@ -284,7 +293,6 @@ export const PoolPage = () => {
                   </svg>
                 </div>
                 <span className="break-words">
-                  {" "}
                   Open for breakfast & and Lunch
                 </span>
               </div>
@@ -297,16 +305,16 @@ export const PoolPage = () => {
       <section className="bg-whiteGray">
         <div className="slide_card-container">
           <div className="options">
-            {CarouselListData.map((el, index) => {
+            {cmsGalleryData?.poolCards?.map((el, index) => {
               return (
                 <OptionCard
                   key={index}
                   handleClick={() => setActiveImage(index)}
                   active={index === activeImage}
-                  backgroundImage={el.backgroundImage}
-                  iconComponent={el.iconComponent}
-                  mainText={el.mainText}
-                  subText={el.subText}
+                  backgroundImage={createAssetsUrl(el?.image)}
+                  iconComponent={<TiWeatherDownpour size={25} />}
+                  mainText={el.title}
+                  subText={el.description}
                 />
               );
             })}
