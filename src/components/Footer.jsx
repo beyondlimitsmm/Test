@@ -22,7 +22,6 @@ import { footer } from "../api/home";
 
 export const Footer = () => {
   const { data, error } = useQuery(["footer"], footer);
-
   if (error) return <Error />;
 
   const cmsData = parseCmsData(data);
