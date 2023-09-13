@@ -3,6 +3,11 @@ import { TiWeatherDownpour } from "react-icons/ti";
 import PoolBg from "../../assets/images/pool.png";
 import "../../styles/ImageCarousel.css";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
+
 const CarouselListData = [
   {
     backgroundImage:
@@ -292,27 +297,93 @@ export const PoolPage = () => {
             <button className="border-button w-full">Book Now</button>
           </div>
         </div>
+
+        {/* Section 4 Desktop View */}
+        <section className="hidden xl:block bg-whiteGray mt-24">
+          {/* <h4 className="typo-display px-14 mb-0">Pool Gallery</h4> */}
+          <div className="slide_card-container px-14">
+            <div className="options">
+              {CarouselListData.map((el, index) => {
+                return (
+                  <OptionCard
+                    key={index}
+                    handleClick={() => setActiveImage(index)}
+                    active={index === activeImage}
+                    backgroundImage={el.backgroundImage}
+                    iconComponent={el.iconComponent}
+                    mainText={el.mainText}
+                    subText={el.subText}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Section 4 Mobile View */}
+
+        <section className="xl:hidden bg-whiteGray mt-20 pb-8">
+          {/* <h4 className="px-12 typo-display my-10">Pool Gallery</h4> */}
+          <div className="">
+            <Swiper
+              spaceBetween={8}
+              slidesPerView={1.2}
+              breakpoints={{
+                640: {
+                  slidesPerView: 2.2,
+                  spaceBetween: 10,
+                },
+                768: {
+                  slidesPerView: 2,
+                  spaceBetween: 12,
+                },
+                1024: {
+                  slidesPerView: 1.7,
+                  spaceBetween: 15,
+                },
+              }}
+              className="h-[340px] md:h-[400px] lg:h-[550px] z-40 px-12"
+            >
+              <SwiperSlide className="">
+                <img
+                  src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
+                  alt=""
+                  className="h-[550px]"
+                />
+              </SwiperSlide>
+              <SwiperSlide className="">
+                <img
+                  src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
+                  alt=""
+                  className="h-[550px]"
+                />
+              </SwiperSlide>
+              <SwiperSlide className="">
+                <img
+                  src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
+                  alt=""
+                  className="h-[550px]"
+                />
+              </SwiperSlide>
+              <SwiperSlide className="">
+                <img
+                  src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
+                  alt=""
+                  className="h-[550px]"
+                />
+              </SwiperSlide>
+              <SwiperSlide className="">
+                <img
+                  src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
+                  alt=""
+                  className="h-[550px]"
+                />
+              </SwiperSlide>
+            </Swiper>
+          </div>
+        </section>
       </section>
       {/* Section 3 */}
-      <section className="bg-whiteGray">
-        <div className="slide_card-container">
-          <div className="options">
-            {CarouselListData.map((el, index) => {
-              return (
-                <OptionCard
-                  key={index}
-                  handleClick={() => setActiveImage(index)}
-                  active={index === activeImage}
-                  backgroundImage={el.backgroundImage}
-                  iconComponent={el.iconComponent}
-                  mainText={el.mainText}
-                  subText={el.subText}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </section>
     </>
   );
 };
@@ -335,14 +406,14 @@ const OptionCard = ({
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div className="shadow"></div>
+      {/* <div className="shadow"></div>
       <div className="label">
         <div className="icon">{iconComponent}</div>
         <div className="info">
           <div className="main">{mainText}</div>
           <div className="sub">{subText}</div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

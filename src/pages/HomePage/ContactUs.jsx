@@ -1,3 +1,4 @@
+import { FlipText } from "../../components/FlipText";
 import { OutlineButton } from "../../components/OutlineButton";
 
 export const ContactUs = () => {
@@ -20,27 +21,28 @@ export const ContactUs = () => {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <p className="typo-body-2 font-medium hover:text-hoverPale">
-                    No 129, Inya Road,
-                    <br className="hidden xl:block" />
-                    Kamayut Township Yangon, Myanmar
+                  <p className="typo-body-2 font-medium hover:text-hoverPale max-w-[400px]">
+                    Coner of Dhammazedi Road x Inya Road, No.129, Kamayut
+                    Township Yangon, Myanmar, 11041
                   </p>
                 </a>
               </div>
               <div className="flex xl:justify-start flex-row">
                 <p className="min-w-[75px] typo-body-2">Email :</p>
                 <a href="mailto:theboundaryresidence@gmail.com">
-                  <p className="flip-text typo-body-2 font-medium">
-                    theboundaryresidence@gmail.com
-                  </p>
+                  <FlipText
+                    textStyles={"typo-body-2"}
+                    text={"theboundaryresidence@gmail.com"}
+                  ></FlipText>
                 </a>
               </div>
               <div className="flex xl:justify-start flex-row">
                 <p className="min-w-[75px] typo-body-2">Phone :</p>
                 <a href="tel:01526289">
-                  <p className="flip-text typo-body-2 font-medium">
-                    01 526 289
-                  </p>
+                  <FlipText
+                    textStyles={"typo-body-2"}
+                    text={"01 526 289"}
+                  ></FlipText>
                 </a>
               </div>
 

@@ -37,7 +37,7 @@ export const GallerySection = () => {
             text="Let's Explore"
           ></OutlineButton>
 
-          <div className="relative xl:mt-6 flex items-center w-[150px]">
+          <div className="relative mt-6 flex items-center w-[150px]">
             <div className="home-gallery-swiper-button-prev h-8 w-8 xl:h-12 xl:w-12">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

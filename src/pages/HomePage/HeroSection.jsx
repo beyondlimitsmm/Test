@@ -1,14 +1,11 @@
-import { Cloudinary } from "@cloudinary/url-gen";
 import HotelLogo from "../../assets/Logo.png";
 import HomePagePoster from "../../assets/images/Rectangle13.png";
+import HomePageVideoMov from "../../assets/videos/hero-video.mov";
 import HomePageVideo from "../../assets/videos/hero-video.mp4";
+import HomePageVideoWebm from "../../assets/videos/hero-video.webm";
 import { handleScrollDownClick } from "../../utils";
 
 export const HeroSection = () => {
-  const cld = new Cloudinary({ cloud: { cloudName: "drioyq6vt" } });
-  const HomePoster = cld.image("Rectangle13_ig2kb3");
-  console.log(cld, HomePoster);
-
   return (
     <section
       id="home"
@@ -25,7 +22,11 @@ export const HeroSection = () => {
           src={HomePageVideo}
           className="w-screen h-screen object-cover"
           poster={HomePagePoster}
-        ></video>
+        >
+          <source src={HomePageVideo} type="video/mp4"></source>
+          <source src={HomePageVideoWebm} type="video/webm"></source>
+          <source src={HomePageVideoMov} type="video/mov"></source>
+        </video>
       </div>
       <div className="flex flex-col z-20 items-center gap-20">
         <img

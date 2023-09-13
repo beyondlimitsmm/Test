@@ -238,10 +238,6 @@ html {
   opacity: 0 !important;
 }
 
-[x-cloak] {
-  display: none !important;
-}
-
 /* Flip Text */
 
 .flip-text-white {
@@ -434,4 +430,12 @@ html {
 
 .pagination a:hover:not(.active) {
   background-color: var(--primary-hover);
+}
+
+.multi-elli {
+  --max-line: 2;
+  display: -webkit-box;
+  -webkit-line-clamp: var(--max-line);
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
