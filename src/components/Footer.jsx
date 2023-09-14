@@ -21,6 +21,8 @@ import Error from "./Error";
 import { footer } from "../api/home";
 
 export const Footer = () => {
+  const navigate = useNavigate();
+  const [footerLinks, setFooterLinks] = useState([]);
   const { data, error } = useQuery(["footer"], footer);
   if (error) return <Error />;
 
@@ -30,6 +32,8 @@ export const Footer = () => {
     if (location.pathname !== "/") {
       navigate("/");
     }
+
+
     setTimeout(() => {
       document.getElementById(sectionId).scrollIntoView({
         behavior: "smooth",
@@ -38,8 +42,30 @@ export const Footer = () => {
   }
 
   function handleLinkClick() {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+   window.scrollTo({ top: 0, left: 0, behavior: "smooth" }); 
   }
+
+  const createFooterLinks = useCallback(() => {
+    if (!cmsData) return;
+
+    let _footerLinks = [];
+    for (let i = 0; i < cmsData.footerLinks.length / 5; i++) {
+      _footerLinks.push(cmsData?.footerLinks?.slice(i * 5, i * 5 + 5));
+    }
+
+    setFooterLinks(_footerLinks);
+  }, [cmsData]);
+
+  useEffect(() => {
+    createFooterLinks();
+  }, [createFooterLinks]);
+
+  const onClickHandler = (data) => {
+    handleLinkClick();
+
+    if (data?.self) handleClick(data?.link);
+    else navigate(data?.link);
+  };
 
   return (
     <footer className="bg-[#3A1E13] text-white/75">
@@ -112,58 +138,68 @@ export const Footer = () => {
         </div>
 
         <div className="col-span-1 grid grid-cols-1 xl:grid-cols-3 xl:grid-rows-3">
-          <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6">
-            <Link
-              onClick={handleLinkClick}
-              to="/"
-              className="my-1 nav-link-footer-typography"
-            >
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Home"}
-              ></FlipText>
-            </Link>
-            <Link
-              onClick={handleLinkClick}
-              to="/room-type"
-              className="my-1 nav-link-footer-typography"
-            >
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Rooms and Suite"}
-              ></FlipText>
-            </Link>
+          {footerLinks?.map((links, index) => (
             <div
-              onClick={() => handleScrollDownClick("features")}
-              className="my-1 nav-link-footer-typography"
+              key={index}
+              className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6"
             >
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Our Features"}
-              ></FlipText>
+              {links?.map((data, index) => (
+                <button
+                  key={index}
+                  onClick={() => onClickHandler(data)}
+                  to="/"
+                  className="my-1 nav-link-footer-typography"
+                >
+                  <FlipText
+                    textStyles={"text-white/75"}
+                    secondTextStyles={"!text-white"}
+                    text={data?.title}
+                  ></FlipText>
+                </button>
+              ))}
+
+              {/* <Link
+                onClick={handleLinkClick}
+                to="/room-type"
+                className="my-1 nav-link-footer-typography"
+              >
+                <FlipText
+                  textStyles={"text-white/75"}
+                  secondTextStyles={"!text-white"}
+                  text={"Rooms and Suite"}
+                ></FlipText>
+              </Link>
+              <div
+                onClick={() => handleClick("features")}
+                className="my-1 nav-link-footer-typography"
+              >
+                <FlipText
+                  textStyles={"text-white/75"}
+                  secondTextStyles={"!text-white"}
+                  text={"Our Features"}
+                ></FlipText>
+              </div>
+              <div className="my-1 nav-link-footer-typography">
+                <FlipText
+                  textStyles={"text-white/75"}
+                  secondTextStyles={"!text-white"}
+                  text={"Online Booking"}
+                ></FlipText>
+              </div>
+              <a
+                href="tel:01526289"
+                className="my-1 nav-link-footer-typography"
+              >
+                <FlipText
+                  textStyles={"text-white/75"}
+                  secondTextStyles={"!text-white"}
+                  text={"Phone Reservation"}
+                ></FlipText>
+              </a> */}
             </div>
-            <div className="my-1 nav-link-footer-typography">
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Online Booking"}
-              ></FlipText>
-            </div>
-            <Link
-              href="tel:01526289"
-              className="my-1 nav-link-footer-typography"
-            >
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Phone Reservation"}
-              ></FlipText>
-            </Link>
-          </div>
-          <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6">
+          ))}
+
+          {/* <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6">
             <Link
               onClick={handleLinkClick}
               to="/restaurant"
@@ -262,7 +298,7 @@ export const Footer = () => {
                 text={"Articles For You"}
               ></FlipText>
             </Link>
-          </div>
+          </div> */}
 
           <div className="col-span-3 row-span-1 flex flex-row justify-center xl:justify-start gap-4 xl:gap-12 mt-8 mb-8 xl:mt-0">
             <p

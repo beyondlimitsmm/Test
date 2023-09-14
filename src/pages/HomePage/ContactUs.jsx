@@ -12,9 +12,7 @@ export const ContactUs = () => {
     queryFn: getInTouch,
   });
   if (error) return <Error />;
-  const sendMessage = useMutation((form) =>
-    axios.post(config.BASE_API_URL + "/messages", form)
-  );
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,7 +36,16 @@ export const ContactUs = () => {
     if (validateForm().length > 0) return console.log("Error");
 
     console.log(formData);
-    // await sendMessage.mutate(formData);
+
+    const data = await fetch(config?.EMAIL_API_URL, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then((res) => res.json());
+
+    console.log(data);
 
     // setFormData({ name: "", email: "", phone: "", comment: "" });
   };

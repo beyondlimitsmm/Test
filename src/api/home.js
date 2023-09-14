@@ -40,3 +40,8 @@ export const footer = async () =>
   await base(
     "/footer?populate[logo]=*&populate[socials]=*&populate[footerLinks]=*&populate[payments][populate][0]=image&populate[contactInfo][populate][0]=location"
   );
+
+export const sidebar = async () =>
+  await base(
+    "/sidebar?populate[navLinks]=*&populate[ourHighlights]=*&populate[socials]=*&populate[contactInfo][populate][0]=location"
+  );
