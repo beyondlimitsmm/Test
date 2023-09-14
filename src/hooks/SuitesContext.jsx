@@ -71,29 +71,28 @@ const SuitesData = [
 const SuitesProvider = ({ children }) => {
   const { data, error, isLoading } = useQuery(["suites"], getSuites);
 
-  console.log("suites", data);
-
   if (!data) return null;
 
   const query = data?.data;
-  console.log("query", query);
 
   const suites = query.map((suite) => ({
     id: suite.id,
     title: suite.attributes.title,
-    price: suite.attributes.price,
-    people: suite.attributes.people,
-    bed: suite.attributes.bed,
-    squareFeet: suite.attributes.squareFeet,
-    type: suite.attributes.type,
     description: suite.attributes.description,
+    featuredHeader: suite.attributes?.featuredHeader,
+    featuredText: suite.attributes?.featuredText,
     featuredImage:
       config.BASE_IMAGE_URL +
       suite.attributes.featuredImage.data.attributes.url,
     galleryImages: suite.attributes.galleryImages.data.map(
       (galleryImage) => config.BASE_IMAGE_URL + galleryImage.attributes.url
     ),
-    imageUrl: suite.attributes.imageUrl?.data.attributes.url,
+    suiteDetails: suite.attributes?.suiteDetails.map((suiteDetail) => ({
+      id: suiteDetail.id,
+      type: suiteDetail.type,
+      value: suiteDetail.value,
+    })),
+    backgroundImage: suite?.attributes?.backgroundImage?.data?.attributes.url,
     amenities: [
       {
         image:
@@ -126,11 +125,15 @@ const SuitesProvider = ({ children }) => {
         description: "Air conditioning",
       },
     ],
+    suiteFeatures: suite.attributes?.suiteFeatures.map((suiteFeature) => ({
+      id: suiteFeature.id,
+      description: suiteFeature.description,
+      iconImage:
+        config.BASE_IMAGE_URL + suiteFeature.iconImage?.data?.attributes.url,
+    })),
     viewDetailsLink: `./suites`,
     reserveRoomLink: "#",
   }));
-
-  console.log("suites", suites);
 
   // if (!data) return null;
   return (

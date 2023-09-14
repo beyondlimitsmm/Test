@@ -13,9 +13,9 @@ import { GalleryPage } from "./pages/OtherPages/GalleryPage";
 import MeetingRoom from "./pages/OtherPages/MeetingRoom";
 import { PoolPage } from "./pages/OtherPages/PoolPage";
 import { RestaurantPage } from "./pages/OtherPages/RestaurantPage";
-import RoomDetailPage from "./pages/OtherPages/RoomDetailPage";
-import { RoomTypePage } from "./pages/OtherPages/RoomTypePage";
-import SuiteDetailPage from "./pages/OtherPages/SuiteDetailPage";
+import RoomDetailPage from "./pages/RoomTypePage/RoomDetailPage";
+import { RoomTypePage } from "./pages/RoomTypePage/RoomTypePage";
+import SuiteDetailPage from "./pages/RoomTypePage/SuiteDetailPage";
 import { RoomsProvider } from "./hooks/RoomsContext";
 import { SuitesProvider } from "./hooks/SuitesContext";
 

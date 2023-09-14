@@ -107,7 +107,7 @@ export const RoomSection = () => {
             </div>
             <div className="mt-8 flex justify-center items-center">
               <OutlineButton
-                routeTo="./rooms"
+                routeTo="./room-types"
                 text="Let’s Explore"
               ></OutlineButton>
             </div>

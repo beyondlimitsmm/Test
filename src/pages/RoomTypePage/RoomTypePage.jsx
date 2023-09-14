@@ -6,8 +6,8 @@ import { handleScrollDownClick } from "../../utils";
 import { useRooms } from "../../hooks/RoomsContext";
 import { useSuites } from "../../hooks/SuitesContext";
 import config from "../../config";
-import {useQuery} from "@tanstack/react-query";
-import {getRoomTypes} from "../../api/roomsAndSuites.js";
+import { useQuery } from "@tanstack/react-query";
+import { getRoomTypes } from "../../api/roomsAndSuites.js";
 import Spinner from "../../assets/images/spinner.svg";
 
 // const RoomsData = [
@@ -150,21 +150,19 @@ import Spinner from "../../assets/images/spinner.svg";
 
 export const RoomTypePage = () => {
   const [selectedMenu, setSelectedMenu] = useState("rooms");
-  const {data, isLoading, error} = useQuery(['room-types'], getRoomTypes);
+  const { data, isLoading, error } = useQuery(["room-types"], getRoomTypes);
 
   const RoomsData = useRooms();
   const SuitesData = useSuites();
 
   if (isLoading)
     return (
-        <div className="min-h-screen grid place-items-center">
-          <img src={Spinner} alt="" />
-        </div>
+      <div className="min-h-screen grid place-items-center">
+        <img src={Spinner} alt="" />
+      </div>
     );
 
-  if (error) return <div>Error: {error.message}</div>
-
-  console.log(data)
+  if (error) return <div>Error: {error.message}</div>;
 
   const query = data?.data.attributes;
 
@@ -181,9 +179,8 @@ export const RoomTypePage = () => {
     description: query.description,
     category: query.category,
     backgroundImage: query.backgroundImage.data.attributes.url,
-    contactText: query.contactText
-  }
-  console.log(roomTypes)
+    contactText: query.contactText,
+  };
 
   function selectRoomType(selectedItem) {
     handleScrollDownClick("roomTypeMenu");
@@ -269,7 +266,7 @@ export const RoomTypePage = () => {
                     <RoomCard
                       id={roomCard.id}
                       key={index}
-                      imageSrc={roomCard.imageUrl}
+                      imageSrc={roomCard.backgroundImage}
                       title={roomCard.title}
                       description={roomCard.description}
                       viewDetailsLink={roomCard.viewDetailsLink}

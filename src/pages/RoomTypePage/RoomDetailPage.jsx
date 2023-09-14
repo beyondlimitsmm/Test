@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import rooms from "../../assets/images/more-rooms.png";
 import { GallerySliderSection } from "../../components/GallerySliderSection";
-import { useSuites } from "../../hooks/SuitesContext";
+import { useRooms } from "../../hooks/RoomsContext";
 import config from "../../config";
 
 const ROOM_CONSTANTS = {
@@ -58,55 +58,40 @@ const ROOM_CONSTANTS = {
   ],
 };
 
-const SuiteDetailPage = () => {
-  const suites = useSuites();
+const RoomDetailPage = () => {
+  const roomData = useRooms();
   const navigate = useNavigate();
   const { id } = useParams();
-  const suite = suites.find((suite) => suite.id == id);
-  console.log(suite);
+  const room = roomData.find((room) => room.id == id);
+
   return (
     <>
       <section className="-mt-20 w-screen min-h-screen xl:min-h-0 relative">
         <div className="absolute inset-0 overflow-hidden -z-10">
           <img
-            src={`${config.BASE_IMAGE_URL}${suite.imageUrl}`}
+            src={`${config.BASE_IMAGE_URL}${room.backgroundImage}`}
             alt=""
             className="w-full h-full object-cover brightness-50"
           />
         </div>
 
         <div className="min-h-screen xl:min-h-[600px] xl:py-48 flex flex-col justify-center gap-8 items-center">
-          <h4 className="text-white font-modesfa z-20 typo-display capitalize !text-3xl xl:!text-5xl">
-            {/* Rooms
-            <span className="typo-display capitalize !text-3xl xl:!text-5xl px-4">
-              &
-            </span>
-            Suites */}
-
-            {suite.title}
+          <h4 className="text-white text-center font-modesfa z-20 typo-display capitalize !text-3xl xl:!text-5xl">
+            {room.title}
           </h4>
 
           <div className="w-[80%] p-8 grid grid-cols-2 xl:grid-cols-5 justify-items-center xl:items-center items-start gap-4 xl:gap-2">
-            <div className="text-white text-center col-span-2 md:col-span-1">
-              <h4 className="typo-body">Price</h4>
-              <p className="typo-menu-2">{suite.price}</p>
-            </div>
-            <div className="text-white text-center">
-              <h4 className="typo-body">People</h4>
-              <p className="typo-menu-2">{suite.people}</p>
-            </div>
-            <div className="text-white text-center">
-              <h4 className="typo-body">Bed</h4>
-              <p className="typo-menu-2">{suite.bed}</p>
-            </div>
-            <div className="text-white text-center">
-              <h4 className="typo-body">Square Feet</h4>
-              <p className="typo-menu-2">{suite.squareFeet}</p>
-            </div>
-            <div className="text-white text-center">
-              <h4 className="typo-body">Type</h4>
-              <p className="typo-menu-2">{suite.type}</p>
-            </div>
+            {room.roomDetails.map((roomDetail, index) => (
+              <div
+                key={roomDetail.id}
+                className={`text-white text-center ${
+                  index === 0 ? "col-span-2 md:col-span-1" : ""
+                }`}
+              >
+                <h4 className="typo-body">{roomDetail.type}</h4>
+                <p className="typo-menu-2">{roomDetail.value}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -114,29 +99,29 @@ const SuiteDetailPage = () => {
       <section className="container mx-auto flex flex-col xl:flex-row justify-between items-center py-10 px-4 xl:px-0 xl:py-20 xl:my-20">
         <div className="flex-1 xl:px-20 self-stretch flex justify-center items-center">
           <img
-            src={suite.featuredImage}
+            src={`${config.BASE_IMAGE_URL}${room.featuredImage}`}
             alt=""
             className="w-full xl:h-full h-[400px] object-cover max-w-[500px]"
           />
         </div>
         <div className="flex-1 text-start p-4 xl:px-0 self-stretch xl:self-auto">
-          <h3 className="typo-section-title">Amenities {id}</h3>
-          <p className="typo-menu-2">Our Executive Rooms feature</p>
+          <h3 className="typo-section-title">{room.featuredHeader}</h3>
+          <p className="typo-menu-2">{room.featuredText}</p>
           <div className="flex flex-col mt-10">
-            {suite.amenities.map((amenity, index) => (
+            {room?.roomFeatures.map((roomFeature) => (
               <div
-                key={index}
+                key={roomFeature.id}
                 className="flex items-center border-b py-4 gap-5"
               >
                 <div className="h-7 w-7 md:w-8 md:h-8 flex shrink-0 items-center">
                   <img
-                    src={amenity.image}
+                    src={roomFeature.iconImage}
                     className="h-full w-full object-cover object-center"
-                    alt={amenity.description}
+                    alt={roomFeature.description}
                     loading="lazy"
                   />
                 </div>
-                <p className="typo-body-2">{amenity.description}</p>
+                <p className="typo-body-2">{roomFeature.description}</p>
               </div>
             ))}
           </div>
@@ -144,7 +129,7 @@ const SuiteDetailPage = () => {
       </section>
 
       <GallerySliderSection
-        imageUrls={suite.galleryImages}
+        imageUrls={room.galleryImages}
       ></GallerySliderSection>
 
       <section className="mx-auto container flex justify-center items-center mb-10 xl:mb-40">
@@ -181,4 +166,4 @@ const SuiteDetailPage = () => {
     </>
   );
 };
-export default SuiteDetailPage;
+export default RoomDetailPage;
