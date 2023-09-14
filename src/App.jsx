@@ -3,6 +3,8 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "swiper/css";
 import { Footer } from "./components/Footer";
 import { HomePageNavBar } from "./components/HomePageNavBar";
+
+import { ModalPopUp } from "./components/ModalPopUP";
 import { NavBar } from "./components/NavBar";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { NotFound } from "./pages/NotFound";
@@ -24,7 +26,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div className="App">
+    <div className="App relative">
       <NavBarBuilder></NavBarBuilder>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
@@ -43,6 +45,8 @@ function App() {
         <Route path="/404" element={<NotFound />}></Route>
       </Routes>
       {location.pathname !== "/404" && <Footer></Footer>}
+
+      <ModalPopUp></ModalPopUp>
     </div>
   );
 }
