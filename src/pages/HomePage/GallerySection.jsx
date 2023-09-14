@@ -1,12 +1,23 @@
+import { useCallback, useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import { Navigation, Pagination, Scrollbar } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { OutlineButton } from "../../components/OutlineButton";
+
 import "../../styles/HomePage.css";
+import { OutlineButton } from "../../components/OutlineButton";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import { gallery } from "../../api/home";
+import Error from "../../components/Error";
 
 export const GallerySection = () => {
+  const { data, error } = useQuery(["homeGallery"], gallery);
+  if (error) return <Error />;
+
+  const cmsData = parseCmsData(data);
+
   return (
     <section
       id="gallery"
@@ -15,7 +26,7 @@ export const GallerySection = () => {
       <div className="container mx-auto flex flex-col lg:flex-row lg:justify-between lg:items-center w-full h-full gap-32 lg:gap-20 relative">
         <div className="lg:max-w-md lg:mb-32 flex flex-col relative mx-12">
           <h6 className="typo-title capitalize typo-text-black font-modesfa mb-4">
-            Our Gallery
+            {cmsData?.title}
           </h6>
           <p
             className="typo-body-2 typo-text-black text-left"
@@ -25,16 +36,13 @@ export const GallerySection = () => {
               fontSize: "1.0625rem",
             }}
           >
-            Lorem ipsum dolor sit amet consectetur. Congue felis nunc dictum
-            urna non suscipit convallis. Ipsum dolor sit amet tetur adipisicing
-            elit. Voluptatem saepe magnam necess quisquam laboriosam atque nulla
-            blanditiis veniam non tenetur!
+            {cmsData?.description}
           </p>
 
           <OutlineButton
             styles="my-6 w-max"
-            routeTo="./gallery"
-            text="Let's Explore"
+            routeTo={cmsData?.button?.link}
+            text={cmsData?.button?.name}
           ></OutlineButton>
 
           <div className="relative mt-6 flex items-center w-[150px]">
@@ -103,20 +111,21 @@ export const GallerySection = () => {
         }}
         className="absolute bottom-0 lg:bottom-auto right-0 w-[90%] lg:w-1/2  pb-10 h-[340px] md:h-[400px] lg:h-[550px] mb-14 tiles home-gallery-swiper"
       >
-        <SwiperSlide className="tile">
-          <img
-            src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
-            alt=""
-            className="h-[550px]"
-          />
-          <div className="details">
-            <span className="title">Lorem Ipsum Dolor</span>
-            <span className="info">
-              Quisque vel felis lectus donec vitae dapibus magna
-            </span>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide className="tile">
+        {cmsData?.galleryCards?.map((data) => (
+          <SwiperSlide key={data?.id} className="swiper-slide tile">
+            <img
+              src={createAssetsUrl(data?.image)}
+              alt=""
+              className="h-[550px]"
+            />
+            <div className="details">
+              <span className="title">{data?.title}</span>
+              <span className="info">{data?.description}</span>
+            </div>
+          </SwiperSlide>
+        ))}
+
+        {/* <SwiperSlide className="tile">
           <img
             src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
             alt=""
@@ -167,8 +176,8 @@ export const GallerySection = () => {
               Quisque vel felis lectus donec vitae dapibus magna
             </span>
           </div>
-        </SwiperSlide>
-
+        </SwiperSlide>{" "}
+        */}
         <div className="swiper-scrollbar z-50"></div>
       </Swiper>
     </section>

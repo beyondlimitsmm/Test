@@ -1,37 +1,42 @@
 /* eslint-disable no-undef */
-import React, { useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+
 import Rectangle10 from "../../assets/images/Rectangle10.png";
 import Rectangle13 from "../../assets/images/Rectangle13.png";
 import "../../styles/HomePage.css";
+import { bar } from "../../api/home";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
 
-const SlideMenuData = [
-  {
-    id: 1,
-    imageRef: React.createRef(),
-    title: "Boundary Restaurant",
-    description:
-      "Indulge in the finest culinary experience at our gourmet restaurant. Our chef prepares exquisite dishes using fresh, locally sourced ingredients. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus odio blanditiis, et beatae modi molestiae, obcaecati sit maxime non deleniti eveniet. Eligendi aliquid delectus soluta impedit iusto neque, mollitia officia?",
-    imageUrl: Rectangle10,
-    cuisine: "French Cuisine, Local Specialties",
-    dressCode: "Smart Casual",
-    openingHours: "6:00pm – 11:00pm",
-    menuLink: "#",
-    exploreLink: "/restaurant",
-  },
-  {
-    id: 2,
-    imageRef: React.createRef(),
-    title: "Voyage Bar",
-    description:
-      "Enjoy a relaxed atmosphere in our Voyage Bar. We offer a wide selection of premium cocktails, wines, and craft beers. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus odio blanditiis, et beatae modi molestiae, obcaecati sit maxime non deleniti eveniet. Eligendi aliquid delectus soluta impedit iusto neque, mollitia officia?",
-    imageUrl: Rectangle13,
-    cuisine: "Cocktails, Wines, Craft Beers",
-    dressCode: "Casual",
-    openingHours: "5:00pm – 2:00am",
-    menuLink: "#",
-    exploreLink: "/bar-details",
-  },
-];
+// const SlideMenuData = [
+//   {
+//     id: 1,
+//     imageRef: React.createRef(),
+//     title: "Boundary Restaurant",
+//     description:
+//       "Indulge in the finest culinary experience at our gourmet restaurant. Our chef prepares exquisite dishes using fresh, locally sourced ingredients. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus odio blanditiis, et beatae modi molestiae, obcaecati sit maxime non deleniti eveniet. Eligendi aliquid delectus soluta impedit iusto neque, mollitia officia?",
+//     imageUrl: Rectangle10,
+//     cuisine: "French Cuisine, Local Specialties",
+//     dressCode: "Smart Casual",
+//     openHours: "6:00pm – 11:00pm",
+//     menuLink: "#",
+//     exploreLink: "#",
+//   },
+//   {
+//     id: 2,
+//     imageRef: React.createRef(),
+//     title: "Voyage Bar",
+//     description:
+//       "Enjoy a relaxed atmosphere in our Voyage Bar. We offer a wide selection of premium cocktails, wines, and craft beers. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Necessitatibus odio blanditiis, et beatae modi molestiae, obcaecati sit maxime non deleniti eveniet. Eligendi aliquid delectus soluta impedit iusto neque, mollitia officia?",
+//     imageUrl: Rectangle13,
+//     cuisine: "Cocktails, Wines, Craft Beers",
+//     dressCode: "Casual",
+//     openHours: "5:00pm – 2:00am",
+//     menuLink: "#",
+//     exploreLink: "#",
+//   },
+// ];
 
 export const BarAndRestaurantSection = () => {
   const menuSection = useRef();
@@ -42,6 +47,36 @@ export const BarAndRestaurantSection = () => {
   const menusRef = useRef();
   const menuDetails = useRef();
   const [menuSlideRight, setMenuSlideRight] = useState(false);
+  const [slideMenu, setSlideMenu] = useState([]);
+
+  const { data, error } = useQuery(["bar"], bar);
+  if (error) return <Error />;
+  const cmsData = parseCmsData(data);
+
+  const createSlideMenu = useCallback(() => {
+    if (!cmsData) return;
+
+    const _slideMenu = cmsData?.restaurantCards?.map((dt) => {
+      return {
+        id: dt?.id,
+        imageRef: React.createRef(),
+        title: dt?.title,
+        description: dt?.description,
+        cuisine: dt?.cuisine,
+        dressCode: dt?.dressCode,
+        openHours: dt?.openHours,
+        imageUrl: createAssetsUrl(dt?.image),
+        menuLink: createAssetsUrl(dt?.menu),
+        exploreLink: dt?.explore,
+      };
+    });
+
+    setSlideMenu(_slideMenu);
+  }, [cmsData]);
+
+  useEffect(() => {
+    createSlideMenu();
+  }, [createSlideMenu]);
 
   function hideImage(imageRef) {
     if (selectEl === null || selectEl === undefined) {
@@ -153,7 +188,7 @@ export const BarAndRestaurantSection = () => {
           className="bg-transparent -z-10 absolute inset-0"
         ></div>
         <div id="imageWrapper" className="flex-1 relative hidden xl:block">
-          {SlideMenuData.map((menu) => {
+          {slideMenu?.map((menu) => {
             return (
               <img
                 key={menu.id}
@@ -175,7 +210,7 @@ export const BarAndRestaurantSection = () => {
             show={changeUI}
             wrapperRef={menuDetails}
             onClosePopUp={closePopUp}
-            {...SlideMenuData.find((menu) => menu.imageRef === selectEl)}
+            {...slideMenu?.find((menu) => menu.imageRef === selectEl)}
           ></LayoutDetails>
 
           <div
@@ -195,7 +230,7 @@ export const BarAndRestaurantSection = () => {
               </h2>
             </div>
 
-            {SlideMenuData.map((menu) => {
+            {slideMenu?.map((menu) => {
               return (
                 <div
                   key={menu.id}
@@ -223,7 +258,7 @@ const LayoutDetails = ({
   description,
   cuisine,
   dressCode,
-  openingHours,
+  openHours,
   menuLink,
   exploreLink,
 }) => {
@@ -251,7 +286,7 @@ const LayoutDetails = ({
       </div>
       <div className="border-b py-4 flex justify-between">
         <p>Opening hours</p>
-        <p>{openingHours}</p>
+        <p>{openHours}</p>
       </div>
       <div className="flex gap-4 group transition opacity-75 hover:opacity-100 duration-300 w-max cursor-pointer">
         <div className="group-hover:translate-x-2 duration-700">

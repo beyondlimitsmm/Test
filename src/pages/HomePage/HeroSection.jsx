@@ -1,9 +1,17 @@
+import { useQuery } from "@tanstack/react-query";
+
 import HotelLogo from "../../assets/Logo.png";
-import HomePagePoster from "../../assets/images/Rectangle13.png";
-import HomePageVideo from "../../assets/videos/hero-video.mp4";
 import { handleScrollDownClick } from "../../utils";
+import { hero } from "../../api/home";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
 
 export const HeroSection = () => {
+  const { data, error } = useQuery({ queryKey: ["hero"], queryFn: hero });
+
+  if (error) return <Error />;
+  const cmsData = parseCmsData(data);
+
   return (
     <section
       id="home"
@@ -17,9 +25,9 @@ export const HeroSection = () => {
           preload="none"
           type="video/mp4"
           playsInline
-          src={HomePageVideo}
+          src={createAssetsUrl(cmsData?.video)}
           className="w-screen h-screen object-cover"
-          poster={HomePagePoster}
+          poster={createAssetsUrl(cmsData?.poster)}
         ></video>
       </div>
       <div className="flex flex-col z-20 items-center gap-20">
@@ -29,8 +37,8 @@ export const HeroSection = () => {
           width="250"
           className="brightness-200 xl:hidden"
         />
-        <div className="text-white z-20 typo-display mb-10 mx-4 capitalize text-center">
-          Serving you our best forever
+        <div className="text-white z-20 typo-display mb-10 capitalize">
+          {cmsData?.title}
         </div>
       </div>
       <div className="absolute bottom-2 lg:bottom-12 left-1/2 -translate-x-1/2 flex justify-center items-center">

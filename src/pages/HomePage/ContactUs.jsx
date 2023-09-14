@@ -1,6 +1,59 @@
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { OutlineButton } from "../../components/OutlineButton";
+import { getInTouch } from "../../api/home";
+import { parseCmsData } from "../../libs/functions";
+import { useState } from "react";
+import config from "../../config";
+import Error from "../../components/Error";
 
 export const ContactUs = () => {
+  const { data, error } = useQuery({
+    queryKey: ["getInTouch"],
+    queryFn: getInTouch,
+  });
+  if (error) return <Error />;
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    comment: "",
+  });
+
+  const cmsData = parseCmsData(data);
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target;
+
+    setFormData((data) => {
+      data[name] = value;
+
+      return data;
+    });
+  };
+
+  const onSubmitHandler = async () => {
+    if (validateForm().length > 0) return console.log("Error");
+
+    console.log(formData);
+
+    const data = await fetch(config?.EMAIL_API_URL, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    }).then((res) => res.json());
+
+    console.log(data);
+
+    // setFormData({ name: "", email: "", phone: "", comment: "" });
+  };
+
+  const validateForm = () => {
+    return Object.keys(formData).filter((key) => formData[key] == "");
+  };
+
   return (
     <section id="contactUs" className="bg-[#F8F9FA] xl:py-12 xl:px-0 px-4 py-6">
       <div className="container mx-auto relative overflow-hidden">
@@ -16,30 +69,31 @@ export const ContactUs = () => {
               <div className="flex xl:justify-start flex-row">
                 <p className="min-w-[75px] typo-body-2">Address :</p>
                 <a
-                  href="https://goo.gl/maps/LFB6PZeqcQDDuBnS8"
+                  href={cmsData?.contactInfo?.location?.link}
                   target="_blank"
                   rel="noreferrer"
                 >
                   <p className="typo-body-2 font-medium hover:text-hoverPale">
-                    No 129, Inya Road,
+                    {/* No 129, Inya Road,
                     <br className="hidden xl:block" />
-                    Kamayut Township Yangon, Myanmar
+                    Kamayut Township Yangon, Myanmar */}
+                    {cmsData?.contactInfo?.location?.name}
                   </p>
                 </a>
               </div>
               <div className="flex xl:justify-start flex-row">
                 <p className="min-w-[75px] typo-body-2">Email :</p>
-                <a href="mailto:theboundaryresidence@gmail.com">
+                <a href={`mailto:${cmsData?.contactInfo?.email}`}>
                   <p className="flip-text typo-body-2 font-medium">
-                    theboundaryresidence@gmail.com
+                    {cmsData?.contactInfo?.email}
                   </p>
                 </a>
               </div>
               <div className="flex xl:justify-start flex-row">
                 <p className="min-w-[75px] typo-body-2">Phone :</p>
-                <a href="tel:01526289">
+                <a href={`tel:${cmsData?.contactInfo?.phone}`}>
                   <p className="flip-text typo-body-2 font-medium">
-                    01 526 289
+                    {cmsData?.contactInfo?.phone}
                   </p>
                 </a>
               </div>
@@ -50,15 +104,19 @@ export const ContactUs = () => {
                 </p>
 
                 <div className="flex justify-start">
-                  <p className="w-[150px] typo-body-2">Winter Season :</p>
+                  <p className="w-[150px] typo-body-2">
+                    {cmsData?.openClose?.open?.split(":")[0]} :
+                  </p>
                   <p className="typo-body-2 font-medium">
-                    03.11.2023 - 21.04.2024
+                    {cmsData?.openClose?.open?.split(":")[1]}
                   </p>
                 </div>
                 <div className="flex justify-start">
-                  <p className="w-[150px] typo-body-2">Summer Season :</p>
+                  <p className="w-[150px] typo-body-2">
+                    {cmsData?.openClose?.close?.split(":")[0]} :
+                  </p>
                   <p className="typo-body-2 font-medium">
-                    03.11.2023 - 21.04.2024
+                    {cmsData?.openClose?.close?.split(":")[1]}
                   </p>
                 </div>
               </div>
@@ -69,6 +127,8 @@ export const ContactUs = () => {
               <input
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-2 font-medium"
+                name="name"
+                onChange={onChangeHandler}
               />
 
               <span className="input_underline"></span>
@@ -82,6 +142,8 @@ export const ContactUs = () => {
               <input
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-2 font-medium"
+                name="phone"
+                onChange={onChangeHandler}
               />
 
               <span className="input_underline"></span>
@@ -95,6 +157,8 @@ export const ContactUs = () => {
               <input
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 font-medium mt-2"
+                name="email"
+                onChange={onChangeHandler}
               />
 
               <span className="input_underline"></span>
@@ -109,6 +173,8 @@ export const ContactUs = () => {
                 rows="4"
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-2 resize-none font-medium"
+                name="comment"
+                onChange={onChangeHandler}
               ></textarea>
 
               <span className="input_underline"></span>
@@ -118,11 +184,16 @@ export const ContactUs = () => {
               </label>
             </div>
 
-            <OutlineButton
+            {/* <OutlineButton
               linkStyle="self-end"
               routeTo="./articles"
               text="Send"
-            ></OutlineButton>
+            ></OutlineButton> */}
+            <div className="self-end">
+              <button className="border-button" onClick={onSubmitHandler}>
+                Send
+              </button>
+            </div>
           </div>
         </div>
 

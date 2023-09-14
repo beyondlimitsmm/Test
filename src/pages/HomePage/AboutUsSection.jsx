@@ -1,7 +1,18 @@
+import { useQuery } from "@tanstack/react-query";
+
 import HotelLogoBrown from "../../assets/logo-brown.png";
 import { FlipText } from "../../components/FlipText";
 import { handleScrollDownClick } from "../../utils";
+import { about } from "../../api/home";
+import { parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
+
 export const AboutUsSection = () => {
+  const { data,error } = useQuery({ queryKey: ["about"], queryFn: about });
+  if(error) return <Error />
+
+  const cmsData = parseCmsData(data);
+
   return (
     <section
       id="aboutUs"
@@ -9,17 +20,13 @@ export const AboutUsSection = () => {
     >
       <div className="flex-[2.5] max-w-[80%] xl:max-w-[750px] xl:pr-40 text-center xl:text-left">
         <h2 className="typo-display mb-4 typo-text-black uppercase xl:text-[40px] text-[30px]">
-          The Boundary Residence
+          {cmsData?.title}
         </h2>
         <p
           className="typo-body-2 typo-text-black mb-8 xl:text-[1rem] text-[16px]"
           style={{ lineHeight: "1.625rem", letterSpacing: "0.02em" }}
         >
-          Lorem ipsum dolor sit amet consectetur. Congue felis nunc dictum urna
-          non suscipit convallis. A vulputate nunc commodo urna nibh aenean
-          facilisi sapien. Non quis semper cursus ultricies velit. Aliquam sed
-          ac volutpat at non. Faucio risus augue tristique amet. Lorem ipsum
-          dolor sit reprehenderit!
+          {cmsData?.description}
         </p>
 
         <button
@@ -28,7 +35,7 @@ export const AboutUsSection = () => {
           }}
           className="border-button"
         >
-          Explore More
+          {cmsData?.button?.name}
         </button>
       </div>
       <div className="divider xl:mx-10 xl:w-[2px] xl:h-[45vh] bg-[#D5D1D1]/40 w-[80%] h-[2px] my-10"></div>
@@ -37,7 +44,7 @@ export const AboutUsSection = () => {
           <img src={HotelLogoBrown} alt="Logo" />
         </div>
         <div className="flex flex-col items-center gap-4 px-4 xl:px-8">
-          <a href="mailto:theboundaryresidence@gmail.com">
+          <a href={`mailto:${cmsData?.contactInfo?.email}`}>
             <div className="flex gap-2">
               <svg
                 width="25"
@@ -56,12 +63,12 @@ export const AboutUsSection = () => {
               </svg>
 
               <FlipText
-                text={"theboundaryresidence@gmail.com"}
+                text={cmsData?.contactInfo?.email}
                 textStyles={"text-left typo-body-2"}
               />
             </div>
           </a>
-          <a href="tel:01526289">
+          <a href={`tel:${cmsData?.contactInfo?.phone}`}>
             <div className="flex gap-2">
               <svg
                 width="25"
@@ -78,11 +85,14 @@ export const AboutUsSection = () => {
                   strokeLinejoin="round"
                 />
               </svg>
-              <FlipText text={"01-526-28"} textStyles={"typo-body-2"} />
+              <FlipText
+                text={cmsData?.contactInfo?.phone}
+                textStyles={"typo-body-2"}
+              />
             </div>
           </a>
           <a
-            href="https://goo.gl/maps/LFB6PZeqcQDDuBnS8"
+            href={cmsData?.contactInfo?.location?.link}
             target="_blank"
             rel="noreferrer"
           >
@@ -111,9 +121,10 @@ export const AboutUsSection = () => {
                 />
               </svg>
               <p className="typo-body-2 text-center hover:text-hoverPale">
-                No 129, Inya Road, Kamayut Township{" "}
+                {/* No 129, Inya Road, Kamayut Township{" "}
                 <br className="2xl:hidden" />
-                Yangon, Myanmar
+                Yangon, Myanmar */}
+                {cmsData?.contactInfo?.location?.name}
               </p>
             </div>
           </a>

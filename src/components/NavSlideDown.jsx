@@ -6,19 +6,37 @@ import LinkedIn from "../assets/images/LinkedIn.svg";
 import Twitter from "../assets/images/Twitter.svg";
 import Youtube from "../assets/images/Youtube.svg";
 import { NavBarContext } from "../hooks/NavBarContext";
+import { useQuery } from "@tanstack/react-query";
+import { sidebar } from "../api/home";
+import Error from "./Error";
+import { parseCmsData } from "../libs/functions";
 
 export const NavSlideDown = () => {
   const { isSidebarOpen, toggleNavbar } = useContext(NavBarContext);
-
   const navigate = useNavigate();
   const location = useLocation();
+  const { data, error } = useQuery(["sidebar"], sidebar);
+  if (error) return <Error />;
 
-  function handleClick(sectionId) {
+  const cmsData = parseCmsData(data);
+
+  function handleClick(data) {
     if (location.pathname !== "/") {
       navigate("/");
     }
+
+    if (!data?.self) {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
+      setTimeout(() => {
+        navigate(data?.link);
+        toggleNavbar();
+      }, 100);
+      return;
+    }
+
     setTimeout(() => {
-      document.getElementById(sectionId).scrollIntoView({
+      document.getElementById(data?.link).scrollIntoView({
         behavior: "smooth",
       });
       toggleNavbar();
@@ -38,14 +56,18 @@ export const NavSlideDown = () => {
       >
         <div className="grid grid-cols-1 xl:grid-cols-2 h-full relative">
           <div className="flex flex-col justify-between col-span-1 2xl:h-2/3 h-[85%]">
-            <button
-              onClick={() => handleClick("home")}
-              className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
-            >
-              Home
-            </button>
+            {cmsData?.navLinks?.map((data, index) => (
+              <button
+                key={index}
+                onClick={() => handleClick(data)}
+                className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
+                //   x-on:click="handleScrollDownClick('#home');open = !open"
+              >
+                {data?.title}
+              </button>
+            ))}
 
-            <button
+            {/* <button
               onClick={() => handleClick("roomSection")}
               className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
             >
@@ -74,43 +96,27 @@ export const NavSlideDown = () => {
               className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
             >
               View on Map
-            </button>
+            </button> */}
           </div>
           <div className="col-span-1 flex flex-col xl:flex-row justify-between h-max pb-10 pt-10 xl:pt-0 transition-none">
             <div className="flex-1">
               <div className="mb-8 2xl:mb-[60px]">
                 <h6 className="nav-link-typography 2xl:mb-4">Our HighLights</h6>
                 <div className="flex flex-col gap-1">
-                  <Link onClick={() => toggleNavbar()} to={"/room-types"}>
-                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
-                      Deluxe Rooms
-                    </p>
-                  </Link>
-                  <Link onClick={() => toggleNavbar()} to={"/room-types"}>
-                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
-                      Suites
-                    </p>
-                  </Link>
-                  <Link onClick={() => toggleNavbar()} to={"/restaurant"}>
-                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
-                      Restaurant
-                    </p>
-                  </Link>
-                  <Link onClick={() => toggleNavbar()} to={"/bar-details"}>
-                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
-                      Voyage Bar
-                    </p>
-                  </Link>
-                  <Link onClick={() => toggleNavbar()} to={"/pool"}>
-                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
-                      Amazing Pool
-                    </p>
-                  </Link>
-                  <Link onClick={() => toggleNavbar()} to={"/meeting-room"}>
-                    <p className="typo-body-2 hover:text-hoverPale transition-colors">
-                      Meetings & Events
-                    </p>
-                  </Link>
+                  {cmsData?.ourHighlights?.map((data, index) => (
+                    <button
+                      className="flex justify-start"
+                      key={index}
+                      onClick={() => handleClick(data)}
+                    >
+                      <p className="typo-body-2">{data?.title}</p>
+                    </button>
+                  ))}
+
+                  {/* <p className="typo-body-2">Restarurant</p>
+                  <p className="typo-body-2">Refresh Pool</p>
+                  <p className="typo-body-2">Voyage Bar</p>
+                  <p className="typo-body-2">Luxuary Rooms</p> */}
                 </div>
               </div>
 
@@ -119,8 +125,12 @@ export const NavSlideDown = () => {
                   Check-In/Check Out
                 </h6>
                 <div className="flex flex-col gap-1">
-                  <p className="typo-body-2">Check in from: 14:00</p>
-                  <p className="typo-body-2">Check out before: 12:00</p>
+                  <p className="typo-body-2">
+                    Check in from: {cmsData?.checkIn}
+                  </p>
+                  <p className="typo-body-2">
+                    Check in from: {cmsData?.checkOut}
+                  </p>
                 </div>
               </div>
             </div>
@@ -130,29 +140,28 @@ export const NavSlideDown = () => {
                   <h6 className="nav-link-typography">Contact Us</h6>
                   <div className="flex flex-col gap-1">
                     <a
-                      href="tel:01526289"
-                      className="typo-body-2 hover:text-hoverPale"
+                      href={`tel:${cmsData?.contactInfo?.phone}`}
+                      className="typo-body-2"
                     >
-                      01-526-289
+                      {cmsData?.contactInfo?.phone}
                     </a>
                     <a
                       href="mailto:theboundaryresidence@gmail.com"
                       className="typo-body-2 hover:text-hoverPale"
                     >
-                      theboundaryresidence@gmail.com
+                      {cmsData?.contactInfo?.email}
                     </a>
                   </div>
                 </div>
                 <div className="mb-8 2xl:mb-[60px]">
                   <h6 className="nav-link-typography">Address</h6>
                   <a
-                    href="https://goo.gl/maps/LFB6PZeqcQDDuBnS8"
+                    href={cmsData?.contactInfo?.location?.link}
                     target="_blank"
                     className="typo-body-2 hover:text-hoverPale"
                     rel="noreferrer"
                   >
-                    Coner of Dhammazedi Road x Inya Road, No.129, Kamayut
-                    Township Yangon, Myanmar, 11041
+                    {cmsData?.contactInfo?.location?.name}
                   </a>
                 </div>
               </div>
@@ -160,33 +169,41 @@ export const NavSlideDown = () => {
           </div>
 
           <div className="nav-footer absolute right-0 left-0 bottom-0 mt-4 flex justify-center xl:justify-end gap-6">
-            <img
-              src={Instagram}
-              alt=""
-              className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
-            />
-            <img
-              src={Twitter}
-              alt=""
-              className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
-            />
-            <a href="https://www.facebook.com/TheBoundaryResidence" target="_">
+            <a href={cmsData?.socials?.instagram}>
+              <img
+                src={Instagram}
+                alt=""
+                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              />
+            </a>
+            <a href={cmsData?.socials?.twitter}>
+              <img
+                src={Twitter}
+                alt=""
+                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              />
+            </a>
+            <a href={cmsData?.socials?.facebook}>
               <img
                 src={Facebook}
                 alt=""
-                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
+                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
               />
             </a>
-            <img
-              src={Youtube}
-              alt=""
-              className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
-            />
-            <img
-              src={LinkedIn}
-              alt=""
-              className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
-            />
+            <a href={cmsData?.socials?.youtube}>
+              <img
+                src={Youtube}
+                alt=""
+                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              />
+            </a>
+            <a href={cmsData?.socials?.linkedin}>
+              <img
+                src={LinkedIn}
+                alt=""
+                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+              />
+            </a>
           </div>
         </div>
       </div>
