@@ -1,4 +1,5 @@
 import { Navigation, Scrollbar } from "swiper/modules";
+import { useQuery } from "@tanstack/react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ArticleIcon from "../../assets/images/articles-icon.svg";
 import Voyage1 from "../../assets/images/voyage1.png";
@@ -7,42 +8,60 @@ import FeatureImage from "../../components/FeatureImage";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import { LinkToContactUs } from "../../components/LinkToContactUs";
+import { feature, gallery, header } from "../../api/bar";
+import Error from "../../components/Error";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 
 const BarDetailPage = () => {
+  const { data: headData, error } = useQuery(["barHeader"], header);
+  const { data: featureData } = useQuery(["barFeature"], feature);
+  const { data: galleryData } = useQuery(["barGallery"], gallery);
+  if (error) return <Error />;
+
+  const cmsHeadData = parseCmsData(headData);
+  const cmsFeatureData = parseCmsData(featureData);
+  const cmsGalleryData = parseCmsData(galleryData);
+
   return (
     <>
       <section className="h-screen w-screen -mt-20 relative overflow-hidden z-10 flex justify-center items-center">
-        <div className="absolute w-screen h-screen brightness-50  bg-bar-details bg-no-repeat bg-cover"></div>
+        <div
+          className="absolute w-screen h-screen brightness-50  bg-no-repeat bg-cover"
+          style={{
+            backgroundImage: `url(${createAssetsUrl(cmsHeadData?.image)})`,
+          }}
+        ></div>
 
         <div className="text-white z-20 typo-display mb-10 flex flex-col items-center">
-          <img src={Voyage1} alt="" />
-          <h2 className="typo-title mb-8 text-center">
-            Serving you our best until the end of time
-          </h2>
+          <img src={createAssetsUrl(cmsHeadData?.logo)} alt="" />
+          <h2 className="typo-title mb-8 text-center">{cmsHeadData?.title}</h2>
 
           <button className="border-button  text-base ">
-            <span className="text-white"> Reserve Now </span>
+            <span className="text-white"> {cmsHeadData?.button?.name} </span>
           </button>
         </div>
       </section>
 
       <section className="py-10 xl:py-20 container mx-auto overflow-hidden w-screen relative flex justify-center items-center text-white">
         <div className="w-screen h-[450px] overflow-hidden relative">
-          <div className="w-full h-full bg-no-repeat bg-cover bg-fixed bg-center bg-foodAndDrink"></div>
+          <div
+            className="w-full h-full bg-no-repeat bg-cover bg-fixed bg-center "
+            style={{
+              backgroundImage: `url(${createAssetsUrl(cmsFeatureData?.image)})`,
+            }}
+          ></div>
 
           <FeatureImage
             icon={ArticleIcon}
-            title={"Food & Drinks"}
-            description={
-              "Lorem ipsum dolor sit amet consectetur. Congue felis nunc dictum urna non suscipit convallis. A vulputate nunc commodo urna nibh aenean facilisi sapien."
-            }
-            detail={"See Menu"}
+            title={cmsFeatureData?.title}
+            description={cmsFeatureData?.description}
+            detail={cmsFeatureData?.button?.name}
           />
         </div>
       </section>
 
       <section className="mx-auto container xl:py-10 py-0 px-4">
-        <h4 className="typo-title">Let’s take a look</h4>
+        <h4 className="typo-title">{cmsGalleryData?.title}</h4>
 
         <div className="relative mt-6 mb-8">
           <Swiper
@@ -78,6 +97,17 @@ const BarDetailPage = () => {
             }}
             className="swiper roomsSwiper2 pb-10 w-full h-[250px] lg:h-[500px]"
           >
+            {cmsGalleryData?.barCards?.map((data) => (
+              <SwiperSlide key={data?.id}>
+                <img src={createAssetsUrl(data?.image)} alt="" />
+              </SwiperSlide>
+            ))}
+            {/* <SwiperSlide>
+              <img
+                src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
+                alt=""
+              />
+            </SwiperSlide>
             <SwiperSlide>
               <img
                 src="https://66.media.tumblr.com/5af3f8303456e376ceda1517553ba786/tumblr_o4986gakjh1qho82wo1_1280.jpg"
@@ -95,19 +125,7 @@ const BarDetailPage = () => {
                 src="https://66.media.tumblr.com/5af3f8303456e376ceda1517553ba786/tumblr_o4986gakjh1qho82wo1_1280.jpg"
                 alt=""
               />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
-                alt=""
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://66.media.tumblr.com/5af3f8303456e376ceda1517553ba786/tumblr_o4986gakjh1qho82wo1_1280.jpg"
-                alt=""
-              />
-            </SwiperSlide>
+            </SwiperSlide> */}
 
             <div className="swiper-scrollbar z-50"></div>
           </Swiper>

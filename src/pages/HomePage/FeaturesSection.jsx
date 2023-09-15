@@ -83,7 +83,7 @@ export const FeaturesSection = () => {
           <img
             src={Rectangle10}
             alt=""
-            className="h-[300px] w-full xl:h-[650px] xl:w-auto object-cover"
+            className="h-[300px] xl:max-w-xl w-full xl:h-[650px] xl:w-auto object-cover"
           />
 
           <img
@@ -107,7 +107,7 @@ export const FeaturesSection = () => {
             urna non suscipit convallis. A vulputate nunc commodo urna
           </p>
           <OutlineButton
-            routeTo="./meeting-room"
+            routeTo="/meeting-room"
             text="Let's Explore"
           ></OutlineButton>
         </div>

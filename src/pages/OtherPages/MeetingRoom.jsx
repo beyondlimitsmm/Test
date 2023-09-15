@@ -1,33 +1,31 @@
+import { useQuery } from "@tanstack/react-query";
 import room from "../../assets/images/rooms.png";
+import { header } from "../../api/meetingRoom";
+import Error from "../../components/Error";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 
 const MeetingRoom = () => {
+  const { data: headData, error } = useQuery(["meetingRoomHeader"], header);
+  if (error) return <Error />;
+
+  const cmsHeadData = parseCmsData(headData);
+
   return (
     <>
-      <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 hidden">
-        <img
-          className="transition duration-300"
-          src="./assets/Logo.png"
-          alt="logo"
-          width="150"
-        />
-      </div>
-
       <section className="-mt-20 w-screen min-h-screen xl:min-h-0 relative">
         <div className="absolute inset-0 overflow-hidden -z-10">
           <img
-            src={room}
+            src={createAssetsUrl(cmsHeadData?.image)}
             alt=""
             className="w-full h-full object-cover brightness-75"
           />
         </div>
         <div className="h-screen xl:h-[75vh] xl:py-48 flex flex-col justify-center items-center">
           <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0">
-            Meeting Room
+            {cmsHeadData?.title}
           </h4>
           <p className="typo-body-2 text-white max-w-[560px] mx-4 xl:mx-0 mt-2 md:mt-6 text-center">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Consequuntur quaerat praesentium at cum eos? Dolore in sapiente
-            totam dolores nobis.
+            {cmsHeadData?.description}
           </p>
         </div>
       </section>
@@ -40,31 +38,30 @@ const MeetingRoom = () => {
             </h4>
             <div className="flex-col flex gap-4">
               <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                molestiae impedit, nobis eligendi nam saepe! Dolorum autem
-                consequuntur natus fuga veritatis quaerat, aliquid quasi magni
-                quod laudantium nemo omnis aspernatur, veniam non officia porro,
-                animi amet officiis re Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
-                similique quos tempora iusto cum?
+                Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
+                consectetur adipisicing elit. Officia vero unde libero
+                voluptatum architecto doloribus laudantium pariatur expedita ea
+                modi reiciendis, debitis ex dicta adipisci mollitia dolores
+                commodi id inventore! Lorem ipsum dolor sit amet consectetur
+                adipisicing elit expedita iste doloribus, recusandae quis illo
+                ipsa beatae veritatis.
               </p>
               <p className="leading-relaxed typo-body-2 transition-all duration-500">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
                 molestiae impedit, nobis eligendi nam saepe! Dolorum autem
                 consequuntur natus fugaelit. Officiis pariatur temporibus eum
-                porro nam sed consectetur quia facilis nemo, in architecto enim
-                libero voluptates. Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
-                similique quos tempora iusto cum?
+                porro nam sed consectetur adipisicing elit. Nostrum rerum
+                aliquam, dolores quas harum modi similique quos tempora iusto
+                cum? Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                Aliquam amet quos earum magnam tempora voluptatum!
               </p>
               <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                molestiae impedit, nobis eligendi nam saepe! Dolorum autem
-                consequuntur natus fuga veritatis quaerat, aliquid quasi magni
-                quod laudantium nemo omnis quia facilis nemo, in architecto enim
-                libero voluptates. Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
-                similique quos tempora iusto cum?
+                Lorem ipsum dolo Lorem ipsum dolor sit, amet consectetur
+                adipisicing elit. Non ullam, facilis quos, quis est distinctio
+                quisquam quae nam? Sit, non ratione accusamus recusandae odio
+                tenetur iste. dolor sit, amet consectetur adipisicing elit.
+                Nostrum rerum aliquam, dolores quas harum modi similique quos
+                tempora iusto cum?
               </p>
             </div>
             <div>

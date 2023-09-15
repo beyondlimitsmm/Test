@@ -1,23 +1,40 @@
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import "swiper/css/effect-creative";
 import { EffectCreative, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { galleries } from "../api/gallery";
+import { createAssetsUrl } from "../libs/functions";
 
-export const IMAGE_URLS = [
-  "https://swiperjs.com/demos/images/nature-1.jpg",
-  "https://swiperjs.com/demos/images/nature-2.jpg",
-  "https://swiperjs.com/demos/images/nature-3.jpg",
-  "https://swiperjs.com/demos/images/nature-4.jpg",
-  "https://swiperjs.com/demos/images/nature-5.jpg",
-  "https://swiperjs.com/demos/images/nature-6.jpg",
-  "https://swiperjs.com/demos/images/nature-7.jpg",
-  "https://swiperjs.com/demos/images/nature-8.jpg",
-  "https://swiperjs.com/demos/images/nature-9.jpg",
-  "https://swiperjs.com/demos/images/nature-10.jpg",
-];
-
-export const GallerySliderSection = ({ imageUrls }) => {
+export const GallerySliderSection = ({ selectedMenu }) => {
   const [thumbSwiper, setThumbsSwiper] = useState(null);
+  const { data } = useQuery({
+    queryKey: [selectedMenu],
+    queryFn: () => galleries(selectedMenu),
+  });
+
+  const [galleryData, setGalleryData] = useState([]);
+
+  const createGalleryData = useCallback(() => {
+    if (!data) return;
+
+    const _galleryData = data?.data[0]?.attributes?.galleries?.data.map(
+      (data) => {
+        const attr = data?.attributes;
+
+        return {
+          id: data?.id,
+          image: createAssetsUrl(attr?.image),
+        };
+      }
+    );
+
+    setGalleryData(_galleryData);
+  }, [data]);
+
+  useEffect(() => {
+    createGalleryData();
+  }, [createGalleryData]);
 
   return (
     <section
@@ -81,11 +98,38 @@ export const GallerySliderSection = ({ imageUrls }) => {
           thumbs={{ swiper: thumbSwiper }}
           className="swiper roomDetailsSwiper h-[400px] xl:h-[600px]"
         >
-          {imageUrls.map((imageUrl, index) => (
-            <SwiperSlide key={index}>
-              <img src={imageUrl} alt={`Nature ${index + 1}`} />
+          {galleryData?.map((data) => (
+            <SwiperSlide key={data.id}>
+              <img src={data.image} />
             </SwiperSlide>
           ))}
+          {/* <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+          </SwiperSlide> */}
         </Swiper>
         <Swiper
           onSwiper={(swiper) => {
@@ -115,11 +159,39 @@ export const GallerySliderSection = ({ imageUrls }) => {
           }}
           className="swiper thumbSwiper xl:h-[150px] h-[100px]"
         >
-          {imageUrls.map((imageUrl, index) => (
-            <SwiperSlide key={index}>
-              <img src={imageUrl} alt={`Nature ${index + 1}`} />
+          {galleryData?.map((data) => (
+            <SwiperSlide key={data.id}>
+              <img src={data.image} />
             </SwiperSlide>
           ))}
+
+          {/* <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+          </SwiperSlide> */}
         </Swiper>
       </div>
     </section>

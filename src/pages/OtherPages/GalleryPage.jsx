@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
+import { useQuery } from "@tanstack/react-query";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
@@ -8,6 +9,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { GallerySliderSection } from "../../components/GallerySliderSection";
 import "../../styles/GalleryPage.css";
 import "../../styles/RoomDetails.css";
+import { galleryCategories } from "../../api/gallery";
+import { parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
 
 const MenuData = [
   "Exterior",
@@ -32,21 +36,48 @@ const imageUrls = [
 ];
 
 export const GalleryPage = () => {
-  const [selectedMenu, setSelectedMenu] = useState(MenuData[0]);
+  const [selectedMenu, setSelectedMenu] = useState();
+  const [menuData, setMenuData] = useState([]);
+  const { data, error } = useQuery({
+    queryKey: ["galleryCategories"],
+    queryFn: galleryCategories,
+  });
+
+  const createMenuData = useCallback(() => {
+    if (!data) return;
+
+    const _menuData = data?.data.map((dt) => {
+      const attr = dt.attributes;
+
+      return {
+        id: dt?.id,
+        title: attr?.title,
+      };
+    });
+
+    setSelectedMenu(_menuData[0]?.title);
+    setMenuData(_menuData);
+  }, [data]);
+
+  useEffect(() => {
+    createMenuData();
+  }, [createMenuData]);
+
+  if (error) return <Error />;
 
   return (
     <>
-      <section className="my-20">
+      <section className="my-12">
         <nav className="flex justify-between md:px-20 w-full relative border-b border-stellarLightGrey mb-18">
           <div className="flex justify-start items-center"></div>
           <ul className="navSlider inline-block py-4 md:py-7 xl:py-9 whitespace-nowrap overflow-x-auto font-walbaum">
-            {MenuData.map((menu, index) => {
+            {menuData?.map((menu, index) => {
               return (
                 <GalleryPageMenu
                   key={index}
-                  label={menu}
+                  label={menu?.title}
                   selectedMenu={selectedMenu}
-                  handleClick={() => setSelectedMenu(menu)}
+                  handleClick={() => setSelectedMenu(menu?.title)}
                 ></GalleryPageMenu>
               );
             })}
@@ -56,10 +87,12 @@ export const GalleryPage = () => {
       </section>
 
       {selectedMenu === MenuData[0] ? (
-        <GallerySliderSection imageUrls={imageUrls}></GallerySliderSection>
+        <GallerySliderSection></GallerySliderSection>
       ) : (
         <ChangeSliderExaample></ChangeSliderExaample>
-      )}
+      )} */}
+
+      <GallerySliderSection selectedMenu={selectedMenu} />
     </>
   );
 };
