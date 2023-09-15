@@ -4,7 +4,7 @@ import "swiper/css";
 import { Footer } from "./components/Footer";
 import { HomePageNavBar } from "./components/HomePageNavBar";
 
-import { ModalPopUp } from "./components/ModalPopUP";
+import { ModalPopUp } from "./components/ModalPopUp";
 import { NavBar } from "./components/NavBar";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { NotFound } from "./pages/NotFound";
