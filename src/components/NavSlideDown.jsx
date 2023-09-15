@@ -12,7 +12,8 @@ import Error from "./Error";
 import { parseCmsData } from "../libs/functions";
 
 export const NavSlideDown = () => {
-  const { isSidebarOpen, toggleNavbar } = useContext(NavBarContext);
+  const { isNavOpen, toggleNavbar } = useContext(NavBarContext);
+
   const navigate = useNavigate();
   const location = useLocation();
   const { data, error } = useQuery(["sidebar"], sidebar);
@@ -46,12 +47,12 @@ export const NavSlideDown = () => {
   return (
     <div
       className={`absolute w-screen bg-white overflow-y-scroll xl:overflow-y-hidden ${
-        isSidebarOpen ? "h-[calc(100vh-79px)] xl:pt-16 xl:pb-10 py-8" : "h-0"
+        isNavOpen ? "h-[calc(100vh-79px)] xl:pt-16 xl:pb-10 py-8" : "h-0"
       }`}
     >
       <div
         className={`container mx-auto xl:px-20 px-4 ${
-          isSidebarOpen ? "h-max xl:h-full" : "hidden h-0"
+          isNavOpen ? "h-max xl:h-full" : "hidden h-0"
         }`}
       >
         <div className="grid grid-cols-1 xl:grid-cols-2 h-full relative">

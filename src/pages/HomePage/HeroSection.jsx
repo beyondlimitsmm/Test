@@ -22,7 +22,7 @@ export const HeroSection = () => {
           loop
           autoPlay
           muted
-          preload="none"
+          // preload="none"
           type="video/mp4"
           playsInline
           src={createAssetsUrl(cmsData?.video)}

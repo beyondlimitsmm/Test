@@ -8,6 +8,11 @@ import { gallery, header } from "../../api/pool";
 import Error from "../../components/Error";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
+
 const CarouselListData = [
   {
     backgroundImage:
@@ -343,14 +348,14 @@ const OptionCard = ({
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div className="shadow"></div>
+      {/* <div className="shadow"></div>
       <div className="label">
         <div className="icon">{iconComponent}</div>
         <div className="info">
           <div className="main">{mainText}</div>
           <div className="sub">{subText}</div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

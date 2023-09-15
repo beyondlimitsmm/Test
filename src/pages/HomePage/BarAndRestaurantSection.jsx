@@ -276,15 +276,15 @@ const LayoutDetails = ({
       <p className="leading-relaxed typo-body-2 font-walbaum transition-all duration-500 translate-y-[50px] opacity-0">
         {description}
       </p>
-      <div className="border-b py-4 flex justify-between">
+      <div className="border-b border-white/50 py-4 flex justify-between">
         <p>Cuisine</p>
         <p>{cuisine}</p>
       </div>
-      <div className="border-b py-4 flex justify-between">
+      <div className="border-b border-white/50 py-4 flex justify-between">
         <p>Dress Code</p>
         <p>{dressCode}</p>
       </div>
-      <div className="border-b py-4 flex justify-between">
+      <div className="border-b border-white/50 py-4 flex justify-between">
         <p>Opening hours</p>
         <p>{openHours}</p>
       </div>
