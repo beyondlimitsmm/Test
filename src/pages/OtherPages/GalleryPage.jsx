@@ -30,8 +30,6 @@ export const GalleryPage = () => {
     queryFn: galleryCategories,
   });
 
-  if (error) return <Error />;
-
   const createMenuData = useCallback(() => {
     if (!data) return;
 
@@ -51,6 +49,8 @@ export const GalleryPage = () => {
   useEffect(() => {
     createMenuData();
   }, [createMenuData]);
+
+  if (error) return <Error />;
 
   return (
     <>
