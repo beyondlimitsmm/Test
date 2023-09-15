@@ -174,35 +174,35 @@ export const NavSlideDown = () => {
               <img
                 src={Instagram}
                 alt=""
-                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
               />
             </a>
             <a href={cmsData?.socials?.twitter}>
               <img
                 src={Twitter}
                 alt=""
-                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
               />
             </a>
             <a href={cmsData?.socials?.facebook}>
               <img
                 src={Facebook}
                 alt=""
-                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 "
               />
             </a>
             <a href={cmsData?.socials?.youtube}>
               <img
                 src={Youtube}
                 alt=""
-                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 "
               />
             </a>
             <a href={cmsData?.socials?.linkedin}>
               <img
                 src={LinkedIn}
                 alt=""
-                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
               />
             </a>
           </div>
