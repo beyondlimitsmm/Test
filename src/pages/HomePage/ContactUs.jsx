@@ -1,17 +1,15 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { OutlineButton } from "../../components/OutlineButton";
-import { getInTouch } from "../../api/home";
-import { parseCmsData } from "../../libs/functions";
+import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import config from "../../config";
+import { getInTouch } from "../../api/home";
 import Error from "../../components/Error";
+import config from "../../config";
+import { parseCmsData } from "../../libs/functions";
 
 export const ContactUs = () => {
   const { data, error } = useQuery({
     queryKey: ["getInTouch"],
     queryFn: getInTouch,
   });
-  if (error) return <Error />;
 
   const [formData, setFormData] = useState({
     name: "",
@@ -19,6 +17,8 @@ export const ContactUs = () => {
     phone: "",
     comment: "",
   });
+
+  if (error) return <Error />;
 
   const cmsData = parseCmsData(data);
 

@@ -4,7 +4,7 @@ export default async (uri) => {
   try {
     const res = await fetch(config.BASE_API_URL + uri, {
       headers: {
-        authorization: `Bearer ${config.TOKEN}`,
+        authorization: `Bearer ${config.BEARER_TOKEN}`,
       },
     });
 

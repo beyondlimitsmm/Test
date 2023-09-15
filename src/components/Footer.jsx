@@ -23,7 +23,6 @@ export const Footer = () => {
   const navigate = useNavigate();
   const [footerLinks, setFooterLinks] = useState([]);
   const { data, error } = useQuery(["footer"], footer);
-  if (error) return <Error />;
 
   const cmsData = parseCmsData(data);
 
@@ -64,6 +63,8 @@ export const Footer = () => {
     if (data?.self) handleClick(data?.link);
     else navigate(data?.link);
   };
+
+  if (error) return <Error />;
 
   return (
     <footer className="bg-[#3A1E13] text-white/75">

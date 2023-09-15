@@ -1,17 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { AiOutlineWifi } from "react-icons/ai";
-import { BiAtom, BiLoader, BiShapeSquare } from "react-icons/bi";
-import { BsClock, BsDatabaseAdd } from "react-icons/bs";
-import { PiAlignBottomDuotone } from "react-icons/pi";
-import { RiBusFill } from "react-icons/ri";
-import { service } from "../../api/home";
-import { parseCmsData } from "../../libs/functions";
 import { useCallback, useEffect, useState } from "react";
+import { BsClock } from "react-icons/bs";
+import { service } from "../../api/home";
 import Error from "../../components/Error";
+import { parseCmsData } from "../../libs/functions";
 
 export const ServiceSection = () => {
-  const { data,error } = useQuery(["homeService"], service);
-  if(error) return <Error />
+  const { data, error } = useQuery(["homeService"], service);
+
   const [services, setServices] = useState([]);
 
   const cmsData = parseCmsData(data);
@@ -30,6 +26,8 @@ export const ServiceSection = () => {
   useEffect(() => {
     createServices();
   }, [createServices]);
+
+  if (error) return <Error />;
 
   return (
     <section className="bg-[#F8F9FA] xl:py-14 py-10 px-4 xl:px-0">

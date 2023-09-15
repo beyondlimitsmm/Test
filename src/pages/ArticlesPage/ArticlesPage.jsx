@@ -36,7 +36,7 @@ export default function Articles() {
       title: post.attributes.title,
       href: `./articles/${post.id}`,
       description: post.attributes.description,
-      imageUrl: post.attributes.imageUrl.data.attributes.url,
+      imageUrl: post.attributes?.imageUrl.data.attributes.url,
       date: post.attributes.createdAt,
       datetime: post.attributes.createdAt,
       content: post.attributes.content,
