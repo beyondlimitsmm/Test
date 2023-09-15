@@ -1,12 +1,11 @@
 import { useState } from "react";
 // import { TiWeatherDownpour } from "react-icons/ti";
-import { FaBowlFood } from "react-icons/fa6";
-import restaurantBg from "../../assets/images/features.png";
-import "../../styles/ImageCarousel.css";
 import { useQuery } from "@tanstack/react-query";
+import { FaBowlFood } from "react-icons/fa6";
 import { about, facility, gallery, header } from "../../api/restaurant";
-import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import "../../styles/ImageCarousel.css";
 
 // const CarouselListData = [
 //   {

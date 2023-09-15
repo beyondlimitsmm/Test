@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from "react-router-dom";
 import rooms from "../../assets/images/more-rooms.png";
-import { GallerySliderSection } from "../../components/GallerySliderSection";
+// import { GallerySliderSection } from "../../components/GallerySliderSection";
 import { useRooms } from "../../hooks/RoomsContext";
 import config from "../../config";
+import { RoomSlider } from "../../components/RoomSlider";
 
 const ROOM_CONSTANTS = {
   title: "Rooms & Suites",
@@ -128,9 +129,7 @@ const RoomDetailPage = () => {
         </div>
       </section>
 
-      <GallerySliderSection
-        imageUrls={room.galleryImages}
-      ></GallerySliderSection>
+      <RoomSlider imageUrls={room.galleryImages}></RoomSlider>
 
       <section className="mx-auto container flex justify-center items-center mb-10 xl:mb-40">
         <div

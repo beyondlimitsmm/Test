@@ -7,11 +7,14 @@ import { galleries } from "../api/gallery";
 import { createAssetsUrl } from "../libs/functions";
 
 export const GallerySliderSection = ({ selectedMenu }) => {
+  console.log("selectedMenu", selectedMenu);
   const [thumbSwiper, setThumbsSwiper] = useState(null);
   const { data } = useQuery({
     queryKey: [selectedMenu],
     queryFn: () => galleries(selectedMenu),
   });
+
+  console.log("gallery data", data);
 
   const [galleryData, setGalleryData] = useState([]);
 

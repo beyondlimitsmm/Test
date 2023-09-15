@@ -3,6 +3,7 @@ import rooms from "../../assets/images/more-rooms.png";
 import { GallerySliderSection } from "../../components/GallerySliderSection";
 import { useSuites } from "../../hooks/SuitesContext";
 import config from "../../config";
+import { RoomSlider } from "../../components/RoomSlider";
 
 const ROOM_CONSTANTS = {
   title: "Rooms & Suites",
@@ -128,9 +129,7 @@ const SuiteDetailPage = () => {
         </div>
       </section>
 
-      <GallerySliderSection
-        imageUrls={suite.galleryImages}
-      ></GallerySliderSection>
+      <RoomSlider imageUrls={suite.galleryImages}></RoomSlider>
 
       <section className="mx-auto container flex justify-center items-center mb-10 xl:mb-40">
         <div

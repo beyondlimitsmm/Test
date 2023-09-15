@@ -86,7 +86,7 @@ export const GalleryPage = () => {
         </nav>
       </section>
 
-      {selectedMenu === MenuData[0] ? (
+      {/* {selectedMenu === MenuData[0] ? (
         <GallerySliderSection></GallerySliderSection>
       ) : (
         <ChangeSliderExaample></ChangeSliderExaample>
