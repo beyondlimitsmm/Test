@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBarBuilder></NavBarBuilder>
+      {/* <NavBarBuilder></NavBarBuilder> */}
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/gallery" element={<GalleryPage />}></Route>
@@ -71,7 +71,7 @@ function App() {
         <Route path="*" element={<Navigate to="/404" replace />}></Route>
         <Route path="/404" element={<NotFound />}></Route>
       </Routes>
-      {location.pathname !== "/404" && <Footer></Footer>}
+      {/* {location.pathname !== "/404" && <Footer></Footer>} */}
     </div>
   );
 }

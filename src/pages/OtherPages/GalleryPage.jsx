@@ -9,8 +9,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { GallerySliderSection } from "../../components/GallerySliderSection";
 import "../../styles/GalleryPage.css";
 import "../../styles/RoomDetails.css";
-import { galleryCategories } from "../../api/gallery";
-import { parseCmsData } from "../../libs/functions";
+import { galleries } from "../../api/gallery";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
 
 const MenuData = [
@@ -39,8 +39,8 @@ export const GalleryPage = () => {
   const [selectedMenu, setSelectedMenu] = useState();
   const [menuData, setMenuData] = useState([]);
   const { data, error } = useQuery({
-    queryKey: ["galleryCategories"],
-    queryFn: galleryCategories,
+    queryKey: ["galleries"],
+    queryFn: galleries,
   });
 
   const createMenuData = useCallback(() => {
@@ -49,9 +49,16 @@ export const GalleryPage = () => {
     const _menuData = data?.data.map((dt) => {
       const attr = dt.attributes;
 
+      let galleries = [];
+
+      attr?.galleries?.forEach((gallery) => {
+        galleries.push(createAssetsUrl(gallery?.image));
+      });
+
       return {
         id: dt?.id,
         title: attr?.title,
+        galleries,
       };
     });
 
@@ -92,7 +99,7 @@ export const GalleryPage = () => {
         <ChangeSliderExaample></ChangeSliderExaample>
       )} */}
 
-      <GallerySliderSection selectedMenu={selectedMenu} />
+      <GallerySliderSection selectedMenu={selectedMenu} menuData={menuData} />
     </>
   );
 };
