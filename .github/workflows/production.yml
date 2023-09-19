@@ -34,6 +34,6 @@ jobs:
             npm i 
             npm run build
             rm -rf ../html/
-            mv dist/ ../html
+            mv dist/ ../dist
             cd ~/www
             pm2 restart 0
