@@ -29,9 +29,11 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /var/www/React-boundary-residence
+            cd www/React-boundary-residence
             git pull origin cms 
             npm i 
             npm run build
             rm -rf ../html/
             mv dist/ ../html
+            cd ..
+            npm restart node
