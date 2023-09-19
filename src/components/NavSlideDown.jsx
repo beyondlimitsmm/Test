@@ -56,7 +56,7 @@ export const NavSlideDown = () => {
       >
         <div className="grid grid-cols-1 xl:grid-cols-2 h-full relative">
           <div className="flex flex-col justify-between col-span-1 2xl:h-2/3 h-[85%]">
-            {cmsData?.navLinks?.map((data, index) => (
+            {cmsData?.navLinks?.slice(0,6).map((data, index) => (
               <button
                 key={index}
                 onClick={() => handleClick(data)}

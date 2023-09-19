@@ -11,6 +11,8 @@ export const ContactUs = () => {
     queryFn: getInTouch,
   });
 
+  console.log(data);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,9 +28,10 @@ export const ContactUs = () => {
     const { name, value } = e.target;
 
     setFormData((data) => {
-      data[name] = value;
+      const newData = { ...data };
+      newData[name] = value;
 
-      return data;
+      return newData;
     });
   };
 
@@ -45,9 +48,7 @@ export const ContactUs = () => {
       body: JSON.stringify(formData),
     }).then((res) => res.json());
 
-    console.log(data);
-
-    // setFormData({ name: "", email: "", phone: "", comment: "" });
+    setFormData({ name: "", email: "", phone: "", comment: "" });
   };
 
   const validateForm = () => {

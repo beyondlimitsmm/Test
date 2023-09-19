@@ -15,63 +15,65 @@ export const FeaturesSection = () => {
 
   return (
     <section id="features" className="container mx-auto overflow-hidden">
-      {cmsData?.featureCards?.map((data) => (
-        <div
-          key={data?.id}
-          data-aos="fade-up"
-          data-aos-offset="300"
-          data-aos-duration="800"
-          className={`flex xl:py-20 py-10 justify-center flex-col ${
-            data?.position == "left" ? "xl:flex-row" : "xl:flex-row-reverse"
-          } `}
-        >
-          <div
-            className={`relative mb-[80px] xl:mb-0 mx-4 xl:mx-0 ${
-              data?.position == "left" ? "xl:mr-[250px]" : "xl:ml-[250px]"
-            }`}
-          >
-            <img
-              src={createAssetsUrl(data?.mainImage)}
-              alt=""
-              className="h-[300px] w-full xl:h-[650px] xl:w-[420px] object-cover"
-            />
+      {cmsData?.featureCards?.map((data, index) => {
+        const isLeft = !(index % 2);
 
+        return (
+          <div
+            key={data?.id}
+            data-aos="fade-up"
+            data-aos-offset="300"
+            data-aos-duration="800"
+            className={`flex xl:py-20 py-10 justify-center flex-col ${
+              isLeft ? "xl:flex-row" : "xl:flex-row-reverse"
+            } `}
+          >
             <div
-              data-aos={data?.position == "left" ? "fade-down" : "fade-right"}
-              data-aos-offset="100"
-              data-aos-duration="500"
-              className={`h-44 w-[300px] absolute xl:h-64 xl:w-[440px]  xl:top-1/2 xl:-translate-y-1/3 -bottom-12 right-0 xl:-right-48 ${
-                data?.position == "left"
-                  ? "right-0 xl:-right-48"
-                  : "left-0 xl:-left-48"
+              className={`relative mb-[80px] xl:mb-0 mx-4 xl:mx-0 ${
+                isLeft ? "xl:mr-[250px]" : "xl:ml-[250px]"
               }`}
             >
               <img
-                src={createAssetsUrl(data?.subImage)}
+                src={createAssetsUrl(data?.mainImage)}
                 alt=""
-                className={`h-full w-full object-cover border-[12px] border-white shadow-lg ${
-                  data?.position == "left" && "rotate-[-3deg]"
-                }`}
-                style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }}
+                className="h-[300px] w-full xl:h-[650px] xl:w-[420px] object-cover"
               />
+
+              <div
+                data-aos={isLeft ? "fade-down" : "fade-right"}
+                data-aos-offset="100"
+                data-aos-duration="500"
+                className={`h-44 w-[300px] absolute xl:h-64 xl:w-[440px]  xl:top-1/2 xl:-translate-y-1/3 -bottom-12 right-0 xl:-right-48 ${
+                  isLeft ? "right-0 xl:-right-48" : "left-0 xl:-left-48"
+                }`}
+              >
+                <img
+                  src={createAssetsUrl(data?.subImage)}
+                  alt=""
+                  className={`h-full w-full object-cover border-[12px] border-white shadow-lg ${
+                    isLeft && "rotate-[-3deg]"
+                  }`}
+                  style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }}
+                />
+              </div>
+            </div>
+
+            <div className="z-20 w-full xl:w-[400px] bg-white px-10 pb-10 flex flex-col justify-center items-center transition-opacity duration-200">
+              <img src={RestaurantColor} alt="" className="w-24 h-24" />
+              <h6 className="typo-title capitalize typo-text-black font-modesfa">
+                {data?.title}
+              </h6>
+              <p className="py-6 typo-body-2 text-center typo-text-black">
+                {data?.description}
+              </p>
+              <OutlineButton
+                routeTo={data?.button?.link}
+                text={data?.button?.name}
+              ></OutlineButton>
             </div>
           </div>
-
-          <div className="z-20 w-full xl:w-[400px] bg-white px-10 pb-10 flex flex-col justify-center items-center transition-opacity duration-200">
-            <img src={RestaurantColor} alt="" className="w-24 h-24" />
-            <h6 className="typo-title capitalize typo-text-black font-modesfa">
-              {data?.title}
-            </h6>
-            <p className="py-6 typo-body-2 text-center typo-text-black">
-              {data?.description}
-            </p>
-            <OutlineButton
-              routeTo={data?.button?.link}
-              text={data?.button?.name}
-            ></OutlineButton>
-          </div>
-        </div>
-      ))}
+        );
+      })}
 
       {/* <div
         data-aos="fade-up"
