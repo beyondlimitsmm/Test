@@ -36,4 +36,4 @@ jobs:
             rm -rf ../html/
             mv dist/ ../html
             cd ~/www
-            npm restart node
+            npm restart 8
