@@ -1,15 +1,27 @@
 import { useQuery } from "@tanstack/react-query";
 import room from "../../assets/images/RoomPlaceHolder.jpg";
-import { header } from "../../api/meetingRoom";
+import { about, facility, header } from "../../api/meetingRoom";
 import Error from "../../components/Error";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import ProgressiveImage from "react-progressive-graceful-image";
+import config from "../../config";
 
 const MeetingRoom = () => {
   const { data: headData, error } = useQuery(["meetingRoomHeader"], header);
-  if (error) return <Error />;
+  const { data: aboutData, error: aboutError } = useQuery(
+    ["meetingRoomAbout"],
+    about
+  );
+  const { data: facilityData, error: facilityError } = useQuery(
+    ["meetingRoomFacilities"],
+    facility
+  );
+
+  if (error || aboutError || facilityError) return <Error />;
 
   const cmsHeadData = parseCmsData(headData);
+  const cmsAboutData = parseCmsData(aboutData);
+  const cmsFacilityData = parseCmsData(facilityData);
 
   return (
     <>
@@ -44,10 +56,18 @@ const MeetingRoom = () => {
         <div className="container mx-auto flex justify-center flex-col gap-10 xl:gap-0 xl:flex-row">
           <div className="flex-1 p-8 xl:p-0 xl:max-w-2xl flex flex-col gap-8">
             <h4 className="text-5xl my-4 transition-all duration-500 font-walbaum">
-              Title
+              {cmsAboutData?.title}
             </h4>
             <div className="flex-col flex gap-4">
-              <p className="leading-relaxed typo-body-2 transition-all duration-500">
+              {cmsAboutData?.descriptions?.map((data) => (
+                <p
+                  key={data?.id}
+                  className="leading-relaxed typo-body-2 transition-all duration-500"
+                >
+                  {data?.description}
+                </p>
+              ))}
+              {/* <p className="leading-relaxed typo-body-2 transition-all duration-500">
                 Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
                 consectetur adipisicing elit. Officia vero unde libero
                 voluptatum architecto doloribus laudantium pariatur expedita ea
@@ -72,9 +92,9 @@ const MeetingRoom = () => {
                 tenetur iste. dolor sit, amet consectetur adipisicing elit.
                 Nostrum rerum aliquam, dolores quas harum modi similique quos
                 tempora iusto cum?
-              </p>
+              </p> */}
             </div>
-            <div>
+            {/* <div>
               <div className="border-b py-4 flex justify-between">
                 <p>Cuisine</p>
                 <p>French cuisine , alpine classNameics</p>
@@ -87,8 +107,8 @@ const MeetingRoom = () => {
                 <p>Opening hours</p>
                 <p>7:00pm – 10:00 pm (last order)</p>
               </div>
-            </div>
-            <div className="flex gap-4 group transition opacity-75 hover:opacity-100 duration-300 w-max cursor-pointer">
+            </div> */}
+            {/* <div className="flex gap-4 group transition opacity-75 hover:opacity-100 duration-300 w-max cursor-pointer">
               <div className="group-hover:translate-x-2 duration-700">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -108,167 +128,28 @@ const MeetingRoom = () => {
               <p className="font-medium group-hover:tracking-wider duration-500">
                 Download Menu
               </p>
-            </div>
+            </div> */}
           </div>
           <div className="flex-1 xl:max-w-lg py-16 px-12 h-max bg-white xl:ml-20 flex flex-col gap-8 xl:gap-16">
             <h4 className="header flex items-center gap-4 typo-body-2">
               <span className="w-10 h-px bg-primary inline-block"></span>
-              MeetingRoom Facilities
+              {cmsFacilityData?.title}
             </h4>
             <div className="grid grid-cols-2 gap-x-6 gap-y-6 opacity-70">
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast & dinner</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span className="break-words">
-                  {" "}
-                  Open for breakfast & and Lunch
-                </span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast & dinner</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast & dinner</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span className="break-words">
-                  {" "}
-                  Open for breakfast & and Lunch
-                </span>
-              </div>
+              {cmsFacilityData?.facilityNames?.map((data) => {
+                return (
+                  <div key={data?.id} className="flex gap-4 items-center">
+                    <div className="min-w-max">
+                      <img
+                        src={`${config.BASE_IMAGE_URL}${data?.icon?.data?.attributes?.url}`}
+                        alt=""
+                        className="w-6 h-6"
+                      />
+                    </div>
+                    <span>{data?.name}</span>
+                  </div>
+                );
+              })}
             </div>
             <button className="border-button w-full">Book Now</button>
           </div>
