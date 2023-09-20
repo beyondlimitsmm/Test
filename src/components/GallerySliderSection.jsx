@@ -84,7 +84,7 @@ export const GallerySliderSection = ({ selectedMenu, menuData }) => {
         >
           {galleryData?.map((data) => (
             <SwiperSlide key={data.id}>
-              <ProgressiveImage src={data?.image} placeholder={RoomPlaceHolder}>
+              {/* <ProgressiveImage src={data?.image} placeholder={RoomPlaceHolder}>
                 {(src, loading) => (
                   <img
                     src={src}
@@ -92,7 +92,8 @@ export const GallerySliderSection = ({ selectedMenu, menuData }) => {
                     loading="lazy"
                   />
                 )}
-              </ProgressiveImage>
+              </ProgressiveImage> */}
+              <img src={data} />
             </SwiperSlide>
           ))}
           {/* <SwiperSlide>
