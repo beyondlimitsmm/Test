@@ -6,6 +6,7 @@ import RestaurantPlaceHolder from "../../assets/images/RestaurantPlaceHolder.jpg
 import Error from "../../components/Error";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import "../../styles/ImageCarousel.css";
+import config from "../../config";
 
 // const CarouselListData = [
 //   {
@@ -97,11 +98,6 @@ export const RestaurantPage = () => {
               />
             )}
           </ProgressiveImage>
-          {/* <img
-            src={createAssetsUrl(cmsHeadData?.image)}
-            alt=""
-            className="w-full h-full object-cover brightness-75"
-          /> */}
         </div>
         <div className="h-screen xl:h-[75vh] xl:py-48 flex flex-col justify-center items-center">
           <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0">
@@ -129,24 +125,6 @@ export const RestaurantPage = () => {
                   {data?.description}
                 </p>
               ))}
-              {/* <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                molestiae impedit, nobis eligendi nam saepe! Dolorum autem
-                consequuntur natus fugaelit. Officiis pariatur temporibus eum
-                porro nam sed consectetur quia facilis nemo, in architecto enim
-                libero voluptates. Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
-                similique quos tempora iusto cum?
-              </p>
-              <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                molestiae impedit, nobis eligendi nam saepe! Dolorum autem
-                consequuntur natus fuga veritatis quaerat, aliquid quasi magni
-                quod laudantium nemo omnis quia facilis nemo, in architecto enim
-                libero voluptates. Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
-                similique quos tempora iusto cum?
-              </p> */}
             </div>
             <div>
               <div className="border-b py-4 flex justify-between">
@@ -173,156 +151,15 @@ export const RestaurantPage = () => {
               {cmsFacilityData?.facilityNames?.map((data) => (
                 <div key={data?.id} className="flex gap-4 items-center">
                   <div className="min-w-max">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="#3A1E13"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="lucide lucide-utensils"
-                    >
-                      <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                      <path d="M7 2v20" />
-                      <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                    </svg>
+                    <img
+                      src={`${config.BASE_IMAGE_URL}${data?.icon?.data?.attributes?.url}`}
+                      alt=""
+                      className="w-6 h-6"
+                    />
                   </div>
                   <span>{data?.name}</span>
                 </div>
               ))}
-              {/* <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span className="break-words">
-                  Open for breakfast & and Lunch
-                </span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast & dinner</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast & dinner</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span className="break-words">
-                  Open for breakfast & and Lunch
-                </span>
-              </div> */}
             </div>
             <a
               href={cmsFacilityData?.button?.link}
