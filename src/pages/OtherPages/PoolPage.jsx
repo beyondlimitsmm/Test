@@ -3,7 +3,7 @@ import { TiWeatherDownpour } from "react-icons/ti";
 import PoolBg from "../../assets/images/PoolPlaceHolder.webp";
 import "../../styles/ImageCarousel.css";
 import { useQuery } from "@tanstack/react-query";
-import { gallery, header } from "../../api/pool";
+import { about, facility, gallery, header } from "../../api/pool";
 
 import Error from "../../components/Error";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
@@ -13,6 +13,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import ProgressiveImage from "react-progressive-graceful-image";
+import config from "../../config";
 
 const CarouselListData = [
   {
@@ -56,10 +57,15 @@ export const PoolPage = () => {
   const [activeImage, setActiveImage] = useState(0);
   const { data: headData, error } = useQuery(["poolHeader"], header);
   const { data: galleryData } = useQuery(["poolGallery"], gallery);
+  const { data: facilityData } = useQuery(["poolFacilities"], facility);
+  const { data: poolAbout } = useQuery(["poolAbout"], about);
+
   if (error) return <Error />;
 
   const cmsHeadData = parseCmsData(headData);
   const cmsGalleryData = parseCmsData(galleryData);
+  const cmsFacilityData = parseCmsData(facilityData);
+  const cmsPoolAbout = parseCmsData(poolAbout);
 
   var optionElements = document.querySelectorAll(".option");
 
@@ -108,10 +114,18 @@ export const PoolPage = () => {
         <div className="container mx-auto flex justify-center flex-col gap-10 xl:gap-0 xl:flex-row">
           <div className="p-8 xl:p-0 flex-1 xl:max-w-2xl flex flex-col gap-8">
             <h4 className="text-5xl my-4 transition-all duration-500 font-walbaum">
-              Title
+              {cmsPoolAbout?.title}
             </h4>
             <div className="flex-col flex gap-4">
-              <p className="leading-relaxed typo-body-2 transition-all duration-500">
+              {cmsPoolAbout?.descriptions?.map((data) => (
+                <p
+                  key={data?.id}
+                  className="leading-relaxed typo-body-2 transition-all duration-500"
+                >
+                  {data?.description}
+                </p>
+              ))}
+              {/* <p className="leading-relaxed typo-body-2 transition-all duration-500">
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
                 molestiae impedit, nobis eligendi nam saepe! Dolorum autem
                 consequuntur natus fuga veritatis quaerat, aliquid quasi magni
@@ -137,9 +151,9 @@ export const PoolPage = () => {
                 libero voluptates. Lorem ipsum dolor sit, amet consectetur
                 adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
                 similique quos tempora iusto cum?
-              </p>
+              </p> */}
             </div>
-            <div>
+            {/* <div>
               <div className="border-b py-4 flex justify-between">
                 <p>Cuisine</p>
                 <p>French cuisine , alpine classics</p>
@@ -152,165 +166,28 @@ export const PoolPage = () => {
                 <p>Opening hours</p>
                 <p>7:00pm – 10:00 pm (last order)</p>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="flex-1 xl:max-w-lg py-16 px-12 h-max bg-white xl:ml-20 flex flex-col gap-8 xl:gap-16">
             <h4 className="header flex items-center gap-4 typo-body-2">
               <span className="w-10 h-px bg-primary inline-block"></span>
-              Restaurant Facilities
+              {cmsFacilityData?.title}
             </h4>
             <div className="grid grid-cols-2 gap-x-6 gap-y-6 opacity-70">
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span className="break-words">
-                  Open for breakfast & and Lunch
-                </span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast & dinner</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast & dinner</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span>Open for breakfast</span>
-              </div>
-              <div className="flex gap-4 items-center">
-                <div className="min-w-max">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#3A1E13"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-utensils"
-                  >
-                    <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" />
-                    <path d="M7 2v20" />
-                    <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />
-                  </svg>
-                </div>
-                <span className="break-words">
-                  Open for breakfast & and Lunch
-                </span>
-              </div>
+              {cmsFacilityData?.facilityNames?.map((data) => {
+                return (
+                  <div key={data?.id} className="flex gap-4 items-center">
+                    <div className="min-w-max">
+                      <img
+                        src={`${config.BASE_IMAGE_URL}${data?.icon?.data?.attributes?.url}`}
+                        alt=""
+                        className="w-6 h-6"
+                      />
+                    </div>
+                    <span>{data?.name}</span>
+                  </div>
+                );
+              })}
             </div>
             <button className="border-button w-full">Book Now</button>
           </div>
