@@ -1,5 +1,4 @@
 import { useState, useCallback, useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
 import "swiper/css/effect-creative";
 import { EffectCreative, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -8,34 +7,16 @@ import { createAssetsUrl } from "../libs/functions";
 import ProgressiveImage from "react-progressive-graceful-image";
 import RoomPlaceHolder from "../assets/images/RoomPlaceHolder.jpg";
 
-export const GallerySliderSection = ({ selectedMenu }) => {
-  console.log("selectedMenu", selectedMenu);
+export const GallerySliderSection = ({ selectedMenu, menuData }) => {
   const [thumbSwiper, setThumbsSwiper] = useState(null);
-  const { data } = useQuery({
-    queryKey: [selectedMenu],
-    queryFn: () => galleries(selectedMenu),
-  });
-
-  console.log("gallery data", data);
 
   const [galleryData, setGalleryData] = useState([]);
 
   const createGalleryData = useCallback(() => {
-    if (!data) return;
+    const _galleryData = menuData?.find((menu) => menu.title == selectedMenu);
 
-    const _galleryData = data?.data[0]?.attributes?.galleries?.data.map(
-      (data) => {
-        const attr = data?.attributes;
-
-        return {
-          id: data?.id,
-          image: createAssetsUrl(attr?.image),
-        };
-      }
-    );
-
-    setGalleryData(_galleryData);
-  }, [data]);
+    setGalleryData(_galleryData.galleries);
+  }, [selectedMenu]);
 
   useEffect(() => {
     createGalleryData();
@@ -172,9 +153,9 @@ export const GallerySliderSection = ({ selectedMenu }) => {
           }}
           className="swiper thumbSwiper xl:h-[150px] h-[100px]"
         >
-          {galleryData?.map((data) => (
-            <SwiperSlide key={data.id}>
-              <img src={data.image} />
+          {galleryData?.map((data, index) => (
+            <SwiperSlide key={index}>
+              <img src={data} />
             </SwiperSlide>
           ))}
 
