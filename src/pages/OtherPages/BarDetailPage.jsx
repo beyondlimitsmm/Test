@@ -2,7 +2,7 @@ import { Navigation, Scrollbar } from "swiper/modules";
 import { useQuery } from "@tanstack/react-query";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ArticleIcon from "../../assets/images/articles-icon.svg";
-import Voyage1 from "../../assets/images/voyage1.png";
+import BarPlaceHolder from "../../assets/images/BarPlaceHolder.jpg";
 import FeatureImage from "../../components/FeatureImage";
 
 import "swiper/css/navigation";
@@ -11,6 +11,8 @@ import { LinkToContactUs } from "../../components/LinkToContactUs";
 import { feature, gallery, header } from "../../api/bar";
 import Error from "../../components/Error";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import ProgressiveImage from "react-progressive-graceful-image";
+import { placeholder } from "@cloudinary/react";
 
 const BarDetailPage = () => {
   const { data: headData, error } = useQuery(["barHeader"], header);
@@ -25,16 +27,28 @@ const BarDetailPage = () => {
   return (
     <>
       <section className="h-screen w-screen -mt-20 relative overflow-hidden z-10 flex justify-center items-center">
-        <div
-          className="absolute w-screen h-screen brightness-50  bg-no-repeat bg-cover"
-          style={{
-            backgroundImage: `url(${createAssetsUrl(cmsHeadData?.image)})`,
-          }}
-        ></div>
+        <div className="absolute w-screen h-screen brightness-50">
+          <ProgressiveImage
+            src={createAssetsUrl(cmsHeadData?.image)}
+            placeholder={BarPlaceHolder}
+          >
+            {(src, loading) => (
+              <img
+                src={src}
+                alt=""
+                className={`w-full h-full object-cover ${
+                  loading ? "loading" : "heroloaded"
+                }`}
+              />
+            )}
+          </ProgressiveImage>
+        </div>
 
         <div className="text-white z-20 typo-display mb-10 flex flex-col items-center">
           <img src={createAssetsUrl(cmsHeadData?.logo)} alt="" />
-          <h2 className="typo-title mb-8 text-center">{cmsHeadData?.title}</h2>
+          <h2 className="typo-title mb-8 text-center mx-2">
+            {cmsHeadData?.title}
+          </h2>
 
           <button className="border-button  text-base ">
             <span className="text-white"> {cmsHeadData?.button?.name} </span>
@@ -42,7 +56,7 @@ const BarDetailPage = () => {
         </div>
       </section>
 
-      <section className="py-10 xl:py-20 container mx-auto overflow-hidden w-screen relative flex justify-center items-center text-white">
+      {/* <section className="py-10 xl:py-20 container mx-auto overflow-hidden w-screen relative flex justify-center items-center text-white">
         <div className="w-screen h-[450px] overflow-hidden relative">
           <div
             className="w-full h-full bg-no-repeat bg-cover bg-fixed bg-center "
@@ -50,6 +64,32 @@ const BarDetailPage = () => {
               backgroundImage: `url(${createAssetsUrl(cmsFeatureData?.image)})`,
             }}
           ></div>
+
+          <FeatureImage
+            icon={ArticleIcon}
+            title={cmsFeatureData?.title}
+            description={cmsFeatureData?.description}
+            detail={cmsFeatureData?.button?.name}
+          />
+        </div>
+      </section> */}
+
+      <section className="py-10 xl:py-20 container mx-auto overflow-hidden w-screen relative flex justify-center items-center text-white">
+        <div className="w-screen h-[450px] overflow-hidden relative">
+          <ProgressiveImage
+            src={createAssetsUrl(cmsFeatureData?.image)}
+            placeholder={BarPlaceHolder}
+          >
+            {(src, loading) => (
+              <img
+                src={src}
+                alt={cmsFeatureData?.title}
+                className={`w-full h-full object-cover object-center bg-white ${
+                  loading ? "loading" : "heroloaded"
+                }`}
+              />
+            )}
+          </ProgressiveImage>
 
           <FeatureImage
             icon={ArticleIcon}
@@ -99,7 +139,18 @@ const BarDetailPage = () => {
           >
             {cmsGalleryData?.barCards?.map((data) => (
               <SwiperSlide key={data?.id}>
-                <img src={createAssetsUrl(data?.image)} alt="" />
+                <ProgressiveImage
+                  src={createAssetsUrl(data?.image)}
+                  placeholder={BarPlaceHolder}
+                >
+                  {(src, loading) => (
+                    <img
+                      src={src}
+                      alt=""
+                      className={loading ? "loading" : "loaded"}
+                    />
+                  )}
+                </ProgressiveImage>
               </SwiperSlide>
             ))}
             {/* <SwiperSlide>
@@ -166,7 +217,9 @@ const BarDetailPage = () => {
         </div>
       </section>
 
-      <LinkToContactUs contactText={"If you have any questions, feel free to Contact Us"}></LinkToContactUs>
+      <LinkToContactUs
+        contactText={"If you have any questions, feel free to Contact Us"}
+      ></LinkToContactUs>
     </>
   );
 };

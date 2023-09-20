@@ -21,7 +21,7 @@ const ArticleDetailPage = () => {
       id: post.id,
       title: post.attributes.title,
       description: post.attributes.description,
-      imageUrl: post.attributes.imageUrl.data.attributes.url,
+      imageUrl: post?.attributes?.imageUrl?.data?.attributes.url,
       date: post.attributes.createdAt,
       datetime: post.attributes.createdAt,
       content: post.attributes.content,
@@ -33,7 +33,7 @@ const ArticleDetailPage = () => {
     .slice(0, 3);
 
   return (
-    <div className="container max-w-6xl mx-auto mb-[120px]">
+    <div className="container max-w-6xl mx-auto mb-[120px] md:mt-20">
       <h2 className="mt-4 mb-6 text-center">
         <Link to="/">Home</Link> &gt;{" "}
         <Link to="/articles"> Articles for you</Link> &gt; <Link> Detail</Link>
@@ -45,12 +45,20 @@ const ArticleDetailPage = () => {
             <div className="absolute bottom-7 right-7 z-10">
               <img src={sharedSvg} alt="Share" />
             </div>
+            {post[0].imageUrl ? (
+              <img
+                src={`${config.BASE_IMAGE_URL}${post[0].imageUrl}`}
+                alt=""
+                className="w-full object-contain mb-4"
+              />
+            ) : (
+              <img
+                src={`https://images.unsplash.com/photo-1612257999781-1a997105f94b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80`}
+                alt=""
+                className="absolute inset-0 h-full w-full rounded-md bg-gray-50 object-cover"
+              />
+            )}
 
-            <img
-              src={`${config.BASE_IMAGE_URL}${post[0].imageUrl}`}
-              alt=""
-              className="w-full object-contain mb-4"
-            />
             <div className="overlay absolute inset-0"></div>
           </div>
 
@@ -64,9 +72,10 @@ const ArticleDetailPage = () => {
             </ReactMarkdown>
           </div>
 
-          <div className='underline mx-4 font-Jost'><Link to={'/articles'}> Back to articles </Link></div>
+          <div className="underline mx-4 font-Jost">
+            <Link to={"/articles"}> Back to articles </Link>
+          </div>
         </div>
-
 
         {/*<div className="container my-6 mx-auto max-w-[400px]">*/}
         {/*  <h4 className="font-Lato text-3xl font-normal leading-3 mb-6">*/}

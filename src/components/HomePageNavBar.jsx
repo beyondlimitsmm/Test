@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 import HotelLogo from "../assets/Logo.png";
 import { NavBarContext } from "../hooks/NavBarContext";
 import useScrollAtTop from "../hooks/useScrollAtTop";
+import { DropDownBtn } from "./DropDownBtn";
 import { NavSlideDown } from "./NavSlideDown";
 
 export const HomePageNavBar = () => {
-  const { isSidebarOpen, toggleNavbar } = useContext(NavBarContext);
+  const { isNavOpen, toggleNavbar } = useContext(NavBarContext);
   const atTop = useScrollAtTop();
 
   return (
@@ -14,7 +15,7 @@ export const HomePageNavBar = () => {
       <div className="HomeNav h-20 sticky top-0 left-0 right-0 z-50">
         <div
           className={`h-20 bg-white ${
-            atTop && !isSidebarOpen && "!bg-transparent"
+            atTop && !isNavOpen && "!bg-transparent"
           }`}
         >
           <nav className="h-20 max-w-[3500px]  custom-container flex justify-between items-center bg-transparent">
@@ -25,23 +26,23 @@ export const HomePageNavBar = () => {
               <div className="w-6 flex items-center justify-center relative">
                 <span
                   className={` transform h-[2px] transition duration-300 w-full absolute bg-black -translate-y-2 ${
-                    atTop && !isSidebarOpen && "bg-white"
-                  }  ${isSidebarOpen && "bg-black translate-y-0 rotate-45"} `}
+                    atTop && !isNavOpen && "bg-white"
+                  }  ${isNavOpen && "bg-black translate-y-0 rotate-45"} `}
                 ></span>
                 <span
                   className={`transform h-[2px] transition duration-300 w-2/3 absolute left-0 ${
-                    atTop && !isSidebarOpen && "bg-white"
+                    atTop && !isNavOpen && "bg-white"
                   } ${
-                    isSidebarOpen
+                    isNavOpen
                       ? "opacity-0 translate-x-3 bg-black"
                       : "opacity-100 bg-black"
                   }`}
                 ></span>
                 <span
                   className={`transform h-[2px] transition duration-300 w-full absolute ${
-                    atTop && !isSidebarOpen && "bg-white"
+                    atTop && !isNavOpen && "bg-white"
                   }  ${
-                    isSidebarOpen
+                    isNavOpen
                       ? "translate-y-0 -rotate-45 bg-black"
                       : "translate-y-2 bg-black"
                   }`}
@@ -51,22 +52,31 @@ export const HomePageNavBar = () => {
             <Link to="/">
               <h1
                 className={`typo-menu absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase typo-text-black tracking-wider font-madera !font-medium invisible xl:visible ${
-                  atTop && !isSidebarOpen && "hidden"
-                } ${isSidebarOpen && "block"}`}
+                  atTop && !isNavOpen && "hidden"
+                } ${isNavOpen && "block"}`}
                 style={{ fontSize: "25px" }}
               >
                 The Boundary Residence
               </h1>
             </Link>
-            <button
+
+            <DropDownBtn></DropDownBtn>
+
+            {/* <button
+              onClick={() => {
+                togglePopUp();
+              }}
               className={`border-button ${
                 atTop &&
-                !isSidebarOpen &&
+                !isNavOpen &&
                 "border-hoverPale bg-transparent !text-white"
               }`}
+              id="menu-button"
+              aria-expanded="true"
+              aria-haspopup="true"
             >
               Book Now
-            </button>
+            </button> */}
           </nav>
         </div>
         <NavSlideDown></NavSlideDown>

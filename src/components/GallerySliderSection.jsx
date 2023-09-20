@@ -2,7 +2,10 @@ import { useState, useCallback, useEffect } from "react";
 import "swiper/css/effect-creative";
 import { EffectCreative, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
+import { galleries } from "../api/gallery";
+import { createAssetsUrl } from "../libs/functions";
+import ProgressiveImage from "react-progressive-graceful-image";
+import RoomPlaceHolder from "../assets/images/RoomPlaceHolder.jpg";
 
 export const GallerySliderSection = ({ selectedMenu, menuData }) => {
   const [thumbSwiper, setThumbsSwiper] = useState(null);
@@ -81,9 +84,17 @@ export const GallerySliderSection = ({ selectedMenu, menuData }) => {
           thumbs={{ swiper: thumbSwiper }}
           className="swiper roomDetailsSwiper h-[400px] xl:h-[600px]"
         >
-          {galleryData?.map((data, index) => (
-            <SwiperSlide key={index}>
-              <img src={data} />
+          {galleryData?.map((data) => (
+            <SwiperSlide key={data.id}>
+              <ProgressiveImage src={data?.image} placeholder={RoomPlaceHolder}>
+                {(src, loading) => (
+                  <img
+                    src={src}
+                    className={loading ? "loading" : "loaded"}
+                    loading="lazy"
+                  />
+                )}
+              </ProgressiveImage>
             </SwiperSlide>
           ))}
           {/* <SwiperSlide>

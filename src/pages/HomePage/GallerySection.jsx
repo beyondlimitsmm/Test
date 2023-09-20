@@ -11,6 +11,8 @@ import { OutlineButton } from "../../components/OutlineButton";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import { gallery } from "../../api/home";
 import Error from "../../components/Error";
+import GalleryPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 export const GallerySection = () => {
   const { data, error } = useQuery(["homeGallery"], gallery);
@@ -113,11 +115,20 @@ export const GallerySection = () => {
       >
         {cmsData?.galleryCards?.map((data) => (
           <SwiperSlide key={data?.id} className="swiper-slide tile">
-            <img
+            <ProgressiveImage
               src={createAssetsUrl(data?.image)}
-              alt=""
-              className="h-[550px]"
-            />
+              placeholder={GalleryPlaceHolder}
+            >
+              {(src, loading) => (
+                <img
+                  className={`h-[550px] image${
+                    loading ? " loading" : " loaded"
+                  }`}
+                  src={src}
+                  alt=""
+                />
+              )}
+            </ProgressiveImage>
             <div className="details">
               <span className="title">{data?.title}</span>
               <span className="info">{data?.description}</span>

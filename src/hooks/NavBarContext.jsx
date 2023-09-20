@@ -5,13 +5,24 @@ import { createContext, useState } from "react";
 export function NavbarProvider({ children }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+
   const toggleNavbar = () => {
     setIsNavOpen(!isNavOpen);
   };
 
+  const togglePopUp = () => {
+    setIsPopUpOpen(!isPopUpOpen);
+  };
+
   return (
     <NavBarContext.Provider
-      value={{ isSidebarOpen: isNavOpen, toggleNavbar: toggleNavbar }}
+      value={{
+        isNavOpen,
+        toggleNavbar,
+        isPopUpOpen,
+        togglePopUp,
+      }}
     >
       {children}
     </NavBarContext.Provider>
