@@ -25,10 +25,6 @@ export const GallerySection = () => {
   const createGalleryData = useCallback(() => {
     if (!galleriesData) return;
 
-    console.log(galleriesData);
-
-    return;
-
     const _galleryData = galleriesData?.data?.map((data) => {
       const attr = data?.attributes;
 
@@ -141,8 +137,8 @@ export const GallerySection = () => {
         }}
         className="absolute bottom-0 lg:bottom-auto right-0 w-[90%] lg:w-1/2  pb-10 h-[340px] md:h-[400px] lg:h-[550px] mb-14 tiles home-gallery-swiper"
       >
-        {galleryData?.map((data) => (
-          <SwiperSlide key={data?.id} className="swiper-slide tile">
+        {galleryData?.map((data, index) => (
+          <SwiperSlide key={index} className="swiper-slide tile">
             <img src={data?.image} alt="" className="h-[550px]" />
             <div className="details">
               <span className="title">{data?.title}</span>

@@ -59,7 +59,11 @@ export const FeaturesSection = () => {
             </div>
 
             <div className="z-20 w-full xl:w-[400px] bg-white px-10 pb-10 flex flex-col justify-center items-center transition-opacity duration-200">
-              <img src={RestaurantColor} alt="" className="w-24 h-24" />
+              <img
+                src={createAssetsUrl(data.icon)}
+                alt=""
+                className="w-20 h-20 mb-2"
+              />
               <h6 className="typo-title capitalize typo-text-black font-modesfa">
                 {data?.title}
               </h6>
