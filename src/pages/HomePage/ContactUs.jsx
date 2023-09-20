@@ -11,6 +11,7 @@ export const ContactUs = () => {
     queryKey: ["getInTouch"],
     queryFn: getInTouch,
   });
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -45,9 +46,12 @@ export const ContactUs = () => {
       body: JSON.stringify(formData),
     }).then((res) => res.json());
 
-    console.log(data);
-
+    setIsSuccess(true);
     setFormData({ name: "", email: "", phone: "", comment: "" });
+
+    setTimeout(() => {
+      setIsSuccess(false);
+    }, 3000);
   };
 
   const validateForm = () => {
@@ -128,6 +132,7 @@ export const ContactUs = () => {
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-2 font-medium"
                 name="name"
+                value={formData.name}
                 onChange={onChangeHandler}
               />
 
@@ -144,6 +149,7 @@ export const ContactUs = () => {
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-2 font-medium"
                 name="phone"
+                value={formData.phone}
                 onChange={onChangeHandler}
               />
 
@@ -160,6 +166,7 @@ export const ContactUs = () => {
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 font-medium mt-2"
                 name="email"
+                value={formData.email}
                 onChange={onChangeHandler}
               />
 
@@ -177,6 +184,7 @@ export const ContactUs = () => {
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-2 resize-none font-medium"
                 name="comment"
+                value={formData.comment}
                 onChange={onChangeHandler}
               ></textarea>
 
@@ -192,7 +200,10 @@ export const ContactUs = () => {
               routeTo="./articles"
               text="Send"
             ></OutlineButton> */}
-            <div className="self-end">
+            <div className="w-full flex items-end  justify-between">
+              <h6 className="text-green-600">
+                {isSuccess && "Message has been send successfully."}
+              </h6>
               <button className="border-button" onClick={onSubmitHandler}>
                 Send
               </button>
