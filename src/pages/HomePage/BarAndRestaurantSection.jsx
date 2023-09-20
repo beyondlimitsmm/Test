@@ -262,7 +262,6 @@ const LayoutDetails = ({
   menuLink,
   exploreLink,
 }) => {
-  console.log(menuLink);
   return (
     <div
       className={`max-w-full lg:max-w-[80%] mx-auto xl:mx-0 flex-col gap-8 px-4 xl:px-32 mt-10 xl:mt-20 2xl:mt-32 justify-start relative new-layout-enter ${

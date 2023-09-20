@@ -82,8 +82,8 @@ export const GallerySliderSection = ({ selectedMenu, menuData }) => {
           thumbs={{ swiper: thumbSwiper }}
           className="swiper roomDetailsSwiper h-[400px] xl:h-[600px]"
         >
-          {galleryData?.map((data) => (
-            <SwiperSlide key={data.id}>
+          {galleryData?.map((data, index) => (
+            <SwiperSlide key={index}>
               {/* <ProgressiveImage src={data?.image} placeholder={RoomPlaceHolder}>
                 {(src, loading) => (
                   <img
@@ -126,7 +126,7 @@ export const GallerySliderSection = ({ selectedMenu, menuData }) => {
         </Swiper>
         <Swiper
           onSwiper={(swiper) => {
-            console.log("Inside thumbSwiper", swiper);
+            // console.log("Inside thumbSwiper", swiper);
             if (swiper && !swiper.destroyed) {
               console.log(thumbSwiper);
               setThumbsSwiper(swiper);
