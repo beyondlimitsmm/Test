@@ -20,9 +20,13 @@ import { RoomTypePage } from "./pages/RoomTypePage/RoomTypePage";
 import SuiteDetailPage from "./pages/RoomTypePage/SuiteDetailPage";
 import { RoomsProvider } from "./hooks/RoomsContext";
 import { SuitesProvider } from "./hooks/SuitesContext";
+import { useQuery } from "@tanstack/react-query";
+import { getRoomTypes } from "./api/roomsAndSuites";
+import ChatBot from "./components/ChatBot";
 
 function App() {
   const location = useLocation();
+  const { data, isLoading, error } = useQuery(["room-types"], getRoomTypes);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
@@ -76,6 +80,7 @@ function App() {
       {location.pathname !== "/404" && <Footer></Footer>}
 
       <ModalPopUp></ModalPopUp>
+      <ChatBot />
     </div>
   );
 }
