@@ -2,10 +2,6 @@ import { useState, useCallback, useEffect } from "react";
 import "swiper/css/effect-creative";
 import { EffectCreative, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { galleries } from "../api/gallery";
-import { createAssetsUrl } from "../libs/functions";
-import ProgressiveImage from "react-progressive-graceful-image";
-import RoomPlaceHolder from "../assets/images/RoomPlaceHolder.jpg";
 
 export const GallerySliderSection = ({ selectedMenu, menuData }) => {
   const [thumbSwiper, setThumbsSwiper] = useState(null);
@@ -13,6 +9,8 @@ export const GallerySliderSection = ({ selectedMenu, menuData }) => {
   const [galleryData, setGalleryData] = useState([]);
 
   const createGalleryData = useCallback(() => {
+    if (!selectedMenu) return;
+
     const _galleryData = menuData?.find((menu) => menu.title == selectedMenu);
 
     setGalleryData(_galleryData.galleries);

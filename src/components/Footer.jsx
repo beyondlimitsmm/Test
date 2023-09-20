@@ -149,7 +149,7 @@ export const Footer = () => {
         </div>
 
         <div className="col-span-1 grid grid-cols-1 xl:grid-cols-3 xl:grid-rows-3">
-          {footerLinks?.map((links, index) => (
+          {footerLinks?.slice(0, 3).map((links, index) => (
             <div
               key={index}
               className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6"
@@ -303,7 +303,7 @@ export const Footer = () => {
             </p>
 
             <div className="grid grid-cols-3 xl:grid-cols-6 gap-3">
-              {cmsData?.payments?.map((data) => (
+              {cmsData?.payments?.slice(0, 6).map((data) => (
                 <div key={data.id} className="h-10 w-14">
                   <img className="" src={createAssetsUrl(data?.image)} alt="" />
                 </div>

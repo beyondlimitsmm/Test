@@ -33,7 +33,7 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <div className="App relative">
+    <div className="App">
       <NavBarBuilder></NavBarBuilder>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
@@ -79,7 +79,7 @@ function App() {
       </Routes>
       {location.pathname !== "/404" && <Footer></Footer>}
 
-      <ModalPopUp></ModalPopUp>
+      <ModalPopUp />
       <ChatBot />
     </div>
   );

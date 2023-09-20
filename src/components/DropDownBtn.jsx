@@ -53,7 +53,7 @@ export const DropDownBtn = () => {
           </a>
 
           <div
-            className="py-4 flex gap-3 justify-center items-center w-full hover:bg-hoverPale/20"
+            className="py-4 flex gap-3 justify-center items-center w-full hover:bg-hoverPale/20 cursor-pointer"
             onClick={() => {
               setShowDropdown(!showDropdown);
               togglePopUp();
