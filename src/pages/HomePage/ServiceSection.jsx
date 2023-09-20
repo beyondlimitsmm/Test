@@ -3,7 +3,9 @@ import { useCallback, useEffect, useState } from "react";
 import { BsClock } from "react-icons/bs";
 import { service } from "../../api/home";
 import Error from "../../components/Error";
-import { parseCmsData } from "../../libs/functions";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+
+import Icon from "../../assets/images/Facebook.svg";
 
 export const ServiceSection = () => {
   const { data, error } = useQuery(["homeService"], service);
@@ -37,14 +39,21 @@ export const ServiceSection = () => {
         </h4>
 
         <div className="w-full xl:w-max grid grid-cols-1 xs:grid-cols-2 xl:grid-cols-4 xl:gap-8 gap-0">
-          {services?.map((data, i) => (
+          {services?.slice(0, 4).map((data, i) => (
             <div key={i} className="col-span-1">
               {data?.map((dt) => (
                 <div
                   key={dt?.id}
                   className="typo-body flex items-center gap-3 mb-2 xl:mb-0"
                 >
-                  <BsClock />
+                  <div className="w-[20px] h-[20px]  ">
+                    <img
+                      src={createAssetsUrl(dt?.icon)}
+                      alt="icon"
+                      className="w-full h-full object-cover hue-rotate-90"
+                    />
+                  </div>
+
                   <span className="pb-1"> {dt?.name}</span>
                 </div>
               ))}

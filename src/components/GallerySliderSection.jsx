@@ -3,13 +3,14 @@ import "swiper/css/effect-creative";
 import { EffectCreative, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-
 export const GallerySliderSection = ({ selectedMenu, menuData }) => {
   const [thumbSwiper, setThumbsSwiper] = useState(null);
 
   const [galleryData, setGalleryData] = useState([]);
 
   const createGalleryData = useCallback(() => {
+    if (!selectedMenu) return;
+
     const _galleryData = menuData?.find((menu) => menu.title == selectedMenu);
 
     setGalleryData(_galleryData.galleries);

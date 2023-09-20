@@ -16,11 +16,12 @@ export const gallery = async () =>
     "/home-gallery?fields=*&populate[galleryCards][populate][0]=image&populate[button]=*"
   );
 
-export const service = async () => await base("/home-service?populate=*");
+export const service = async () =>
+  await base("/home-service?populate[serviceNames][populate][0]=icon+");
 
 export const feature = async () =>
   await base(
-    "/home-feature?fields=*&populate[featureCards][populate][0]=mainImage&populate[featureCards][populate][1]=subImage&populate[featureCards][populate][2]=button"
+    "/home-feature?fields=*&populate[featureCards][populate][0]=mainImage&populate[featureCards][populate][1]=subImage&populate[featureCards][populate][2]=button&populate[featureCards][populate][3]=icon"
   );
 
 export const bar = async () =>

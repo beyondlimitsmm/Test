@@ -26,16 +26,15 @@ export const ContactUs = () => {
     const { name, value } = e.target;
 
     setFormData((data) => {
-      data[name] = value;
+      const newData = { ...data };
+      newData[name] = value;
 
-      return data;
+      return newData;
     });
   };
 
   const onSubmitHandler = async () => {
     if (validateForm().length > 0) return console.log("Error");
-
-    console.log(formData);
 
     const data = await fetch(config?.EMAIL_API_URL, {
       method: "POST",
@@ -47,7 +46,7 @@ export const ContactUs = () => {
 
     console.log(data);
 
-    // setFormData({ name: "", email: "", phone: "", comment: "" });
+    setFormData({ name: "", email: "", phone: "", comment: "" });
   };
 
   const validateForm = () => {
@@ -134,7 +133,8 @@ export const ContactUs = () => {
               <span className="input_underline"></span>
 
               <label className="input_label absolute top-0 typo-body-2 font-medium text-black/70 transition-all ease-linear">
-                Your Name<span className="text-red-500">*</span>
+                {cmsData?.label_for_name}
+                <span className="text-red-500">*</span>
               </label>
             </div>
 
@@ -149,7 +149,8 @@ export const ContactUs = () => {
               <span className="input_underline"></span>
 
               <label className="input_label absolute top-0 typo-body-2 font-medium text-black/70 transition-all ease-linear">
-                Phone <span className="text-red-500">*</span>
+                {cmsData?.label_for_phone}{" "}
+                <span className="text-red-500">*</span>
               </label>
             </div>
 
@@ -164,7 +165,8 @@ export const ContactUs = () => {
               <span className="input_underline"></span>
 
               <label className="input_label absolute top-0 typo-body-2 font-medium text-black/70 transition-all ease-linear">
-                Email <span className="text-red-500">*</span>
+                {cmsData?.label_for_email}{" "}
+                <span className="text-red-500">*</span>
               </label>
             </div>
 
@@ -180,7 +182,7 @@ export const ContactUs = () => {
               <span className="input_underline"></span>
 
               <label className="input_label top-0 absolute z-10 bg-[#F8F9FA] typo-body-2 font-medium text-black/70 transition-all ease-linear">
-                Your Comment
+                {cmsData?.label_for_comment}
               </label>
             </div>
 

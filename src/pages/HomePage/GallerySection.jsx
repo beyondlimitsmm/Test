@@ -11,12 +11,38 @@ import { OutlineButton } from "../../components/OutlineButton";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import { gallery } from "../../api/home";
 import Error from "../../components/Error";
+import { galleries } from "../../api/gallery";
 
 export const GallerySection = () => {
-  const { data, error } = useQuery(["homeGallery"], gallery);
-  if (error) return <Error />;
-
+  const { data } = useQuery(["homeGallery"], gallery);
   const cmsData = parseCmsData(data);
+  const { data: galleriesData, error } = useQuery({
+    queryKey: ["galleries"],
+    queryFn: galleries,
+  });
+  const [galleryData, setGalleryData] = useState([]);
+
+  const createGalleryData = useCallback(() => {
+    if (!galleriesData) return;
+
+    const _galleryData = galleriesData?.data?.map((data) => {
+      const attr = data?.attributes;
+
+      return {
+        title: attr?.title,
+        description: "-",
+        image: createAssetsUrl(attr.galleries[0].image),
+      };
+    });
+
+    setGalleryData(_galleryData);
+  }, [galleriesData]);
+
+  useEffect(() => {
+    createGalleryData();
+  }, [createGalleryData]);
+
+  if (error) return <Error />;
 
   return (
     <section
@@ -111,16 +137,12 @@ export const GallerySection = () => {
         }}
         className="absolute bottom-0 lg:bottom-auto right-0 w-[90%] lg:w-1/2  pb-10 h-[340px] md:h-[400px] lg:h-[550px] mb-14 tiles home-gallery-swiper"
       >
-        {cmsData?.galleryCards?.map((data) => (
-          <SwiperSlide key={data?.id} className="swiper-slide tile">
-            <img
-              src={createAssetsUrl(data?.image)}
-              alt=""
-              className="h-[550px]"
-            />
+        {galleryData?.map((data, index) => (
+          <SwiperSlide key={index} className="swiper-slide tile">
+            <img src={data?.image} alt="" className="h-[550px]" />
             <div className="details">
               <span className="title">{data?.title}</span>
-              <span className="info">{data?.description}</span>
+              {/* <span className="info">{data?.description}</span> */}
             </div>
           </SwiperSlide>
         ))}

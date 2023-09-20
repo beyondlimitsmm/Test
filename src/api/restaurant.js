@@ -5,7 +5,9 @@ export const header = async () => await base("/restaurant-header?populate=*");
 export const about = async () => await base("/restaurant-about?populate=*");
 
 export const facility = async () =>
-  await base("/restaurant-facility?populate=*");
+  await base(
+    "/restaurant-facility?populate[button]=*&populate[facilityNames][populate][0]=icon"
+  );
 
 export const gallery = async () =>
   await base("/restaurant-gallery?populate[galleryCards][populate][0]=image");

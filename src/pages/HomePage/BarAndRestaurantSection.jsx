@@ -188,7 +188,7 @@ export const BarAndRestaurantSection = () => {
           className="bg-transparent -z-10 absolute inset-0"
         ></div>
         <div id="imageWrapper" className="flex-1 relative hidden xl:block">
-          {slideMenu?.map((menu) => {
+          {slideMenu?.slice(0, 4).map((menu) => {
             return (
               <img
                 key={menu.id}
@@ -276,15 +276,15 @@ const LayoutDetails = ({
       <p className="leading-relaxed typo-body-2 font-walbaum transition-all duration-500 translate-y-[50px] opacity-0">
         {description}
       </p>
-      <div className="border-b py-4 flex justify-between">
+      <div className="border-b border-[#e5e7eb8c] py-4 flex justify-between">
         <p>Cuisine</p>
         <p>{cuisine}</p>
       </div>
-      <div className="border-b py-4 flex justify-between">
+      <div className="border-b border-[#e5e7eb8c]  py-4 flex justify-between">
         <p>Dress Code</p>
         <p>{dressCode}</p>
       </div>
-      <div className="border-b py-4 flex justify-between">
+      <div className="border-b border-[#e5e7eb8c]  py-4 flex justify-between">
         <p>Opening hours</p>
         <p>{openHours}</p>
       </div>
