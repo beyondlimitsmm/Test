@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import room from "../../assets/images/rooms.png";
+import room from "../../assets/images/RoomPlaceHolder.jpg";
 import { header } from "../../api/meetingRoom";
 import Error from "../../components/Error";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 const MeetingRoom = () => {
   const { data: headData, error } = useQuery(["meetingRoomHeader"], header);
@@ -14,14 +15,23 @@ const MeetingRoom = () => {
     <>
       <section className="-mt-20 w-screen min-h-screen xl:min-h-0 relative">
         <div className="absolute inset-0 overflow-hidden -z-10">
-          <img
+          <ProgressiveImage
             src={createAssetsUrl(cmsHeadData?.image)}
-            alt=""
-            className="w-full h-full object-cover brightness-75"
-          />
+            placeholder={room}
+          >
+            {(src, loading) => (
+              <img
+                src={src}
+                alt=""
+                className={`w-full h-full object-cover -z-10 brightness-75 ${
+                  loading ? "loading" : "heroloaded"
+                }`}
+              />
+            )}
+          </ProgressiveImage>
         </div>
         <div className="h-screen xl:h-[75vh] xl:py-48 flex flex-col justify-center items-center">
-          <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0">
+          <h4 className="text-white z-40 typo-display capitalize text-5xl mb-6 xl:mb-0">
             {cmsHeadData?.title}
           </h4>
           <p className="typo-body-2 text-white max-w-[560px] mx-4 xl:mx-0 mt-2 md:mt-6 text-center">

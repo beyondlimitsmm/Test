@@ -3,6 +3,8 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "swiper/css";
 import { Footer } from "./components/Footer";
 import { HomePageNavBar } from "./components/HomePageNavBar";
+
+import { ModalPopUp } from "./components/ModalPopUp";
 import { NavBar } from "./components/NavBar";
 import { HomePage } from "./pages/HomePage/HomePage";
 import { NotFound } from "./pages/NotFound";
@@ -18,9 +20,13 @@ import { RoomTypePage } from "./pages/RoomTypePage/RoomTypePage";
 import SuiteDetailPage from "./pages/RoomTypePage/SuiteDetailPage";
 import { RoomsProvider } from "./hooks/RoomsContext";
 import { SuitesProvider } from "./hooks/SuitesContext";
+import { useQuery } from "@tanstack/react-query";
+import { getRoomTypes } from "./api/roomsAndSuites";
+import ChatBot from "./components/ChatBot";
 
 function App() {
   const location = useLocation();
+  const { data, isLoading, error } = useQuery(["room-types"], getRoomTypes);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
@@ -72,6 +78,9 @@ function App() {
         <Route path="/404" element={<NotFound />}></Route>
       </Routes>
       {location.pathname !== "/404" && <Footer></Footer>}
+
+      <ModalPopUp />
+      <ChatBot />
     </div>
   );
 }

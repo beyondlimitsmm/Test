@@ -7,6 +7,7 @@ import { OutlineButton } from "../../components/OutlineButton";
 import { feature } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 export const FeaturesSection = () => {
   const { data, error } = useQuery(["homeFeature"], feature);
@@ -47,14 +48,20 @@ export const FeaturesSection = () => {
                   isLeft ? "right-0 xl:-right-48" : "left-0 xl:-left-48"
                 }`}
               >
-                <img
+                <ProgressiveImage
                   src={createAssetsUrl(data?.subImage)}
-                  alt=""
-                  className={`h-full w-full object-cover border-[12px] border-white shadow-lg ${
-                    isLeft && "rotate-[-3deg]"
-                  }`}
-                  style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }}
-                />
+                  placeholder={createAssetsUrl(data?.subImage)}
+                >
+                  {(src, loading) => (
+                    <img
+                      src={src}
+                      alt=""
+                      className={`h-full w-full object-cover border-[12px] border-white shadow-lg ${
+                        data?.position == "left" && "rotate-[-3deg]"
+                      }  ${loading ? "loading" : "loaded"}`}
+                    />
+                  )}
+                </ProgressiveImage>
               </div>
             </div>
 

@@ -82,9 +82,17 @@ export const GallerySliderSection = ({ selectedMenu, menuData }) => {
           thumbs={{ swiper: thumbSwiper }}
           className="swiper roomDetailsSwiper h-[400px] xl:h-[600px]"
         >
-          {galleryData?.map((data, index) => (
-            <SwiperSlide key={index}>
-              <img src={data} />
+          {galleryData?.map((data) => (
+            <SwiperSlide key={data.id}>
+              <ProgressiveImage src={data?.image} placeholder={RoomPlaceHolder}>
+                {(src, loading) => (
+                  <img
+                    src={src}
+                    className={loading ? "loading" : "loaded"}
+                    loading="lazy"
+                  />
+                )}
+              </ProgressiveImage>
             </SwiperSlide>
           ))}
           {/* <SwiperSlide>

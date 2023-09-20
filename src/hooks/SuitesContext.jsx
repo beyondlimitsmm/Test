@@ -3,6 +3,7 @@ import { createContext, useContext } from "react";
 import Rooms from "../assets/images/rooms.png";
 import { getSuites } from "../api/roomsAndSuites.js";
 import config from "../config";
+import Spinner from "../assets/images/spinner.svg";
 
 const SuitesContext = createContext();
 
@@ -70,6 +71,15 @@ const SuitesData = [
 
 const SuitesProvider = ({ children }) => {
   const { data, error, isLoading } = useQuery(["suites"], getSuites);
+
+  if (isLoading)
+    return (
+      <div className="min-h-screen grid place-items-center">
+        <img src={Spinner} alt="" />
+      </div>
+    );
+
+  if (error) return <div>Error: {error.message}</div>;
 
   if (!data) return null;
 

@@ -66,7 +66,7 @@ export const BarAndRestaurantSection = () => {
         dressCode: dt?.dressCode,
         openHours: dt?.openHours,
         imageUrl: createAssetsUrl(dt?.image),
-        menuLink: createAssetsUrl(dt?.menu),
+        menuLink: dt.menu,
         exploreLink: dt?.explore,
       };
     });
@@ -262,6 +262,7 @@ const LayoutDetails = ({
   menuLink,
   exploreLink,
 }) => {
+  console.log(menuLink);
   return (
     <div
       className={`max-w-full lg:max-w-[80%] mx-auto xl:mx-0 flex-col gap-8 px-4 xl:px-32 mt-10 xl:mt-20 2xl:mt-32 justify-start relative new-layout-enter ${

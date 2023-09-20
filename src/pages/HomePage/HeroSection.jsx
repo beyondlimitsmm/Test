@@ -22,13 +22,19 @@ export const HeroSection = () => {
           loop
           autoPlay
           muted
-          preload="none"
+          // preload="none"
           type="video/mp4"
           playsInline
           src={createAssetsUrl(cmsData?.video)}
           className="w-screen h-screen object-cover"
           poster={createAssetsUrl(cmsData?.poster)}
-        ></video>
+        >
+          <img
+            src={createAssetsUrl(cmsData?.poster)}
+            alt="Poster"
+            loading="lazy" // Add this line for lazy loading
+          />
+        </video>
       </div>
       <div className="flex flex-col z-20 items-center gap-20">
         <img

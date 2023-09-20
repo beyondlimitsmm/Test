@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import config from "../config";
 import { format } from "date-fns";
+import Yangon from "../assets/images/yangon.jpeg";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 const ArticleCard = ({ post }) => {
   return (
@@ -9,11 +11,29 @@ const ArticleCard = ({ post }) => {
       className="relative isolate flex flex-col gap-8 lg:flex-row"
     >
       <div className="relative aspect-[16/9] sm:aspect-[2/1] lg:aspect-square lg:w-64 lg:shrink-0">
-        <img
-          src={`${config.BASE_IMAGE_URL}${post.imageUrl}`}
-          alt=""
-          className="absolute inset-0 h-full w-full rounded-md bg-gray-50 object-cover"
-        />
+        {post.imageUrl ? (
+          <ProgressiveImage
+            src={`${config.BASE_IMAGE_URL}${post.imageUrl}`}
+            placeholder={Yangon}
+          >
+            {(src, loading) => (
+              <img
+                className={`absolute inset-0 h-full w-full rounded-md bg-gray-50 object-cover ${
+                  loading ? " loading" : " loaded"
+                }`}
+                src={src}
+                alt="sea beach"
+              />
+            )}
+          </ProgressiveImage>
+        ) : (
+          <img
+            src={Yangon}
+            alt=""
+            className="absolute inset-0 h-full w-full rounded-md bg-gray-50 object-cover"
+          />
+        )}
+
         <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10" />
       </div>
       <div>

@@ -1,12 +1,18 @@
 import { useState } from "react";
 import { TiWeatherDownpour } from "react-icons/ti";
-import PoolBg from "../../assets/images/pool.png";
+import PoolBg from "../../assets/images/PoolPlaceHolder.webp";
 import "../../styles/ImageCarousel.css";
 import { useQuery } from "@tanstack/react-query";
 import { gallery, header } from "../../api/pool";
 
 import Error from "../../components/Error";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 const CarouselListData = [
   {
@@ -72,11 +78,20 @@ export const PoolPage = () => {
       {/* Section 1 */}
       <section className="-mt-20 w-screen min-h-screen xl:min-h-0 relative">
         <div className="absolute inset-0 overflow-hidden -z-10">
-          <img
+          <ProgressiveImage
             src={createAssetsUrl(cmsHeadData?.image)}
-            alt=""
-            className="w-full h-full object-cover brightness-75"
-          />
+            placeholder={PoolBg}
+          >
+            {(src, loading) => (
+              <img
+                src={src}
+                alt=""
+                className={`w-full h-full object-cover brightness-50 ${
+                  loading ? "loading" : "heroloaded"
+                }`}
+              />
+            )}
+          </ProgressiveImage>
         </div>
         <div className="h-screen xl:h-[75vh] xl:py-48 flex flex-col justify-center items-center">
           <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0">
@@ -343,14 +358,14 @@ const OptionCard = ({
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div className="shadow"></div>
+      {/* <div className="shadow"></div>
       <div className="label">
         <div className="icon">{iconComponent}</div>
         <div className="info">
           <div className="main">{mainText}</div>
           <div className="sub">{subText}</div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

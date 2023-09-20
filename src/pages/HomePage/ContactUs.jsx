@@ -1,3 +1,4 @@
+import { FlipText } from "../../components/FlipText";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { getInTouch } from "../../api/home";

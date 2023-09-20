@@ -9,3 +9,7 @@ export const parseCmsData = (data) => {
 
   return data.data.attributes;
 };
+
+export const validateForm = (formData) => {
+  return Object.keys(formData).filter((key) => formData[key] == "");
+};

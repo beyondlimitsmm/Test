@@ -2,7 +2,6 @@ import { AboutUsSection } from "./AboutUsSection";
 import { Articles } from "./Articles";
 import { BarAndRestaurantSection } from "./BarAndRestaurantSection";
 import { ContactUs } from "./ContactUs";
-import { FeatureSection } from "./FeatureSection";
 import { FeaturesSection } from "./FeaturesSection";
 import { GallerySection } from "./GallerySection";
 import { HeroSection } from "./HeroSection";
