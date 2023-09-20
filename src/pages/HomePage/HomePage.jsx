@@ -2,13 +2,11 @@ import { AboutUsSection } from "./AboutUsSection";
 import { Articles } from "./Articles";
 import { BarAndRestaurantSection } from "./BarAndRestaurantSection";
 import { ContactUs } from "./ContactUs";
-import { FeatureSection } from "./FeatureSection";
 import { FeaturesSection } from "./FeaturesSection";
 import { GallerySection } from "./GallerySection";
 import { HeroSection } from "./HeroSection";
 import { RoomSection } from "./RoomSection";
 import { ServiceSection } from "./ServiceSection";
-import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const HomePage = () => {
   return (

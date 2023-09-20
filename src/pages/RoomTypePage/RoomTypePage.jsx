@@ -9,7 +9,6 @@ import config from "../../config";
 import { useQuery } from "@tanstack/react-query";
 import { getRoomTypes } from "../../api/roomsAndSuites.js";
 import Spinner from "../../assets/images/spinner.svg";
-import "react-lazy-load-image-component/src/effects/blur.css";
 import ProgressiveImage from "react-progressive-graceful-image";
 import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
 
