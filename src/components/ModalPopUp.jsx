@@ -141,7 +141,7 @@ export const ModalPopUp = ({
           </div>
           {isSuccess && (
             <h6 className="text-center text-green-600">
-              Message send successfully.
+              Message has been send successfully.
             </h6>
           )}
         </div>
