@@ -8,6 +8,7 @@ import { GallerySection } from "./GallerySection";
 import { HeroSection } from "./HeroSection";
 import { RoomSection } from "./RoomSection";
 import { ServiceSection } from "./ServiceSection";
+import "react-lazy-load-image-component/src/effects/blur.css";
 
 export const HomePage = () => {
   return (

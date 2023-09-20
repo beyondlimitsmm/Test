@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -40,10 +39,10 @@
   src: url(./assets/fonts/Walbaum_Regular.ttf);
 }
 
-/* 
+/*
 
-Button Hover Mild - #b18e7d 
-Button Hover Primary - #806558 
+Button Hover Mild - #b18e7d
+Button Hover Primary - #806558
 border color - #D5D1D1
 footer bg - #3A1E13
 
@@ -442,4 +441,31 @@ html {
   -webkit-line-clamp: var(--max-line);
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+}
+
+.loading {
+  filter: blur(10px);
+  clip-path: inset(0);
+}
+
+.loaded {
+  filter: blur(0px);
+  transition: filter 0.6s linear;
+}
+
+.heroloaded {
+  filter: blur(0px) brightness(0.5);
+  transition: filter 0.6s linear;
+}
+
+.reduceBrightness {
+  filter: blur(0px);
+  transition: filter 0.3s linear;
+  filter: brightness(0.5);
 }

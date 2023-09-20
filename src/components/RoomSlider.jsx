@@ -1,7 +1,9 @@
 import { useState } from "react";
+import ProgressiveImage from "react-progressive-graceful-image";
 import "swiper/css/effect-creative";
 import { EffectCreative, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import RoomPlaceHolder from "../assets/images/RoomPlaceHolder.jpg";
 
 // export const IMAGE_URLS = [
 //   "https://swiperjs.com/demos/images/nature-1.jpg",
@@ -83,7 +85,15 @@ export const RoomSlider = ({ imageUrls }) => {
         >
           {imageUrls.map((imageUrl, index) => (
             <SwiperSlide key={index}>
-              <img src={imageUrl} alt={`Nature ${index + 1}`} />
+              <ProgressiveImage src={imageUrl} placeholder={RoomPlaceHolder}>
+                {(src, loading) => (
+                  <img
+                    src={src}
+                    className={loading ? "loading" : "loaded"}
+                    alt={`Nature ${index + 1}`}
+                  />
+                )}
+              </ProgressiveImage>
             </SwiperSlide>
           ))}
         </Swiper>
@@ -117,7 +127,16 @@ export const RoomSlider = ({ imageUrls }) => {
         >
           {imageUrls.map((imageUrl, index) => (
             <SwiperSlide key={index}>
-              <img src={imageUrl} alt={`Nature ${index + 1}`} />
+              <ProgressiveImage src={imageUrl} placeholder={RoomPlaceHolder}>
+                {(src, loading) => (
+                  <img
+                    src={src}
+                    className={loading ? "loading" : "loaded"}
+                    alt={`Nature ${index + 1}`}
+                  />
+                )}
+              </ProgressiveImage>
+              {/* <img src={imageUrl} alt={`Nature ${index + 1}`} /> */}
             </SwiperSlide>
           ))}
         </Swiper>

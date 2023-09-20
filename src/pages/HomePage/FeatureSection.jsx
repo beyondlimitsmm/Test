@@ -6,6 +6,9 @@ import { feature } from "../../api/home";
 import Error from "../../components/Error";
 import { parseCmsData, createAssetsUrl } from "../../libs/functions";
 
+import "react-lazy-load-image-component/src/effects/blur.css";
+import ProgressiveImage from "react-progressive-graceful-image";
+
 export const FeatureSection = () => {
   const { data, error } = useQuery(["homeFeature"], feature);
   if (error) return <Error />;
@@ -24,25 +27,54 @@ export const FeatureSection = () => {
               : "xl:flex-row-reverse ml-auto"
           } `}
         >
-          <div className="relative xl:mr-[250px] mb-[80px] xl:mb-0 mx-4 xl:mx-0">
-            <img
+          <div className="relative h-[300px] xl:h-[650px] xl:mr-[250px] mb-[80px] xl:mb-0 mx-4 xl:mx-0">
+            <ProgressiveImage
+              src={createAssetsUrl(data?.mainImage)}
+              placeholder={Rectangle10}
+            >
+              {(src, loading) => (
+                <img
+                  src={src}
+                  alt=""
+                  className={` w-full  xl:w-auto object-cover ${
+                    loading ? "loading" : "loaded"
+                  }`}
+                />
+              )}
+            </ProgressiveImage>
+            {/* <LazyLoadImage
               src={createAssetsUrl(data?.mainImage)}
               alt=""
+              effect="blur"
+              placeholderSrc={Rectangle10}
               className="h-[300px] w-full xl:h-[650px] xl:w-[480px] object-cover"
-            />
+            /> */}
 
             <div
               data-aos={data?.position == "left" ? "fade-down" : "fade-right"}
               data-aos-offset="100"
               data-aos-duration="500"
-              className={`h-44 w-[300px] absolute xl:h-64 xl:w-[440px] -bottom-12 right-0 xl:-right-48 xl:top-1/2 xl:-translate-y-1/3`}
+              className={`h-[300px] w-[300px]  absolute xl:h-64 xl:w-[440px] -bottom-12 right-0 xl:-right-48 xl:top-1/2 xl:-translate-y-1/3`}
             >
-              <img
+              <ProgressiveImage
+                src={createAssetsUrl(data?.subImage)}
+                placeholder={Rectangle10}
+              >
+                {(src, loading) => (
+                  <img
+                    src={src}
+                    alt=""
+                    className={` ${loading ? "loading" : "loaded"}`}
+                  />
+                )}
+              </ProgressiveImage>
+              {/* <LazyLoadImage
                 src={createAssetsUrl(data?.subImage)}
                 alt=""
+                effect="blur"
                 className="h-full w-full object-cover border-[12px] border-white shadow-lg rotate-[-3deg]"
                 style={{ boxShadow: "0px 4px 4px 0px rgba(0, 0, 0, 0.25)" }}
-              />
+              /> */}
             </div>
           </div>
 

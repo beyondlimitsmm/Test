@@ -4,60 +4,8 @@ import { GallerySliderSection } from "../../components/GallerySliderSection";
 import { useSuites } from "../../hooks/SuitesContext";
 import config from "../../config";
 import { RoomSlider } from "../../components/RoomSlider";
-
-const ROOM_CONSTANTS = {
-  title: "Rooms & Suites",
-  price: "90,000/per night",
-  people: "3 max",
-  bed: "King Bed",
-  squareFeet: "32 m²",
-  type: "en suite",
-  featuredImage: rooms,
-  amenities: [
-    {
-      image:
-        "https://www.kempinski.com/en/content/download/115/405?version=21&amp;inline=1",
-      description: "Bathtub and separate shower",
-    },
-    {
-      image:
-        "https://www.kempinski.com/en/content/download/105/385?version=21&amp;inline=1",
-      description: "Safe",
-    },
-    {
-      image:
-        "https://www.kempinski.com/en/content/download/83/341?version=21&amp;inline=1",
-      description: "Desk",
-    },
-    {
-      image:
-        "https://www.kempinski.com/en/content/download/80/335?version=21&amp;inline=1",
-      description: "Coffee and/or tea making facilities",
-    },
-    {
-      image:
-        "https://www.kempinski.com/en/content/download/77/329?version=23&amp;inline=1",
-      description: "Baby bed allowed",
-    },
-    {
-      image:
-        "https://www.kempinski.com/en/content/download/74/323?version=21&amp;inline=1",
-      description: "Air conditioning",
-    },
-  ],
-  galleryImages: [
-    "https://swiperjs.com/demos/images/nature-1.jpg",
-    "https://swiperjs.com/demos/images/nature-2.jpg",
-    "https://swiperjs.com/demos/images/nature-3.jpg",
-    "https://swiperjs.com/demos/images/nature-4.jpg",
-    "https://swiperjs.com/demos/images/nature-5.jpg",
-    "https://swiperjs.com/demos/images/nature-6.jpg",
-    "https://swiperjs.com/demos/images/nature-7.jpg",
-    "https://swiperjs.com/demos/images/nature-8.jpg",
-    "https://swiperjs.com/demos/images/nature-9.jpg",
-    "https://swiperjs.com/demos/images/nature-10.jpg",
-  ],
-};
+import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 const SuiteDetailPage = () => {
   const suites = useSuites();
@@ -69,11 +17,25 @@ const SuiteDetailPage = () => {
     <>
       <section className="-mt-20 w-screen min-h-screen xl:min-h-0 relative">
         <div className="absolute inset-0 overflow-hidden -z-10">
-          <img
+          <ProgressiveImage
+            src={`${config.BASE_IMAGE_URL}${suite.backgroundImage}`}
+            placeholder={RoomPlaceHolder}
+          >
+            {(src, loading) => (
+              <img
+                src={src}
+                alt=""
+                className={`w-full h-full object-cover ${
+                  loading ? "loading" : "heroloaded"
+                } `}
+              />
+            )}
+          </ProgressiveImage>
+          {/* <img
             src={`${config.BASE_IMAGE_URL}${suite.backgroundImage}`}
             alt=""
             className="w-full h-full object-cover brightness-50"
-          />
+          /> */}
         </div>
 
         <div className="min-h-screen xl:min-h-[600px] xl:py-48 flex flex-col justify-center gap-8 items-center">
@@ -99,11 +61,20 @@ const SuiteDetailPage = () => {
 
       <section className="container mx-auto flex flex-col xl:flex-row justify-between items-center py-10 px-4 xl:px-0 xl:py-20 xl:my-20">
         <div className="flex-1 xl:px-20 self-stretch flex justify-center items-center">
-          <img
+          <ProgressiveImage
             src={suite.featuredImage}
-            alt=""
-            className="w-full xl:h-full h-[400px] object-cover max-w-[500px]"
-          />
+            placeholder={RoomPlaceHolder}
+          >
+            {(src, loading) => (
+              <img
+                src={src}
+                alt=""
+                className={`w-full xl:h-full h-[400px] object-cover max-w-[500px] ${
+                  loading ? "loading" : "loaded"
+                }}`}
+              />
+            )}
+          </ProgressiveImage>
         </div>
         <div className="flex-1 text-start p-4 xl:px-0 self-stretch xl:self-auto">
           <h3 className="typo-section-title">{suite.featuredHeader}</h3>

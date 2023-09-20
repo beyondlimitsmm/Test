@@ -9,144 +9,9 @@ import config from "../../config";
 import { useQuery } from "@tanstack/react-query";
 import { getRoomTypes } from "../../api/roomsAndSuites.js";
 import Spinner from "../../assets/images/spinner.svg";
-
-// const RoomsData = [
-//   {
-//     id: 1,
-//     imageSrc: Rooms,
-//     title: "Lorem ipsum dolor sit amet",
-//     price: "90,000/per night",
-//     people: "3 max",
-//     bed: "King Bed",
-//     squareFeet: "32 m²",
-//     type: "en suite",
-//     featuredImage: Rooms,
-//     description:
-//       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, iusto. Quas nisi perspiciatis molestias totam?",
-//     amenities: [
-//       {
-//         image:
-//           "https://www.kempinski.com/en/content/download/115/405?version=21&amp;inline=1",
-//         description: "Bathtub and separate shower",
-//       },
-//       {
-//         image:
-//           "https://www.kempinski.com/en/content/download/105/385?version=21&amp;inline=1",
-//         description: "Safe",
-//       },
-//       {
-//         image:
-//           "https://www.kempinski.com/en/content/download/83/341?version=21&amp;inline=1",
-//         description: "Desk",
-//       },
-//       {
-//         image:
-//           "https://www.kempinski.com/en/content/download/80/335?version=21&amp;inline=1",
-//         description: "Coffee and/or tea making facilities",
-//       },
-//       {
-//         image:
-//           "https://www.kempinski.com/en/content/download/77/329?version=23&amp;inline=1",
-//         description: "Baby bed allowed",
-//       },
-//       {
-//         image:
-//           "https://www.kempinski.com/en/content/download/74/323?version=21&amp;inline=1",
-//         description: "Air conditioning",
-//       },
-//     ],
-//     galleryImages: [
-//       "https://swiperjs.com/demos/images/nature-1.jpg",
-//       "https://swiperjs.com/demos/images/nature-2.jpg",
-//       "https://swiperjs.com/demos/images/nature-3.jpg",
-//       "https://swiperjs.com/demos/images/nature-4.jpg",
-//       "https://swiperjs.com/demos/images/nature-5.jpg",
-//       "https://swiperjs.com/demos/images/nature-6.jpg",
-//       "https://swiperjs.com/demos/images/nature-7.jpg",
-//       "https://swiperjs.com/demos/images/nature-8.jpg",
-//       "https://swiperjs.com/demos/images/nature-9.jpg",
-//       "https://swiperjs.com/demos/images/nature-10.jpg",
-//     ],
-//     viewDetailsLink: `./rooms`,
-//     reserveRoomLink: "#",
-//   },
-// ];
-// {
-//   id: 2,
-//   imageSrc: Rooms,
-//   title: "Lorem ipsum dolor 2",
-//   description:
-//     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, iusto. Quas nisi perspiciatis molestias totam?",
-//   viewDetailsLink: "./rooms",
-//   reserveRoomLink: "#",
-// },
-
-// {
-//   id: 3,
-//   imageSrc: Rooms,
-//   title: "Deluxe Room",
-//   description:
-//     "Enjoy the spacious and elegantly designed Deluxe Room. Featuring a comfortable king-size bed, modern amenities, and a private balcony with city views.",
-//   viewDetailsLink: `./rooms`,
-//   reserveRoomLink: "#",
-// },
-// {
-//   id: 5,
-//   imageSrc: Rooms,
-//   title: "Presidential Suite",
-//   description:
-//     "Indulge in luxury with our Presidential Suite. This opulent suite boasts a grand living area, a dining room, a king-size bedroom, and a private terrace.",
-//   viewDetailsLink: "./rooms",
-//   reserveRoomLink: "#",
-// },
-
-// const SuitesData = [
-//   {
-//     id: 1,
-//     imageSrc: Rooms,
-//     title: "Luxury Suite",
-//     description:
-//       "Experience true luxury in our exquisitely designed Luxury Suite. Enjoy spacious living areas, a king-size bed, and breathtaking views of the city skyline.",
-//     viewDetailsLink: "./suites",
-//     reserveRoomLink: "#",
-//   },
-//   {
-//     id: 2,
-//     imageSrc: Rooms,
-//     title: "Grand Suite",
-//     description:
-//       "The Grand Suite is the epitome of elegance and comfort. It features a separate living room, a queen-size bed, and a private terrace overlooking lush gardens.",
-//     viewDetailsLink: "./suites",
-//     reserveRoomLink: "#",
-//   },
-//   {
-//     id: 3,
-//     imageSrc: Rooms,
-//     title: "Honeymoon Suite",
-//     description:
-//       "Celebrate your special moments in our romantic Honeymoon Suite. Enjoy a cozy fireplace, a four-poster bed, and a private balcony with stunning sunset views.",
-//     viewDetailsLink: "./suites",
-//     reserveRoomLink: "#",
-//   },
-//   {
-//     id: 4,
-//     imageSrc: Rooms,
-//     title: "Penthouse Suite",
-//     description:
-//       "Indulge in the ultimate luxury in our Penthouse Suite. This spacious suite includes a private elevator, a king-size bedroom, and a rooftop terrace with a private pool.",
-//     viewDetailsLink: "./suites",
-//     reserveRoomLink: "#",
-//   },
-//   {
-//     id: 5,
-//     imageSrc: Rooms,
-//     title: "Family Suite",
-//     description:
-//       "Ideal for families, our Family Suite offers a blend of comfort and space. It includes a master bedroom, a twin-bedded room, and a cozy living area.",
-//     viewDetailsLink: "./suites",
-//     reserveRoomLink: "#",
-//   },
-// ];
+import "react-lazy-load-image-component/src/effects/blur.css";
+import ProgressiveImage from "react-progressive-graceful-image";
+import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
 
 export const RoomTypePage = () => {
   const [selectedMenu, setSelectedMenu] = useState("rooms");
@@ -192,11 +57,27 @@ export const RoomTypePage = () => {
       <div>
         <section className="-mt-20 w-screen min-h-screen xl:min-h-0 relative">
           <div className="absolute inset-0 overflow-hidden -z-10">
-            <img
+            <ProgressiveImage
+              src={`${config.BASE_IMAGE_URL}${roomTypes.backgroundImage}`}
+              placeholder={RoomPlaceHolder}
+            >
+              {(src, loading) => (
+                <img
+                  className={`w-full h-full object-cover brightness-75 ${
+                    loading ? " loading" : "heroloaded"
+                  }`}
+                  src={src}
+                  alt="sea beach"
+                  width="700"
+                  height="465"
+                />
+              )}
+            </ProgressiveImage>
+            {/* <img
               src={`${config.BASE_IMAGE_URL}${roomTypes.backgroundImage}`}
               alt=""
-              className="w-full h-full object-cover brightness-75"
-            />
+              className=" block"
+            /> */}
           </div>
           <div className="min-h-screen xl:min-h-[600px] xl:py-48 flex flex-col justify-center items-center">
             <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0 text-center max-w-lg">
@@ -294,11 +175,30 @@ export const RoomCard = ({
   return (
     <div className="card-container w-[80%] xl:w-[500px] relative">
       <div className="w-full h-[300px] relative overflow-hidden">
-        <img
+        <ProgressiveImage
+          src={`${config.BASE_IMAGE_URL}${imageSrc}`}
+          placeholder={RoomPlaceHolder}
+        >
+          {(src, loading) => (
+            <img
+              className={`w-full h-full object-cover brightness-75 image${
+                loading ? " loading" : "loaded"
+              }`}
+              src={src}
+              alt="sea beach"
+              width="700"
+              height="465"
+            />
+          )}
+        </ProgressiveImage>
+        {/* <LazyLoadImage
           src={`${config.BASE_IMAGE_URL}${imageSrc}`}
           alt={title}
+          placeholderSrc={Rooms}
+          effect="blur"
           className="w-full h-full object-cover"
-        />
+          style={{ width: "100%", height: "100%" }}
+        /> */}
       </div>
       <div className="flex flex-col justify-center items-center text-center">
         <h6 className="typo-menu-2">{title}</h6>

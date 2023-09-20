@@ -33,7 +33,7 @@ const ArticleDetailPage = () => {
     .slice(0, 3);
 
   return (
-    <div className="container max-w-6xl mx-auto mb-[120px]">
+    <div className="container max-w-6xl mx-auto mb-[120px] md:mt-20">
       <h2 className="mt-4 mb-6 text-center">
         <Link to="/">Home</Link> &gt;{" "}
         <Link to="/articles"> Articles for you</Link> &gt; <Link> Detail</Link>

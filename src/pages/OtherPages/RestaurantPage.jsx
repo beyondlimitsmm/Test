@@ -1,8 +1,8 @@
 import { useState } from "react";
-// import { TiWeatherDownpour } from "react-icons/ti";
 import { useQuery } from "@tanstack/react-query";
-import { FaBowlFood } from "react-icons/fa6";
+import ProgressiveImage from "react-progressive-graceful-image";
 import { about, facility, gallery, header } from "../../api/restaurant";
+import RestaurantPlaceHolder from "../../assets/images/RestaurantPlaceHolder.jpg";
 import Error from "../../components/Error";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import "../../styles/ImageCarousel.css";
@@ -83,11 +83,25 @@ export const RestaurantPage = () => {
       {/* Section 1 */}
       <section className="-mt-20 w-screen min-h-screen xl:min-h-0 relative">
         <div className="absolute inset-0 overflow-hidden -z-10">
-          <img
+          <ProgressiveImage
+            src={createAssetsUrl(cmsHeadData?.image)}
+            placeholder={RestaurantPlaceHolder}
+          >
+            {(src, loading) => (
+              <img
+                className={`w-full h-full object-cover brightness-75 image${
+                  loading ? " loading" : " heroloaded"
+                }`}
+                src={src}
+                alt=""
+              />
+            )}
+          </ProgressiveImage>
+          {/* <img
             src={createAssetsUrl(cmsHeadData?.image)}
             alt=""
             className="w-full h-full object-cover brightness-75"
-          />
+          /> */}
         </div>
         <div className="h-screen xl:h-[75vh] xl:py-48 flex flex-col justify-center items-center">
           <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0">
@@ -361,7 +375,7 @@ const OptionCard = ({
         backgroundImage: `url(${backgroundImage})`,
       }}
     >
-      <div className="shadow"></div>
+      {/* <div className="shadow"></div>
       <div className="label">
         <div className="icon">
           <FaBowlFood size={25} />
@@ -370,7 +384,7 @@ const OptionCard = ({
           <div className="main">{mainText}</div>
           <div className="sub">{subText}</div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

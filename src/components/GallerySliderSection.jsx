@@ -5,6 +5,8 @@ import { EffectCreative, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { galleries } from "../api/gallery";
 import { createAssetsUrl } from "../libs/functions";
+import ProgressiveImage from "react-progressive-graceful-image";
+import RoomPlaceHolder from "../assets/images/RoomPlaceHolder.jpg";
 
 export const GallerySliderSection = ({ selectedMenu }) => {
   console.log("selectedMenu", selectedMenu);
@@ -103,7 +105,15 @@ export const GallerySliderSection = ({ selectedMenu }) => {
         >
           {galleryData?.map((data) => (
             <SwiperSlide key={data.id}>
-              <img src={data.image} />
+              <ProgressiveImage src={data?.image} placeholder={RoomPlaceHolder}>
+                {(src, loading) => (
+                  <img
+                    src={src}
+                    className={loading ? "loading" : "loaded"}
+                    loading="lazy"
+                  />
+                )}
+              </ProgressiveImage>
             </SwiperSlide>
           ))}
           {/* <SwiperSlide>
