@@ -5,9 +5,21 @@ import { handleScrollDownClick } from "../../utils";
 import { hero } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
+import Spinner from "../../assets/images/spinner.svg";
 
 export const HeroSection = () => {
-  const { data, error } = useQuery({ queryKey: ["hero"], queryFn: hero });
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["hero"],
+    queryFn: hero,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen grid place-items-center">
+        <img src={Spinner} alt="" />
+      </div>
+    );
+  }
 
   if (error) return <Error />;
   const cmsData = parseCmsData(data);
@@ -28,13 +40,7 @@ export const HeroSection = () => {
           src={createAssetsUrl(cmsData?.video)}
           className="w-screen h-screen object-cover"
           poster={createAssetsUrl(cmsData?.poster)}
-        >
-          <img
-            src={createAssetsUrl(cmsData?.poster)}
-            alt="Poster"
-            loading="lazy" // Add this line for lazy loading
-          />
-        </video>
+        ></video>
       </div>
       <div className="flex flex-col z-20 items-center gap-20">
         <img

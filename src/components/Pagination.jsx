@@ -15,7 +15,7 @@ const Pagination = ({
     <div className="pagination typo-body-2 flex justify-center items-center mb-[60px]">
       {currentPage > 1 && (
         <li
-          className={`flex justify-center items-center gap-2 ${
+          className={`flex justify-center items-center gap-2 cursor-pointer ${
             currentPage === 1 ? "disabled" : ""
           }`}
           onClick={previousPage}
@@ -26,7 +26,7 @@ const Pagination = ({
       {pageNumbers.map((number) => (
         <li
           key={number}
-          className={currentPage === number ? "active" : ""}
+          className={`cursor-pointer ${currentPage === number ? "active" : ""}`}
           onClick={() => paginate(number)}
         >
           {number}
@@ -34,7 +34,7 @@ const Pagination = ({
       ))}
       {currentPage < pageNumbers.length && (
         <li
-          className={`flex justify-center items-center gap-2 ${
+          className={`flex justify-center items-center gap-2 cursor-pointer ${
             currentPage === pageNumbers.length ? "disabled" : ""
           }`}
           onClick={nextPage}
