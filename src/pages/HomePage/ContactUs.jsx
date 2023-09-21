@@ -30,7 +30,6 @@ export const ContactUs = () => {
     setFormData((data) => {
       const newData = { ...data };
       newData[name] = value;
-
       return newData;
     });
   };
@@ -182,7 +181,7 @@ export const ContactUs = () => {
               <textarea
                 rows="4"
                 type="text"
-                className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-2 resize-none font-medium"
+                className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-4 resize-none font-medium z-[8]"
                 name="comment"
                 value={formData.comment}
                 onChange={onChangeHandler}
