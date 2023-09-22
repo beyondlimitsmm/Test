@@ -70,7 +70,6 @@ export const BarAndRestaurantSection = () => {
         exploreLink: dt?.explore,
       };
     });
-
     setSlideMenu(_slideMenu);
   }, [cmsData]);
 
