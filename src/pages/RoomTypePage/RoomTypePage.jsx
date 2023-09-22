@@ -11,6 +11,7 @@ import { getRoomTypes } from "../../api/roomsAndSuites.js";
 import ProgressiveImage from "react-progressive-graceful-image";
 import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
 import Loading from "../../components/Loading";
+import Error from "../../components/Error";
 
 export const RoomTypePage = () => {
   const [selectedMenu, setSelectedMenu] = useState("rooms");
@@ -21,7 +22,7 @@ export const RoomTypePage = () => {
 
   if (isLoading) return <Loading />;
 
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return <Error />;
 
   const query = data?.data.attributes;
 

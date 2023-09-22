@@ -7,6 +7,7 @@ import Error from "../../components/Error";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import "../../styles/ImageCarousel.css";
 import config from "../../config";
+import Loading from "../../components/Loading";
 
 // const CarouselListData = [
 //   {
@@ -55,10 +56,31 @@ import config from "../../config";
 
 export const RestaurantPage = () => {
   const [activeImage, setActiveImage] = useState(0);
-  const { data: headData, error } = useQuery(["restaurantHeader"], header);
-  const { data: aboutData } = useQuery(["restaurantAbout"], about);
-  const { data: facilityData } = useQuery(["restaurantFacility"], facility);
-  const { data: galleryData } = useQuery(["restaurantGallery"], gallery);
+  const {
+    data: headData,
+    error,
+    isLoading: loadingHeader,
+  } = useQuery(["restaurantHeader"], header);
+  const { data: aboutData, isLoading: loadingAboutData } = useQuery(
+    ["restaurantAbout"],
+    about
+  );
+  const { data: facilityData, isLoading: loadingFacilityData } = useQuery(
+    ["restaurantFacility"],
+    facility
+  );
+  const { data: galleryData, isLoading: loadingGallery } = useQuery(
+    ["restaurantGallery"],
+    gallery
+  );
+
+  if (
+    loadingHeader ||
+    loadingAboutData ||
+    loadingFacilityData ||
+    loadingGallery
+  )
+    return <Loading />;
 
   if (error) return <Error />;
 

@@ -23,10 +23,20 @@ import { SuitesProvider } from "./hooks/SuitesContext";
 import { useQuery } from "@tanstack/react-query";
 import { getRoomTypes } from "./api/roomsAndSuites";
 import ChatBot from "./components/ChatBot";
+import { hero } from "./api/home";
 
 function App() {
   const location = useLocation();
   const { data, isLoading, error } = useQuery(["room-types"], getRoomTypes);
+
+  const {
+    data: heroData,
+    isLoading: loadingHero,
+    error: heroError,
+  } = useQuery({
+    queryKey: ["hero"],
+    queryFn: hero,
+  });
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
@@ -34,7 +44,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBarBuilder></NavBarBuilder>
+      {heroData && <NavBarBuilder></NavBarBuilder>}
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/gallery" element={<GalleryPage />}></Route>
@@ -77,8 +87,7 @@ function App() {
         <Route path="*" element={<Navigate to="/404" replace />}></Route>
         <Route path="/404" element={<NotFound />}></Route>
       </Routes>
-      {location.pathname !== "/404" && <Footer></Footer>}
-
+      {location.pathname !== "/404" && heroData && <Footer></Footer>}
       <ModalPopUp />
       <ChatBot />
     </div>
