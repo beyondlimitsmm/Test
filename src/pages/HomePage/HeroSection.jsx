@@ -5,7 +5,8 @@ import { handleScrollDownClick } from "../../utils";
 import { hero } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
-import Spinner from "../../assets/images/spinner.svg";
+
+import Loading from "../../components/Loading";
 
 export const HeroSection = () => {
   const { data, isLoading, error } = useQuery({
@@ -14,11 +15,7 @@ export const HeroSection = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen grid place-items-center">
-        <img src={Spinner} alt="" />
-      </div>
-    );
+    return <Loading />;
   }
 
   if (error) return <Error />;

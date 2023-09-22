@@ -3,19 +3,14 @@ import { createContext, useContext } from "react";
 import { getRooms } from "../api/roomsAndSuites.js";
 import { useQuery } from "@tanstack/react-query";
 import config from "../config";
-import Spinner from "../assets/images/spinner.svg";
+import Loading from "../components/Loading.jsx";
 
 const RoomsContext = createContext();
 
 const RoomsProvider = ({ children }) => {
   const { isLoading, error, data } = useQuery(["rooms"], getRooms);
 
-  if (isLoading)
-    return (
-      <div className="min-h-screen grid place-items-center">
-        <img src={Spinner} alt="" />
-      </div>
-    );
+  if (isLoading) return <Loading />;
 
   if (error) return <div>Error: {error.message}</div>;
 

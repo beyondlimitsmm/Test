@@ -9,4 +9,6 @@ export const gallery = async () =>
 export const about = async () => await base("/pool-about?&populate=*");
 
 export const facility = async () =>
-  await base("/pool-facility?populate[facilityNames][populate]=*");
+  await base(
+    "/pool-facility?populate[facilityNames][populate]=*&populate[button][populate]=*"
+  );

@@ -14,6 +14,8 @@ import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import ProgressiveImage from "react-progressive-graceful-image";
 import config from "../../config";
+import { Link } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 const CarouselListData = [
   {
@@ -55,12 +57,26 @@ const CarouselListData = [
 
 export const PoolPage = () => {
   const [activeImage, setActiveImage] = useState(0);
-  const { data: headData, error } = useQuery(["poolHeader"], header);
-  const { data: galleryData } = useQuery(["poolGallery"], gallery);
-  const { data: facilityData } = useQuery(["poolFacilities"], facility);
+  const {
+    data: headData,
+    error,
+    isLoading: loadingHeader,
+  } = useQuery(["poolHeader"], header);
+  const { data: galleryData, isLoading: loadedGallery } = useQuery(
+    ["poolGallery"],
+    gallery
+  );
+  const { data: facilityData, isLoading: loadingFacility } = useQuery(
+    ["poolFacilities"],
+    facility
+  );
   const { data: poolAbout } = useQuery(["poolAbout"], about);
 
   if (error) return <Error />;
+
+  if (loadingFacility || loadingHeader || loadedGallery) {
+    return <Loading />;
+  }
 
   const cmsHeadData = parseCmsData(headData);
   const cmsGalleryData = parseCmsData(galleryData);
@@ -189,7 +205,11 @@ export const PoolPage = () => {
                 );
               })}
             </div>
-            <button className="border-button w-full">Book Now</button>
+            <Link to={cmsFacilityData?.button.link}>
+              <button className="border-button w-full">
+                {cmsFacilityData?.button.name}
+              </button>
+            </Link>
           </div>
         </div>
       </section>

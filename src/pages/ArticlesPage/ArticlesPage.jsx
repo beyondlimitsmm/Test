@@ -3,7 +3,8 @@ import { useState } from "react";
 import { getArticles } from "../../api/articles";
 import ArticleCard from "../../components/ArticleCard";
 import Pagination from "../../components/Pagination";
-import Spinner from "../../assets/images/spinner.svg";
+
+import Loading from "../../components/Loading";
 
 const ErrorPage = ({ message }) => {
   return (
@@ -20,12 +21,7 @@ export default function Articles() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
 
-  if (isLoading)
-    return (
-      <div className="min-h-screen grid place-items-center">
-        <img src={Spinner} alt="" />
-      </div>
-    );
+  if (isLoading) return <Loading />;
   if (error) return <ErrorPage message={error.message} />;
 
   const query = data?.data;

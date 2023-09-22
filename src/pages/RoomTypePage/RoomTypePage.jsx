@@ -8,9 +8,9 @@ import { useSuites } from "../../hooks/SuitesContext";
 import config from "../../config";
 import { useQuery } from "@tanstack/react-query";
 import { getRoomTypes } from "../../api/roomsAndSuites.js";
-import Spinner from "../../assets/images/spinner.svg";
 import ProgressiveImage from "react-progressive-graceful-image";
 import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
+import Loading from "../../components/Loading";
 
 export const RoomTypePage = () => {
   const [selectedMenu, setSelectedMenu] = useState("rooms");
@@ -19,12 +19,7 @@ export const RoomTypePage = () => {
   const RoomsData = useRooms();
   const SuitesData = useSuites();
 
-  if (isLoading)
-    return (
-      <div className="min-h-screen grid place-items-center">
-        <img src={Spinner} alt="" />
-      </div>
-    );
+  if (isLoading) return <Loading />;
 
   if (error) return <div>Error: {error.message}</div>;
 
@@ -225,7 +220,7 @@ export const RoomCard = ({
           </Link>
           <div
             onClick={() => {
-              console.log(reserveRoomLink);
+              // console.log(reserveRoomLink);
             }}
             className="bg-primary text-white p-4"
           >

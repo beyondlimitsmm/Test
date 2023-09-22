@@ -13,11 +13,25 @@ import Error from "../../components/Error";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import ProgressiveImage from "react-progressive-graceful-image";
 import { placeholder } from "@cloudinary/react";
+import Loading from "../../components/Loading";
 
 const BarDetailPage = () => {
-  const { data: headData, error } = useQuery(["barHeader"], header);
-  const { data: featureData } = useQuery(["barFeature"], feature);
-  const { data: galleryData } = useQuery(["barGallery"], gallery);
+  const {
+    data: headData,
+    error,
+    isLoading: loadingHeader,
+  } = useQuery(["barHeader"], header);
+  const { data: featureData, isLoading: loadingFeature } = useQuery(
+    ["barFeature"],
+    feature
+  );
+  const { data: galleryData, isLoading: loadingGallery } = useQuery(
+    ["barGallery"],
+    gallery
+  );
+
+  if (loadingHeader || loadingFeature || loadingGallery) return <Loading />;
+
   if (error) return <Error />;
 
   const cmsHeadData = parseCmsData(headData);

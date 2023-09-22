@@ -5,18 +5,27 @@ import Error from "../../components/Error";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import ProgressiveImage from "react-progressive-graceful-image";
 import config from "../../config";
+import { Link } from "react-router-dom";
+import Loading from "../../components/Loading";
 
 const MeetingRoom = () => {
-  const { data: headData, error } = useQuery(["meetingRoomHeader"], header);
-  const { data: aboutData, error: aboutError } = useQuery(
-    ["meetingRoomAbout"],
-    about
-  );
-  const { data: facilityData, error: facilityError } = useQuery(
-    ["meetingRoomFacilities"],
-    facility
-  );
+  const {
+    data: headData,
+    error,
+    isLoading: loadingHeader,
+  } = useQuery(["meetingRoomHeader"], header);
+  const {
+    data: aboutData,
+    error: aboutError,
+    isLoading: loadingAbout,
+  } = useQuery(["meetingRoomAbout"], about);
+  const {
+    data: facilityData,
+    error: facilityError,
+    isLoading: loadingFacility,
+  } = useQuery(["meetingRoomFacilities"], facility);
 
+  if (loadingHeader || loadingAbout || loadingFacility) return <Loading />;
   if (error || aboutError || facilityError) return <Error />;
 
   const cmsHeadData = parseCmsData(headData);
@@ -151,7 +160,11 @@ const MeetingRoom = () => {
                 );
               })}
             </div>
-            <button className="border-button w-full">Book Now</button>
+            <Link to={cmsFacilityData?.button.link}>
+              <button className="border-button w-full">
+                {cmsFacilityData?.button.name}
+              </button>
+            </Link>
           </div>
         </div>
       </section>
