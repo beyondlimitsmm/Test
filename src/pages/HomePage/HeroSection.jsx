@@ -11,7 +11,6 @@ import { useToken } from "../../hooks/CsrfContext";
 
 export const HeroSection = () => {
   const { token } = useToken();
-  console.log(token);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["hero"],
@@ -50,7 +49,7 @@ export const HeroSection = () => {
           width="250"
           className="brightness-200 xl:hidden"
         />
-        <div className="text-white z-20 typo-display mb-10 capitalize">
+        <div className="text-white z-20 typo-display mb-10 capitalize text-center">
           {cmsData?.title}
         </div>
       </div>
