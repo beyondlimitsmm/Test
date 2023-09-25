@@ -128,7 +128,7 @@ export const GallerySliderSection = ({ selectedMenu, menuData }) => {
           onSwiper={(swiper) => {
             // console.log("Inside thumbSwiper", swiper);
             if (swiper && !swiper.destroyed) {
-              console.log(thumbSwiper);
+              // console.log(thumbSwiper);
               setThumbsSwiper(swiper);
             }
           }}
