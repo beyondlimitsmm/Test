@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import { createContext, useContext, useEffect, useState } from "react";
 import config from "../config";
+import Loading from "../components/Loading";
 
 const CsrfContext = createContext();
 
@@ -20,7 +21,7 @@ const CsrfProvider = ({ children }) => {
     setToken(data.token);
   };
 
-  if (!token) return <h1>Loading...</h1>;
+  if (!token) return <Loading />;
   else
     return (
       <CsrfContext.Provider value={{ token }}>{children}</CsrfContext.Provider>
