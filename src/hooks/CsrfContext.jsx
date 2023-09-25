@@ -12,7 +12,7 @@ const CsrfProvider = ({ children }) => {
   }, []);
 
   const getCsrfToken = async () => {
-    const respose = await fetch("http://localhost:1337/api/csrf");
+    const respose = await fetch(config.BASE_API_URL + "/csrf");
     const data = await respose.json();
 
     // return data.token;

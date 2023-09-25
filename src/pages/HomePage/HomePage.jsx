@@ -9,10 +9,7 @@ import { HeroSection } from "./HeroSection";
 import { RoomSection } from "./RoomSection";
 import { ServiceSection } from "./ServiceSection";
 
-
 export const HomePage = () => {
-  
-
   return (
     <div className="HomePage">
       <HeroSection></HeroSection>

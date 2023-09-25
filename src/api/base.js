@@ -8,7 +8,7 @@ export default async (uri) => {
     const res = await fetch(config.BASE_API_URL + uri, {
       headers: {
         authorization: `Bearer ${config.BEARER_TOKEN}`,
-        // "X-CSRF-TOKEN": token,
+        "X-CSRF-TOKEN": `${token}`,
       },
     });
 

@@ -50,11 +50,9 @@ export const BarAndRestaurantSection = () => {
   const [slideMenu, setSlideMenu] = useState([]);
 
   const { data, error } = useQuery(["bar"], bar);
-  if (error) return <Error />;
   const cmsData = parseCmsData(data);
-
   const createSlideMenu = useCallback(() => {
-    if (!cmsData) return;
+    if (!cmsData && !error) return;
 
     const _slideMenu = cmsData?.restaurantCards?.map((dt) => {
       return {
@@ -76,6 +74,8 @@ export const BarAndRestaurantSection = () => {
   useEffect(() => {
     createSlideMenu();
   }, [createSlideMenu]);
+
+  if (error) return <Error />;
 
   function hideImage(imageRef) {
     if (selectEl === null || selectEl === undefined) {
