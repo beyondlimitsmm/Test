@@ -7,7 +7,7 @@ import { HomePageNavBar } from "./components/HomePageNavBar";
 import { ModalPopUp } from "./components/ModalPopUp";
 import { NavBar } from "./components/NavBar";
 import { HomePage } from "./pages/HomePage/HomePage";
-import { NotFound } from "./pages/NotFound";
+import NotFound from "./pages/NotFound";
 import ArticleDetailPage from "./pages/ArticlesPage/ArticleDetailPage";
 import Articles from "./pages/ArticlesPage/ArticlesPage";
 import BarPage from "./pages/OtherPages/BarDetailPage";
