@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import base from "./base";
 
 export const hero = async () =>
@@ -17,7 +18,7 @@ export const gallery = async () =>
   );
 
 export const service = async () =>
-  await base("/home-service?populate[serviceNames][populate][0]=icon+");
+  await base("/home-service?populate[serviceNames][populate][0]=icon");
 
 export const feature = async () =>
   await base(

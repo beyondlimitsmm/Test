@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { AboutUsSection } from "./AboutUsSection";
 import { Articles } from "./Articles";
 import { BarAndRestaurantSection } from "./BarAndRestaurantSection";
@@ -8,7 +9,10 @@ import { HeroSection } from "./HeroSection";
 import { RoomSection } from "./RoomSection";
 import { ServiceSection } from "./ServiceSection";
 
+
 export const HomePage = () => {
+  
+
   return (
     <div className="HomePage">
       <HeroSection></HeroSection>

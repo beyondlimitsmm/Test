@@ -6,8 +6,12 @@ import { hero } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
 import Spinner from "../../assets/images/spinner.svg";
+import { useToken } from "../../hooks/CsrfContext";
 
 export const HeroSection = () => {
+  const { token } = useToken();
+  console.log(token);
+
   const { data, isLoading, error } = useQuery({
     queryKey: ["hero"],
     queryFn: hero,
