@@ -67,7 +67,7 @@ export const Footer = () => {
   if (error) return <Error />;
 
   return (
-    <footer className="bg-[#3A1E13] text-white/75">
+    <footer className="bg-[#3A1E13] text-white/75 px-4">
       <div className="mx-auto container pt-10 grid grid-cols-1 xl:grid-cols-2 xl:gap-6">
         <div className="col-span-1">
           <img

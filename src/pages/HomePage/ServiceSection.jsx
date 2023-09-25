@@ -32,7 +32,7 @@ export const ServiceSection = () => {
   if (error) return <Error />;
 
   return (
-    <section className="bg-[#F8F9FA] xl:py-14 py-10 px-4 xl:px-0">
+    <section className="bg-[#F8F9FA] xl:py-14 py-10 px-4 ">
       <div className="container mx-auto flex justify-between flex-col xl:flex-row gap-4 xl:gap-0">
         <h4 className="xl:typo-menu typo-section-title font-walbaum">
           {cmsData?.title}

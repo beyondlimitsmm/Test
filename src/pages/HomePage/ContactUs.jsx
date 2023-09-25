@@ -46,7 +46,7 @@ export const ContactUs = () => {
   };
 
   return (
-    <section id="contactUs" className="bg-[#F8F9FA] xl:py-12 xl:px-0 px-4 py-6">
+    <section id="contactUs" className="bg-[#F8F9FA] xl:py-12  px-4 py-6">
       <div className="container mx-auto relative overflow-hidden">
         <div className="flex my-12 flex-col xl:flex-row">
           <div className="flex-1">
