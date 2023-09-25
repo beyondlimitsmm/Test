@@ -1,19 +1,26 @@
-import { FlipText } from "../../components/FlipText";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+
 import { getInTouch } from "../../api/home";
 import Error from "../../components/Error";
-import config from "../../config";
 import { parseCmsData } from "../../libs/functions";
+import useSendEmail from "../../hooks/useSendEmail";
+import ButtonLoading from "../../components/ButtonLoading";
 
 export const ContactUs = () => {
   const { data, error } = useQuery({
     queryKey: ["getInTouch"],
     queryFn: getInTouch,
   });
-  const [isSuccess, setIsSuccess] = useState(false);
 
-  const [formData, setFormData] = useState({
+  const {
+    isSuccess,
+    isError,
+    isLoading,
+    message,
+    onSubmit,
+    formData,
+    setFormData,
+  } = useSendEmail({
     name: "",
     email: "",
     phone: "",
@@ -35,26 +42,7 @@ export const ContactUs = () => {
   };
 
   const onSubmitHandler = async () => {
-    if (validateForm().length > 0) return console.log("Error");
-
-    const data = await fetch(config?.EMAIL_API_URL, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    }).then((res) => res.json());
-
-    setIsSuccess(true);
-    setFormData({ name: "", email: "", phone: "", comment: "" });
-
-    setTimeout(() => {
-      setIsSuccess(false);
-    }, 3000);
-  };
-
-  const validateForm = () => {
-    return Object.keys(formData).filter((key) => formData[key] == "");
+    await onSubmit(formData);
   };
 
   return (
@@ -199,12 +187,20 @@ export const ContactUs = () => {
               routeTo="./articles"
               text="Send"
             ></OutlineButton> */}
-            <div className="w-full flex items-end  justify-between">
-              <h6 className="text-green-600">
-                {isSuccess && "Message has been send successfully."}
+            <div className="w-full flex items-start  justify-between">
+              <h6
+                className={`${isSuccess && "text-green-600"} ${
+                  isError && "text-red-600"
+                }`}
+              >
+                {message && message}
               </h6>
-              <button className="border-button" onClick={onSubmitHandler}>
-                Send
+              <button
+                className="border-button relative"
+                onClick={onSubmitHandler}
+              >
+                {isLoading && <ButtonLoading />}
+                <span className={isLoading ? "opacity-0" : ""}>Send</span>
               </button>
             </div>
           </div>

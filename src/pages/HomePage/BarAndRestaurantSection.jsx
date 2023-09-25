@@ -52,9 +52,8 @@ export const BarAndRestaurantSection = () => {
   const { data, error } = useQuery(["bar"], bar);
 
   const cmsData = parseCmsData(data);
-
   const createSlideMenu = useCallback(() => {
-    if (!cmsData) return;
+    if (!cmsData && !error) return;
 
     const _slideMenu = cmsData?.restaurantCards?.map((dt) => {
       return {

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import "swiper/css";
 import { Footer } from "./components/Footer";
@@ -24,6 +24,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getRoomTypes } from "./api/roomsAndSuites";
 import ChatBot from "./components/ChatBot";
 import { hero } from "./api/home";
+import Cookies from "js-cookie";
 
 function App() {
   const location = useLocation();

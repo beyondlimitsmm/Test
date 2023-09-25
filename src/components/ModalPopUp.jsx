@@ -1,9 +1,10 @@
 import { useContext, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+
 import FeatherIcon from "../assets/images/feather.svg";
 import { NavBarContext } from "../hooks/NavBarContext";
-import { validateForm } from "../libs/functions";
-import config from "../config";
+import useSendEmail from "../hooks/useSendEmail";
+import ButtonLoading from "./ButtonLoading";
 
 export const ModalPopUp = ({
   // headerIcon,
@@ -15,8 +16,16 @@ export const ModalPopUp = ({
   buttonAction,
 }) => {
   const { isPopUpOpen, togglePopUp } = useContext(NavBarContext);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [formData, setFormData] = useState({
+
+  const {
+    isSuccess,
+    isError,
+    isLoading,
+    message,
+    onSubmit,
+    formData,
+    setFormData,
+  } = useSendEmail({
     name: "",
     contact: "",
     comment: "",
@@ -33,28 +42,8 @@ export const ModalPopUp = ({
   };
 
   const onSubmitHandler = async () => {
-    if (validateForm(formData).length > 0) return console.log("Error");
-
     const body = parseValidForm();
-
-    const data = await fetch(config?.EMAIL_API_URL, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(body),
-    }).then((res) => res.json());
-
-    setIsSuccess(true);
-    setFormData({
-      name: "",
-      contact: "",
-      comment: "",
-    });
-
-    setTimeout(() => {
-      setIsSuccess(false);
-    }, 3000);
+    await onSubmit(body);
   };
 
   const parseValidForm = () => {
@@ -134,16 +123,19 @@ export const ModalPopUp = ({
           <div className="flex justify-center items-center mt-4">
             <button
               onClick={onSubmitHandler}
-              className="pb-4 pt-[11px] px-20 tracking-widest border border-primary bg-primary font-madera text-white"
+              className="pb-4 pt-[11px] px-20 tracking-widest border border-primary bg-primary font-madera text-white relative"
             >
-              Send
+              {isLoading && <ButtonLoading />}
+              <span className={isLoading ? "opacity-0" : ""}>Send</span>
             </button>
           </div>
-          {isSuccess && (
-            <h6 className="text-center text-green-600">
-              Message has been send successfully.
-            </h6>
-          )}
+          <h6
+            className={`${isSuccess && "text-green-600"} ${
+              isError && "text-red-600"
+            } text-center`}
+          >
+            {message && message}
+          </h6>
         </div>
       </div>
     </div>
