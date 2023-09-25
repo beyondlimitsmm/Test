@@ -7,9 +7,11 @@ export default async (uri) => {
         authorization: `Bearer ${config.BEARER_TOKEN}`,
       },
     });
-
-    if (res.ok) return await res.json();
+    if (!res.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return res.json();
   } catch (error) {
-    throw new Error(error.message);
+    throw new Error(`API Error occurred: ${error.message}`);
   }
 };

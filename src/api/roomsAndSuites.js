@@ -1,58 +1,13 @@
-import config from "../config";
+import base from "./base";
 
-export const getRooms = async () => {
-  try {
-    const response = await fetch(
-      `${config.BASE_API_URL}/rooms/?populate[featuredImage][populate]&populate[backgroundImage][populate]=*&populate[galleryImages][populate]=*&populate[roomFeatures][populate]=*&populate[roomDetails][populate]`,
-      {
-        headers: {
-          Authorization: `Bearer ${config.BEARER_TOKEN}`,
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return response.json();
-  } catch (error) {
-    throw new Error(`API Error occurred: ${error.message}`);
-  }
-};
+export const getRooms = async () =>
+  await base(
+    "/rooms/?populate[featuredImage][populate]&populate[backgroundImage][populate]=*&populate[galleryImages][populate]=*&populate[roomFeatures][populate]=*&populate[roomDetails][populate]"
+  );
 
-export const getSuites = async () => {
-  try {
-    const response = await fetch(
-      `${config.BASE_API_URL}/suites/?populate[featuredImage][populate]&populate[backgroundImage][populate]=*&populate[galleryImages][populate]=*&populate[suiteFeatures][populate]=*&populate[suiteDetails][populate]`,
-      {
-        headers: {
-          Authorization: `Bearer ${config.BEARER_TOKEN}`,
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return response.json();
-  } catch (error) {
-    throw new Error(`API Error occurred: ${error.message}`);
-  }
-};
+export const getSuites = async () =>
+  await base(
+    "/suites/?populate[featuredImage][populate]&populate[backgroundImage][populate]=*&populate[galleryImages][populate]=*&populate[suiteFeatures][populate]=*&populate[suiteDetails][populate]"
+  );
 
-export const getRoomTypes = async () => {
-  try {
-    const response = await fetch(
-      `${config.BASE_API_URL}/room-type?populate=*`,
-      {
-        headers: {
-          Authorization: `Bearer ${config.BEARER_TOKEN}`,
-        },
-      }
-    );
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return response.json();
-  } catch (error) {
-    throw new Error(`API Error occurred: ${error.message}`);
-  }
-};
+export const getRoomTypes = async () => await base("/room-type?populate=*");

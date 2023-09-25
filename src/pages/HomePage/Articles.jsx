@@ -6,9 +6,14 @@ import { OutlineButton } from "../../components/OutlineButton";
 import { article } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
+import Loading from "../../components/Loading";
 
 export const Articles = () => {
-  const { data, error } = useQuery({ queryKey: ["article"], queryFn: article });
+  const { error, data, isLoading } = useQuery({
+    queryKey: ["article"],
+    queryFn: article,
+  });
+  if (isLoading) return <Loading />;
   if (error) return <Error />;
   const cmsData = parseCmsData(data);
 

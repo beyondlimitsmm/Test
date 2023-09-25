@@ -36,6 +36,7 @@ function App() {
   } = useQuery({
     queryKey: ["hero"],
     queryFn: hero,
+    // staleTime: 1000 * 60 * 60 * 24,
   });
 
   useEffect(() => {
