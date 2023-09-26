@@ -13,21 +13,28 @@ export default (initialFormState) => {
   const token = Cookies.get("csrfToken");
 
   const onSubmit = async (data = formData) => {
-    if (validateForm(data).length > 0) {
-      setErrorStatus();
+    const validated = validateForm(data);
+
+    if (validated) {
+      setErrorStatus(validated);
       return;
     }
 
     setIsLoading(true);
     try {
-      const response = await fetch(config?.BASE_API_URL + "/email/send", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "X-Csrf-Token": `${token}`,
-        },
-        body: JSON.stringify(formData),
-      }).then((res) => res.json());
+      const response = await fetch(
+        "http://localhost:1337/api" + "/email/send",
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "X-Csrf-Token": `${token}`,
+          },
+          body: JSON.stringify(data),
+        }
+      ).then((res) => res.json());
+
+      console.log(response);
 
       if (response.data) {
         setIsLoading(false);
@@ -44,6 +51,7 @@ export default (initialFormState) => {
         setErrorStatus();
       }
     } catch (error) {
+      console.log("Error");
       setIsLoading(false);
       setErrorStatus("Server error");
     }

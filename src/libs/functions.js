@@ -10,6 +10,31 @@ export const parseCmsData = (data) => {
   return data.data.attributes;
 };
 
+export const isValidEmail = (email) => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  return emailRegex.test(email);
+};
+
 export const validateForm = (formData) => {
-  return Object.keys(formData).filter((key) => formData[key] == "");
+  const keys = Object.keys(formData);
+  const isRequiredAllData = keys.filter((key) => formData[key] == "");
+
+  if (isRequiredAllData.length > 0) return "required all data";
+
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i];
+    const value = formData[key];
+
+    if (key == "name" && value.length < 5)
+      return "Name must contain at least 5 characters";
+
+    if (key == "phone" && value != "-") {
+      if (value.length <= 7 || isNaN(value))
+        return "Phone number must be number and contain at least 7 characters";
+    }
+
+    if (key == "email" && value != "-" && !isValidEmail(value))
+      return "Invalid email";
+  }
 };

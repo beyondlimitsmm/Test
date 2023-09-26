@@ -5,6 +5,7 @@ import FeatherIcon from "../assets/images/feather.svg";
 import { NavBarContext } from "../hooks/NavBarContext";
 import useSendEmail from "../hooks/useSendEmail";
 import ButtonLoading from "./ButtonLoading";
+import { isValidEmail } from "../libs/functions";
 
 export const ModalPopUp = ({
   // headerIcon,
@@ -15,7 +16,8 @@ export const ModalPopUp = ({
   // buttonTitle,
   buttonAction,
 }) => {
-  const { isPopUpOpen, togglePopUp } = useContext(NavBarContext);
+  const { isPopUpOpen, togglePopUp, roomType, setRoomType } =
+    useContext(NavBarContext);
 
   const {
     isSuccess,
@@ -43,13 +45,15 @@ export const ModalPopUp = ({
 
   const onSubmitHandler = async () => {
     const body = parseValidForm();
+    body["roomType"] = roomType ?? "-";
+
     await onSubmit(body);
   };
 
   const parseValidForm = () => {
-    const data = formData;
+    const data = { ...formData };
 
-    if (isValidEmail(data["contact"])) {
+    if (isNaN(data["contact"])) {
       data["email"] = data["contact"];
       data["phone"] = "-";
     } else {
@@ -62,10 +66,9 @@ export const ModalPopUp = ({
     return data;
   };
 
-  const isValidEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    return emailRegex.test(email);
+  const onCloseHandler = () => {
+    togglePopUp();
+    setRoomType(undefined);
   };
 
   return (
@@ -73,7 +76,7 @@ export const ModalPopUp = ({
       className={`w-screen h-screen fixed inset-0 z-[98] bg-black/20 flex justify-center items-center ${
         isPopUpOpen ? "flex" : "hidden"
       }`}
-      onClick={() => togglePopUp()}
+      onClick={onCloseHandler}
     >
       <div
         className="flex flex-col w-[375px] p-10  border-2 border-primary bg-white z-[99999]"
@@ -90,7 +93,7 @@ export const ModalPopUp = ({
           <AiOutlineClose
             size={27}
             className="cursor-pointer"
-            onClick={() => togglePopUp()}
+            onClick={onCloseHandler}
           ></AiOutlineClose>
         </div>
         <div className="flex flex-col gap-6 mt-4">
@@ -103,6 +106,7 @@ export const ModalPopUp = ({
             value={formData.name}
             onChange={onChangeHandler}
           />
+
           <input
             type="text"
             className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
@@ -111,6 +115,18 @@ export const ModalPopUp = ({
             value={formData.contact}
             onChange={onChangeHandler}
           />
+
+          {roomType && (
+            <input
+              type="text"
+              className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
+              placeholder="Your Email or Phone"
+              name="contact"
+              defaultValue={roomType}
+              disabled
+            />
+          )}
+
           <textarea
             rows="4"
             type="text"
@@ -122,6 +138,7 @@ export const ModalPopUp = ({
           />
           <div className="flex justify-center items-center mt-4">
             <button
+              disabled={isLoading}
               onClick={onSubmitHandler}
               className="pb-4 pt-[11px] px-20 tracking-widest border border-primary bg-primary font-madera text-white relative"
             >

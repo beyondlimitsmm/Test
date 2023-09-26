@@ -4,7 +4,7 @@ import { createContext, useState } from "react";
 
 export function NavbarProvider({ children }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
-
+  const [roomType, setRoomType] = useState(undefined);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
 
   const toggleNavbar = () => {
@@ -22,6 +22,8 @@ export function NavbarProvider({ children }) {
         toggleNavbar,
         isPopUpOpen,
         togglePopUp,
+        roomType,
+        setRoomType,
       }}
     >
       {children}
