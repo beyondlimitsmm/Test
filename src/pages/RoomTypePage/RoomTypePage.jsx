@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import Rooms from "../../assets/images/rooms.png";
 import { LinkToContactUs } from "../../components/LinkToContactUs";
@@ -12,6 +12,7 @@ import ProgressiveImage from "react-progressive-graceful-image";
 import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
 import Loading from "../../components/Loading";
 import Error from "../../components/Error";
+import { NavBarContext } from "../../hooks/NavBarContext";
 
 export const RoomTypePage = () => {
   const [selectedMenu, setSelectedMenu] = useState("rooms");
@@ -167,6 +168,13 @@ export const RoomCard = ({
   viewDetailsLink,
   reserveRoomLink,
 }) => {
+  const { togglePopUp, setRoomType } = useContext(NavBarContext);
+
+  const onReserveNowHandler = () => {
+    togglePopUp();
+    setRoomType(title);
+  };
+
   return (
     <div className="card-container w-[80%] xl:w-[500px] relative">
       <div className="w-full h-[300px] relative overflow-hidden">
@@ -219,14 +227,12 @@ export const RoomCard = ({
               <path d="m9 18 6-6-6-6" />
             </svg>
           </Link>
-          <div
-            onClick={() => {
-              // console.log(reserveRoomLink);
-            }}
+          <button
+            onClick={onReserveNowHandler}
             className="bg-primary text-white p-4"
           >
             Reserve Room
-          </div>
+          </button>
         </div>
       </div>
     </div>

@@ -22,8 +22,8 @@ export const ContactUs = () => {
     setFormData,
   } = useSendEmail({
     name: "",
-    email: "",
     phone: "",
+    email: "",
     comment: "",
   });
 
@@ -150,7 +150,7 @@ export const ContactUs = () => {
 
             <div className="relative flex flex-col">
               <input
-                type="text"
+                type="email"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 font-medium mt-2"
                 name="email"
                 value={formData.email}
@@ -196,6 +196,7 @@ export const ContactUs = () => {
                 {message && message}
               </h6>
               <button
+                disabled={isLoading}
                 className="border-button relative"
                 onClick={onSubmitHandler}
               >
