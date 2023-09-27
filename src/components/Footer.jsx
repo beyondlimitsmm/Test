@@ -335,9 +335,14 @@ export const Footer = () => {
         <div className="w-full flex flex-col gap-6 xl:gap-0 xl:flex-row justify-between items-center pb-10 typo-body-2 text-white/75">
           <p>The Boundary Residence © 2023</p>
 
-          <p className="text-center">
-            All Right Reserved. Powered by Beyond Limits Technologies
-          </p>
+          <a
+            href="https://beyondlimitsmm.com/"
+            target="_blank"
+            className="text-center"
+            rel="noreferrer"
+          >
+            All Right Reserved. Powered by Beyond Limits Technology
+          </a>
         </div>
       </div>
     </footer>

@@ -8,6 +8,7 @@ import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import "../../styles/ImageCarousel.css";
 import config from "../../config";
 import Loading from "../../components/Loading";
+import { RoomSlider } from "../../components/RoomSlider";
 
 // const CarouselListData = [
 //   {
@@ -101,6 +102,12 @@ export const RestaurantPage = () => {
     });
   });
 
+  const galleryImages = cmsGalleryData?.galleryCards?.map((el, index) => {
+    return createAssetsUrl(el.image);
+  });
+
+  // console.log(galleryImages);
+
   return (
     <>
       {/* Section 1 */}
@@ -193,25 +200,7 @@ export const RestaurantPage = () => {
         </div>
       </section>
       {/* Section 3 */}
-      <section className="bg-whiteGray">
-        <div className="slide_card-container">
-          <div className="options">
-            {cmsGalleryData?.galleryCards?.map((el, index) => {
-              return (
-                <OptionCard
-                  key={index}
-                  handleClick={() => setActiveImage(index)}
-                  active={index === activeImage}
-                  backgroundImage={createAssetsUrl(el.image)}
-                  iconComponent={el.iconComponent}
-                  mainText={el.title}
-                  subText={el.description}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      <RoomSlider imageUrls={galleryImages} />
     </>
   );
 };

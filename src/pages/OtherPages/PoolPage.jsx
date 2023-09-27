@@ -16,6 +16,7 @@ import ProgressiveImage from "react-progressive-graceful-image";
 import config from "../../config";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
+import { RoomSlider } from "../../components/RoomSlider";
 
 const CarouselListData = [
   {
@@ -82,6 +83,11 @@ export const PoolPage = () => {
   const cmsGalleryData = parseCmsData(galleryData);
   const cmsFacilityData = parseCmsData(facilityData);
   const cmsPoolAbout = parseCmsData(poolAbout);
+
+  const galleryImages = cmsGalleryData?.poolCards?.map((el) => {
+    return createAssetsUrl(el?.image);
+  });
+  console.log(galleryImages);
 
   var optionElements = document.querySelectorAll(".option");
 
@@ -214,7 +220,8 @@ export const PoolPage = () => {
         </div>
       </section>
       {/* Section 3 */}
-      <section className="bg-whiteGray">
+      <RoomSlider imageUrls={galleryImages} />
+      {/* <section className="bg-whiteGray">
         <div className="slide_card-container">
           <div className="options">
             {cmsGalleryData?.poolCards?.map((el, index) => {
@@ -232,7 +239,7 @@ export const PoolPage = () => {
             })}
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

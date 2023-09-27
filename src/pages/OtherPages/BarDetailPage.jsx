@@ -167,31 +167,6 @@ const BarDetailPage = () => {
                 </ProgressiveImage>
               </SwiperSlide>
             ))}
-            {/* <SwiperSlide>
-              <img
-                src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
-                alt=""
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://66.media.tumblr.com/5af3f8303456e376ceda1517553ba786/tumblr_o4986gakjh1qho82wo1_1280.jpg"
-                alt=""
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
-                alt=""
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://66.media.tumblr.com/5af3f8303456e376ceda1517553ba786/tumblr_o4986gakjh1qho82wo1_1280.jpg"
-                alt=""
-              />
-            </SwiperSlide> */}
-
             <div className="swiper-scrollbar z-50"></div>
           </Swiper>
           <div className="swiper-button-prev w-14 h-14 p-[14px] hidden md:flex">
