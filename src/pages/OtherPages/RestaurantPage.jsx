@@ -202,7 +202,7 @@ export const RestaurantPage = () => {
       </section>
       {/* Section 3 */}
       {/* <RoomSlider imageUrls={galleryImages} /> */}
-      <ImageSlider imageUrls={galleryImages} />
+      <ImageSlider imageUrls={galleryImages} type="restaurant" />
     </>
   );
 };

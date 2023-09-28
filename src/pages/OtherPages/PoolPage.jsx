@@ -221,7 +221,7 @@ export const PoolPage = () => {
         </div>
       </section>
       {/* Section 3 */}
-      <ImageSlider imageUrls={galleryImages} />
+      <ImageSlider imageUrls={galleryImages} type="pool" />
       {/* <section className="bg-whiteGray">
         <div className="slide_card-container">
           <div className="options">

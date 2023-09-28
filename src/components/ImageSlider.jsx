@@ -3,8 +3,10 @@ import "swiper/css/effect-creative";
 import { Navigation, Scrollbar } from "swiper/modules";
 import { SwiperSlide, Swiper } from "swiper/react";
 import RoomPlaceHolder from "../assets/images/RoomPlaceHolder.jpg";
+import RestaurantPlaceholder from "../assets/images/RestaurantPlaceHolder.jpg";
+import PoolPlaceHolder from "../assets/images/PoolPlaceHolder.jpg";
 
-const ImageSlider = ({ imageUrls }) => {
+const ImageSlider = ({ imageUrls, type }) => {
   return (
     <section className="mx-auto container xl:py-10 py-0 px-4">
       <h4 className="typo-title">Let&apos;s take a look</h4>
@@ -45,7 +47,16 @@ const ImageSlider = ({ imageUrls }) => {
         >
           {imageUrls.map((imageUrl, index) => (
             <SwiperSlide key={index}>
-              <ProgressiveImage src={imageUrl} placeholder={RoomPlaceHolder}>
+              <ProgressiveImage
+                src={imageUrl}
+                placeholder={
+                  type == "restaurant"
+                    ? RestaurantPlaceholder
+                    : type == "pool"
+                    ? PoolPlaceHolder
+                    : RoomPlaceHolder
+                }
+              >
                 {(src, loading) => (
                   <img
                     src={src}
