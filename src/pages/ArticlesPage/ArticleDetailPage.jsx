@@ -59,9 +59,9 @@ const ArticleDetailPage = () => {
       <div className="flex flex-col gap-4">
         <div className="flex-1">
           <div className="relative">
-            <div className="absolute bottom-7 right-7 z-10">
+            {/* <div className="absolute bottom-7 right-7 z-10">
               <img src={sharedSvg} alt="Share" />
-            </div>
+            </div> */}
             {post[0].imageUrl ? (
               <img
                 src={`${config.BASE_IMAGE_URL}${post[0].imageUrl}`}

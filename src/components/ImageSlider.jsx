@@ -8,7 +8,7 @@ import PoolPlaceHolder from "../assets/images/PoolPlaceHolder.jpg";
 
 const ImageSlider = ({ imageUrls, type }) => {
   return (
-    <section className="mx-auto container xl:py-10 py-0 px-4">
+    <section className="mx-auto container xl:py-10 py-6 px-4">
       <h4 className="typo-title">Let&apos;s take a look</h4>
 
       <div className="relative mt-6 mb-8">

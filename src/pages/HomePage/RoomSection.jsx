@@ -89,10 +89,10 @@ export const RoomSection = () => {
       {/* Mobile Section */}
       <div className="flex xl:hidden w-screen h-[70vh] mb-10 overflow-hidden z-0 relative justify-center items-center">
         <div
-          className="w-full h-full bg-no-repeat bg-cover bg-fixed"
-          style={{
-            backgroundImage: `url('${RoomsBg}')`,
-          }}
+          className="w-full h-full bg-no-repeat bg-cover bg-fixed bg-room"
+          // style={{
+          //   backgroundImage: `url('${RoomsBg}')`,
+          // }}
         >
           <div className="px-6 py-10 xl:p-10 bg-white/90 w-[350px] xl:w-[500px] h-max absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
             <div className="flex flex-col gap-3 2xl:gap-6 items-center">
