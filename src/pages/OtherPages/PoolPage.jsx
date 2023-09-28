@@ -17,6 +17,7 @@ import config from "../../config";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { RoomSlider } from "../../components/RoomSlider";
+import ImageSlider from "../../components/ImageSlider";
 
 const CarouselListData = [
   {
@@ -220,7 +221,7 @@ export const PoolPage = () => {
         </div>
       </section>
       {/* Section 3 */}
-      <RoomSlider imageUrls={galleryImages} />
+      <ImageSlider imageUrls={galleryImages} />
       {/* <section className="bg-whiteGray">
         <div className="slide_card-container">
           <div className="options">

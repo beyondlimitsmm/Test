@@ -1,11 +1,13 @@
-import React from "react";
 import ProgressiveImage from "react-progressive-graceful-image";
-import { SwiperSlide } from "swiper/react";
+import "swiper/css/effect-creative";
+import { Navigation, Scrollbar } from "swiper/modules";
+import { SwiperSlide, Swiper } from "swiper/react";
+import RoomPlaceHolder from "../assets/images/RoomPlaceHolder.jpg";
 
 const ImageSlider = ({ imageUrls }) => {
   return (
     <section className="mx-auto container xl:py-10 py-0 px-4">
-      <h4 className="typo-title">{cmsGalleryData?.title}</h4>
+      <h4 className="typo-title">Let&apos;s take a look</h4>
 
       <div className="relative mt-6 mb-8">
         <Swiper

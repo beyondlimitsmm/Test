@@ -9,6 +9,7 @@ import "../../styles/ImageCarousel.css";
 import config from "../../config";
 import Loading from "../../components/Loading";
 import { RoomSlider } from "../../components/RoomSlider";
+import ImageSlider from "../../components/ImageSlider";
 
 // const CarouselListData = [
 //   {
@@ -200,7 +201,8 @@ export const RestaurantPage = () => {
         </div>
       </section>
       {/* Section 3 */}
-      <RoomSlider imageUrls={galleryImages} />
+      {/* <RoomSlider imageUrls={galleryImages} /> */}
+      <ImageSlider imageUrls={galleryImages} />
     </>
   );
 };
