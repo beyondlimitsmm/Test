@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import Rooms from "../../assets/images/rooms.png";
 import { LinkToContactUs } from "../../components/LinkToContactUs";
 import { handleScrollDownClick } from "../../utils";
 import { useRooms } from "../../hooks/RoomsContext";
@@ -214,10 +213,10 @@ export const RoomCard = ({
   };
 
   const truncatedDescription =
-    description.length > 144 ? description.slice(0, 141) + "..." : description;
+    description.length > 170 ? description.slice(0, 160) + "..." : description;
 
   return (
-    <div className="card-container w-[80%] xl:w-[500px] h-[500px] ">
+    <div className="card-container w-[80%] xl:w-[500px] h-[80%] sm:h-[500px] ">
       <div className="w-full h-[300px] relative overflow-hidden">
         <ProgressiveImage
           src={`${config.BASE_IMAGE_URL}${imageSrc}`}
