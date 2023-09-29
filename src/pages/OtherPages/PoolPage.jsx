@@ -88,7 +88,6 @@ export const PoolPage = () => {
   const galleryImages = cmsGalleryData?.poolCards?.map((el) => {
     return createAssetsUrl(el?.image);
   });
-  console.log(galleryImages);
 
   var optionElements = document.querySelectorAll(".option");
 
@@ -148,48 +147,7 @@ export const PoolPage = () => {
                   {data?.description}
                 </p>
               ))}
-              {/* <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                molestiae impedit, nobis eligendi nam saepe! Dolorum autem
-                consequuntur natus fuga veritatis quaerat, aliquid quasi magni
-                quod laudantium nemo omnis aspernatur, veniam non officia porro,
-                animi amet officiis re Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
-                similique quos tempora iusto cum?
-              </p>
-              <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                molestiae impedit, nobis eligendi nam saepe! Dolorum autem
-                consequuntur natus fugaelit. Officiis pariatur temporibus eum
-                porro nam sed consectetur quia facilis nemo, in architecto enim
-                libero voluptates. Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
-                similique quos tempora iusto cum?
-              </p>
-              <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                molestiae impedit, nobis eligendi nam saepe! Dolorum autem
-                consequuntur natus fuga veritatis quaerat, aliquid quasi magni
-                quod laudantium nemo omnis quia facilis nemo, in architecto enim
-                libero voluptates. Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
-                similique quos tempora iusto cum?
-              </p> */}
             </div>
-            {/* <div>
-              <div className="border-b py-4 flex justify-between">
-                <p>Cuisine</p>
-                <p>French cuisine , alpine classics</p>
-              </div>
-              <div className="border-b py-4 flex justify-between">
-                <p>Dress Code</p>
-                <p>Smart-casual</p>
-              </div>
-              <div className="border-b py-4 flex justify-between">
-                <p>Opening hours</p>
-                <p>7:00pm – 10:00 pm (last order)</p>
-              </div>
-            </div> */}
           </div>
           <div className="flex-1 xl:max-w-lg py-16 px-12 h-max bg-white xl:ml-20 flex flex-col gap-8 xl:gap-16">
             <h4 className="header flex items-center gap-4 typo-body-2">
@@ -221,7 +179,11 @@ export const PoolPage = () => {
         </div>
       </section>
       {/* Section 3 */}
-      <ImageSlider imageUrls={galleryImages} type="pool" />
+      <ImageSlider
+        imageUrls={galleryImages}
+        type="pool"
+        title={cmsGalleryData?.title}
+      />
       {/* <section className="bg-whiteGray">
         <div className="slide_card-container">
           <div className="options">

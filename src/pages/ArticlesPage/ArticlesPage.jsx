@@ -10,15 +10,6 @@ import Error from "../../components/Error";
 import ArticleBg from "../../assets/images/yangon.jpeg";
 import ProgressiveImage from "react-progressive-graceful-image";
 
-const ErrorPage = ({ message }) => {
-  return (
-    <div className="container mx-auto">
-      <h2>Error</h2>
-      <p>{message}</p>
-    </div>
-  );
-};
-
 export default function Articles() {
   const { isLoading, error, data } = useQuery(["articles"], getArticles);
   const {

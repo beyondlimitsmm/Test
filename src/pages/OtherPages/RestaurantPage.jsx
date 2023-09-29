@@ -202,7 +202,11 @@ export const RestaurantPage = () => {
       </section>
       {/* Section 3 */}
       {/* <RoomSlider imageUrls={galleryImages} /> */}
-      <ImageSlider imageUrls={galleryImages} type="restaurant" />
+      <ImageSlider
+        imageUrls={galleryImages}
+        type="restaurant"
+        title={cmsGalleryData?.galleryTitle}
+      />
     </>
   );
 };

@@ -32,7 +32,7 @@ const ArticleDetailPage = () => {
   const query = data?.data;
 
   const postDetail = query.filter((post) => post.id == id);
-  console.log(postDetail);
+
   const post = postDetail.map((post) => {
     return {
       id: post.id,

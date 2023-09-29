@@ -5,11 +5,12 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import RoomPlaceHolder from "../assets/images/RoomPlaceHolder.jpg";
 import RestaurantPlaceholder from "../assets/images/RestaurantPlaceHolder.jpg";
 import PoolPlaceHolder from "../assets/images/PoolPlaceHolder.jpg";
+import BarPlaceHolder from "../assets/images/BarPlaceHolder.jpg";
 
-const ImageSlider = ({ imageUrls, type }) => {
+const ImageSlider = ({ imageUrls, type, title }) => {
   return (
     <section className="mx-auto container xl:py-10 py-6 px-4">
-      <h4 className="typo-title">Let&apos;s take a look</h4>
+      <h4 className="typo-title">{title}</h4>
 
       <div className="relative mt-6 mb-8">
         <Swiper
@@ -54,6 +55,8 @@ const ImageSlider = ({ imageUrls, type }) => {
                     ? RestaurantPlaceholder
                     : type == "pool"
                     ? PoolPlaceHolder
+                    : type == "bar"
+                    ? BarPlaceHolder
                     : RoomPlaceHolder
                 }
               >
