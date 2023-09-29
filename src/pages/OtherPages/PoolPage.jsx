@@ -16,6 +16,8 @@ import ProgressiveImage from "react-progressive-graceful-image";
 import config from "../../config";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
+import { RoomSlider } from "../../components/RoomSlider";
+import ImageSlider from "../../components/ImageSlider";
 
 const CarouselListData = [
   {
@@ -83,6 +85,10 @@ export const PoolPage = () => {
   const cmsFacilityData = parseCmsData(facilityData);
   const cmsPoolAbout = parseCmsData(poolAbout);
 
+  const galleryImages = cmsGalleryData?.poolCards?.map((el) => {
+    return createAssetsUrl(el?.image);
+  });
+
   var optionElements = document.querySelectorAll(".option");
 
   optionElements.forEach(function (element) {
@@ -141,33 +147,6 @@ export const PoolPage = () => {
                   {data?.description}
                 </p>
               ))}
-              {/* <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                molestiae impedit, nobis eligendi nam saepe! Dolorum autem
-                consequuntur natus fuga veritatis quaerat, aliquid quasi magni
-                quod laudantium nemo omnis aspernatur, veniam non officia porro,
-                animi amet officiis re Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
-                similique quos tempora iusto cum?
-              </p>
-              <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                molestiae impedit, nobis eligendi nam saepe! Dolorum autem
-                consequuntur natus fugaelit. Officiis pariatur temporibus eum
-                porro nam sed consectetur quia facilis nemo, in architecto enim
-                libero voluptates. Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
-                similique quos tempora iusto cum?
-              </p>
-              <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                molestiae impedit, nobis eligendi nam saepe! Dolorum autem
-                consequuntur natus fuga veritatis quaerat, aliquid quasi magni
-                quod laudantium nemo omnis quia facilis nemo, in architecto enim
-                libero voluptates. Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Nostrum rerum aliquam, dolores quas harum modi
-                similique quos tempora iusto cum?
-              </p> */}
             </div>
             {/* <div>
               <div className="border-b py-4 flex justify-between">
@@ -229,7 +208,12 @@ export const PoolPage = () => {
         </div>
       </section>
       {/* Section 3 */}
-      <section className="bg-whiteGray">
+      <ImageSlider
+        imageUrls={galleryImages}
+        type="pool"
+        title={cmsGalleryData?.title}
+      />
+      {/* <section className="bg-whiteGray">
         <div className="slide_card-container">
           <div className="options">
             {cmsGalleryData?.poolCards?.map((el, index) => {
@@ -247,7 +231,7 @@ export const PoolPage = () => {
             })}
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 };

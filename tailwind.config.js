@@ -13,7 +13,7 @@ export default {
         hoverPale: "#b18e7d",
       },
       fontFamily: {
-        Jost: ['Jost', 'Arial', 'sans-serif']
+        Jost: ["Jost", "Arial", "sans-serif"],
       },
       backgroundImage: {
         "room-door": "url('/src/assets/images/rooms-door.svg')",

@@ -1,28 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { getArticles } from "../../api/articles";
+import { getArticlePage, getArticles } from "../../api/articles";
 import ArticleCard from "../../components/ArticleCard";
 import Pagination from "../../components/Pagination";
 
 import Loading from "../../components/Loading";
-
-const ErrorPage = ({ message }) => {
-  return (
-    <div className="container mx-auto">
-      <h2>Error</h2>
-      <p>{message}</p>
-    </div>
-  );
-};
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
+import Error from "../../components/Error";
+import ArticleBg from "../../assets/images/yangon.jpeg";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 export default function Articles() {
   const { isLoading, error, data } = useQuery(["articles"], getArticles);
+  const {
+    data: articlePageData,
+    isLoading: loadingArticlePage,
+    error: ArticlePageError,
+  } = useQuery(["article-page"], getArticlePage);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
 
-  if (isLoading) return <Loading />;
-  if (error) return <ErrorPage message={error.message} />;
+  if (isLoading || loadingArticlePage) return <Loading />;
+  if (error || ArticlePageError) return <Error />;
+
+  const cmsArticlePageData = parseCmsData(articlePageData);
 
   const query = data?.data;
 
@@ -49,29 +51,40 @@ export default function Articles() {
     setCurrentPage(pageNumber);
     window.scrollTo(0, 0);
   };
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const previousPage = () => setCurrentPage(currentPage - 1);
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+    window.scrollTo(0, 0);
+  };
+  const previousPage = () => {
+    setCurrentPage(currentPage - 1);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
       <section className="-mt-20 w-screen min-h-screen xl:min-h-0 relative">
         <div className="absolute inset-0 overflow-hidden -z-10">
-          <img
-            src={
-              "https://images.unsplash.com/photo-1612257999781-1a997105f94b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80"
-            }
-            alt=""
-            className="w-full h-full object-cover brightness-75"
-          />
+          <ProgressiveImage
+            src={createAssetsUrl(cmsArticlePageData?.backgroundImage)}
+            placeholder={ArticleBg}
+          >
+            {(src, loading) => (
+              <img
+                src={src}
+                alt=""
+                className={`w-full h-full object-cover brightness-50 ${
+                  loading ? "loading" : "heroloaded"
+                }`}
+              />
+            )}
+          </ProgressiveImage>
         </div>
         <div className="h-screen xl:h-[65vh] xl:py-48 flex flex-col justify-center items-center">
           <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0">
-            Articles for You
+            {cmsArticlePageData?.header}
           </h4>
           <p className="typo-body-2 text-white max-w-[560px] mx-4 xl:mx-0 mt-2 md:mt-6 text-center">
-            Lorem ipsum dolor sit amet consectetur. Congue felis nunc dictum
-            urna non suscipit convallis. Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Maxime, similique.
+            {cmsArticlePageData?.description}
           </p>
         </div>
       </section>

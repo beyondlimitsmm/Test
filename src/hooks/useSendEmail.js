@@ -22,17 +22,14 @@ export default (initialFormState) => {
 
     setIsLoading(true);
     try {
-      const response = await fetch(
-        "http://localhost:1337/api" + "/email/send",
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-            "X-Csrf-Token": `${token}`,
-          },
-          body: JSON.stringify(data),
-        }
-      ).then((res) => res.json());
+      const response = await fetch(config.BASE_API_URL + "/email/send", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          "X-Csrf-Token": `${token}`,
+        },
+        body: JSON.stringify(data),
+      }).then((res) => res.json());
 
       if (response.data) {
         setIsLoading(false);

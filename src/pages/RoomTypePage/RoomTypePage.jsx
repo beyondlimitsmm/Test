@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import Rooms from "../../assets/images/rooms.png";
 import { LinkToContactUs } from "../../components/LinkToContactUs";
 import { handleScrollDownClick } from "../../utils";
 import { useRooms } from "../../hooks/RoomsContext";
@@ -38,9 +37,9 @@ export const RoomTypePage = () => {
   const roomTypes = {
     heroHeader: query.heroHeader,
     description: query.description,
-    category: query.category,
     backgroundImage: query.backgroundImage.data.attributes.url,
-    contactText: query.contactText,
+    linkText: query.linkToDetailText,
+    buttonText: query.buttonText,
   };
 
   function selectRoomType(selectedItem) {
@@ -69,11 +68,6 @@ export const RoomTypePage = () => {
                 />
               )}
             </ProgressiveImage>
-            {/* <img
-              src={`${config.BASE_IMAGE_URL}${roomTypes.backgroundImage}`}
-              alt=""
-              className=" block"
-            /> */}
           </div>
           <div className="min-h-screen xl:min-h-[600px] xl:py-48 flex flex-col justify-center items-center">
             <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0 text-center max-w-lg">
@@ -88,10 +82,10 @@ export const RoomTypePage = () => {
           id="roomTypeMenu"
           className="max-h-max relative mb-16 scroll-m-20"
         >
-          <div className="w-full border-b border-black/40">
-            <nav className="flex justify-between md:px-20 w-full relative">
+          {/* <div className="w-full">
+            <nav className="flex justify-between md:px-20 w-full relative  border-b border-hoverPale">
               <div></div>
-              <ul className="">
+              <ul className="mx-4">
                 <li className="relative inline-block text-center mx-4 md:mx-7 xl:mx-9 first:ml-4 last:mr-4">
                   <button
                     id="rooms"
@@ -119,10 +113,47 @@ export const RoomTypePage = () => {
               </ul>
               <div></div>
             </nav>
+          </div> */}
+          <div className="w-full">
+            <div className="mx-4 md:mx-20">
+              {" "}
+              {/* Add left and right margins here */}
+              <nav className="flex justify-between w-full relative border-b border-hoverPale">
+                <div></div>
+                <ul className="flex space-x-4 md:space-x-7 xl:space-x-9">
+                  <li>
+                    <button
+                      id="rooms"
+                      type="button"
+                      className={`py-4 text-black/75 transition hover:text-hoverPale ${
+                        selectedMenu === "rooms" && "!text-hoverPale"
+                      }`}
+                      onClick={() => selectRoomType("rooms")}
+                    >
+                      <h6 className="typo-display">Rooms</h6>
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      id="suites"
+                      type="button"
+                      className={`py-4 text-black/75 transition hover:text-hoverPale ${
+                        selectedMenu === "suites" && "!text-hoverPale"
+                      }`}
+                      onClick={() => selectRoomType("suites")}
+                    >
+                      <h6 className="typo-display">Suites</h6>
+                    </button>
+                  </li>
+                </ul>
+                <div></div>
+              </nav>
+            </div>
           </div>
+
           <div
             id="rt-card-container"
-            className="mt-10 flex justify-center items-center gap-8 flex-col xl:flex-row flex-wrap"
+            className="mt-10 flex justify-center items-center gap-16 md:gap-12 flex-col xl:flex-row flex-wrap "
           >
             {selectedMenu === "rooms"
               ? RoomsData.map((roomCard, index) => {
@@ -130,11 +161,13 @@ export const RoomTypePage = () => {
                     <RoomCard
                       id={roomCard.id}
                       key={index}
-                      imageSrc={roomCard.featuredImage}
+                      imageSrc={roomCard.backgroundImage}
                       title={roomCard.title}
                       description={roomCard.description}
                       viewDetailsLink={roomCard.viewDetailsLink}
                       reserveRoomLink={roomCard.reserveRoomLink}
+                      linkText={roomTypes.linkText}
+                      buttonText={roomTypes.buttonText}
                     />
                   );
                 })
@@ -148,13 +181,15 @@ export const RoomTypePage = () => {
                       description={roomCard.description}
                       viewDetailsLink={roomCard.viewDetailsLink}
                       reserveRoomLink={roomCard.reserveRoomLink}
+                      linkText={roomTypes.linkText}
+                      buttonText={roomTypes.buttonText}
                     />
                   );
                 })}
           </div>
         </section>
 
-        <LinkToContactUs contactText={roomTypes.contactText}></LinkToContactUs>
+        <LinkToContactUs />
       </div>
     </div>
   );
@@ -167,6 +202,8 @@ export const RoomCard = ({
   description,
   viewDetailsLink,
   reserveRoomLink,
+  linkText,
+  buttonText,
 }) => {
   const { togglePopUp, setRoomType } = useContext(NavBarContext);
 
@@ -175,8 +212,11 @@ export const RoomCard = ({
     setRoomType(title);
   };
 
+  const truncatedDescription =
+    description.length > 170 ? description.slice(0, 160) + "..." : description;
+
   return (
-    <div className="card-container w-[80%] xl:w-[500px] relative">
+    <div className="card-container w-[80%] xl:w-[500px] h-[80%] sm:h-[500px] ">
       <div className="w-full h-[300px] relative overflow-hidden">
         <ProgressiveImage
           src={`${config.BASE_IMAGE_URL}${imageSrc}`}
@@ -205,13 +245,13 @@ export const RoomCard = ({
       </div>
       <div className="flex flex-col justify-center items-center text-center">
         <h6 className="typo-menu-2">{title}</h6>
-        <p className="typo-body-2 mt-2 mb-8">{description}</p>
+        <p className="typo-body-2 mt-2 mb-8">{truncatedDescription}</p>
         <div className="flex justify-between items-center gap-10">
           <Link
             to={`${viewDetailsLink}/${id}`}
             className="flex items-center gap-1"
           >
-            <div className="mb-1">View Details</div>
+            <div className="mb-1">{linkText}</div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -231,7 +271,7 @@ export const RoomCard = ({
             onClick={onReserveNowHandler}
             className="bg-primary text-white p-4"
           >
-            Reserve Room
+            {buttonText}
           </button>
         </div>
       </div>

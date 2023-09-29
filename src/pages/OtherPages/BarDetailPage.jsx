@@ -14,6 +14,7 @@ import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import ProgressiveImage from "react-progressive-graceful-image";
 import { placeholder } from "@cloudinary/react";
 import Loading from "../../components/Loading";
+import ImageSlider from "../../components/ImageSlider";
 
 const BarDetailPage = () => {
   const {
@@ -37,6 +38,13 @@ const BarDetailPage = () => {
   const cmsHeadData = parseCmsData(headData);
   const cmsFeatureData = parseCmsData(featureData);
   const cmsGalleryData = parseCmsData(galleryData);
+
+  const galleryImages = cmsGalleryData?.barCards?.map((data) => {
+    return createAssetsUrl(data?.image);
+  });
+
+  const iconImage = createAssetsUrl(cmsFeatureData?.iconImage);
+
 
   return (
     <>
@@ -109,7 +117,7 @@ const BarDetailPage = () => {
           </ProgressiveImage>
 
           <FeatureImage
-            icon={ArticleIcon}
+            icon={iconImage}
             title={cmsFeatureData?.title}
             description={cmsFeatureData?.description}
             detail={cmsFeatureData?.button?.name}
@@ -117,7 +125,7 @@ const BarDetailPage = () => {
         </div>
       </section>
 
-      <section className="mx-auto container xl:py-10 py-0 px-4">
+      {/* <section className="mx-auto container xl:py-10 py-0 px-4">
         <h4 className="typo-title">{cmsGalleryData?.title}</h4>
 
         <div className="relative mt-6 mb-8">
@@ -170,31 +178,6 @@ const BarDetailPage = () => {
                 </ProgressiveImage>
               </SwiperSlide>
             ))}
-            {/* <SwiperSlide>
-              <img
-                src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
-                alt=""
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://66.media.tumblr.com/5af3f8303456e376ceda1517553ba786/tumblr_o4986gakjh1qho82wo1_1280.jpg"
-                alt=""
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://66.media.tumblr.com/6fb397d822f4f9f4596dff2085b18f2e/tumblr_nzsvb4p6xS1qho82wo1_1280.jpg"
-                alt=""
-              />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                src="https://66.media.tumblr.com/5af3f8303456e376ceda1517553ba786/tumblr_o4986gakjh1qho82wo1_1280.jpg"
-                alt=""
-              />
-            </SwiperSlide> */}
-
             <div className="swiper-scrollbar z-50"></div>
           </Swiper>
           <div className="swiper-button-prev w-14 h-14 p-[14px] hidden md:flex">
@@ -232,11 +215,14 @@ const BarDetailPage = () => {
             </svg>
           </div>
         </div>
-      </section>
+      </section> */}
+      <ImageSlider
+        imageUrls={galleryImages}
+        type="bar"
+        title={cmsGalleryData?.title}
+      />
 
-      <LinkToContactUs
-        contactText={"If you have any questions, feel free to Contact Us"}
-      ></LinkToContactUs>
+      <LinkToContactUs />
     </>
   );
 };

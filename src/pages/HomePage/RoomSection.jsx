@@ -9,10 +9,14 @@ import { OutlineButton } from "../../components/OutlineButton";
 import { room } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
+import Loading from "../../components/Loading";
 
 export const RoomSection = () => {
   const roomSectionRef = useRef();
-  const { data, error } = useQuery({ queryKey: ["room"], queryFn: room });
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["room"],
+    queryFn: room,
+  });
   const cmsData = parseCmsData(data);
 
   useEffect(() => {
@@ -40,7 +44,7 @@ export const RoomSection = () => {
       });
     }
   }, []);
-
+  // if (isLoading) return <Loading />;
   if (error) return <Error />;
 
   return (
@@ -77,7 +81,7 @@ export const RoomSection = () => {
               </div>
               <div className="mt-8 flex justify-center items-center">
                 <OutlineButton
-                  routeTo={cmsData?.button?.link}
+                  routeTo="./room-types"
                   text={cmsData?.button?.name}
                 ></OutlineButton>
               </div>
@@ -89,12 +93,12 @@ export const RoomSection = () => {
       {/* Mobile Section */}
       <div className="flex xl:hidden w-screen h-[70vh] mb-10 overflow-hidden z-0 relative justify-center items-center">
         <div
-          className="w-full h-full bg-no-repeat bg-cover bg-fixed"
+          className="w-full h-full bg-auto bg-fixed"
           style={{
             backgroundImage: `url('${RoomsBg}')`,
           }}
         >
-          <div className="px-6 py-10 xl:p-10 bg-white/90 w-[350px] xl:w-[500px] h-max absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+          <div className="px-6 py-10 xl:p-10 bg-white/90 w-[350px] xl:w-[500px] h-max absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-auto">
             <div className="flex flex-col gap-3 2xl:gap-6 items-center">
               <img
                 src={RoomsDoor}
@@ -114,8 +118,8 @@ export const RoomSection = () => {
             </div>
             <div className="mt-8 flex justify-center items-center">
               <OutlineButton
-                routeTo={cmsData?.button?.link}
-                text={cmsData?.button?.name}
+                routeTo="./room-types"
+                text="Let’s Explore"
               ></OutlineButton>
             </div>
           </div>
