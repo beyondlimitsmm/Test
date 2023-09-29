@@ -138,6 +138,20 @@ const MeetingRoom = () => {
                 Download Menu
               </p>
             </div> */}
+
+            <div>
+              {cmsAboutData?.facilities
+                ?.slice(0, 4)
+                .map(({ label, value }, index) => (
+                  <div
+                    key={index}
+                    className="border-b py-4 flex justify-between"
+                  >
+                    <p>{label}</p>
+                    <p>{value}</p>
+                  </div>
+                ))}
+            </div>
           </div>
           <div className="flex-1 xl:max-w-lg py-16 px-12 h-max bg-white xl:ml-20 flex flex-col gap-8 xl:gap-16">
             <h4 className="header flex items-center gap-4 typo-body-2">
@@ -145,7 +159,7 @@ const MeetingRoom = () => {
               {cmsFacilityData?.title}
             </h4>
             <div className="grid grid-cols-2 gap-x-6 gap-y-6 opacity-70">
-              {cmsFacilityData?.facilityNames?.map((data) => {
+              {cmsFacilityData?.facilityNames?.slice(0, 8).map((data) => {
                 return (
                   <div key={data?.id} className="flex gap-4 items-center">
                     <div className="min-w-max">
@@ -160,11 +174,12 @@ const MeetingRoom = () => {
                 );
               })}
             </div>
-            <Link to={cmsFacilityData?.button.link}>
-              <button className="border-button w-full">
-                {cmsFacilityData?.button.name}
-              </button>
-            </Link>
+            <a
+              href={`tel:${cmsFacilityData?.button?.phone}`}
+              className="border-button w-full flex justify-center items-center"
+            >
+              {cmsFacilityData?.button.label}
+            </a>
           </div>
         </div>
       </section>

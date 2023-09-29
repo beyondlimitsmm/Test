@@ -4,18 +4,38 @@ import HotelLogo from "../assets/logo-brown.png";
 import { NavBarContext } from "../hooks/NavBarContext";
 import useScrollAtTop from "../hooks/useScrollAtTop";
 import { NavSlideDown } from "./NavSlideDown";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "./Loading";
+import Error from "./Error";
+import { navbar } from "../api/home";
 
 export const NavBar = () => {
   const { isNavOpen, toggleNavbar } = useContext(NavBarContext);
   const atTop = useScrollAtTop();
 
+  // const { data, isLoading, error } = useQuery({
+  //   queryKey: ["navbar"],
+  //   queryFn: navbar,
+  // });
+
+  // if (isLoading) {
+  //   return <Loading />;
+  // }
+
+  // if (error) return <Error />;
+  // const cmsData = parseCmsData(data);
+
   return (
     <>
-      <div className="NavBar h-20 sticky top-0 left-0 right-0 w-screen z-50">
+      <div className={`NavBar h-20 sticky top-0 left-0 right-0 w-screen z-50`}>
         <div className="h-20 bg-white">
           <nav className="h-full w-screen custom-container flex justify-between items-center">
             <button
-              onClick={toggleNavbar}
+              onClick={() => {
+                setTimeout(() => {
+                  toggleNavbar();
+                }, 1000);
+              }}
               className="space-x-2 focus:outline-none w-8 h-8 flex justify-center items-center"
             >
               <div className="w-6 flex items-center justify-center relative">

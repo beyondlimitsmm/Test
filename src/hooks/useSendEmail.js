@@ -34,8 +34,6 @@ export default (initialFormState) => {
         }
       ).then((res) => res.json());
 
-      console.log(response);
-
       if (response.data) {
         setIsLoading(false);
         setIsSuccess(true);
@@ -51,7 +49,6 @@ export default (initialFormState) => {
         setErrorStatus();
       }
     } catch (error) {
-      console.log("Error");
       setIsLoading(false);
       setErrorStatus("Server error");
     }

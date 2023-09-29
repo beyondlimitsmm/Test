@@ -99,9 +99,7 @@ export const RoomSlider = ({ imageUrls }) => {
         </Swiper>
         <Swiper
           onSwiper={(swiper) => {
-            // console.log("Inside thumbSwiper", swiper);
             if (swiper && !swiper.destroyed) {
-              // console.log(thumbSwiper);
               setThumbsSwiper(swiper);
             }
           }}

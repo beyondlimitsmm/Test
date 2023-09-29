@@ -1,5 +1,11 @@
-import { useCallback, useEffect } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { useCallback, useContext, useEffect } from "react";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import "swiper/css";
 import { Footer } from "./components/Footer";
 import { HomePageNavBar } from "./components/HomePageNavBar";
@@ -25,10 +31,14 @@ import { getRoomTypes } from "./api/roomsAndSuites";
 import ChatBot from "./components/ChatBot";
 import { hero } from "./api/home";
 import Cookies from "js-cookie";
+import { NavBarContext } from "./hooks/NavBarContext";
+import usePrefetchHomePage from "./hooks/usePrefetchHomePage";
 
 function App() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { data, isLoading, error } = useQuery(["room-types"], getRoomTypes);
+  const { setShowDropdown, isNavOpen, isHidden } = useContext(NavBarContext);
 
   const {
     data: heroData,
@@ -40,12 +50,18 @@ function App() {
     // staleTime: 1000 * 60 * 60 * 24,
   });
 
+  usePrefetchHomePage();
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
   }, [location.pathname]);
 
   return (
-    <div className="App">
+    <div
+      className={`App ${isHidden && "overflow-hidden h-screen"}`}
+      // className="App hide-scrollbar"
+      onClick={() => setShowDropdown(false)}
+    >
       {heroData && <NavBarBuilder></NavBarBuilder>}
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
@@ -101,12 +117,7 @@ export default App;
 export const NavBarBuilder = () => {
   const location = useLocation();
 
-  if (
-    location.pathname === "/gallery" ||
-    location.pathname.startsWith("/articles/")
-  ) {
-    return <NavBar />;
-  } else if (location.pathname === "/404") {
+  if (location.pathname === "/404") {
     return;
   } else {
     return <HomePageNavBar />;

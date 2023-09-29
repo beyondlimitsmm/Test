@@ -10,7 +10,9 @@ export const about = async () =>
   );
 
 export const room = async () =>
-  await base("/home-room?fields=*&populate[0]=button&populate[1]=image");
+  await base(
+    "/home-room?fields=*&populate[0]=button&populate[1]=image&populate[2]=icon"
+  );
 
 export const gallery = async () =>
   await base(
@@ -27,7 +29,7 @@ export const feature = async () =>
 
 export const bar = async () =>
   await base(
-    "/home-restaurant/?populate[restaurantCards][populate][0]=image&fields=*"
+    "/home-restaurant/?populate[restaurantCards][populate][0]=image&populate[restaurantCards][populate][1]=facilities&fields=*"
   );
 
 export const article = async () =>
@@ -46,4 +48,9 @@ export const footer = async () =>
 export const sidebar = async () =>
   await base(
     "/sidebar?populate[navLinks]=*&populate[ourHighlights]=*&populate[socials]=*&populate[contactInfo][populate][0]=location"
+  );
+
+export const navbar = async () =>
+  await base(
+    "/navbar?populate[logo]=*&populate[button]=*&populate[phone_button][populate][0]=icon&populate[email_button][populate][0]=icon"
   );

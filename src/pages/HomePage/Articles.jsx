@@ -10,7 +10,7 @@ import Loading from "../../components/Loading";
 
 export const Articles = () => {
   const { error, data, isLoading } = useQuery({
-    queryKey: ["article"],
+    queryKey: ["homeArticle"],
     queryFn: article,
   });
   if (isLoading) return <Loading />;
@@ -40,7 +40,7 @@ export const Articles = () => {
           >
             <div className="flex flex-col gap-6 items-center">
               <img
-                src={ArticleIcon}
+                src={createAssetsUrl(cmsData?.icon)}
                 alt="Articles"
                 width="60"
                 height="60"

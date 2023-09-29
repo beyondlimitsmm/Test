@@ -8,6 +8,18 @@
   outline: 1px solid red;
 } */
 
+/* hide scroll bar */
+/* ::-webkit-scrollbar {
+  display: none;
+}
+
+@-moz-document url-prefix() {
+  html,
+  body {
+    scrollbar-width: none;
+  }
+} */
+
 /* Rooms Gallery */
 @font-face {
   font-family: Modesfa;
@@ -343,42 +355,84 @@ html {
 
 /* Outline-Button */
 
-.border-button {
-  padding-bottom: 16px;
-  padding-top: 11px;
-  padding-left: 2rem;
-  padding-right: 2rem;
-  letter-spacing: 0.1em;
-  border-width: 1px;
-  border-color: var(--hover-pale);
-  font-family: Madera !important;
-  position: relative;
-  isolation: isolate;
-  color: var(--text-black);
-  transition: color 450ms;
-  overflow: hidden;
+@media screen and (min-width: 600px) {
+  .border-button {
+    padding-bottom: 16px;
+    padding-top: 11px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    letter-spacing: 0.1em;
+    border-width: 1px;
+    border-color: var(--hover-pale);
+    font-family: Madera !important;
+    position: relative;
+    isolation: isolate;
+    color: var(--text-black);
+    transition: color 450ms;
+    overflow: hidden;
+  }
+
+  .border-button::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background-color: var(--hover-pale);
+    inset: 0;
+    transform-origin: right;
+    scale: 0 1;
+    transition: scale 550ms;
+  }
+
+  .border-button:hover,
+  .border-button:focus-visible {
+    color: white;
+  }
+
+  .border-button:hover::after,
+  .border-button:focus-visible::after {
+    transform-origin: left;
+    scale: 1 1;
+  }
 }
 
-.border-button::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  background-color: var(--hover-pale);
-  inset: 0;
-  transform-origin: right;
-  scale: 0 1;
-  transition: scale 550ms;
-}
+@media only screen and (max-width: 600px) {
+  .border-button {
+    padding-bottom: 16px;
+    padding-top: 11px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    letter-spacing: 0.1em;
+    border-width: 1px;
+    border-color: var(--hover-pale);
+    font-family: Madera !important;
+    position: relative;
+    isolation: isolate;
+    color: var(--text-black);
+    transition: color 450ms;
+    overflow: hidden;
+  }
 
-.border-button:hover,
-.border-button:focus-visible {
-  color: white;
-}
+  /* .border-button::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    background-color: var(--hover-pale);
+    inset: 0;
+    transform-origin: right;
+    transform: translateX(-100%);
+    transition: all 300ms ease-in-out;
+  }
 
-.border-button:hover::after,
-.border-button:focus-visible::after {
-  transform-origin: left;
-  scale: 1 1;
+  .border-button:active,
+  .border-button:focus-visible {
+    color: white;
+  }
+
+  .border-button:active::after,
+  .border-button:focus-visible::after {
+    transform-origin: left;
+    transform: translateX(0%);
+  } */
 }
 
 /* Input */

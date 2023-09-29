@@ -22,26 +22,28 @@ export const NavSlideDown = () => {
   const cmsData = parseCmsData(data);
 
   function handleClick(data) {
-    if (location.pathname !== "/") {
-      navigate("/");
-    }
+    toggleNavbar();
+    // if (location.pathname !== "/") {
+    //   alert("/");
+    //   navigate("/");
+    // }
 
     if (!data?.self) {
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
       setTimeout(() => {
         navigate(data?.link);
-        toggleNavbar();
-      }, 100);
+        // toggleNavbar();
+      }, 1);
       return;
     }
 
+    navigate("/");
     setTimeout(() => {
       document.getElementById(data?.link).scrollIntoView({
         behavior: "smooth",
       });
-      toggleNavbar();
-    }, 1);
+    }, 300);
   }
 
   return (
@@ -57,7 +59,7 @@ export const NavSlideDown = () => {
       >
         <div className="grid grid-cols-1 xl:grid-cols-2 h-full relative">
           <div className="flex flex-col justify-between col-span-1 2xl:h-2/3 h-[85%]">
-            {cmsData?.navLinks?.slice(0,6).map((data, index) => (
+            {cmsData?.navLinks?.slice(0, 6).map((data, index) => (
               <button
                 key={index}
                 onClick={() => handleClick(data)}
@@ -170,41 +172,55 @@ export const NavSlideDown = () => {
           </div>
 
           <div className="nav-footer absolute right-0 left-0 bottom-0 mt-4 flex justify-center xl:justify-end gap-6">
-            <a href={cmsData?.socials?.instagram}>
-              <img
-                src={Instagram}
-                alt=""
-                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
-              />
-            </a>
-            <a href={cmsData?.socials?.twitter}>
-              <img
-                src={Twitter}
-                alt=""
-                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
-              />
-            </a>
-            <a href={cmsData?.socials?.facebook}>
-              <img
-                src={Facebook}
-                alt=""
-                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 "
-              />
-            </a>
-            <a href={cmsData?.socials?.youtube}>
-              <img
-                src={Youtube}
-                alt=""
-                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 "
-              />
-            </a>
-            <a href={cmsData?.socials?.linkedin}>
-              <img
-                src={LinkedIn}
-                alt=""
-                className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
-              />
-            </a>
+            {cmsData?.socials?.instagram && (
+              <a href={cmsData?.socials?.instagram}>
+                <img
+                  src={Instagram}
+                  alt=""
+                  className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
+                />
+              </a>
+            )}
+
+            {cmsData?.socials?.twitter && (
+              <a href={cmsData?.socials?.twitter}>
+                <img
+                  src={Twitter}
+                  alt=""
+                  className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
+                />
+              </a>
+            )}
+
+            {cmsData?.socials?.facebook && (
+              <a href={cmsData?.socials?.facebook}>
+                <img
+                  src={Facebook}
+                  alt=""
+                  className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
+                />
+              </a>
+            )}
+
+            {cmsData?.socials?.youtube && (
+              <a href={cmsData?.socials?.youtube}>
+                <img
+                  src={Youtube}
+                  alt=""
+                  className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
+                />
+              </a>
+            )}
+
+            {cmsData?.socials?.linkedin && (
+              <a href={cmsData?.socials?.linkedin}>
+                <img
+                  src={LinkedIn}
+                  alt=""
+                  className="w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300"
+                />
+              </a>
+            )}
           </div>
         </div>
       </div>

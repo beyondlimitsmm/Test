@@ -64,9 +64,12 @@ const BarDetailPage = () => {
             {cmsHeadData?.title}
           </h2>
 
-          <button className="border-button  text-base ">
-            <span className="text-white"> {cmsHeadData?.button?.name} </span>
-          </button>
+          <a
+            href={`tel:${cmsHeadData?.button?.phone}`}
+            className="border-button  text-base "
+          >
+            <span className="text-white"> {cmsHeadData?.button?.label} </span>
+          </a>
         </div>
       </section>
 

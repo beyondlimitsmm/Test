@@ -7,7 +7,6 @@ function MyForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(formRef.current);
   };
 
   return (

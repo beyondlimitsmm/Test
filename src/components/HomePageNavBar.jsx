@@ -1,14 +1,31 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import HotelLogo from "../assets/Logo.png";
 import { NavBarContext } from "../hooks/NavBarContext";
 import useScrollAtTop from "../hooks/useScrollAtTop";
 import { DropDownBtn } from "./DropDownBtn";
 import { NavSlideDown } from "./NavSlideDown";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "./Loading";
+import Error from "./Error";
+import { navbar } from "../api/home";
+import { createAssetsUrl, parseCmsData } from "../libs/functions";
 
 export const HomePageNavBar = () => {
   const { isNavOpen, toggleNavbar } = useContext(NavBarContext);
   const atTop = useScrollAtTop();
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["navbar"],
+    queryFn: navbar,
+  });
+
+  if (isLoading) {
+    return;
+  }
+
+  if (error) return;
+  const cmsData = parseCmsData(data);
 
   return (
     <>
@@ -49,18 +66,22 @@ export const HomePageNavBar = () => {
                 ></span>
               </div>
             </button>
-            <Link to="/">
+            <Link to={cmsData?.link}>
               <h1
                 className={`typo-menu absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase typo-text-black tracking-wider font-madera !font-medium invisible xl:visible ${
                   atTop && !isNavOpen && "hidden"
                 } ${isNavOpen && "block"}`}
                 style={{ fontSize: "25px" }}
               >
-                The Boundary Residence
+                {cmsData?.title}
               </h1>
             </Link>
 
-            <DropDownBtn></DropDownBtn>
+            <DropDownBtn
+              {...cmsData?.button}
+              phoneButton={cmsData?.phone_button}
+              emailButton={cmsData?.email_button}
+            ></DropDownBtn>
 
             {/* <button
               onClick={() => {
@@ -85,7 +106,7 @@ export const HomePageNavBar = () => {
       <div className="absolute top-2 left-1/2 -translate-x-1/2 z-20 hidden xl:block">
         <img
           className="transition duration-300"
-          src={HotelLogo}
+          src={createAssetsUrl(cmsData?.logo)}
           alt="logo"
           width="150"
         />

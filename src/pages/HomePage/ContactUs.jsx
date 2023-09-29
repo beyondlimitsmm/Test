@@ -5,6 +5,7 @@ import Error from "../../components/Error";
 import { parseCmsData } from "../../libs/functions";
 import useSendEmail from "../../hooks/useSendEmail";
 import ButtonLoading from "../../components/ButtonLoading";
+import { FlipText } from "../../components/FlipText";
 
 export const ContactUs = () => {
   const { data, error } = useQuery({
@@ -75,17 +76,21 @@ export const ContactUs = () => {
               <div className="flex xl:justify-start flex-row">
                 <p className="min-w-[75px] typo-body-2">Email :</p>
                 <a href={`mailto:${cmsData?.contactInfo?.email}`}>
-                  <p className="flip-text typo-body-2 font-medium">
-                    {cmsData?.contactInfo?.email}
-                  </p>
+                  <FlipText
+                    text={cmsData?.contactInfo?.email}
+                    textStyles={" typo-body-2 font-medium "}
+                    secondTextStyles={"!text-black"}
+                  ></FlipText>
                 </a>
               </div>
               <div className="flex xl:justify-start flex-row">
                 <p className="min-w-[75px] typo-body-2">Phone :</p>
                 <a href={`tel:${cmsData?.contactInfo?.phone}`}>
-                  <p className="flip-text typo-body-2 font-medium">
-                    {cmsData?.contactInfo?.phone}
-                  </p>
+                  <FlipText
+                    text={cmsData?.contactInfo?.phone}
+                    textStyles={" typo-body-2 font-medium "}
+                    secondTextStyles={"!text-black"}
+                  ></FlipText>
                 </a>
               </div>
 

@@ -18,13 +18,13 @@ export const isValidEmail = (email) => {
 
 export const validateForm = (formData) => {
   const keys = Object.keys(formData);
-  const isRequiredAllData = keys.filter((key) => formData[key] == "");
+  const isRequiredAllData = keys.filter((key) => formData[key].trim() == "");
 
   if (isRequiredAllData.length > 0) return "required all data";
 
   for (let i = 0; i < keys.length; i++) {
     const key = keys[i];
-    const value = formData[key];
+    const value = formData[key].trim();
 
     if (key == "name" && value.length < 5)
       return "Name must contain at least 5 characters";

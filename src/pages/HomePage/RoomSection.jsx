@@ -62,7 +62,7 @@ export const RoomSection = () => {
             <div className="p-10 bg-white/90 w-[300px] xl:w-[500px] h-max absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
               <div className="flex flex-col gap-3 2xl:gap-6 items-center">
                 <img
-                  src={RoomsDoor}
+                  src={createAssetsUrl(cmsData?.icon)}
                   alt="Rooms"
                   width="60"
                   height="60"
@@ -77,7 +77,7 @@ export const RoomSection = () => {
               </div>
               <div className="mt-8 flex justify-center items-center">
                 <OutlineButton
-                  routeTo="./room-types"
+                  routeTo={cmsData?.button?.link}
                   text={cmsData?.button?.name}
                 ></OutlineButton>
               </div>
@@ -114,8 +114,8 @@ export const RoomSection = () => {
             </div>
             <div className="mt-8 flex justify-center items-center">
               <OutlineButton
-                routeTo="./room-types"
-                text="Let’s Explore"
+                routeTo={cmsData?.button?.link}
+                text={cmsData?.button?.name}
               ></OutlineButton>
             </div>
           </div>

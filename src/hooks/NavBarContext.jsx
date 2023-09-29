@@ -1,14 +1,33 @@
 /* eslint-disable react/prop-types */
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export function NavbarProvider({ children }) {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [roomType, setRoomType] = useState(undefined);
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [currentOffset, setCurrentOffset] = useState(0);
+  const [isHidden, setIsHidden] = useState(false);
+  // const
 
   const toggleNavbar = () => {
-    setIsNavOpen(!isNavOpen);
+    if (!isNavOpen) {
+      setCurrentOffset(window.scrollY);
+      setIsHidden(true);
+      setIsNavOpen(!isNavOpen);
+    } else {
+      setIsHidden(false);
+      setTimeout(() => {
+        window.scrollTo({
+          top: parseInt(currentOffset),
+          left: 0,
+        });
+      }, 0.1);
+      setTimeout(() => {
+        setIsNavOpen(!isNavOpen);
+      }, 200);
+    }
   };
 
   const togglePopUp = () => {
@@ -24,6 +43,10 @@ export function NavbarProvider({ children }) {
         togglePopUp,
         roomType,
         setRoomType,
+        showDropdown,
+        setShowDropdown,
+        currentOffset,
+        isHidden,
       }}
     >
       {children}

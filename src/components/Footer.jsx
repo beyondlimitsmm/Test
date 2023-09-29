@@ -35,7 +35,7 @@ export const Footer = () => {
       document.getElementById(sectionId).scrollIntoView({
         behavior: "smooth",
       });
-    }, 1);
+    }, 200);
   }
 
   function handleLinkClick() {
@@ -112,39 +112,47 @@ export const Footer = () => {
           </div>
 
           <div className="socials flex gap-8 xl:mb-10 mb-6 justify-center xl:justify-start">
-            <a
-              target="_blank"
-              href={cmsData?.socials?.facebook}
-              rel="noreferrer"
-            >
-              <img
-                src={Facebook}
-                alt=""
-                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
-              />
-            </a>
-            <a
-              target="_blank"
-              href={cmsData?.socials?.instagram}
-              rel="noreferrer"
-            >
-              <img
-                src={Instagram}
-                alt=""
-                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
-              />
-            </a>
-            <a
-              target="_blank"
-              href={cmsData?.socials?.youtube}
-              rel="noreferrer"
-            >
-              <img
-                src={Youtube}
-                alt=""
-                className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
-              />
-            </a>
+            {cmsData?.socials?.facebook && (
+              <a
+                target="_blank"
+                href={cmsData?.socials?.facebook}
+                rel="noreferrer"
+              >
+                <img
+                  src={Facebook}
+                  alt=""
+                  className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+                />
+              </a>
+            )}
+
+            {cmsData?.socials?.instagram && (
+              <a
+                target="_blank"
+                href={cmsData?.socials?.instagram}
+                rel="noreferrer"
+              >
+                <img
+                  src={Instagram}
+                  alt=""
+                  className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+                />
+              </a>
+            )}
+
+            {cmsData?.socials?.youtube && (
+              <a
+                target="_blank"
+                href={cmsData?.socials?.youtube}
+                rel="noreferrer"
+              >
+                <img
+                  src={Youtube}
+                  alt=""
+                  className="opacity-40 w-10 h-10 rounded-full hover:opacity-100 transition-all duration-300 bg-black"
+                />
+              </a>
+            )}
           </div>
         </div>
 
@@ -154,146 +162,40 @@ export const Footer = () => {
               key={index}
               className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6"
             >
-              {links?.map((data, index) => (
-                <button
-                  key={index}
-                  onClick={() => onClickHandler(data)}
-                  to="/"
-                  className="my-1 nav-link-footer-typography"
-                >
-                  <FlipText
-                    textStyles={"text-white/75"}
-                    secondTextStyles={"!text-white"}
-                    text={data?.title}
-                  ></FlipText>
-                </button>
-              ))}
-
-              {/* <Link
-                onClick={handleLinkClick}
-                to="/room-type"
-                className="my-1 nav-link-footer-typography"
-              >
-                <FlipText
-                  textStyles={"text-white/75"}
-                  secondTextStyles={"!text-white"}
-                  text={"Rooms and Suite"}
-                ></FlipText>
-              </Link>
-              <div
-                onClick={() => handleClick("features")}
-                className="my-1 nav-link-footer-typography"
-              >
-                <FlipText
-                  textStyles={"text-white/75"}
-                  secondTextStyles={"!text-white"}
-                  text={"Our Features"}
-                ></FlipText>
-              </div>
-              <div className="my-1 nav-link-footer-typography">
-                <FlipText
-                  textStyles={"text-white/75"}
-                  secondTextStyles={"!text-white"}
-                  text={"Online Booking"}
-                ></FlipText>
-              </div>
-              <a
-                href="tel:01526289"
-                className="my-1 nav-link-footer-typography"
-              >
-                <FlipText
-                  textStyles={"text-white/75"}
-                  secondTextStyles={"!text-white"}
-                  text={"Phone Reservation"}
-                ></FlipText>
-              </a> */}
+              {links?.map((data, index) => {
+                return (
+                  <div key={index}>
+                    {data?.title == "Phone Reservation" ? (
+                      <a
+                        href={`tel:${data?.link}`}
+                        to="/"
+                        className="my-1 nav-link-footer-typography"
+                      >
+                        <FlipText
+                          textStyles={"text-white/75"}
+                          secondTextStyles={"!text-white"}
+                          text={data?.title}
+                        ></FlipText>
+                      </a>
+                    ) : (
+                      <button
+                        onClick={() => onClickHandler(data)}
+                        to="/"
+                        className="my-1 nav-link-footer-typography"
+                      >
+                        <FlipText
+                          textStyles={"text-white/75"}
+                          secondTextStyles={"!text-white"}
+                          text={data?.title}
+                        ></FlipText>
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           ))}
 
-          {/* <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-6 items-center justify-start xl:items-start mb-6">
-            <Link
-              onClick={handleLinkClick}
-              to="/restaurant"
-              className="my-1 nav-link-footer-typography"
-            >
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Restaurant"}
-              ></FlipText>
-            </Link>
-            <Link to="/bar-details" className="my-1 nav-link-footer-typography">
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Voyage Bar"}
-              ></FlipText>
-            </Link>
-            <Link to="/pool" className="my-1 nav-link-footer-typography">
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Amazing Pool"}
-              ></FlipText>
-            </Link>
-            <Link
-              to="/meeting-room"
-              className="my-1 nav-link-footer-typography"
-            >
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Meeting and Events"}
-              ></FlipText>
-            </Link>
-            <Link to="/gallery" className="my-1 nav-link-footer-typography">
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Gallery"}
-              ></FlipText>
-            </Link>
-          </div>
-          <div className="col-span-3 xl:col-span-1 xl:row-span-2 flex flex-col gap-3 items-center justify-start xl:items-start mb-6">
-            <div
-              onClick={() => handleClick("contactUs")}
-              className="my-1 nav-link-footer-typography"
-            >
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Contact Us"}
-              ></FlipText>
-            </div>
-            <div
-              onClick={() => handleClick("aboutUs")}
-              className="my-1 nav-link-footer-typography"
-            >
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"About"}
-              ></FlipText>
-            </div>
-            <div
-              onClick={() => handleClick("br-map")}
-              className="my-1 nav-link-footer-typography"
-            >
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"View On Map"}
-              ></FlipText>
-            </div>
-            <Link to="/articles" className="my-1 nav-link-footer-typography">
-              <FlipText
-                textStyles={"text-white/75"}
-                secondTextStyles={"!text-white"}
-                text={"Articles For You"}
-              ></FlipText>
-            </Link>
-          </div>{" "}
-          */}
           <div className="col-span-3 row-span-1 flex flex-row justify-center xl:justify-start gap-4 xl:gap-12 mt-8 mb-8 xl:mt-0">
             <p
               className="nav-link-footer-typography capitalize !font-thin"
@@ -303,40 +205,24 @@ export const Footer = () => {
             </p>
 
             <div className="grid grid-cols-3 xl:grid-cols-6 gap-3">
-              {cmsData?.payments?.slice(0, 6).map((data) => (
-                <div key={data.id} className="h-10 w-14">
+              {cmsData?.payments?.slice(0, 6).map((data, index) => (
+                <div key={index} className="h-10 w-14">
                   <img className="" src={createAssetsUrl(data?.image)} alt="" />
                 </div>
               ))}
-
-              {/* <div className="h-10 w-14">
-                <img className="" src={Kpay} alt="" />
-              </div>
-              <div className="h-10 w-14">
-                <img className="" src={MasterCard} alt="" />
-              </div>
-              <div className="h-10 w-14">
-                <img className="" src={MPU} alt="" />
-              </div>
-              <div className="h-10 w-14">
-                <img className="" src={Union} alt="" />
-              </div>
-              <div className="h-10 w-14">
-                <img className="" src={VISA} alt="" />
-              </div> */}
             </div>
           </div>
         </div>
       </div>
 
       <div className="mx-auto container">
-        <div className="w-full divider h-[0.5px] bg-white/30 mb-10"></div>
+        <div className="w-full divider h-[1px] bg-white/30 mb-10"></div>
 
         <div className="w-full flex flex-col gap-6 xl:gap-0 xl:flex-row justify-between items-center pb-10 typo-body-2 text-white/75">
           <p>The Boundary Residence © 2023</p>
 
           <p className="text-center">
-            All Right Reserved. Powered by Beyond Limits Technologies
+            All Right Reserved. Powered by Beyond Limits Technology
           </p>
         </div>
       </div>

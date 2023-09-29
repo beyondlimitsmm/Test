@@ -8,8 +8,8 @@ import { parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
 
 export const AboutUsSection = () => {
-  const { data,error } = useQuery({ queryKey: ["about"], queryFn: about });
-  if(error) return <Error />
+  const { data, error } = useQuery({ queryKey: ["about"], queryFn: about });
+  if (error) return <Error />;
 
   const cmsData = parseCmsData(data);
 

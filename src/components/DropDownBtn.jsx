@@ -1,18 +1,19 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { NavBarContext } from "../hooks/NavBarContext";
 import useScrollAtTop from "../hooks/useScrollAtTop";
+import { createAssetsUrl } from "../libs/functions";
 
-export const DropDownBtn = () => {
-  const { isNavOpen, togglePopUp } = useContext(NavBarContext);
+export const DropDownBtn = ({ label, phone, phoneButton, emailButton }) => {
+  const { isNavOpen, togglePopUp, showDropdown, setShowDropdown } =
+    useContext(NavBarContext);
   const atTop = useScrollAtTop();
-
-  const [showDropdown, setShowDropdown] = useState(false);
 
   return (
     <div className="relative inline-block text-left">
       <button
-        onClick={() => {
+        onClick={(e) => {
+          e.stopPropagation();
           setShowDropdown(!showDropdown);
         }}
         className={`border-button ${
@@ -22,7 +23,7 @@ export const DropDownBtn = () => {
         aria-expanded="true"
         aria-haspopup="true"
       >
-        Book Now
+        {label}
       </button>
 
       <div
@@ -43,12 +44,16 @@ export const DropDownBtn = () => {
           className="w-full flex justify-center items-center flex-col"
           role="none"
         >
-          <a href="tel:01526289" className="cursor-pointer w-full">
+          <a href={`tel:${phone}`} className="cursor-pointer w-full">
             <div className="py-4 flex gap-3 justify-center items-center hover:bg-hoverPale/20">
               <div className="mt-[6px]">
-                <PhoneIcon></PhoneIcon>
+                <img
+                  src={createAssetsUrl(phoneButton?.icon)}
+                  alt="phone-icon"
+                  className="w-[20px] h-[20px] mr-1"
+                />
               </div>
-              <p className="typo-body-2">Book With Phone</p>
+              <p className="typo-body-2">{phoneButton?.label}</p>
             </div>
           </a>
 
@@ -59,10 +64,14 @@ export const DropDownBtn = () => {
               togglePopUp();
             }}
           >
-            <div className="mt-[3px]">
-              <EmailIcon></EmailIcon>
+            <div className="mt-[3px] -translate-x-1">
+              <img
+                src={createAssetsUrl(emailButton?.icon)}
+                alt="email-icon"
+                className="w-[21px] h-[21px]"
+              />
             </div>
-            <p className="typo-body-2">Book With Email</p>
+            <p className="typo-body-2">{emailButton?.label}</p>
           </div>
         </div>
       </div>

@@ -141,7 +141,7 @@ export const GallerySection = () => {
           <SwiperSlide key={index} className="swiper-slide tile">
             <img src={data?.image} alt="" className="h-[550px]" />
             <div className="details">
-              <span className="title">{data?.title}</span>
+              <span className="title font-walbaum">{data?.title}</span>
               {/* <span className="info">{data?.description}</span> */}
             </div>
           </SwiperSlide>

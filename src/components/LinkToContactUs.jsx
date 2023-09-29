@@ -11,7 +11,7 @@ export const LinkToContactUs = ({ contactText }) => {
       document.getElementById(sectionId).scrollIntoView({
         behavior: "smooth",
       });
-    }, 1);
+    }, 300);
   }
 
   return (

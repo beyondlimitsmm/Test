@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function useScrollAtTop(threshold = 50) {
+  const location = useLocation();
   const [atTop, setAtTop] = useState(window.scrollY < threshold);
 
   useEffect(() => {
@@ -19,7 +21,10 @@ function useScrollAtTop(threshold = 50) {
     setAtTop(window.scrollY < threshold);
   }, [threshold]);
 
-  return atTop;
+  return location.pathname == "/gallery" ||
+    location.pathname.startsWith("/articles/")
+    ? false
+    : atTop;
 }
 
 export default useScrollAtTop;

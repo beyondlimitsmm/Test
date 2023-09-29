@@ -149,18 +149,17 @@ export const RestaurantPage = () => {
               ))}
             </div>
             <div>
-              <div className="border-b py-4 flex justify-between">
-                <p>Cuisine</p>
-                <p>{cmsAboutData?.cuisine}</p>
-              </div>
-              <div className="border-b py-4 flex justify-between">
-                <p>Dress Code</p>
-                <p>{cmsAboutData?.dressCode}</p>
-              </div>
-              <div className="border-b py-4 flex justify-between">
-                <p>Opening hours</p>
-                <p>{cmsAboutData?.openHours}</p>
-              </div>
+              {cmsAboutData?.facilities
+                ?.slice(0, 4)
+                .map(({ label, value }, index) => (
+                  <div
+                    key={index}
+                    className="border-b py-4 flex justify-between"
+                  >
+                    <p>{label}</p>
+                    <p>{value}</p>
+                  </div>
+                ))}
             </div>
           </div>
 
@@ -170,7 +169,7 @@ export const RestaurantPage = () => {
               {cmsFacilityData?.title}
             </h4>
             <div className="grid grid-cols-2 gap-x-6 gap-y-6 opacity-70">
-              {cmsFacilityData?.facilityNames?.map((data) => (
+              {cmsFacilityData?.facilityNames?.slice(0, 8).map((data) => (
                 <div key={data?.id} className="flex gap-4 items-center">
                   <div className="min-w-max">
                     <img
@@ -184,10 +183,10 @@ export const RestaurantPage = () => {
               ))}
             </div>
             <a
-              href={cmsFacilityData?.button?.link}
+              href={`tel:${cmsFacilityData?.button?.phone}`}
               className="border-button w-full text-center"
             >
-              {cmsFacilityData?.button?.name}
+              {cmsFacilityData?.button?.label}
             </a>
           </div>
         </div>
