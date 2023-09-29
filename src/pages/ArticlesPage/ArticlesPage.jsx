@@ -51,8 +51,14 @@ export default function Articles() {
     setCurrentPage(pageNumber);
     window.scrollTo(0, 0);
   };
-  const nextPage = () => setCurrentPage(currentPage + 1);
-  const previousPage = () => setCurrentPage(currentPage - 1);
+  const nextPage = () => {
+    setCurrentPage(currentPage + 1);
+    window.scrollTo(0, 0);
+  };
+  const previousPage = () => {
+    setCurrentPage(currentPage - 1);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
