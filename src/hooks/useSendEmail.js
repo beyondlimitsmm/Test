@@ -43,7 +43,7 @@ export default (initialFormState) => {
         }, 3000);
       } else {
         setIsLoading(false);
-        setErrorStatus();
+        setErrorStatus("Server error");
       }
     } catch (error) {
       setIsLoading(false);
