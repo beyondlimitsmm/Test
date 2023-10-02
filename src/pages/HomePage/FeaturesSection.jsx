@@ -34,11 +34,25 @@ export const FeaturesSection = () => {
                 isLeft ? "xl:mr-[250px]" : "xl:ml-[250px]"
               }`}
             >
-              <img
+              <ProgressiveImage
+                src={createAssetsUrl(data?.mainImage)}
+                placeholder={Rectangle10}
+              >
+                {(src, loading) => (
+                  <img
+                    src={src}
+                    alt=""
+                    className={`h-[300px] w-full xl:h-[650px] xl:w-[420px] object-cover ${
+                      loading ? "loading" : "loaded"
+                    }`}
+                  />
+                )}
+              </ProgressiveImage>
+              {/* <img
                 src={createAssetsUrl(data?.mainImage)}
                 alt=""
                 className="h-[300px] w-full xl:h-[650px] xl:w-[420px] object-cover"
-              />
+              /> */}
 
               <div
                 data-aos={isLeft ? "fade-down" : "fade-right"}
@@ -50,7 +64,7 @@ export const FeaturesSection = () => {
               >
                 <ProgressiveImage
                   src={createAssetsUrl(data?.subImage)}
-                  placeholder={createAssetsUrl(data?.subImage)}
+                  placeholder={Rectangle10}
                 >
                   {(src, loading) => (
                     <img

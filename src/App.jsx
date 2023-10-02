@@ -30,14 +30,12 @@ import { useQuery } from "@tanstack/react-query";
 import { getRoomTypes } from "./api/roomsAndSuites";
 import ChatBot from "./components/ChatBot";
 import { hero } from "./api/home";
-import Cookies from "js-cookie";
 import { NavBarContext } from "./hooks/NavBarContext";
-import usePrefetchHomePage from "./hooks/usePrefetchHomePage";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function App() {
   const location = useLocation();
-  const navigate = useNavigate();
-  const { data, isLoading, error } = useQuery(["room-types"], getRoomTypes);
   const { setShowDropdown, isNavOpen, isHidden } = useContext(NavBarContext);
 
   const {
@@ -50,11 +48,14 @@ function App() {
     // staleTime: 1000 * 60 * 60 * 24,
   });
 
-  usePrefetchHomePage();
-
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
   }, [location.pathname]);
+
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+  }, []);
 
   return (
     <div
