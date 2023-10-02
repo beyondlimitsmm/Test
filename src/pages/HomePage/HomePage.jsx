@@ -13,13 +13,6 @@ import Loading from "../../components/Loading";
 import Error from "../../components/Error";
 
 export const HomePage = () => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["hero"],
-    queryFn: hero,
-  });
-
-  if (isLoading) return <Loading />;
-  if (error) return <Error />;
   return (
     <div className="HomePage">
       <HeroSection></HeroSection>

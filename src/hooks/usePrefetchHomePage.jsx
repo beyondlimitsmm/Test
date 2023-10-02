@@ -1,4 +1,4 @@
-import { useQueries } from "@tanstack/react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import { galleries } from "../api/gallery";
 import {
   about,
@@ -11,6 +11,7 @@ import {
   room,
   service,
 } from "../api/home";
+import { useLocation } from "react-router-dom";
 
 const homePageQueries = [
   { queryKey: ["hero"], queryFn: hero },
@@ -26,7 +27,14 @@ const homePageQueries = [
 ];
 
 export default () => {
-  useQueries({
-    queries: homePageQueries,
-  });
+  const { pathname } = useLocation();
+
+  // if (pathname == "/") useQuery({ queryKey: ["_"], queryFn: () => true });
+  // else
+  //   useQueries({
+  //     queries: homePageQueries,
+  //   });
+  // useQueries({
+  //   queries: homePageQueries,
+  // });
 };

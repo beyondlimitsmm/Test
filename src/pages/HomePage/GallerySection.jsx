@@ -5,6 +5,7 @@ import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 import { Navigation, Pagination, Scrollbar } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Rectangle10 from "../../assets/images/Rectangle10.png";
 
 import "../../styles/HomePage.css";
 import { OutlineButton } from "../../components/OutlineButton";
@@ -12,6 +13,7 @@ import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import { gallery } from "../../api/home";
 import Error from "../../components/Error";
 import { galleries } from "../../api/gallery";
+import ProgressiveImage from "react-progressive-graceful-image";
 
 export const GallerySection = () => {
   const { data } = useQuery(["homeGallery"], gallery);
@@ -31,7 +33,7 @@ export const GallerySection = () => {
       return {
         title: attr?.title,
         description: "-",
-        image: createAssetsUrl(attr.galleries[0].image),
+        image: createAssetsUrl(attr.galleries[0].image, "medium"),
       };
     });
 
@@ -139,7 +141,16 @@ export const GallerySection = () => {
       >
         {galleryData?.map((data, index) => (
           <SwiperSlide key={index} className="swiper-slide tile">
-            <img src={data?.image} alt="" className="h-[550px]" />
+            <ProgressiveImage src={data?.image} placeholder={Rectangle10}>
+              {(src, loading) => (
+                <img
+                  src={src}
+                  alt=""
+                  className={`h-[550px] ${loading ? "loading" : "loaded"}`}
+                />
+              )}
+            </ProgressiveImage>
+            {/* <img src={data?.image} alt="" className="h-[550px]" /> */}
             <div className="details">
               <span className="title font-walbaum">{data?.title}</span>
               {/* <span className="info">{data?.description}</span> */}

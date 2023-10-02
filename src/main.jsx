@@ -7,7 +7,13 @@ import "./index.css";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { CsrfProvider } from "./hooks/CsrfContext.jsx";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false, // default: true
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>

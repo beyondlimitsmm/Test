@@ -33,10 +33,10 @@ export const Articles = () => {
         <div className="h-full p-10 w-[400px] xl:w-[600px] absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
           <div
             className="h-full flex justify-center items-center flex-col"
-            data-aos="fade-up"
-            data-aos-offset="100"
-            data-aos-delay="25"
-            data-aos-duration="500"
+            // data-aos="fade-up"
+            // data-aos-offset="100"
+            // data-aos-delay="25"
+            // data-aos-duration="500"
           >
             <div className="flex flex-col gap-6 items-center">
               <img

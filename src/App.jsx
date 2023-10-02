@@ -33,20 +33,15 @@ import { hero } from "./api/home";
 import { NavBarContext } from "./hooks/NavBarContext";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import usePrefetchHomePage from "./hooks/usePrefetchHomePage";
+import Cookies from "js-cookie";
 
 function App() {
   const location = useLocation();
   const { setShowDropdown, isNavOpen, isHidden } = useContext(NavBarContext);
+  const token = Cookies.get("csrfToken");
 
-  const {
-    data: heroData,
-    isLoading: loadingHero,
-    error: heroError,
-  } = useQuery({
-    queryKey: ["hero"],
-    queryFn: hero,
-    // staleTime: 1000 * 60 * 60 * 24,
-  });
+  usePrefetchHomePage();
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0 });
@@ -63,7 +58,7 @@ function App() {
       // className="App hide-scrollbar"
       onClick={() => setShowDropdown(false)}
     >
-      {heroData && <NavBarBuilder></NavBarBuilder>}
+      {token && <NavBarBuilder></NavBarBuilder>}
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/gallery" element={<GalleryPage />}></Route>
@@ -106,7 +101,7 @@ function App() {
         <Route path="*" element={<Navigate to="/404" replace />}></Route>
         <Route path="/404" element={<NotFound />}></Route>
       </Routes>
-      {location.pathname !== "/404" && heroData && <Footer></Footer>}
+      {location.pathname !== "/404" && token && <Footer></Footer>}
       <ModalPopUp />
       <ChatBot />
     </div>
