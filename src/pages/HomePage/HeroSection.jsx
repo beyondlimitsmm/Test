@@ -10,8 +10,6 @@ import Loading from "../../components/Loading";
 import { useToken } from "../../hooks/CsrfContext";
 
 export const HeroSection = () => {
-  const { token } = useToken();
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["hero"],
     queryFn: hero,
