@@ -63,7 +63,7 @@ export const NavBar = () => {
                 } ${isNavOpen && "block"}`}
                 style={{ fontSize: "25px" }}
               >
-                The Boundary Residence
+                Hotel Boundary
               </h1>
             </Link>
             <button className={`border-button `}>Book Now</button>

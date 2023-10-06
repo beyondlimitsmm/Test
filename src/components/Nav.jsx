@@ -54,7 +54,7 @@ const Nav = () => {
                 } ${isNavOpen && "block"}`}
                 style={{ fontSize: "25px" }}
               >
-                The Boundary Residence
+                Hotel Boundary
               </h1>
             </Link>
             <button

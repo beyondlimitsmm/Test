@@ -218,7 +218,7 @@ export const Footer = () => {
         <div className="w-full divider h-[1px] bg-white/30 mb-10"></div>
 
         <div className="w-full flex flex-col gap-6 xl:gap-0 xl:flex-row justify-between items-center pb-10 typo-body-2 text-white/75">
-          <p>The Boundary Residence © 2023</p>
+          <p>Hotel Boundary © 2023</p>
 
           <a
             href="https://beyondlimitsmm.com/"
