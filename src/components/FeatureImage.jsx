@@ -1,4 +1,4 @@
-const FeatureImage = ({ icon, title, description, detail }) => {
+const FeatureImage = ({ icon, title, description, detail, button }) => {
   return (
     <div className="p-10 w-full xl:w-[600px] h-max absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
       <div className="flex flex-col gap-6 items-center">
@@ -10,9 +10,13 @@ const FeatureImage = ({ icon, title, description, detail }) => {
       </div>
 
       <div className="mt-8 flex justify-center items-center">
-        <button className="py-[14px] w-[180px] text-black bg-white opacity-100 border border-primary-100 text-primary-100">
-          {detail}
-        </button>
+        <a
+          href={button?.link}
+          target="_blank"
+          className="py-[14px] w-[180px] text-black bg-white opacity-100 border border-primary-100 text-primary-100 text-center"
+        >
+          {button?.name}
+        </a>
       </div>
     </div>
   );

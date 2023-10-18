@@ -45,6 +45,7 @@ const BarDetailPage = () => {
 
   const iconImage = createAssetsUrl(cmsFeatureData?.iconImage);
 
+  console.log(cmsFeatureData?.button);
 
   return (
     <>
@@ -120,7 +121,7 @@ const BarDetailPage = () => {
             icon={iconImage}
             title={cmsFeatureData?.title}
             description={cmsFeatureData?.description}
-            detail={cmsFeatureData?.button?.name}
+            button={cmsFeatureData?.button}
           />
         </div>
       </section>
