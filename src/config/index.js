@@ -1,6 +1,6 @@
 export default {
-  BASE_API_URL: "https://protocol.boundaryresidence.com/api",
-  BASE_IMAGE_URL: "https://protocol.boundaryresidence.com",
+  BASE_API_URL: "https://protocol.hotelboundary.com/api",
+  BASE_IMAGE_URL: "https://protocol.hotelboundary.com",
   BEARER_TOKEN:
-    "3342e8309af8aeedab4727234864bd8fe21e383961c319a85c9fd996610e9fe3522f5ace749999da2418307753c5b9543320e31eab761ea4ffbf870cabd2c77519d7426448137034fd5215af383f6acce92b91660dace2ad45911a4208ac8837f77e8d86a4b0a4c5d15bcf924f8fa07bfcdd9ee59d8b9bb2180058039b5bae6d",
+    "da6db8baed2debec9feca5a6238c025f4a2f6fdde600c306d5e48a07c5ea6a984ce3c162d8b130952f57b831add2b54543016a54b13ada6a2bafe831872aaaea234857a68f2c69f2066b74aaf9b0ab5e8c7b94345818450113e6d0c83f18bab755ef504ec3c60e1948e8c1b4461a324d6d8265c52d2bb56f300d9e63a591d971",
 };
