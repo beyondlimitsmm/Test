@@ -45,8 +45,6 @@ const BarDetailPage = () => {
 
   const iconImage = createAssetsUrl(cmsFeatureData?.iconImage);
 
-  console.log(cmsFeatureData?.button);
-
   return (
     <>
       <section className="h-screen w-screen -mt-20 relative overflow-hidden z-10 flex justify-center items-center">

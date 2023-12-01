@@ -29,6 +29,8 @@ export const NavSlideDown = () => {
     // }
 
     if (!data?.self) {
+      if (data?.link.includes("http")) return window.open(data?.link);
+
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
       setTimeout(() => {

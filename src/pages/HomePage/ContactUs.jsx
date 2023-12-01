@@ -100,19 +100,15 @@ export const ContactUs = () => {
                 </p>
 
                 <div className="flex justify-start">
-                  <p className="w-[150px] typo-body-2">
-                    {cmsData?.openClose?.open?.split(":")[0]} :
-                  </p>
+                  <p className="w-[100px] typo-body-2">Open Hour :</p>
                   <p className="typo-body-2 font-medium">
-                    {cmsData?.openClose?.open?.split(":")[1]}
+                    {cmsData?.openClose?.open}
                   </p>
                 </div>
                 <div className="flex justify-start">
-                  <p className="w-[150px] typo-body-2">
-                    {cmsData?.openClose?.close?.split(":")[0]} :
-                  </p>
+                  <p className="w-[100px] typo-body-2">Close Hour :</p>
                   <p className="typo-body-2 font-medium">
-                    {cmsData?.openClose?.close?.split(":")[1]}
+                    {cmsData?.openClose?.close}
                   </p>
                 </div>
               </div>

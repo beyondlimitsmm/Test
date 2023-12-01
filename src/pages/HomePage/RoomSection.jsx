@@ -101,25 +101,23 @@ export const RoomSection = () => {
           <div className="px-6 py-10 xl:p-10 bg-white/90 w-[350px] xl:w-[500px] h-max absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 bg-auto">
             <div className="flex flex-col gap-3 2xl:gap-6 items-center">
               <img
-                src={RoomsDoor}
+                src={createAssetsUrl(cmsData?.icon)}
                 alt="Rooms"
                 width="60"
                 height="60"
                 className="w-[60px] h-[60px]"
               />
               <h4 className="typo-title capitalize typo-text-black font-modesfa">
-                Rooms
+                {cmsData?.title}
               </h4>
               <p className="typo-body-2 text-center max-w-[450px] typo-text-black">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Explicabo amet rerum ex quibusdam, nisi debitis aliquid eaque
-                animi iure assumenda?
+                {cmsData?.description}
               </p>
             </div>
             <div className="mt-8 flex justify-center items-center">
               <OutlineButton
                 routeTo="./room-types"
-                text="Let’s Explore"
+                text={cmsData?.button?.name}
               ></OutlineButton>
             </div>
           </div>

@@ -58,10 +58,12 @@ export const Footer = () => {
   }, [createFooterLinks]);
 
   const onClickHandler = (data) => {
+    console.log(data);
     handleLinkClick();
 
-    if (data?.self) handleClick(data?.link);
-    else navigate(data?.link);
+    if (data?.self) return handleClick(data?.link);
+    else if (data.link.includes("http")) return window.open(data?.link);
+    else navigate(data.link);
   };
 
   if (error) return <Error />;
