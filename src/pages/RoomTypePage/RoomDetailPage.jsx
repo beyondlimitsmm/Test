@@ -43,7 +43,7 @@ const RoomDetailPage = () => {
             {room.title}
           </h4>
 
-          <div className="w-[80%] p-8 grid grid-cols-2 xl:grid-cols-5 justify-items-center xl:items-center items-start gap-4 xl:gap-2">
+          <div className="w-[80%] p-8 grid grid-cols-1 md:grid-cols-3 lg:auto-cols-auto justify-center  md:justify-center items-center gap-4 xl:gap-2">
             {room.roomDetails.map((roomDetail, index) => (
               <div
                 key={roomDetail.id}
@@ -52,7 +52,7 @@ const RoomDetailPage = () => {
                 }`}
               >
                 <h4 className="typo-body">{roomDetail.type}</h4>
-                <p className="typo-menu-2">{roomDetail.value}</p>
+                <p className="typo-menu-2 ">{roomDetail.value}</p>
               </div>
             ))}
           </div>
