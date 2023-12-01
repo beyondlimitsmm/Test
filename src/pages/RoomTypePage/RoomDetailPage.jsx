@@ -6,12 +6,24 @@ import config from "../../config";
 import { RoomSlider } from "../../components/RoomSlider";
 import ProgressiveImage from "react-progressive-graceful-image";
 import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
+import { useEffect } from "react";
+import NotFound from "../NotFound";
 
 const RoomDetailPage = () => {
   const roomData = useRooms();
   const navigate = useNavigate();
   const { id } = useParams();
   const room = roomData.find((room) => room.id == id);
+
+  useEffect(() => {
+    if (!room) {
+      navigate("/404");
+    }
+  }, [room, navigate]);
+
+  if (!room) {
+    return <NotFound />;
+  }
 
   return (
     <>
@@ -43,7 +55,7 @@ const RoomDetailPage = () => {
             {room.title}
           </h4>
 
-          <div className="w-[80%] p-8 grid grid-cols-2 xl:grid-cols-5 justify-items-center xl:items-center items-start gap-4 xl:gap-2">
+          <div className="w-[80%] p-8 grid grid-cols-1 md:grid-cols-3 lg:auto-cols-auto justify-center  md:justify-center items-start gap-4 xl:gap-2">
             {room.roomDetails.map((roomDetail, index) => (
               <div
                 key={roomDetail.id}
@@ -52,7 +64,7 @@ const RoomDetailPage = () => {
                 }`}
               >
                 <h4 className="typo-body">{roomDetail.type}</h4>
-                <p className="typo-menu-2">{roomDetail.value}</p>
+                <p className="typo-menu-2 ">{roomDetail.value}</p>
               </div>
             ))}
           </div>
