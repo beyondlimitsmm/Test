@@ -8,6 +8,7 @@ import "../../styles/HomePage.css";
 import { bar } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
+import ReactMarkdown from "react-markdown";
 
 // const SlideMenuData = [
 //   {
@@ -275,11 +276,14 @@ const LayoutDetails = ({
       <h4 className="text-5xl my-4 transition-all duration-500 translate-y-[50px] opacity-0 font-walbaum">
         {title}
       </h4>
-      <p className="leading-relaxed typo-body-2 font-walbaum transition-all duration-500 translate-y-[50px] opacity-0">
+      <ReactMarkdown className="leading-relaxed typo-body-2 font-walbaum transition-all duration-500 translate-y-[50px] opacity-0">
         {description}
-      </p>
+      </ReactMarkdown>
       {facilities?.slice(0, 4).map(({ label, value }) => (
-        <div className="border-b border-[#e5e7eb8c] py-4 flex justify-between">
+        <div
+          key={label}
+          className="border-b border-[#e5e7eb8c] py-4 flex justify-between"
+        >
           <p>{label}</p>
           <p>{value}</p>
         </div>

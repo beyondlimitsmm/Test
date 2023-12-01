@@ -8,6 +8,7 @@ import { feature } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
 import ProgressiveImage from "react-progressive-graceful-image";
+import ReactMarkdown from "react-markdown";
 
 export const FeaturesSection = () => {
   const { data, error } = useQuery(["homeFeature"], feature);
@@ -88,9 +89,9 @@ export const FeaturesSection = () => {
               <h6 className="typo-title capitalize typo-text-black font-modesfa">
                 {data?.title}
               </h6>
-              <p className="py-6 typo-body-2 text-center typo-text-black">
+              <ReactMarkdown className="py-6 typo-body-2 text-center typo-text-black">
                 {data?.description}
-              </p>
+              </ReactMarkdown>
               <OutlineButton
                 routeTo={data?.button?.link}
                 text={data?.button?.name}

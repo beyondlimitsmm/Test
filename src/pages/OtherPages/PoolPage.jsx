@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { RoomSlider } from "../../components/RoomSlider";
 import ImageSlider from "../../components/ImageSlider";
+import ReactMarkdown from "react-markdown";
 
 const CarouselListData = [
   {
@@ -125,9 +126,9 @@ export const PoolPage = () => {
           <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0">
             {cmsHeadData?.title}
           </h4>
-          <p className="typo-body-2 text-white max-w-[560px] mx-4 xl:mx-0 mt-2 md:mt-6 text-center">
+          <ReactMarkdown className="typo-body-2 text-white max-w-[560px] mx-4 xl:mx-0 mt-2 md:mt-6 text-center">
             {cmsHeadData?.description}
-          </p>
+          </ReactMarkdown>
         </div>
       </section>
       {/* Section 2 */}
@@ -140,12 +141,12 @@ export const PoolPage = () => {
             </h4>
             <div className="flex-col flex gap-4">
               {cmsPoolAbout?.descriptions?.map((data) => (
-                <p
+                <ReactMarkdown
                   key={data?.id}
                   className="leading-relaxed typo-body-2 transition-all duration-500"
                 >
                   {data?.description}
-                </p>
+                </ReactMarkdown>
               ))}
             </div>
             {/* <div>

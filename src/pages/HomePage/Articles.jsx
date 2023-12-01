@@ -7,6 +7,7 @@ import { article } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
 import Loading from "../../components/Loading";
+import ReactMarkdown from "react-markdown";
 
 export const Articles = () => {
   const { error, data, isLoading } = useQuery({
@@ -47,9 +48,9 @@ export const Articles = () => {
                 className="w-[60px] h-[60px]"
               />
               <h4 className="typo-title capitalize">{cmsData?.title}</h4>
-              <p className="typo-body-2 text-center max-w-[450px]">
+              <ReactMarkdown className="typo-body-2 text-center max-w-[450px]">
                 {cmsData?.description}
-              </p>
+              </ReactMarkdown>
             </div>
             <div className="mt-8 flex justify-center items-center">
               <OutlineButton

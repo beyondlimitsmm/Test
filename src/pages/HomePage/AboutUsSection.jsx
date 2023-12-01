@@ -6,6 +6,7 @@ import { handleScrollDownClick } from "../../utils";
 import { about } from "../../api/home";
 import { parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
+import ReactMarkdown from "react-markdown";
 
 export const AboutUsSection = () => {
   const { data, error } = useQuery({ queryKey: ["about"], queryFn: about });
@@ -22,12 +23,9 @@ export const AboutUsSection = () => {
         <h2 className="typo-display mb-4 typo-text-black uppercase xl:text-[40px] text-[30px]">
           {cmsData?.title}
         </h2>
-        <p
-          className="typo-body-2 typo-text-black mb-8 xl:text-[1rem] text-[16px]"
-          style={{ lineHeight: "1.625rem", letterSpacing: "0.02em" }}
-        >
+        <ReactMarkdown className="typo-body-2 typo-text-black mb-8 xl:text-[1rem] text-[16px] leading-[1.625rem] tracking-[0.02em]">
           {cmsData?.description}
-        </p>
+        </ReactMarkdown>
 
         <button
           onClick={() => {

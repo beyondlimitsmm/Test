@@ -14,6 +14,7 @@ import { gallery } from "../../api/home";
 import Error from "../../components/Error";
 import { galleries } from "../../api/gallery";
 import ProgressiveImage from "react-progressive-graceful-image";
+import ReactMarkdown from "react-markdown";
 
 export const GallerySection = () => {
   const { data } = useQuery(["homeGallery"], gallery);
@@ -56,7 +57,7 @@ export const GallerySection = () => {
           <h6 className="typo-title capitalize typo-text-black font-modesfa mb-4">
             {cmsData?.title}
           </h6>
-          <p
+          <ReactMarkdown
             className="typo-body-2 typo-text-black text-left"
             style={{
               lineHeight: "1.625rem",
@@ -65,7 +66,7 @@ export const GallerySection = () => {
             }}
           >
             {cmsData?.description}
-          </p>
+          </ReactMarkdown>
 
           <OutlineButton
             styles="my-6 w-max"
