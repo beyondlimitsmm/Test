@@ -95,18 +95,18 @@ export const ContactUs = () => {
               </div>
 
               <div className="my-8">
-                <p className="typo-body-2 mb-2 text-center xl:text-start">
-                  Opening / Closing Hours
+                <p className="typo-body-2 mb-2 text-start">
+                  Check In / Check Out
                 </p>
 
                 <div className="flex justify-start">
-                  <p className="w-[100px] typo-body-2">Open Hour :</p>
+                  <p className="w-[100px] typo-body-2">Check In :</p>
                   <p className="typo-body-2 font-medium">
                     {cmsData?.openClose?.open}
                   </p>
                 </div>
                 <div className="flex justify-start">
-                  <p className="w-[100px] typo-body-2">Close Hour :</p>
+                  <p className="w-[100px] typo-body-2">Check Out :</p>
                   <p className="typo-body-2 font-medium">
                     {cmsData?.openClose?.close}
                   </p>
