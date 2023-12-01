@@ -140,7 +140,7 @@ const SuitesProvider = ({ children }) => {
     reserveRoomLink: "#",
   }));
 
-  // if (!data) return null;
+  if (!data) return null;
   return (
     <SuitesContext.Provider value={suites}>{children}</SuitesContext.Provider>
   );

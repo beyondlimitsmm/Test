@@ -6,12 +6,26 @@ import config from "../../config";
 import { RoomSlider } from "../../components/RoomSlider";
 import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
 import ProgressiveImage from "react-progressive-graceful-image";
+import NotFound from "../NotFound";
+import { useEffect } from "react";
 
 const SuiteDetailPage = () => {
   const suites = useSuites();
   const navigate = useNavigate();
+
   const { id } = useParams();
   const suite = suites.find((suite) => suite.id == id);
+
+  useEffect(() => {
+    console.log("suite", suite);
+    if (!suite) {
+      navigate("/404");
+    }
+  }, [suite, navigate]);
+
+  if (!suite) {
+    return <NotFound />;
+  }
 
   return (
     <>
