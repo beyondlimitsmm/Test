@@ -55,7 +55,9 @@ const RoomDetailPage = () => {
             {room.title}
           </h4>
 
-          <div className="w-[80%] p-8 grid grid-cols-1 md:grid-cols-3 lg:auto-cols-auto justify-center  md:justify-center items-start gap-4 xl:gap-2">
+          <div
+            className={`w-[80%] p-8 grid grid-cols-2 xl:grid-cols-${room.roomDetails.length} justify-items-center xl:items-center items-start gap-4 xl:gap-2`}
+          >
             {room.roomDetails.map((roomDetail, index) => (
               <div
                 key={roomDetail.id}

@@ -238,7 +238,7 @@ export const RoomCard = ({
         /> */}
       </div>
       <div className="flex flex-col justify-center items-center text-center">
-        <h6 className="typo-menu-2">{title}</h6>
+        <h6 className="typo-room-card-title mt-2">{title}</h6>
         <p className="typo-body-2 mt-2 mb-8">{truncatedDescription}</p>
         <div className="flex justify-between items-center gap-10">
           <Link
