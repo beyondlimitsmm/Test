@@ -54,3 +54,6 @@ export const navbar = async () =>
   await base(
     "/navbar?populate[logo]=*&populate[button]=*&populate[phone_button][populate][0]=icon&populate[email_button][populate][0]=icon"
   );
+
+export const notfound = async () =>
+  await base("/not-found?populate[logo]=*&populate[buttons][populate][0]=icon");

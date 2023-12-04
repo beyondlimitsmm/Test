@@ -1,5 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
 import Logo from "../assets/logo-brown.png";
 import { Link } from "react-router-dom";
+import { notfound } from "../api/home";
+import { createAssetsUrl, parseCmsData } from "../libs/functions";
+import Loading from "../components/Loading";
 
 const links = [
   {
@@ -82,21 +86,32 @@ const social = [
 ];
 
 export default function NotFound() {
+  const { data, isLoading } = useQuery({
+    queryKey: ["notfound"],
+    queryFn: notfound,
+  });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  const cmsData = parseCmsData(data);
+
   return (
     <div className="bg-white font-Jost">
       <main className="mx-auto w-full max-w-7xl px-6 pb-16 pt-10 sm:pb-24 lg:px-8">
         <img
           className="mx-auto h-full w-32 sm:w-44"
-          src={Logo}
+          src={createAssetsUrl(cmsData?.logo)}
           alt="Your Company"
         />
         <div className="mx-auto mt-20 max-w-2xl text-center sm:mt-24">
           <p className="text-base font-semibold leading-8 text-primary">404</p>
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-            Page Not Found
+            {cmsData?.title}
           </h1>
           <p className="mt-4 text-base leading-7 text-gray-600 sm:mt-6 sm:text-lg sm:leading-8">
-            Sorry, we couldn’t find the page you’re looking for.
+            {cmsData?.description}
           </p>
         </div>
         <div className="mx-auto mt-16 flow-root max-w-lg sm:mt-20">
@@ -105,10 +120,11 @@ export default function NotFound() {
             role="list"
             className="-mt-6 divide-y divide-gray-900/5 border-b border-gray-900/5"
           >
-            {links.map((link, linkIdx) => (
+            {cmsData?.buttons.map((link, linkIdx) => (
               <li key={linkIdx} className="relative flex gap-x-6 py-6">
                 <div className="flex h-10 w-10 flex-none items-center justify-center rounded-lg shadow-sm ring-1 ring-gray-900/10">
-                  <link.icon
+                  <img
+                    src={createAssetsUrl(link?.icon)}
                     className="h-6 w-6 text-primary"
                     aria-hidden="true"
                   />
