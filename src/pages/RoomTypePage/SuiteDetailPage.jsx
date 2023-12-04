@@ -57,7 +57,9 @@ const SuiteDetailPage = () => {
             {suite.title}
           </h4>
 
-          <div className="w-[80%] p-8 grid grid-cols-2 xl:grid-cols-5 justify-items-center xl:items-center items-start gap-4 xl:gap-2">
+          <div
+            className={`w-[80%] p-8 grid grid-cols-2 xl:grid-cols-${suite.suiteDetails.length} justify-items-center xl:items-center items-start gap-4 xl:gap-2`}
+          >
             {suite.suiteDetails.map((suiteDetail, index) => (
               <div
                 key={suiteDetail.id}
