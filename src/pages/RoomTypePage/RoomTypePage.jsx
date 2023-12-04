@@ -26,20 +26,14 @@ export const RoomTypePage = () => {
 
   const query = data?.data.attributes;
 
-  // const roomTypes = query.map(roomType => ({
-  //   heroText: roomType.attributes.heroHeader,
-  //   description: roomType.attributes.description,
-  //   category: roomType.attributes.category,
-  //   backgroundImage: roomType.attributes.backgroundImage.data.attributes.url,
-  //   contactText: roomType.attributes.contactText
-  // }))
-
   const roomTypes = {
     heroHeader: query.heroHeader,
     description: query.description,
     backgroundImage: query.backgroundImage.data.attributes.url,
     linkText: query.linkToDetailText,
     buttonText: query.buttonText,
+    roomName: query.roomName,
+    suiteName: query.suiteName,
   };
 
   function selectRoomType(selectedItem) {
@@ -130,7 +124,7 @@ export const RoomTypePage = () => {
                       }`}
                       onClick={() => selectRoomType("rooms")}
                     >
-                      <h6 className="typo-display">Rooms</h6>
+                      <h6 className="typo-display">{roomTypes?.roomName}</h6>
                     </button>
                   </li>
                   <li>
@@ -142,7 +136,7 @@ export const RoomTypePage = () => {
                       }`}
                       onClick={() => selectRoomType("suites")}
                     >
-                      <h6 className="typo-display">Suites</h6>
+                      <h6 className="typo-display">{roomTypes?.suiteName}</h6>
                     </button>
                   </li>
                 </ul>
