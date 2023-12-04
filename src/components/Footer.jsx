@@ -58,7 +58,14 @@ export const Footer = () => {
   }, [createFooterLinks]);
 
   const onClickHandler = (data) => {
-    console.log(data);
+    if (window.location.origin === "https://thevoyagebar.com") {
+      if (data.self) {
+        return window.location.href("https://thehotelboundary.com");
+      } else {
+        return window.location.href("https://thehotelboundary.com" + data.link);
+      }
+    }
+
     handleLinkClick();
 
     if (data?.self) return handleClick(data?.link);

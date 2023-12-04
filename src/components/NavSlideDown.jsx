@@ -15,7 +15,7 @@ export const NavSlideDown = () => {
   const { isNavOpen, toggleNavbar } = useContext(NavBarContext);
 
   const navigate = useNavigate();
-  const location = useLocation();
+  // const location = useLocation();
   const { data, error } = useQuery(["sidebar"], sidebar);
   if (error) return <Error />;
 
@@ -27,6 +27,14 @@ export const NavSlideDown = () => {
     //   alert("/");
     //   navigate("/");
     // }
+
+    if (window.location.origin === "https://thevoyagebar.com") {
+      if (data.self) {
+        return window.location.href("https://thehotelboundary.com");
+      } else {
+        return window.location.href("https://thehotelboundary.com" + data.link);
+      }
+    }
 
     if (!data?.self) {
       if (data?.link.includes("http")) return window.open(data?.link);

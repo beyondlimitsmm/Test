@@ -19,7 +19,7 @@ import { useEffect } from "react";
 
 const BarDetailPage = () => {
   useEffect(() => {
-    window.location.href = "https://thevoyagebar.com/bar-details";
+    window.location.href = "https://thevoyagebar.com";
   }, []);
 
   const {
