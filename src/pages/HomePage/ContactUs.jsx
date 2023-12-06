@@ -128,7 +128,7 @@ export const ContactUs = () => {
               <span className="input_underline"></span>
 
               <label className="input_label absolute top-0 typo-body-2 font-medium text-black/70 transition-all ease-linear">
-                {cmsData?.label_for_name}
+                {cmsData?.label_for_name}{" "}
                 <span className="text-red-500">*</span>
               </label>
             </div>
@@ -197,7 +197,8 @@ export const ContactUs = () => {
               <span className="input_underline"></span>
 
               <label className="input_label top-0 absolute z-10 bg-[#F8F9FA] typo-body-2 font-medium text-black/70 transition-all ease-linear">
-                {cmsData?.label_for_message}
+                {cmsData?.label_for_message}{" "}
+                <span className="text-red-500">*</span>
               </label>
             </div>
 

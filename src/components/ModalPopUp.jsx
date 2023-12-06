@@ -32,9 +32,11 @@ export const ModalPopUp = ({
     setFormData,
   } = useSendEmail({
     name: "",
-    contact: "",
-    comment: "",
+    email: "",
+    phone: "",
     subject: "",
+    roomType,
+    message: "",
   });
 
   const onChangeHandler = (e) => {
@@ -48,30 +50,27 @@ export const ModalPopUp = ({
   };
 
   const onSubmitHandler = async () => {
-    const body = parseValidForm();
-    body["roomType"] = roomType ?? "-";
-    body["subject"] = formData.subject ? formData.subject : "Book Now";
+    // const body = parseValidForm();
+    // data["roomType"] = roomType ?? "-";
 
-    console.log(body);
-
-    // await onSubmit(body);
+    await onSubmit(formData);
   };
 
-  const parseValidForm = () => {
-    const data = { ...formData };
+  // const parseValidForm = () => {
+  //   const data = { ...formData };
 
-    if (isNaN(data["contact"])) {
-      data["email"] = data["contact"];
-      data["phone"] = "-";
-    } else {
-      data["email"] = "-";
-      data["phone"] = data["contact"];
-    }
+  //   if (isNaN(data["contact"])) {
+  //     data["email"] = data["contact"];
+  //     data["phone"] = "-";
+  //   } else {
+  //     data["email"] = "-";
+  //     data["phone"] = data["contact"];
+  //   }
 
-    delete data.contact;
+  //   delete data.contact;
 
-    return data;
-  };
+  //   return data;
+  // };
 
   const onCloseHandler = () => {
     togglePopUp();
@@ -92,8 +91,8 @@ export const ModalPopUp = ({
       }`}
       onClick={onCloseHandler}
     >
-      <div className="border-2 border-primary bg-white z-[99999] flex-1 max-w-[1024px] flex justify-between items-center">
-        <div className="w-1/2 h-full flex justify-center items-center">
+      <div className="border-2 border-primary bg-white z-[99999] flex-1 lg:max-w-[1024px] max-w-[500px] flex justify-between items-center">
+        <div className="w-1/2 h-full lg:flex hidden justify-center items-center">
           <img
             src={createAssetsUrl(cmsData?.logo)}
             alt="logo"
@@ -102,80 +101,97 @@ export const ModalPopUp = ({
         </div>
 
         <div
-          className="flex flex-col w-1/2 p-10  "
+          className="flex flex-col lg:w-1/2 w-full py-10 "
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="flex justify-between relative">
-            <AiOutlineClose
-              size={27}
-              className="invisible opacity-0"
-            ></AiOutlineClose>
-            <div className="w-12 h-12 ">
-              <img src={FeatherIcon} alt="" className="w-full h-full" />
+          <div className="border-primary border-opacity-10 lg:border-l border-l-0">
+            <div className="flex justify-between relative px-10">
+              <AiOutlineClose
+                size={27}
+                className="invisible opacity-0"
+              ></AiOutlineClose>
+              <div className="w-12 h-12 ">
+                <img src={FeatherIcon} alt="" className="w-full h-full" />
+              </div>
+              <AiOutlineClose
+                size={27}
+                className="cursor-pointer"
+                onClick={onCloseHandler}
+              ></AiOutlineClose>
             </div>
-            <AiOutlineClose
-              size={27}
-              className="cursor-pointer"
-              onClick={onCloseHandler}
-            ></AiOutlineClose>
-          </div>
-          <div className="flex flex-col gap-6 mt-4">
-            <div className="typo-title text-center">Book Now</div>
-            <input
-              type="text"
-              className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
-              placeholder="Your Name"
-              name="name"
-              value={formData.name}
-              onChange={onChangeHandler}
-            />
+            <div className="flex flex-col gap-4 mt-4  px-10">
+              <div className="typo-title text-center">Book Now</div>
 
-            <input
-              type="text"
-              className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
-              placeholder="Your Email or Phone"
-              name="contact"
-              value={formData.contact}
-              onChange={onChangeHandler}
-            />
+              <input
+                type="text"
+                className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
+                placeholder="Your Name"
+                name="name"
+                value={formData.name}
+                onChange={onChangeHandler}
+              />
 
-            <input
-              type="text"
-              className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
-              placeholder="Subject"
-              name="contact"
-              value={formData.contact}
-              onChange={onChangeHandler}
-            />
+              <input
+                type="email"
+                className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
+                placeholder="Your Email"
+                name="email"
+                value={formData.email}
+                onChange={onChangeHandler}
+              />
 
-            <BDropdown selectedRoomName={roomType} />
+              <input
+                type="text"
+                className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
+                placeholder="Your Phone"
+                name="phone"
+                value={formData.phone}
+                onChange={onChangeHandler}
+              />
 
-            <textarea
-              rows="4"
-              type="text"
-              className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
-              placeholder="Write Here"
-              name="comment"
-              value={formData.comment}
-              onChange={onChangeHandler}
-            />
-            <div className="flex justify-center items-center mt-4">
-              <button
-                disabled={isLoading}
-                onClick={onSubmitHandler}
-                className="pb-4 pt-[11px] px-20 tracking-widest border border-primary bg-primary font-madera text-white relative"
+              <input
+                type="text"
+                className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
+                placeholder="Subject"
+                name="subject"
+                value={formData.subject}
+                onChange={onChangeHandler}
+              />
+
+              <BDropdown
+                selectedRoomName={roomType}
+                onOptionChange={(option) =>
+                  setFormData({ ...formData, roomType: option })
+                }
+              />
+
+              <textarea
+                rows="4"
+                type="text"
+                className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
+                placeholder="Write Here"
+                name="message"
+                value={formData.message}
+                onChange={onChangeHandler}
+              />
+              <div className="flex justify-center items-center mt-4">
+                <button
+                  disabled={isLoading}
+                  onClick={onSubmitHandler}
+                  className="pb-4 pt-[11px] px-20 tracking-widest border border-primary bg-primary font-madera text-white relative"
+                >
+                  {isLoading && <ButtonLoading />}
+                  <span className={isLoading ? "opacity-0" : ""}>Send</span>
+                </button>
+              </div>
+              <h6
+                className={`${isSuccess && "text-green-600"} ${
+                  isError && "text-red-600"
+                } text-center`}
               >
-                {isLoading && <ButtonLoading />}
-                <span className={isLoading ? "opacity-0" : ""}>Send</span>
-              </button>
+                {message && message}
+              </h6>
             </div>
-            <h6
-              className={`${isSuccess && "text-green-600"} ${
-                isError && "text-red-600"
-              } text-center`}
-            >
-              {message && message}
-            </h6>
           </div>
         </div>
       </div>

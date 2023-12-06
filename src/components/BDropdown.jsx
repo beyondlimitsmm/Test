@@ -2,12 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect, useState } from "react";
 import { getRoomNames, getSuiteNames } from "../api/roomsAndSuites";
 
-const BDropdown = ({ selectedRoomName }) => {
+const BDropdown = ({ selectedRoomName, onOptionChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [roomNames, setRoomNames] = useState([]);
   const [selectedOption, setSelectedOption] = useState(selectedRoomName);
-
-  console.log("Selected Option", selectedOption);
 
   const { data: rooms } = useQuery({
     queryKey: ["getRoomNames"],
@@ -25,6 +23,7 @@ const BDropdown = ({ selectedRoomName }) => {
 
   const handleOptionClick = (option) => {
     setSelectedOption(option);
+    onOptionChange(option);
     setIsOpen(false);
   };
 
@@ -67,7 +66,13 @@ const BDropdown = ({ selectedRoomName }) => {
         className="inline-flex justify-between items-center w-full p-3 border border-primary/50 border-opacity-10 outline-none bg-white"
       >
         <span className=" typo-body-2">
-          {selectedOption ? selectedOption : roomNames[0]}
+          {selectedOption ? (
+            selectedOption
+          ) : (
+            <span className="text-opacity-60 text-primary">
+              Please select room type
+            </span>
+          )}
         </span>
         <svg
           className=" h-5 w-5"
