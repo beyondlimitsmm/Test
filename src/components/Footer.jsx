@@ -58,8 +58,7 @@ export const Footer = () => {
   }, [createFooterLinks]);
 
   const onClickHandler = (data) => {
-    if (window.location.origin === "https://thevoyagebar.com") {
-      git;
+    if (window.location.origin.includes("https://thevoyagebar.com")) {
       if (data.self) {
         return window.location.href("https://thehotelboundary.com");
       } else {

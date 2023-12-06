@@ -28,7 +28,7 @@ export const NavSlideDown = () => {
     //   navigate("/");
     // }
 
-    if (window.location.origin === "https://thevoyagebar.com") {
+    if (window.location.origin.includes("https://thevoyagebar.com")) {
       if (data.self) {
         return window.location.href("https://thehotelboundary.com");
       } else {
@@ -37,7 +37,8 @@ export const NavSlideDown = () => {
     }
 
     if (!data?.self) {
-      if (data?.link.includes("http")) return window.open(data?.link);
+      if (data?.link.includes("http"))
+        return window.location.replace(data?.link);
 
       window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
