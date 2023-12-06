@@ -15,13 +15,8 @@ import ProgressiveImage from "react-progressive-graceful-image";
 import { placeholder } from "@cloudinary/react";
 import Loading from "../../components/Loading";
 import ImageSlider from "../../components/ImageSlider";
-import { useEffect } from "react";
 
 const BarDetailPage = () => {
-  useEffect(() => {
-    window.location.href = "https://thevoyagebar.com";
-  }, []);
-
   const {
     data: headData,
     error,
