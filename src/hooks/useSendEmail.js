@@ -17,6 +17,10 @@ export default (initialFormState) => {
 
     if (validated) {
       setErrorStatus(validated);
+
+      if (formData?.subject === "Book Bow") {
+        setFormData({ ...formData, subject: "" });
+      }
       return;
     }
 
@@ -34,7 +38,7 @@ export default (initialFormState) => {
       if (response.data) {
         setIsLoading(false);
         setIsSuccess(true);
-        setMessage(response.message);
+        setMessage("We will contact you later for booking confirmation");
         setFormData(initialFormState);
 
         setTimeout(() => {
@@ -46,6 +50,7 @@ export default (initialFormState) => {
         setErrorStatus("Server error");
       }
     } catch (error) {
+      console.log(error);
       setIsLoading(false);
       setErrorStatus("Server error");
     }

@@ -13,3 +13,7 @@ export const getSuites = async () =>
 export const getRoomTypes = async () => await base("/room-type?populate=*");
 
 export const getContactUs = async () => await base("/contact-us?populate=*");
+
+export const getRoomNames = async () => await base("/rooms");
+
+export const getSuiteNames = async () => await base("/suites?fields[0]=title");

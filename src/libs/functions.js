@@ -2,7 +2,9 @@ import config from "../config";
 
 export const createAssetsUrl = (url, format) => {
   if (format) {
-    return config.BASE_IMAGE_URL + url?.data?.attributes?.formats?.[format]?.url;
+    return (
+      config.BASE_IMAGE_URL + url?.data?.attributes?.formats?.[format]?.url
+    );
   } else {
     return config.BASE_IMAGE_URL + url?.data?.attributes?.url;
   }
@@ -22,7 +24,9 @@ export const isValidEmail = (email) => {
 
 export const validateForm = (formData) => {
   const keys = Object.keys(formData);
-  const isRequiredAllData = keys.filter((key) => formData[key].trim() == "");
+  const isRequiredAllData = keys.filter(
+    (key) => formData[key] === undefined || formData[key].trim() === ""
+  );
 
   if (isRequiredAllData.length > 0) return "required all data";
 
@@ -40,5 +44,7 @@ export const validateForm = (formData) => {
 
     if (key == "email" && value != "-" && !isValidEmail(value))
       return "Invalid email";
+
+    if (key == "email" && value.trim() == "") return "Subject is required";
   }
 };

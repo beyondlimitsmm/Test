@@ -47,6 +47,7 @@ export const BarAndRestaurantSection = () => {
   const [changeUI, setChangeUI] = useState(false);
   const menusRef = useRef();
   const menuDetails = useRef();
+  const defaultImageRef = useRef();
   const [menuSlideRight, setMenuSlideRight] = useState(false);
   const [slideMenu, setSlideMenu] = useState([]);
 
@@ -82,6 +83,14 @@ export const BarAndRestaurantSection = () => {
 
   function hideImage(imageRef) {
     if (selectEl === null || selectEl === undefined) {
+      if (defaultImageRef.current) {
+        defaultImageRef.current.classList.replace(
+          "-translate-x-full",
+          "-translate-x-[50%]"
+        );
+        defaultImageRef.current.classList.replace("opacity-0", "opacity-50");
+      }
+
       if (imageRef.current) {
         imageRef.current.classList.replace(
           "-translate-x-[50%]",
@@ -93,6 +102,14 @@ export const BarAndRestaurantSection = () => {
   }
 
   function showImage(imageRef) {
+    if (defaultImageRef.current) {
+      defaultImageRef.current.classList.replace(
+        "-translate-x-[50%]",
+        "-translate-x-full"
+      );
+      defaultImageRef.current.classList.replace("opacity-50", "opacity-0");
+    }
+
     imageRef.current.classList.replace(
       "-translate-x-full",
       "-translate-x-[50%]"
@@ -108,6 +125,14 @@ export const BarAndRestaurantSection = () => {
     imageRef.current.classList.replace("opacity-50", "opacity-100");
 
     setMenuSlideRight(true);
+
+    if (defaultImageRef.current) {
+      defaultImageRef.current.classList.replace(
+        "-translate-x-[50%]",
+        "-translate-x-full"
+      );
+      defaultImageRef.current.classList.replace("opacity-50", "opacity-0");
+    }
 
     setTimeout(() => {
       menuSection.current.scrollIntoView({
@@ -151,6 +176,14 @@ export const BarAndRestaurantSection = () => {
   function closePopUp() {
     selectEl.current.classList.replace("opacity-100", "opacity-0");
     selectEl.current.classList.replace("translate-x-0", "-translate-x-full");
+
+    if (defaultImageRef.current) {
+      defaultImageRef.current.classList.replace(
+        "-translate-x-full",
+        "-translate-x-[50%]"
+      );
+      defaultImageRef.current.classList.replace("opacity-0", "opacity-50");
+    }
 
     requestAnimationFrame(() => {
       menuDetails.current.classList.remove("new-layout-enter-active");
@@ -196,11 +229,20 @@ export const BarAndRestaurantSection = () => {
                 key={menu.id}
                 src={menu.imageUrl}
                 alt=""
-                className="absolute inset-0 h-full w-full  transition-all duration-1000 object-cover -translate-x-full opacity-0"
+                className="absolute inset-0 h-full w-full  transition-all duration-1000 object-cover -translate-x-full opacity-0 z-10"
                 ref={menu.imageRef}
               />
             );
           })}
+
+          <img
+            src={
+              "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3Vwd2s2MTY2MTU3Ny13aWtpbWVkaWEtaW1hZ2Uta293YXBlZWouanBn.jpg"
+            }
+            alt=""
+            className="absolute inset-0  h-full w-full  transition-all duration-1000 object-cover -translate-x-[50%] opacity-50"
+            ref={defaultImageRef}
+          />
         </div>
 
         <div
