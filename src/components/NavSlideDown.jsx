@@ -30,9 +30,9 @@ export const NavSlideDown = () => {
 
     if (window.location.origin.includes("https://thevoyagebar.com")) {
       if (data.self) {
-        return window.location.href("https://thehotelboundary.com");
+        return window.location.href = "https://thehotelboundary.com";
       } else {
-        return window.location.href("https://thehotelboundary.com" + data.link);
+        return window.location.href = "https://thehotelboundary.com" + data.link;
       }
     }
 
