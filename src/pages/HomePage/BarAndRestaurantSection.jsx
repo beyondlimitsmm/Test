@@ -54,6 +54,7 @@ export const BarAndRestaurantSection = () => {
   const { data, error } = useQuery(["bar"], bar);
 
   const cmsData = parseCmsData(data);
+
   const createSlideMenu = useCallback(() => {
     if (!cmsData && !error) return;
 
@@ -236,9 +237,7 @@ export const BarAndRestaurantSection = () => {
           })}
 
           <img
-            src={
-              "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3Vwd2s2MTY2MTU3Ny13aWtpbWVkaWEtaW1hZ2Uta293YXBlZWouanBn.jpg"
-            }
+            src={createAssetsUrl(cmsData?.defaultImage)}
             alt=""
             className="absolute inset-0  h-full w-full  transition-all duration-1000 object-cover -translate-x-[50%] opacity-50"
             ref={defaultImageRef}
@@ -266,6 +265,13 @@ export const BarAndRestaurantSection = () => {
             ref={menusRef}
             id="menus"
           >
+            <div className="w-[180px] mb-10">
+              <img
+                src={createAssetsUrl(cmsData?.logo)}
+                alt="logo"
+                className="w-full"
+              />
+            </div>
             <div className="flex items-center gap-4 mb-10">
               <div className="bg-white/80 w-8 h-1"></div>
 

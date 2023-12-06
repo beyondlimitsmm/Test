@@ -32,7 +32,7 @@ export const feature = async () =>
 
 export const bar = async () =>
   await base(
-    "/home-restaurant/?populate[restaurantCards][populate][0]=image&populate[restaurantCards][populate][1]=facilities&fields=*"
+    "/home-restaurant/?populate[logo]=*&populate[defaultImage]=*&populate[restaurantCards][populate][0]=image&populate[restaurantCards][populate][1]=facilities&fields=*"
   );
 
 export const article = async () =>
