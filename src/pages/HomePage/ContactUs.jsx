@@ -25,7 +25,8 @@ export const ContactUs = () => {
     name: "",
     phone: "",
     email: "",
-    comment: "",
+    subject: "",
+    message: "",
   });
 
   if (error) return <Error />;
@@ -167,19 +168,36 @@ export const ContactUs = () => {
             </div>
 
             <div className="relative flex flex-col">
+              <input
+                type="text"
+                className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 font-medium mt-2"
+                name="subject"
+                value={formData.subject}
+                onChange={onChangeHandler}
+              />
+
+              <span className="input_underline"></span>
+
+              <label className="input_label absolute top-0 typo-body-2 font-medium text-black/70 transition-all ease-linear">
+                {cmsData?.label_for_subject}{" "}
+                <span className="text-red-500">*</span>
+              </label>
+            </div>
+
+            <div className="relative flex flex-col">
               <textarea
                 rows="4"
                 type="text"
                 className="input border-b border-black/20 py-3 outline-none bg-transparent w-full typo-body-2 mt-4 resize-none font-medium z-[8]"
-                name="comment"
-                value={formData.comment}
+                name="message"
+                value={formData.message}
                 onChange={onChangeHandler}
               ></textarea>
 
               <span className="input_underline"></span>
 
               <label className="input_label top-0 absolute z-10 bg-[#F8F9FA] typo-body-2 font-medium text-black/70 transition-all ease-linear">
-                {cmsData?.label_for_comment}
+                {cmsData?.label_for_message}
               </label>
             </div>
 

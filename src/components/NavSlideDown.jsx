@@ -67,7 +67,7 @@ export const NavSlideDown = () => {
           isNavOpen ? "h-max xl:h-full" : "hidden h-0"
         }`}
       >
-        <div className="grid grid-cols-1 xl:grid-cols-2 h-full relative">
+        <div className="grid grid-cols-1 xl:grid-cols-2 h-full relative ">
           <div className="flex flex-col justify-between col-span-1 2xl:h-2/3 h-[85%]">
             {cmsData?.navLinks?.slice(0, 6).map((data, index) => (
               <button
@@ -79,39 +79,9 @@ export const NavSlideDown = () => {
                 {data?.title}
               </button>
             ))}
-
-            {/* <button
-              onClick={() => handleClick("roomSection")}
-              className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
-            >
-              Our Rooms
-            </button>
-            <button
-              onClick={() => handleClick("features")}
-              className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
-            >
-              Our Features
-            </button>
-            <button
-              onClick={() => handleClick("gallery")}
-              className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
-            >
-              Gallery
-            </button>
-            <button
-              onClick={() => handleClick("articles-for-you")}
-              className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
-            >
-              Articles For You
-            </button>
-            <button
-              onClick={() => handleClick("br-map")}
-              className="w-max xl:px-4 py-4 xl:py-0 nav-link-typography text-[#02102A] opacity-80 hover:opacity-100 !text-5xl hover:translate-x-4 duration-700 hover:text-hoverPale"
-            >
-              View on Map
-            </button> */}
           </div>
-          <div className="col-span-1 flex flex-col xl:flex-row justify-between h-max pb-10 pt-10 xl:pt-0 transition-none">
+
+          <div className="col-span-1 flex flex-col xl:flex-row gap-4 justify-between h-max pb-10 pt-10 xl:pt-0 transition-none">
             <div className="flex-1">
               <div className="mb-8 2xl:mb-[60px]">
                 <h6 className="nav-link-typography 2xl:mb-4">Our HighLights</h6>
@@ -125,11 +95,6 @@ export const NavSlideDown = () => {
                       <p className="typo-body-2">{data?.title}</p>
                     </button>
                   ))}
-
-                  {/* <p className="typo-body-2">Restarurant</p>
-                  <p className="typo-body-2">Refresh Pool</p>
-                  <p className="typo-body-2">Voyage Bar</p>
-                  <p className="typo-body-2">Luxuary Rooms</p> */}
                 </div>
               </div>
 
@@ -142,11 +107,12 @@ export const NavSlideDown = () => {
                     Check in from: {cmsData?.checkIn}
                   </p>
                   <p className="typo-body-2">
-                    Check in from: {cmsData?.checkOut}
+                    Check out from: {cmsData?.checkOut}
                   </p>
                 </div>
               </div>
             </div>
+
             <div className="flex-1 flex flex-col pb-10 transform-none">
               <div>
                 <div className="mb-8 2xl:mb-[60px]">

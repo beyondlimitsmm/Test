@@ -46,6 +46,7 @@ export default (initialFormState) => {
         setErrorStatus("Server error");
       }
     } catch (error) {
+      console.log(error);
       setIsLoading(false);
       setErrorStatus("Server error");
     }

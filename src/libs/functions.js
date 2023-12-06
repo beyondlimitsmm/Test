@@ -2,7 +2,9 @@ import config from "../config";
 
 export const createAssetsUrl = (url, format) => {
   if (format) {
-    return config.BASE_IMAGE_URL + url?.data?.attributes?.formats?.[format]?.url;
+    return (
+      config.BASE_IMAGE_URL + url?.data?.attributes?.formats?.[format]?.url
+    );
   } else {
     return config.BASE_IMAGE_URL + url?.data?.attributes?.url;
   }
@@ -40,5 +42,7 @@ export const validateForm = (formData) => {
 
     if (key == "email" && value != "-" && !isValidEmail(value))
       return "Invalid email";
+
+    if (key == "email" && value.trim() == "") return "Subject is required";
   }
 };
