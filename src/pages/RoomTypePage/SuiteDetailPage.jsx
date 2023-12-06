@@ -7,17 +7,20 @@ import { RoomSlider } from "../../components/RoomSlider";
 import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
 import ProgressiveImage from "react-progressive-graceful-image";
 import NotFound from "../NotFound";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const SuiteDetailPage = () => {
   const suites = useSuites();
   const navigate = useNavigate();
+  const [gridLength, setGridLength] = useState(5);
 
   const { id } = useParams();
   const suite = suites.find((suite) => suite.id == id);
 
   useEffect(() => {
     console.log("suite", suite);
+    setGridLength(suite?.suiteDetails.length);
+
     if (!suite) {
       navigate("/404");
     }
@@ -58,7 +61,7 @@ const SuiteDetailPage = () => {
           </h4>
 
           <div
-            className={`w-[80%] p-8 grid grid-cols-2 xl:grid-cols-${suite.suiteDetails.length} justify-items-center xl:items-center items-start gap-4 xl:gap-2`}
+            className={`w-[80%] p-8 grid grid-cols-2 lg:grid-cols-5 justify-items-center xl:items-center items-start gap-4 xl:gap-2`}
           >
             {suite.suiteDetails.map((suiteDetail, index) => (
               <div

@@ -42,7 +42,7 @@ export const RoomTypePage = () => {
   }
 
   return (
-    <div>
+    <div className="">
       <div>
         <section className="-mt-20 w-screen min-h-screen xl:min-h-0 relative">
           <div className="absolute inset-0 overflow-hidden -z-10">
@@ -72,114 +72,82 @@ export const RoomTypePage = () => {
             </p>
           </div>
         </section>
-        <section
-          id="roomTypeMenu"
-          className="max-h-max relative mb-16 scroll-m-20"
-        >
-          {/* <div className="w-full">
-            <nav className="flex justify-between md:px-20 w-full relative  border-b border-hoverPale">
-              <div></div>
-              <ul className="mx-4">
-                <li className="relative inline-block text-center mx-4 md:mx-7 xl:mx-9 first:ml-4 last:mr-4">
-                  <button
-                    id="rooms"
-                    type="button"
-                    className={`py-4 text-black/75 transition hover:text-hoverPale ${
-                      selectedMenu === "rooms" && "!text-hoverPale"
-                    }`}
-                    onClick={() => selectRoomType("rooms")}
-                  >
-                    <h6 className="typo-display">Rooms</h6>
-                  </button>
-                </li>
-                <li className="relative inline-block text-center mx-4 md:mx-7 xl:mx-9 first:ml-4 last:mr-4">
-                  <button
-                    id="suites"
-                    type="button"
-                    className={`py-4 text-black/75 transition hover:text-hoverPale ${
-                      selectedMenu === "suites" && "!text-hoverPale"
-                    }`}
-                    onClick={() => selectRoomType("suites")}
-                  >
-                    <h6 className="typo-display">Suites</h6>
-                  </button>
-                </li>
-              </ul>
-              <div></div>
-            </nav>
-          </div> */}
-          <div className="w-full">
-            <div className="mx-4 md:mx-20">
-              {" "}
-              {/* Add left and right margins here */}
-              <nav className="flex justify-between w-full relative border-b border-hoverPale">
-                <div></div>
-                <ul className="flex space-x-4 md:space-x-7 xl:space-x-9">
-                  <li>
-                    <button
-                      id="rooms"
-                      type="button"
-                      className={`py-4 text-black/75 transition hover:text-hoverPale ${
-                        selectedMenu === "rooms" && "!text-hoverPale"
-                      }`}
-                      onClick={() => selectRoomType("rooms")}
-                    >
-                      <h6 className="typo-display">{roomTypes?.roomName}</h6>
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      id="suites"
-                      type="button"
-                      className={`py-4 text-black/75 transition hover:text-hoverPale ${
-                        selectedMenu === "suites" && "!text-hoverPale"
-                      }`}
-                      onClick={() => selectRoomType("suites")}
-                    >
-                      <h6 className="typo-display">{roomTypes?.suiteName}</h6>
-                    </button>
-                  </li>
-                </ul>
-                <div></div>
-              </nav>
+        <section id="roomTypeMenu" className="max-h-max relative  scroll-m-20">
+          <div className="bg-[#F8F9FA]">
+            <div className="w-full ">
+              <div className="mx-4 md:mx-20">
+                {" "}
+                {/* Add left and right margins here */}
+                <nav className="flex justify-between w-full relative border-b border-hoverPale">
+                  <div></div>
+                  <ul className="flex space-x-4 md:space-x-7 xl:space-x-9">
+                    <li>
+                      <button
+                        id="rooms"
+                        type="button"
+                        className={`py-4 text-black/75 transition hover:text-hoverPale ${
+                          selectedMenu === "rooms" && "!text-hoverPale"
+                        }`}
+                        onClick={() => selectRoomType("rooms")}
+                      >
+                        <h6 className="typo-display">{roomTypes?.roomName}</h6>
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        id="suites"
+                        type="button"
+                        className={`py-4 text-black/75 transition hover:text-hoverPale ${
+                          selectedMenu === "suites" && "!text-hoverPale"
+                        }`}
+                        onClick={() => selectRoomType("suites")}
+                      >
+                        <h6 className="typo-display">{roomTypes?.suiteName}</h6>
+                      </button>
+                    </li>
+                  </ul>
+                  <div></div>
+                </nav>
+              </div>
             </div>
-          </div>
-
-          <div
-            id="rt-card-container"
-            className="mt-10 flex justify-center items-center gap-16 md:gap-12 flex-col xl:flex-row flex-wrap "
-          >
-            {selectedMenu === "rooms"
-              ? RoomsData.map((roomCard, index) => {
-                  return (
-                    <RoomCard
-                      id={roomCard.id}
-                      key={index}
-                      imageSrc={roomCard.backgroundImage}
-                      title={roomCard.title}
-                      description={roomCard.description}
-                      viewDetailsLink={roomCard.viewDetailsLink}
-                      reserveRoomLink={roomCard.reserveRoomLink}
-                      linkText={roomTypes.linkText}
-                      buttonText={roomTypes.buttonText}
-                    />
-                  );
-                })
-              : SuitesData.map((roomCard, index) => {
-                  return (
-                    <RoomCard
-                      id={roomCard.id}
-                      key={index}
-                      imageSrc={roomCard.backgroundImage}
-                      title={roomCard.title}
-                      description={roomCard.description}
-                      viewDetailsLink={roomCard.viewDetailsLink}
-                      reserveRoomLink={roomCard.reserveRoomLink}
-                      linkText={roomTypes.linkText}
-                      buttonText={roomTypes.buttonText}
-                    />
-                  );
-                })}
+            <div
+              id="rt-card-container"
+              className="py-10 flex justify-center items-center gap-16 md:gap-12 flex-col xl:flex-row flex-wrap "
+            >
+              {selectedMenu === "rooms"
+                ? RoomsData.map((roomCard, index) => {
+                    return (
+                      <RoomCard
+                        id={roomCard.id}
+                        key={index}
+                        imageSrc={roomCard.backgroundImage}
+                        title={roomCard.title}
+                        description={roomCard.description}
+                        viewDetailsLink={roomCard.viewDetailsLink}
+                        reserveRoomLink={roomCard.reserveRoomLink}
+                        linkText={roomTypes.linkText}
+                        roomFeatures={roomCard.roomFeatures}
+                        buttonText={roomTypes.buttonText}
+                      />
+                    );
+                  })
+                : SuitesData.map((roomCard, index) => {
+                    return (
+                      <RoomCard
+                        id={roomCard.id}
+                        key={index}
+                        imageSrc={roomCard.backgroundImage}
+                        title={roomCard.title}
+                        description={roomCard.description}
+                        viewDetailsLink={roomCard.viewDetailsLink}
+                        reserveRoomLink={roomCard.reserveRoomLink}
+                        linkText={roomTypes.linkText}
+                        roomFeatures={roomCard.suiteFeatures}
+                        buttonText={roomTypes.buttonText}
+                      />
+                    );
+                  })}
+            </div>
           </div>
         </section>
 
@@ -196,6 +164,7 @@ export const RoomCard = ({
   description,
   viewDetailsLink,
   reserveRoomLink,
+  roomFeatures,
   linkText,
   buttonText,
 }) => {
@@ -210,7 +179,7 @@ export const RoomCard = ({
     description.length > 170 ? description.slice(0, 160) + "..." : description;
 
   return (
-    <div className="card-container w-[80%] xl:w-[500px] h-[80%] sm:h-[500px] ">
+    <div className="card-container w-[80%] xl:w-[500px] h-full sm:h-full bg-white">
       <div className="w-full h-[300px] relative overflow-hidden">
         <ProgressiveImage
           src={`${config.BASE_IMAGE_URL}${imageSrc}`}
@@ -238,9 +207,29 @@ export const RoomCard = ({
         /> */}
       </div>
       <div className="flex flex-col justify-center items-center text-center">
-        <h6 className="typo-room-card-title mt-2">{title}</h6>
-        <p className="typo-body-2 mt-2 mb-8">{truncatedDescription}</p>
-        <div className="flex justify-between items-center gap-10">
+        <h6 className="typo-room-card-title mt-2 max-w-sm">{title}</h6>
+        {/* <p className="typo-body-2 mt-2 mb-8">{truncatedDescription}</p> */}
+        <div className="grid grid-cols-4 place-content-evenly">
+          {roomFeatures.slice(0, 4).map((roomFeature) => (
+            <div
+              key={roomFeature.id}
+              className="flex flex-col items-center justify-between my-8"
+            >
+              <img
+                src={roomFeature.iconImage}
+                className="h-7 w-7 object-cover object-center"
+                alt={roomFeature.description}
+                loading="lazy"
+              />
+              <p>
+                <span className="typo-body-2 text-sx">
+                  {roomFeature.description.split(" ")[0]}
+                </span>
+              </p>
+            </div>
+          ))}
+        </div>
+        <div className="flex justify-between items-center gap-10 pb-6">
           <Link
             to={`${viewDetailsLink}/${id}`}
             className="flex items-center gap-1"
