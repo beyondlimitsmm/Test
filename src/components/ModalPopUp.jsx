@@ -7,7 +7,7 @@ import useSendEmail from "../hooks/useSendEmail";
 import ButtonLoading from "./ButtonLoading";
 import BDropdown from "./BDropdown";
 import { useQuery } from "@tanstack/react-query";
-import { logo } from "../api/home";
+import { bookNow } from "../api/home";
 import { createAssetsUrl, parseCmsData } from "../libs/functions";
 
 export const ModalPopUp = ({
@@ -78,8 +78,8 @@ export const ModalPopUp = ({
   };
 
   const { data } = useQuery({
-    queryKey: ["logo"],
-    queryFn: logo,
+    queryKey: ["bookNow"],
+    queryFn: bookNow,
   });
 
   const cmsData = parseCmsData(data);
@@ -111,7 +111,11 @@ export const ModalPopUp = ({
                 className="invisible opacity-0"
               ></AiOutlineClose>
               <div className="w-12 h-12 ">
-                <img src={FeatherIcon} alt="" className="w-full h-full" />
+                <img
+                  src={createAssetsUrl(cmsData?.icon)}
+                  alt=""
+                  className="w-full h-full"
+                />
               </div>
               <AiOutlineClose
                 size={27}
@@ -120,12 +124,12 @@ export const ModalPopUp = ({
               ></AiOutlineClose>
             </div>
             <div className="flex flex-col gap-4 mt-4  px-10">
-              <div className="typo-title text-center">Book Now</div>
+              <div className="typo-title text-center">{cmsData?.title}</div>
 
               <input
                 type="text"
                 className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
-                placeholder="Your Name"
+                placeholder={cmsData?.label_for_name}
                 name="name"
                 value={formData.name}
                 onChange={onChangeHandler}
@@ -134,7 +138,7 @@ export const ModalPopUp = ({
               <input
                 type="email"
                 className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
-                placeholder="Your Email"
+                placeholder={cmsData?.label_for_email}
                 name="email"
                 value={formData.email}
                 onChange={onChangeHandler}
@@ -143,7 +147,7 @@ export const ModalPopUp = ({
               <input
                 type="text"
                 className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
-                placeholder="Your Phone"
+                placeholder={cmsData?.label_for_phone}
                 name="phone"
                 value={formData.phone}
                 onChange={onChangeHandler}
@@ -152,13 +156,14 @@ export const ModalPopUp = ({
               <input
                 type="text"
                 className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
-                placeholder="Subject"
+                placeholder={cmsData?.label_for_subject}
                 name="subject"
                 value={formData.subject}
                 onChange={onChangeHandler}
               />
 
               <BDropdown
+                label={cmsData?.label_for_roomType}
                 selectedRoomName={roomType}
                 onOptionChange={(option) =>
                   setFormData({ ...formData, roomType: option })
@@ -169,7 +174,7 @@ export const ModalPopUp = ({
                 rows="4"
                 type="text"
                 className="focus:border-primary border border-primary/50 outline-none p-3  w-full typo-body-2 font-medium"
-                placeholder="Write Here"
+                placeholder={cmsData?.label_for_message}
                 name="message"
                 value={formData.message}
                 onChange={onChangeHandler}
