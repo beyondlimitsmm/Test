@@ -9,8 +9,8 @@ export const about = async () =>
     "/home-about?fields=*&populate[logo]=*&populate[contactInfo][populate][location]=*&populate[button]=*"
   );
 
-export const logo = async () =>
-  await base("/home-about?fields[0]=title&populate[logo]=*");
+export const bookNow = async () =>
+  await base("/book-now?fields=*&populate[logo]=*&populate[icon]=*");
 
 export const room = async () =>
   await base(

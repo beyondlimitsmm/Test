@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect, useState } from "react";
 import { getRoomNames, getSuiteNames } from "../api/roomsAndSuites";
 
-const BDropdown = ({ selectedRoomName, onOptionChange }) => {
+const BDropdown = ({ selectedRoomName, onOptionChange,label }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [roomNames, setRoomNames] = useState([]);
   const [selectedOption, setSelectedOption] = useState(selectedRoomName);
@@ -70,7 +70,7 @@ const BDropdown = ({ selectedRoomName, onOptionChange }) => {
             selectedOption
           ) : (
             <span className="text-opacity-60 text-primary">
-              Please select room type
+              {label}
             </span>
           )}
         </span>
