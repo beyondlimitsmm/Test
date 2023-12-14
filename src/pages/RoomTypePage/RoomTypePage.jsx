@@ -12,6 +12,7 @@ import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
 import Loading from "../../components/Loading";
 import Error from "../../components/Error";
 import { NavBarContext } from "../../hooks/NavBarContext";
+import ReactMarkdown from "react-markdown";
 
 export const RoomTypePage = () => {
   const [selectedMenu, setSelectedMenu] = useState("rooms");
@@ -67,9 +68,9 @@ export const RoomTypePage = () => {
             <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0 text-center max-w-lg">
               {roomTypes.heroHeader}
             </h4>
-            <p className="typo-body-2 text-white max-w-[560px] mx-4 xl:mx-0 mt-2 md:mt-6 text-center">
+            <ReactMarkdown className="typo-body-2 text-white max-w-[560px] mx-4 xl:mx-0 mt-2 md:mt-6 text-center">
               {roomTypes.description}
-            </p>
+            </ReactMarkdown>
           </div>
         </section>
         <section id="roomTypeMenu" className="max-h-max relative  scroll-m-20">
@@ -222,9 +223,9 @@ export const RoomCard = ({
                 loading="lazy"
               />
               <p>
-                <span className="typo-body-2 text-sx">
+                <ReactMarkdown className="typo-body-2 text-sx">
                   {roomFeature.description.split(" ")[0]}
-                </span>
+                </ReactMarkdown>
               </p>
             </div>
           ))}

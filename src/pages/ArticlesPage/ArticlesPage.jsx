@@ -9,6 +9,7 @@ import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
 import ArticleBg from "../../assets/images/yangon.jpeg";
 import ProgressiveImage from "react-progressive-graceful-image";
+import ReactMarkdown from "react-markdown";
 
 export default function Articles() {
   const { isLoading, error, data } = useQuery(["articles"], getArticles);
@@ -83,9 +84,9 @@ export default function Articles() {
           <h4 className="text-white z-20 typo-display capitalize text-5xl mb-6 xl:mb-0">
             {cmsArticlePageData?.header}
           </h4>
-          <p className="typo-body-2 text-white max-w-[560px] mx-4 xl:mx-0 mt-2 md:mt-6 text-center">
+          <ReactMarkdown className="typo-body-2 text-white max-w-[560px] mx-4 xl:mx-0 mt-2 md:mt-6 text-center">
             {cmsArticlePageData?.description}
-          </p>
+          </ReactMarkdown>
         </div>
       </section>
 

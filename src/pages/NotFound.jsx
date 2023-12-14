@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { notfound } from "../api/home";
 import { createAssetsUrl, parseCmsData } from "../libs/functions";
 import Loading from "../components/Loading";
+import ReactMarkdown from "react-markdown";
 
 const links = [
   {
@@ -110,9 +111,9 @@ export default function NotFound() {
           <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">
             {cmsData?.title}
           </h1>
-          <p className="mt-4 text-base leading-7 text-gray-600 sm:mt-6 sm:text-lg sm:leading-8">
+          <ReactMarkdown className="mt-4 text-base leading-7 text-gray-600 sm:mt-6 sm:text-lg sm:leading-8">
             {cmsData?.description}
-          </p>
+          </ReactMarkdown>
         </div>
         <div className="mx-auto mt-16 flow-root max-w-lg sm:mt-20">
           <h2 className="sr-only">Popular pages</h2>
@@ -136,9 +137,9 @@ export default function NotFound() {
                       {link.name}
                     </Link>
                   </h3>
-                  <p className="mt-2 text-sm leading-6 text-gray-600">
+                  <ReactMarkdown className="mt-2 text-sm leading-6 text-gray-600">
                     {link.description}
-                  </p>
+                  </ReactMarkdown>
                 </div>
                 <div className="flex-none self-center">
                   {/* <ChevronRightIcon

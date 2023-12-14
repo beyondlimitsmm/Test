@@ -8,6 +8,7 @@ import ProgressiveImage from "react-progressive-graceful-image";
 import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
 import { useEffect } from "react";
 import NotFound from "../NotFound";
+import ReactMarkdown from "react-markdown";
 
 const RoomDetailPage = () => {
   const roomData = useRooms();
@@ -107,7 +108,9 @@ const RoomDetailPage = () => {
                     loading="lazy"
                   />
                 </div>
-                <p className="typo-body-2">{roomFeature.description}</p>
+                <ReactMarkdown className="typo-body-2">
+                  {roomFeature.description}
+                </ReactMarkdown>
               </div>
             ))}
           </div>
