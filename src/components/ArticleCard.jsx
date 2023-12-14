@@ -3,6 +3,7 @@ import config from "../config";
 import { format } from "date-fns";
 import Yangon from "../assets/images/yangon.jpeg";
 import ProgressiveImage from "react-progressive-graceful-image";
+import ReactMarkdown from "react-markdown";
 
 const ArticleCard = ({ post }) => {
   return (
@@ -49,9 +50,9 @@ const ArticleCard = ({ post }) => {
               {post.title}
             </Link>
           </h3>
-          <p className="typo-body-2 mt-5 text-sm leading-6 text-gray-600">
+          <ReactMarkdown className="typo-body-2 mt-5 text-sm leading-6 text-gray-600">
             {post.description}
-          </p>
+          </ReactMarkdown>
         </div>
       </div>
     </article>

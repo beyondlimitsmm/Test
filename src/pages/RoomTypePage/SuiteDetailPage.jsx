@@ -8,6 +8,7 @@ import RoomPlaceHolder from "../../assets/images/RoomPlaceHolder.jpg";
 import ProgressiveImage from "react-progressive-graceful-image";
 import NotFound from "../NotFound";
 import { useEffect, useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 const SuiteDetailPage = () => {
   const suites = useSuites();
@@ -112,7 +113,9 @@ const SuiteDetailPage = () => {
                     loading="lazy"
                   />
                 </div>
-                <p className="typo-body-2">{suiteFeature.description}</p>
+                <ReactMarkdown className="typo-body-2">
+                  {suiteFeature.description}
+                </ReactMarkdown>
               </div>
             ))}
           </div>

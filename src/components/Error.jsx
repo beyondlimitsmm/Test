@@ -1,3 +1,4 @@
+import ReactMarkdown from "react-markdown";
 import Logo from "../assets/logo-brown.png";
 import { Link } from "react-router-dom";
 
@@ -122,9 +123,9 @@ export default function Error() {
                       {link.name}
                     </Link>
                   </h3>
-                  <p className="mt-2 text-sm leading-6 text-gray-600">
+                  <ReactMarkdown className="mt-2 text-sm leading-6 text-gray-600">
                     {link.description}
-                  </p>
+                  </ReactMarkdown>
                 </div>
                 <div className="flex-none self-center">
                   {/* <ChevronRightIcon
