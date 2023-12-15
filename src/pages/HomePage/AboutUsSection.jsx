@@ -4,11 +4,14 @@ import HotelLogoBrown from "../../assets/logo-brown.png";
 import { FlipText } from "../../components/FlipText";
 import { handleScrollDownClick } from "../../utils";
 import { about } from "../../api/home";
-import { parseCmsData } from "../../libs/functions";
+import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
 import ReactMarkdown from "react-markdown";
+import { useNavigate } from "react-router-dom";
 
 export const AboutUsSection = () => {
+  const navigate = useNavigate();
+
   const { data, error } = useQuery({ queryKey: ["about"], queryFn: about });
   if (error) return <Error />;
 
@@ -29,17 +32,20 @@ export const AboutUsSection = () => {
 
         <button
           onClick={() => {
-            handleScrollDownClick("roomSection");
+            if (cmsData?.button?.self)
+              return handleScrollDownClick(cmsData?.button?.link);
+
+            return navigate(cmsData?.button?.link);
           }}
           className="border-button"
         >
-          {cmsData?.button?.name}
+          {cmsData?.button?.title}
         </button>
       </div>
       <div className="divider xl:mx-10 xl:w-[2px] xl:h-[45vh] bg-[#D5D1D1]/40 w-[80%] h-[2px] my-10"></div>
       <div className="flex-1 flex flex-col items-center xl:max-w-[375px]">
         <div className="hidden xl:block w-[224px] h-[180px] mb-6">
-          <img src={HotelLogoBrown} alt="Logo" />
+          <img src={createAssetsUrl(cmsData?.logo)} alt="Logo" />
         </div>
         <div className="flex flex-col items-center gap-4 px-4 xl:px-8">
           <a href={`mailto:${cmsData?.contactInfo?.email}`}>
