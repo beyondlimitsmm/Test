@@ -173,7 +173,7 @@ export const RestaurantPage = () => {
           </div>
 
           <div className="flex-1 xl:max-w-lg py-16 px-12 h-max bg-white xl:ml-20 flex flex-col gap-8 xl:gap-16">
-            <h4 className="header flex items-center gap-4 typo-body-2">
+            <h4 className="header flex items-center gap-4 typo-body-2 font-walbaum">
               <span className="w-10 h-px bg-primary inline-block"></span>
               {cmsFacilityData?.title}
             </h4>

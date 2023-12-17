@@ -69,7 +69,9 @@ export const BarAndRestaurantSection = () => {
         openHours: dt?.openHours,
         imageUrl: createAssetsUrl(dt?.image),
         menuLink: dt.menu,
+        menuLabel: dt.menu_label,
         exploreLink: dt?.explore,
+        exploreLabel: dt?.explore_label,
         facilities: dt?.facilities,
       };
     });
@@ -310,7 +312,9 @@ const LayoutDetails = ({
   dressCode,
   openHours,
   menuLink,
+  menuLabel,
   exploreLink,
+  exploreLabel,
   facilities,
 }) => {
   return (
@@ -366,7 +370,7 @@ const LayoutDetails = ({
           href={menuLink}
           className="font-medium group-hover:tracking-wider duration-500"
         >
-          Download Menu
+          {menuLabel}
         </a>
       </div>
       <div className="flex gap-4 group transition opacity-75 hover:opacity-100 duration-300 w-max cursor-pointer">
@@ -390,7 +394,7 @@ const LayoutDetails = ({
           href={exploreLink}
           className="font-medium group-hover:tracking-wider duration-500"
         >
-          Explore More
+          {exploreLabel}
         </a>
       </div>
       <div

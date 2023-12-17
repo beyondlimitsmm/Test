@@ -102,15 +102,11 @@ export const ContactUs = () => {
 
                 <div className="flex justify-start">
                   <p className="w-[100px] typo-body-2">Check In :</p>
-                  <p className="typo-body-2 font-medium">
-                    {cmsData?.openClose?.open}
-                  </p>
+                  <p className="typo-body-2 font-medium">{cmsData?.checkIn}</p>
                 </div>
                 <div className="flex justify-start">
                   <p className="w-[100px] typo-body-2">Check Out :</p>
-                  <p className="typo-body-2 font-medium">
-                    {cmsData?.openClose?.close}
-                  </p>
+                  <p className="typo-body-2 font-medium">{cmsData?.checkOut}</p>
                 </div>
               </div>
             </div>

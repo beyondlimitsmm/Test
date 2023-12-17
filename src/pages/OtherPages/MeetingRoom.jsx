@@ -77,68 +77,7 @@ const MeetingRoom = () => {
                   {data?.description}
                 </ReactMarkdown>
               ))}
-              {/* <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Officia vero unde libero
-                voluptatum architecto doloribus laudantium pariatur expedita ea
-                modi reiciendis, debitis ex dicta adipisci mollitia dolores
-                commodi id inventore! Lorem ipsum dolor sit amet consectetur
-                adipisicing elit expedita iste doloribus, recusandae quis illo
-                ipsa beatae veritatis.
-              </p>
-              <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugiat
-                molestiae impedit, nobis eligendi nam saepe! Dolorum autem
-                consequuntur natus fugaelit. Officiis pariatur temporibus eum
-                porro nam sed consectetur adipisicing elit. Nostrum rerum
-                aliquam, dolores quas harum modi similique quos tempora iusto
-                cum? Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Aliquam amet quos earum magnam tempora voluptatum!
-              </p>
-              <p className="leading-relaxed typo-body-2 transition-all duration-500">
-                Lorem ipsum dolo Lorem ipsum dolor sit, amet consectetur
-                adipisicing elit. Non ullam, facilis quos, quis est distinctio
-                quisquam quae nam? Sit, non ratione accusamus recusandae odio
-                tenetur iste. dolor sit, amet consectetur adipisicing elit.
-                Nostrum rerum aliquam, dolores quas harum modi similique quos
-                tempora iusto cum?
-              </p> */}
             </div>
-            {/* <div>
-              <div className="border-b py-4 flex justify-between">
-                <p>Cuisine</p>
-                <p>French cuisine , alpine classNameics</p>
-              </div>
-              <div className="border-b py-4 flex justify-between">
-                <p>Dress Code</p>
-                <p>Smart-casual</p>
-              </div>
-              <div className="border-b py-4 flex justify-between">
-                <p>Opening hours</p>
-                <p>7:00pm – 10:00 pm (last order)</p>
-              </div>
-            </div> */}
-            {/* <div className="flex gap-4 group transition opacity-75 hover:opacity-100 duration-300 w-max cursor-pointer">
-              <div className="group-hover:translate-x-2 duration-700">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-chevron-right"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </div>
-              <p className="font-medium group-hover:tracking-wider duration-500">
-                Download Menu
-              </p>
-            </div> */}
 
             <div>
               {cmsAboutData?.facilities
@@ -155,7 +94,7 @@ const MeetingRoom = () => {
             </div>
           </div>
           <div className="flex-1 xl:max-w-lg py-16 px-12 h-max bg-white xl:ml-20 flex flex-col gap-8 xl:gap-16">
-            <h4 className="header flex items-center gap-4 typo-body-2">
+            <h4 className="header flex items-center gap-4 typo-body-2 font-walbaum">
               <span className="w-10 h-px bg-primary inline-block"></span>
               {cmsFacilityData?.title}
             </h4>
