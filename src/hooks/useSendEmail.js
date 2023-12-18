@@ -26,6 +26,7 @@ export default (initialFormState) => {
 
     setIsLoading(true);
     try {
+      console.log("data", data);
       const response = await fetch(config.BASE_API_URL + "/email/send", {
         method: "POST",
         headers: {

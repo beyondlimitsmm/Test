@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useCallback, useEffect, useState } from "react";
 import { getRoomNames, getSuiteNames } from "../api/roomsAndSuites";
 
-const BDropdown = ({ selectedRoomName, onOptionChange,label }) => {
+const BDropdown = ({ selectedRoomName, onOptionChange, label, isSuccess }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [roomNames, setRoomNames] = useState([]);
   const [selectedOption, setSelectedOption] = useState(selectedRoomName);
@@ -58,6 +58,10 @@ const BDropdown = ({ selectedRoomName, onOptionChange,label }) => {
     _setSelectedOption();
   }, [_setSelectedOption]);
 
+  useEffect(() => {
+    if (isSuccess) setSelectedOption(undefined);
+  }, [isSuccess]);
+
   return (
     <div className="relative inline-block text-left">
       <button
@@ -69,9 +73,7 @@ const BDropdown = ({ selectedRoomName, onOptionChange,label }) => {
           {selectedOption ? (
             selectedOption
           ) : (
-            <span className="text-opacity-60 text-primary">
-              {label}
-            </span>
+            <span className="text-opacity-60 text-primary">{label}</span>
           )}
         </span>
         <svg

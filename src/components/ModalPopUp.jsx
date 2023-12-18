@@ -54,6 +54,7 @@ export const ModalPopUp = ({
     // data["roomType"] = roomType ?? "-";
 
     await onSubmit(formData);
+    setRoomType(undefined);
   };
 
   // const parseValidForm = () => {
@@ -83,6 +84,7 @@ export const ModalPopUp = ({
   });
 
   const cmsData = parseCmsData(data);
+
 
   return (
     <div
@@ -163,6 +165,7 @@ export const ModalPopUp = ({
               />
 
               <BDropdown
+                isSuccess={isSuccess}
                 label={cmsData?.label_for_roomType}
                 selectedRoomName={roomType}
                 onOptionChange={(option) =>
