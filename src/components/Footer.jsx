@@ -81,7 +81,7 @@ export const Footer = () => {
       <div className="mx-auto container pt-10 grid grid-cols-1 xl:grid-cols-2 xl:gap-6">
         <div className="col-span-1">
           <img
-            src={HotelLogo}
+            src={createAssetsUrl(cmsData?.logo)}
             alt="HotelLogo"
             className="w-44 h-auto mb-10 xl:mx-0 mx-auto"
           />
