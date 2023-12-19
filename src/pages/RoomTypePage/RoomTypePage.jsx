@@ -162,7 +162,6 @@ export const RoomCard = ({
   id,
   imageSrc,
   title,
-  description,
   viewDetailsLink,
   reserveRoomLink,
   roomFeatures,
@@ -175,9 +174,6 @@ export const RoomCard = ({
     togglePopUp();
     setRoomType(title);
   };
-
-  const truncatedDescription =
-    description.length > 170 ? description.slice(0, 160) + "..." : description;
 
   return (
     <div className="card-container w-[80%] xl:w-[500px] h-full sm:h-full bg-white">
