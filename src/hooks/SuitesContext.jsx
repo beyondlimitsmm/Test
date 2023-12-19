@@ -83,7 +83,6 @@ const SuitesProvider = ({ children }) => {
   const suites = query.map((suite) => ({
     id: suite.id,
     title: suite.attributes.title,
-    description: suite.attributes.description,
     featuredHeader: suite.attributes?.featuredHeader,
     featuredText: suite.attributes?.featuredText,
     featuredImage:

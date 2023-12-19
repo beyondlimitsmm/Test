@@ -21,7 +21,6 @@ const RoomsProvider = ({ children }) => {
   const rooms = query.map((room) => ({
     id: room.id,
     title: room.attributes.title,
-    description: room.attributes.description,
     featuredImage: room.attributes.featuredImage.data.attributes.url,
     galleryImages: room.attributes.galleryImages.data.map(
       (galleryImage) => config.BASE_IMAGE_URL + galleryImage.attributes.url
