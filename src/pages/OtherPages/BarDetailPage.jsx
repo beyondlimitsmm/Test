@@ -66,7 +66,11 @@ const BarDetailPage = () => {
         </div>
 
         <div className="text-white z-20 typo-display mb-10 flex flex-col items-center">
-          <img src={createAssetsUrl(cmsHeadData?.logo)} alt="" />
+          <img
+            src={createAssetsUrl(cmsHeadData?.logo)}
+            alt=""
+            className="max-w-[500px] object-cover"
+          />
           <h2 className="typo-title mb-8 text-center mx-2">
             {cmsHeadData?.title}
           </h2>
