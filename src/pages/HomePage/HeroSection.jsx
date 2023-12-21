@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 import HotelLogo from "../../assets/Logo.png";
 import { handleScrollDownClick } from "../../utils";
-import { hero } from "../../api/home";
+import { hero, navbarLogo } from "../../api/home";
 import { createAssetsUrl, parseCmsData } from "../../libs/functions";
 import Error from "../../components/Error";
 
@@ -15,12 +15,18 @@ export const HeroSection = () => {
     queryFn: hero,
   });
 
+  const { data: navbarLogoData } = useQuery({
+    queryKey: ["navbarLogo"],
+    queryFn: navbarLogo,
+  });
+
   if (isLoading) {
     return <Loading />;
   }
 
   if (error) return <Error />;
   const cmsData = parseCmsData(data);
+  const cmsLogoData = parseCmsData(navbarLogoData);
 
   return (
     <section
@@ -42,7 +48,7 @@ export const HeroSection = () => {
       </div>
       <div className="flex flex-col z-20 items-center gap-20">
         <img
-          src={HotelLogo}
+          src={createAssetsUrl(cmsLogoData?.logo)}
           alt="logo"
           width="250"
           className="brightness-200 xl:hidden"
