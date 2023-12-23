@@ -1,6 +1,6 @@
 export default {
   BASE_API_URL: "https://protocol.thevoyagebar.com/api",
-  BASE_IMAGE_URL: "https://protocol.thevoyagebar.com",
+  BASE_IMAGE_URL: "",
   BEARER_TOKEN:
     "e16b7243ed903d6911381e46986e8aa001fed433ee87d241a4d037fc17eee7568da12999c674d265291bc8590587af5e56553008f936065aa1fe93fbbb29e4cca5d0660285d611dbdeff1df45337784000f415ee6888523f880f0dc93304788627c4d75f34b46e054460b83eb6592c2cbd9940921d38c1e56c4159080ea469d2",
 };
