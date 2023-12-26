@@ -85,7 +85,6 @@ export const ModalPopUp = ({
 
   const cmsData = parseCmsData(data);
 
-
   return (
     <div
       className={`w-screen h-screen fixed inset-0 z-[98] bg-black/20 flex justify-center items-center ${
@@ -93,7 +92,10 @@ export const ModalPopUp = ({
       }`}
       onClick={onCloseHandler}
     >
-      <div className="border-2 border-primary bg-white z-[99999] flex-1 lg:max-w-[1024px] max-w-[500px] flex justify-between items-center">
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="border-2 border-primary bg-white z-[99999] flex-1 lg:max-w-[1024px] max-w-[500px] flex justify-between items-center"
+      >
         <div className="w-1/2 h-full lg:flex hidden justify-center items-center">
           <img
             src={createAssetsUrl(cmsData?.logo)}
@@ -102,10 +104,7 @@ export const ModalPopUp = ({
           />
         </div>
 
-        <div
-          className="flex flex-col lg:w-1/2 w-full py-10 "
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className="flex flex-col lg:w-1/2 w-full py-10 ">
           <div className="border-primary border-opacity-10 lg:border-l border-l-0">
             <div className="flex justify-between relative px-10">
               <AiOutlineClose

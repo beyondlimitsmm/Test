@@ -1,5 +1,6 @@
-import Cookies from "js-cookie";
 import base from "./base";
+
+export const csrf = async () => await base("/csrf");
 
 export const hero = async () =>
   await base("/home-hero?fields=title&populate=*");

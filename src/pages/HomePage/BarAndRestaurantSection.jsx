@@ -267,7 +267,7 @@ export const BarAndRestaurantSection = () => {
             ref={menusRef}
             id="menus"
           >
-            <div className="w-[180px] mb-10">
+            <div className="w-[220px] mb-10">
               <img
                 src={createAssetsUrl(cmsData?.logo)}
                 alt="logo"

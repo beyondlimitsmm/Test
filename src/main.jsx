@@ -18,14 +18,14 @@ const queryClient = new QueryClient({
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
   <QueryClientProvider client={queryClient}>
-    <CsrfProvider>
-      <NavbarProvider>
-        <Router>
+    <Router>
+      <CsrfProvider>
+        <NavbarProvider>
           <App />
-        </Router>
-      </NavbarProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </CsrfProvider>
+        </NavbarProvider>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </CsrfProvider>
+    </Router>
   </QueryClientProvider>
   // </React.StrictMode>
 );

@@ -35,6 +35,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import usePrefetchHomePage from "./hooks/usePrefetchHomePage";
 import Cookies from "js-cookie";
+import Error from "./components/Error";
 
 function App() {
   const location = useLocation();
@@ -100,8 +101,11 @@ function App() {
 
         <Route path="*" element={<Navigate to="/404" replace />}></Route>
         <Route path="/404" element={<NotFound />}></Route>
+        <Route path="/error" element={<Error />}></Route>
       </Routes>
-      {location.pathname !== "/404" && token && <Footer></Footer>}
+      {location.pathname !== "/404" &&
+        location.pathname !== "/error" &&
+        token && <Footer></Footer>}
       <ModalPopUp />
       <ChatBot />
     </div>
