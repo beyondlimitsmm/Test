@@ -30,9 +30,10 @@ export const NavSlideDown = () => {
 
     if (window.location.origin.includes("https://thevoyagebar.com")) {
       if (data.self) {
-        return window.location.href = "https://thehotelboundary.com";
+        return (window.location.href = "https://thehotelboundary.com");
       } else {
-        return window.location.href = "https://thehotelboundary.com" + data.link;
+        return (window.location.href =
+          "https://thehotelboundary.com" + data.link);
       }
     }
 
@@ -54,7 +55,7 @@ export const NavSlideDown = () => {
       document.getElementById(data?.link).scrollIntoView({
         behavior: "smooth",
       });
-    }, 300);
+    }, 10);
   }
 
   return (
