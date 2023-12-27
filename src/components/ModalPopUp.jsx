@@ -111,7 +111,7 @@ export const ModalPopUp = ({
                 size={27}
                 className="invisible opacity-0"
               ></AiOutlineClose>
-              <div className="w-12 h-12 ">
+              <div className="w-20 h-20 ">
                 <img
                   src={createAssetsUrl(cmsData?.icon)}
                   alt=""

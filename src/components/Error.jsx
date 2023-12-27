@@ -84,7 +84,7 @@ const social = [
 
 export default function Error() {
   return (
-    <div className="bg-white font-Jost">
+    <div className="bg-white font-Jost w-screen h-screen fixed top-0 left-0 flex justify-center items-center">
       <main className="mx-auto w-full max-w-7xl px-6 pb-16 pt-10 sm:pb-24 lg:px-8">
         <img
           className="mx-auto h-full w-32 sm:w-44"
