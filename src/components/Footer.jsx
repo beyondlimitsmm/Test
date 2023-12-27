@@ -35,7 +35,7 @@ export const Footer = () => {
       document.getElementById(sectionId).scrollIntoView({
         behavior: "smooth",
       });
-    }, 600);
+    }, 200);
   }
 
   function handleLinkClick() {
