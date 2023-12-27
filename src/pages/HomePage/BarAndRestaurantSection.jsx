@@ -68,9 +68,9 @@ export const BarAndRestaurantSection = () => {
         dressCode: dt?.dressCode,
         openHours: dt?.openHours,
         imageUrl: createAssetsUrl(dt?.image),
-        menuLink: dt.menu,
+        menuLink: dt.menu_link,
         menuLabel: dt.menu_label,
-        exploreLink: dt?.explore,
+        exploreLink: dt?.explore_link,
         exploreLabel: dt?.explore_label,
         facilities: dt?.facilities,
       };
