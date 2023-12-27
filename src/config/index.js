@@ -1,6 +1,6 @@
 export default {
-  BASE_API_URL: "http://localhost:1337/api/",
-  BASE_IMAGE_URL: "http://localhost:1337",
+  BASE_API_URL: "http://localhost:13373/api/",
+  BASE_IMAGE_URL: "http://localhost:13373",
   BEARER_TOKEN:
     "b85f667c5530b9d79189e98ff75545ab51bf6e8145d31130ae71030b2dee6057ca8e0fb26fab4197fc82b40e6075572a2e4db5ce85eb6a18be8ef1196c59222d0b314739e2ffa1a57ba5e9fee2c3959dcd4283b5b22a3a73df09b9c45f5e2305b5b2d26279869839c490391fd0e70f6918deb9637a93b79ca2ac9d3107313ee4",
 };
