@@ -19,6 +19,7 @@ import Loading from "../../components/Loading";
 import { RoomSlider } from "../../components/RoomSlider";
 import ImageSlider from "../../components/ImageSlider";
 import ReactMarkdown from "react-markdown";
+import { LinkToContactUs } from "../../components/LinkToContactUs";
 
 const CarouselListData = [
   {
@@ -233,6 +234,8 @@ export const PoolPage = () => {
           </div>
         </div>
       </section> */}
+
+      <LinkToContactUs />
     </>
   );
 };

@@ -8,6 +8,7 @@ import config from "../../config";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
 import ReactMarkdown from "react-markdown";
+import { LinkToContactUs } from "../../components/LinkToContactUs";
 
 const MeetingRoom = () => {
   const {
@@ -123,6 +124,8 @@ const MeetingRoom = () => {
           </div>
         </div>
       </section>
+
+      <LinkToContactUs />
     </>
   );
 };
