@@ -278,7 +278,7 @@ export const BarAndRestaurantSection = () => {
               <div className="bg-white/80 w-8 h-1"></div>
 
               <h2 className="typo-menu-2 font-modesfa text-white/80">
-                Bar And Restaurant
+                {cmsData?.title}
               </h2>
             </div>
 
