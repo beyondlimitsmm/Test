@@ -218,11 +218,9 @@ export const RoomCard = ({
                 alt={roomFeature.description}
                 loading="lazy"
               />
-              <p>
-                <ReactMarkdown className="typo-body-2 text-sx">
-                  {roomFeature.description.split(" ")[0]}
-                </ReactMarkdown>
-              </p>
+              <ReactMarkdown className="typo-body-2 text-sx">
+                {roomFeature.description.split(" ")[0]}
+              </ReactMarkdown>
             </div>
           ))}
         </div>
