@@ -109,8 +109,6 @@ export const RestaurantPage = () => {
     return createAssetsUrl(el.image);
   });
 
-  // console.log(galleryImages);
-
   return (
     <>
       {/* Section 1 */}

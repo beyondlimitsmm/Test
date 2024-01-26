@@ -1,7 +1,7 @@
 import ReactMarkdown from "react-markdown";
 
 const FeatureImage = ({ icon, title, description, detail, button }) => {
-  console.log(description);
+
   return (
     <div className="p-10 w-full xl:w-[600px] h-max absolute inset-0 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
       <div className="flex flex-col gap-6 items-center">

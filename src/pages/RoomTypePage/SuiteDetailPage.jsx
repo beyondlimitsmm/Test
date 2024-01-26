@@ -19,7 +19,6 @@ const SuiteDetailPage = () => {
   const suite = suites.find((suite) => suite.id == id);
 
   useEffect(() => {
-    console.log("suite", suite);
     setGridLength(suite?.suiteDetails.length);
 
     if (!suite) {
