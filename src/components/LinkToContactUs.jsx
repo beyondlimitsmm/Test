@@ -15,7 +15,7 @@ export const LinkToContactUs = () => {
       navigate("/");
     }
     setTimeout(() => {
-      document.getElementById(sectionId).scrollIntoView({
+      document.getElementById(sectionId ? sectionId : "").scrollIntoView({
         behavior: "smooth",
       });
     }, 600);

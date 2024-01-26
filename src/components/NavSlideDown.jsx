@@ -52,7 +52,7 @@ export const NavSlideDown = () => {
 
     navigate("/");
     setTimeout(() => {
-      document.getElementById(data?.link).scrollIntoView({
+      document.getElementById(data?.link ? data?.link : "").scrollIntoView({
         behavior: "smooth",
       });
     }, 10);
