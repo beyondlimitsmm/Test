@@ -32,7 +32,7 @@ export const Footer = () => {
     }
 
     setTimeout(() => {
-      document.getElementById(sectionId ? sectionId : "").scrollIntoView({
+      document.getElementById("")?.scrollIntoView({
         behavior: "smooth",
       });
     }, 10);
