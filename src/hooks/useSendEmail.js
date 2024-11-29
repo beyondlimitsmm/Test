@@ -26,7 +26,7 @@ export default (initialFormState) => {
 
     setIsLoading(true);
     try {
-      const response = await fetch(config.BASE_API_URL + "/email/send", {
+      const response = await fetch(config.BASE_API_URL + "email/send", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -47,11 +47,11 @@ export default (initialFormState) => {
         }, 3000);
       } else {
         setIsLoading(false);
-        setErrorStatus("Server error");
+        setErrorStatus("Failed to send email");
       }
     } catch (error) {
       setIsLoading(false);
-      setErrorStatus("Server error");
+      setErrorStatus(`${error}`);
     }
   };
 

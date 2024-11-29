@@ -1,6 +1,6 @@
 export default {
-  BASE_API_URL: "http://167.172.89.103:1337/api/",
-  BASE_IMAGE_URL: "http://167.172.89.103:1337",
+  BASE_API_URL: "https://protocol.thehotelboundary.com/api/",
+  BASE_IMAGE_URL: "https://protocol.thehotelboundary.com",
   BEARER_TOKEN:
     "d557d72886728f4eee516e87359f959ad3d53161f2c184d708bd6789dc3bc58e25cb054c4615903c2d4bb386cfac33ace73bf07b5dcd0cf27c6344a5765f6c811fabe8905f4df359532e59bcc2b7c4c05009cef05a62268bb2a0e4e2116f2600990ad6da4600ea6fa06a63d4392a603ac7aca7b8d57fb6ee43a339ab5c66c634",
 };
