@@ -59,7 +59,7 @@ function App() {
       // className="App hide-scrollbar"
       onClick={() => setShowDropdown(false)}
     >
-      {token && <NavBarBuilder></NavBarBuilder>}
+      <NavBarBuilder></NavBarBuilder>
       <Routes>
         <Route path="/" element={<HomePage />}></Route>
         <Route path="/gallery" element={<GalleryPage />}></Route>
