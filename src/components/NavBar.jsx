@@ -40,28 +40,24 @@ export const NavBar = () => {
             >
               <div className="w-6 flex items-center justify-center relative">
                 <span
-                  className={` transform h-[2px] transition duration-300 w-full absolute bg-black -translate-y-2 ${
-                    isNavOpen && " translate-y-0 rotate-45"
-                  } `}
+                  className={` transform h-[2px] transition duration-300 w-full absolute bg-black -translate-y-2 ${isNavOpen && " translate-y-0 rotate-45"
+                    } `}
                 ></span>
                 <span
-                  className={`transform h-[2px] transition duration-300 w-2/3 absolute left-0 bg-black ${
-                    isNavOpen ? "opacity-0 translate-x-3" : "opacity-100 "
-                  }`}
+                  className={`transform h-[2px] transition duration-300 w-2/3 absolute left-0 bg-black ${isNavOpen ? "opacity-0 translate-x-3" : "opacity-100 "
+                    }`}
                 ></span>
                 <span
-                  className={`transform h-[2px] transition duration-300 w-full absolute bg-black ${
-                    isNavOpen ? "translate-y-0 -rotate-45" : "translate-y-2 "
-                  }`}
+                  className={`transform h-[2px] transition duration-300 w-full absolute bg-black ${isNavOpen ? "translate-y-0 -rotate-45" : "translate-y-2 "
+                    }`}
                 ></span>
               </div>
             </button>
             <Link to="/">
               <h1
                 className={`typo-menu absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 uppercase typo-text-black 
-                tracking-wider font-madera !font-medium invisible xl:visible pb-2 font-modesfa ${
-                  atTop && !isNavOpen && "hidden"
-                } ${isNavOpen && "block"}`}
+                tracking-wider font-madera !font-medium invisible xl:visible pb-2 font-modesfa ${atTop && !isNavOpen && "hidden"
+                  } ${isNavOpen && "block"}`}
                 style={{ fontSize: "25px" }}
               >
                 Hotel Boundary
@@ -74,9 +70,8 @@ export const NavBar = () => {
       </div>
 
       <div
-        className={`absolute top-2 left-1/2 -translate-x-1/2 z-[99] hidden  ${
-          atTop && "xl:block"
-        } ${isNavOpen && "!hidden"}`}
+        className={`absolute top-2 left-1/2 -translate-x-1/2 z-[99] hidden  ${atTop && "xl:block"
+          } ${isNavOpen && "!hidden"}`}
       >
         <img
           className="transition duration-300"
